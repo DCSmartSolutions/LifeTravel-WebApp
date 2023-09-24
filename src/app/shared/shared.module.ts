@@ -27,6 +27,7 @@ import {NotificationComponent} from "./widgets/notification.component";
 import {UserComponent} from "./widgets/user.component";
 import {MatListModule} from "@angular/material/list";
 import {NgxPermissionsRestrictStubDirective} from "ngx-permissions";
+import {MatInputModule} from "@angular/material/input";
 
 
 
@@ -69,6 +70,7 @@ import {NgxPermissionsRestrictStubDirective} from "ngx-permissions";
     NgProgressComponent,
     MatListModule,
     NgxPermissionsRestrictStubDirective,
+    MatInputModule,
 
   ]
 })

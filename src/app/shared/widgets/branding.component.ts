@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
   styles: [
     `
       .brand-logo {
-        height: 35px;
+        height: 26px;
       }
     `,
   ],

@@ -6,7 +6,17 @@
     padding: 0 8px;
     background: lightslategrey;
   }
+
 }
 .flex-fill {
   flex: 1;
+}
+.mat-toolbar .search {
+  margin-top: 20px;
+  font-size: 20px;
+  transform: translateY(-0.59375em) scale(0.75) !important;
+  width: 80%;
+}
+.mat-mdc-form-field-subscript-wrapper {
+  display: none;
 }
