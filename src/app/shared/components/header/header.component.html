@@ -1,0 +1,22 @@
+<mat-toolbar class="matero-toolbar">
+  <!-- Elementos a la izquierda -->
+  <div>
+    <button mat-icon-button *ngIf="showToggle" (click)="toggleSidenav.emit()">
+      <mat-icon>menu</mat-icon>
+    </button>
+
+    <app-branding *ngIf="showBranding"></app-branding>
+  </div>
+
+  <!-- Espacio flexible para alinear elementos a la derecha -->
+  <span class="flex-fill"></span>
+
+  <!-- Elementos a la derecha -->
+  <div>
+    <button mat-icon-button>
+      <mat-icon>search</mat-icon>
+    </button>
+
+    <app-user></app-user>
+  </div>
+</mat-toolbar>
