@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterModule, Routes} from "@angular/router";
-import {ListPackagesComponent} from "./list-packages/list-packages.component";
+import {ListPackagesComponent} from "./components/list-packages/list-packages.component";
 
 
 const routes: Routes = [
