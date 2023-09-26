@@ -4,8 +4,6 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatTabsModule} from "@angular/material/tabs";
 import {RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
 import {MatMenuModule} from "@angular/material/menu";
-import {TopmenuComponent} from "./components/topmenu/topmenu.component";
-import {TopmenuPanelComponent} from "./components/topmenu/topmenu-panel.component";
 import {AdminLayoutComponent} from "./pages/admin-layout/admin-layout.component";
 import {NgProgressComponent} from "ngx-progressbar";
 import {HeaderComponent} from "./components/header/header.component";
@@ -31,8 +29,6 @@ import {PublicLayoutRoutingModule} from "./public-layout-routing.module";
 
 @NgModule({
   declarations: [
-    TopmenuComponent,
-    TopmenuPanelComponent,
     AdminLayoutComponent,
     HeaderComponent,
     SidebarComponent,
