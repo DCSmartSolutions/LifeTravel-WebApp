@@ -2,7 +2,7 @@
 @use '../../../../styles/transitions';
 @use '../../../../styles/badge';
 
-.matero-sidemenu {
+.sidemenu {
   width: variables.$sidenav-width - 1px; // subtract border width
   padding: 0;
   margin: 0;

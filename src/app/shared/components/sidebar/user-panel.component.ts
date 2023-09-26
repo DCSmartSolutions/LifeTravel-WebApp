@@ -1,8 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import {User} from "../../interfaces/user";
-import {AuthService} from "../../services/auth.service";
-
 @Component({
   selector: 'app-user-panel',
   template: `
@@ -37,16 +35,13 @@ import {AuthService} from "../../services/auth.service";
 export class UserPanelComponent implements OnInit {
   user!: User;
 
-  constructor(private router: Router, private auth: AuthService) {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
-    this.auth.user().subscribe((user: any) => (
-      this.user = user
 
-    ));
   }
 
   logout() {
-    this.auth.logout().subscribe(() => this.router.navigateByUrl('/auth/login'));
+
   }
 }

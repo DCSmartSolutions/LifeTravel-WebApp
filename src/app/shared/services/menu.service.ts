@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { share } from 'rxjs/operators';
+import {map, share} from 'rxjs/operators';
 
 export interface MenuTag {
   color: string; // background color
@@ -19,6 +19,187 @@ export interface MenuChildrenItem {
   children?: MenuChildrenItem[];
   permissions?: MenuPermissions;
 }
+export const MENU_ITEMS: Menu[] = [
+  {
+    "route": "design",
+    "name": "design",
+    "type": "sub",
+    "icon": "color_lens",
+    "children": [
+      {
+        "route": "colors",
+        "name": "colors",
+        "type": "link"
+      },
+      {
+        "route": "icons",
+        "name": "icons",
+        "type": "link"
+      }
+    ],
+    "permissions": {
+      "only": [
+        "ADMIN",
+        "MANAGER"
+      ]
+    }
+  },
+  {
+    "route": "permissions",
+    "name": "permissions",
+    "type": "sub",
+    "icon": "lock",
+    "children": [
+      {
+        "route": "role-switching",
+        "name": "role-switching",
+        "type": "link"
+      },
+      {
+        "route": "route-guard",
+        "name": "route-guard",
+        "type": "link",
+        "permissions": {
+          "except": "GUEST"
+        }
+      },
+      {
+        "route": "test",
+        "name": "test",
+        "type": "link",
+        "permissions": {
+          "only": "ADMIN"
+        }
+      }
+    ]
+  },
+  {
+    "route": "media",
+    "name": "media",
+    "type": "sub",
+    "icon": "image",
+    "children": [
+      {
+        "route": "gallery",
+        "name": "gallery",
+        "type": "link"
+      }
+    ]
+  },
+  {
+    "route": "profile",
+    "name": "profile",
+    "type": "sub",
+    "icon": "person",
+    "children": [
+      {
+        "route": "overview",
+        "name": "overview",
+        "type": "link"
+      },
+      {
+        "route": "settings",
+        "name": "settings",
+        "type": "link"
+      }
+    ]
+  },
+  {
+    "route": "/",
+    "name": "sessions",
+    "type": "sub",
+    "icon": "question_answer",
+    "children": [
+      {
+        "route": "403",
+        "name": "403",
+        "type": "link"
+      },
+      {
+        "route": "404",
+        "name": "404",
+        "type": "link"
+      },
+      {
+        "route": "500",
+        "name": "500",
+        "type": "link"
+      }
+    ],
+    "permissions": {
+      "only": "ADMIN"
+    }
+  },
+  {
+    "route": "utilities",
+    "name": "utilities",
+    "type": "sub",
+    "icon": "all_inbox",
+    "label": {
+      "color": "indigo-500",
+      "value": "new"
+    },
+    "children": [
+      {
+        "route": "css-grid",
+        "name": "css-grid",
+        "type": "link"
+      },
+      {
+        "route": "css-helpers",
+        "name": "css-helpers",
+        "type": "link"
+      }
+    ]
+  },
+  {
+    "route": "menu-level",
+    "name": "menu-level",
+    "type": "sub",
+    "icon": "subject",
+    "children": [
+      {
+        "route": "level-1-1",
+        "name": "level-1-1",
+        "type": "sub",
+        "children": [
+          {
+            "route": "level-2-1",
+            "name": "level-2-1",
+            "type": "sub",
+            "children": [
+              {
+                "route": "level-3-1",
+                "name": "level-3-1",
+                "type": "sub",
+                "children": [
+                  {
+                    "route": "level-4-1",
+                    "name": "level-4-1",
+                    "type": "link"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "route": "level-2-2",
+            "name": "level-2-2",
+            "type": "link"
+          }
+        ]
+      },
+      {
+        "route": "level-1-2",
+        "name": "level-1-2",
+        "type": "link"
+      }
+    ],
+    "permissions": {
+      "only": "ADMIN"
+    }
+  }
+];
 
 export interface Menu {
   route: string;

@@ -47,7 +47,6 @@ import {MatInputModule} from "@angular/material/input";
     BrandingComponent,
     NotificationComponent,
     UserComponent,
-
   ],
   exports: [
     AdminLayoutComponent
