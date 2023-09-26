@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterModule, Routes} from "@angular/router";
 import {ListPackagesComponent} from "./components/list-packages/list-packages.component";
+import { SearchPlacesModalComponent } from './components/search-places.modal/search-places.modal.component';
 
 
 const routes: Routes = [
@@ -12,7 +13,9 @@ const routes: Routes = [
 ]
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    SearchPlacesModalComponent
+  ],
   imports: [
     RouterModule.forChild(routes),
   ],
