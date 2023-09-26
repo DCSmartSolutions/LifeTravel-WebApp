@@ -5,19 +5,28 @@ import { ListPackagesComponent } from './packages/list-packages/list-packages.co
 
 const routes: Routes = [
   {
-    path: '',
-    component: ListPackagesComponent,
+    path: 'home',
+    component: AdminLayoutComponent,
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('./packages/tour-packages.module').then(m => m.TourPackagesModule)
+      }
+    ]
   },
   {
-    path: 'home', 
-    component: ListPackagesComponent, 
-  },
+    path: '',
+    redirectTo: 'home'
+    , pathMatch: 'full'
+  }
+  // {
+  //   path: 'home',
+  //   component: ListPackagesComponent,
+  // },
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routes, {
-    }),
-  ],
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
 export class AppRoutingModule { }
