@@ -21,19 +21,19 @@ export interface MenuChildrenItem {
 }
 export const MENU_ITEMS: Menu[] = [
   {
-    "route": "design",
-    "name": "design",
+    "route": "peru",
+    "name": "Tour Packages",
     "type": "sub",
-    "icon": "color_lens",
+    "icon": "streetview",
     "children": [
       {
-        "route": "colors",
-        "name": "colors",
+        "route": "tour-packages",
+        "name": "Search Tour Packages",
         "type": "link"
       },
       {
-        "route": "icons",
-        "name": "icons",
+        "route": "reservations",
+        "name": "Reservations",
         "type": "link"
       }
     ],
@@ -45,160 +45,81 @@ export const MENU_ITEMS: Menu[] = [
     }
   },
   {
-    "route": "permissions",
-    "name": "permissions",
+    "route": "peru",
+    "name": "Transportation",
     "type": "sub",
-    "icon": "lock",
+    "icon": "directions_bus",
     "children": [
       {
-        "route": "role-switching",
-        "name": "role-switching",
+        "route": "transportation",
+        "name": "My vehicles",
         "type": "link"
       },
-      {
-        "route": "route-guard",
-        "name": "route-guard",
-        "type": "link",
-        "permissions": {
-          "except": "GUEST"
-        }
-      },
-      {
-        "route": "test",
-        "name": "test",
-        "type": "link",
-        "permissions": {
-          "only": "ADMIN"
-        }
-      }
+      // {
+      //   "route": "route-guard",
+      //   "name": "route-guard",
+      //   "type": "link",
+      //   "permissions": {
+      //     "except": "GUEST"
+      //   }
+      // },
+      // {
+      //   "route": "test",
+      //   "name": "test",
+      //   "type": "link",
+      //   "permissions": {
+      //     "only": "ADMIN"
+      //   }
+      // }
     ]
   },
-  {
-    "route": "media",
-    "name": "media",
-    "type": "sub",
-    "icon": "image",
-    "children": [
-      {
-        "route": "gallery",
-        "name": "gallery",
-        "type": "link"
-      }
-    ]
-  },
-  {
-    "route": "profile",
-    "name": "profile",
-    "type": "sub",
-    "icon": "person",
-    "children": [
-      {
-        "route": "overview",
-        "name": "overview",
-        "type": "link"
-      },
-      {
-        "route": "settings",
-        "name": "settings",
-        "type": "link"
-      }
-    ]
-  },
-  {
-    "route": "/",
-    "name": "sessions",
-    "type": "sub",
-    "icon": "question_answer",
-    "children": [
-      {
-        "route": "403",
-        "name": "403",
-        "type": "link"
-      },
-      {
-        "route": "404",
-        "name": "404",
-        "type": "link"
-      },
-      {
-        "route": "500",
-        "name": "500",
-        "type": "link"
-      }
-    ],
-    "permissions": {
-      "only": "ADMIN"
-    }
-  },
-  {
-    "route": "utilities",
-    "name": "utilities",
-    "type": "sub",
-    "icon": "all_inbox",
-    "label": {
-      "color": "indigo-500",
-      "value": "new"
-    },
-    "children": [
-      {
-        "route": "css-grid",
-        "name": "css-grid",
-        "type": "link"
-      },
-      {
-        "route": "css-helpers",
-        "name": "css-helpers",
-        "type": "link"
-      }
-    ]
-  },
-  {
-    "route": "menu-level",
-    "name": "menu-level",
-    "type": "sub",
-    "icon": "subject",
-    "children": [
-      {
-        "route": "level-1-1",
-        "name": "level-1-1",
-        "type": "sub",
-        "children": [
-          {
-            "route": "level-2-1",
-            "name": "level-2-1",
-            "type": "sub",
-            "children": [
-              {
-                "route": "level-3-1",
-                "name": "level-3-1",
-                "type": "sub",
-                "children": [
-                  {
-                    "route": "level-4-1",
-                    "name": "level-4-1",
-                    "type": "link"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "route": "level-2-2",
-            "name": "level-2-2",
-            "type": "link"
-          }
-        ]
-      },
-      {
-        "route": "level-1-2",
-        "name": "level-1-2",
-        "type": "link"
-      }
-    ],
-    "permissions": {
-      "only": "ADMIN"
-    }
-  }
+  // {
+  //   "route": "menu-level",
+  //   "name": "menu-level",
+  //   "type": "sub",
+  //   "icon": "subject",
+  //   "children": [
+  //     {
+  //       "route": "level-1-1",
+  //       "name": "level-1-1",
+  //       "type": "sub",
+  //       "children": [
+  //         {
+  //           "route": "level-2-1",
+  //           "name": "level-2-1",
+  //           "type": "sub",
+  //           "children": [
+  //             {
+  //               "route": "level-3-1",
+  //               "name": "level-3-1",
+  //               "type": "sub",
+  //               "children": [
+  //                 {
+  //                   "route": "level-4-1",
+  //                   "name": "level-4-1",
+  //                   "type": "link"
+  //                 }
+  //               ]
+  //             }
+  //           ]
+  //         },
+  //         {
+  //           "route": "level-2-2",
+  //           "name": "level-2-2",
+  //           "type": "link"
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       "route": "level-1-2",
+  //       "name": "level-1-2",
+  //       "type": "link"
+  //     }
+  //   ],
+  //   "permissions": {
+  //     "only": "ADMIN"
+  //   }
+  // }
 ];
 
 export interface Menu {

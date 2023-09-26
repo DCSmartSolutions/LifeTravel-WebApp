@@ -6,13 +6,11 @@ import {RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
 import {MatMenuModule} from "@angular/material/menu";
 import {TopmenuComponent} from "./components/topmenu/topmenu.component";
 import {TopmenuPanelComponent} from "./components/topmenu/topmenu-panel.component";
-import {AdminLayoutComponent} from "./components/admin-layout/admin-layout.component";
+import {AdminLayoutComponent} from "./pages/admin-layout/admin-layout.component";
 import {NgProgressComponent} from "ngx-progressbar";
 import {HeaderComponent} from "./components/header/header.component";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {SidebarComponent} from "./components/sidebar/sidebar.component";
-import {SidebarNoticeComponent} from "./components/sidebar-notice/sidebar-notice.component";
-import {UserPanelComponent} from "./components/sidebar/user-panel.component";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {NavAccordionToggleDirective} from "./components/sidemenu/nav-accordion-toggle.directive";
 import {NavAccordionDirective} from "./components/sidemenu/nav-accordion.directive";
@@ -23,11 +21,11 @@ import {MatRippleModule} from "@angular/material/core";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {BrandingComponent} from "./widgets/branding.component";
-import {NotificationComponent} from "./widgets/notification.component";
 import {UserComponent} from "./widgets/user.component";
 import {MatListModule} from "@angular/material/list";
 import {NgxPermissionsRestrictStubDirective} from "ngx-permissions";
 import {MatInputModule} from "@angular/material/input";
+import {PublicLayoutRoutingModule} from "./public-layout-routing.module";
 
 
 
@@ -38,14 +36,11 @@ import {MatInputModule} from "@angular/material/input";
     AdminLayoutComponent,
     HeaderComponent,
     SidebarComponent,
-    SidebarNoticeComponent,
     NavAccordionToggleDirective,
     NavAccordionDirective,
     NavAccordionItemDirective,
     SidemenuComponent,
-    UserPanelComponent,
     BrandingComponent,
-    NotificationComponent,
     UserComponent,
   ],
   exports: [
@@ -62,7 +57,7 @@ import {MatInputModule} from "@angular/material/input";
     MatRippleModule,
     MatToolbarModule,
     MatTooltipModule,
-
+    PublicLayoutRoutingModule,
     RouterLink,
     RouterLinkActive,
     RouterOutlet,
@@ -73,4 +68,4 @@ import {MatInputModule} from "@angular/material/input";
 
   ]
 })
-export class SharedModule { }
+export class PublicLayoutModule { }

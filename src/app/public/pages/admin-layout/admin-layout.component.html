@@ -13,7 +13,6 @@
   <!-- Header Above -->
   <app-header *ngIf="options.showHeader && options.headerPos === 'above'"
               (toggleSidenav)="sidenav.toggle()"
-              (toggleSidenavNotice)="sidenavNotice.toggle()"
               [showBranding]="true">
   </app-header>
 
@@ -31,16 +30,12 @@
       </app-sidebar>
     </mat-sidenav>
 
-    <mat-sidenav #sidenavNotice position="end" mode="over">
-      <app-sidebar-notice></app-sidebar-notice>
-    </mat-sidenav>
-
     <mat-sidenav-content #content class="matero-content-wrap">
       <app-header *ngIf="options.showHeader && options.headerPos !== 'above'"
                   [showToggle]="!options.sidenavCollapsed && options.navPos !== 'top'"
                   [showBranding]="options.navPos === 'top'"
                   (toggleSidenav)="sidenav.toggle()"
-                  (toggleSidenavNotice)="sidenavNotice.toggle()">
+                  >
       </app-header>
 
       <app-topmenu *ngIf="options.navPos === 'top'"></app-topmenu>

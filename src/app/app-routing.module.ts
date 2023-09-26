@@ -1,27 +1,21 @@
 import { NgModule } from '@angular/core';
 import {RouterModule, Routes} from "@angular/router";
-import {AdminLayoutComponent} from "./shared/components/admin-layout/admin-layout.component";
 
 const routes: Routes = [
   {
-    path: 'home',
-    component: AdminLayoutComponent,
+    path: 'peru',
     children: [
       {
         path: '',
-        loadChildren: () => import('./packages/tour-packages.module').then(m => m.TourPackagesModule)
+        loadChildren: () => import('./public/public-layout.module').then(m => m.PublicLayoutModule)
       }
     ]
   },
   {
     path: '',
-    redirectTo: 'home'
+    redirectTo: 'peru'
     , pathMatch: 'full'
   }
-  // {
-  //   path: 'home',
-  //   component: ListPackagesComponent,
-  // },
 ];
 
 @NgModule({
