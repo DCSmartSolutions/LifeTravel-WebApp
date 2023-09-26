@@ -7,21 +7,35 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {HttpClientModule} from "@angular/common/http";
 import {SharedModule} from "./shared/shared.module";
 import {AppRoutingModule} from "./app-routing.module";
-import { ListPackagesComponent } from './packages/list-packages/list-packages.component';
+import { ListPackagesComponent } from './packages/components/list-packages/list-packages.component';
+import { SearchPackagesComponent } from './packages/components/search-packages/search-packages.component';
+import {MatListModule} from "@angular/material/list";
+import {MatCardModule} from "@angular/material/card";
+import {FormsModule} from "@angular/forms";
+import {MatButtonModule} from "@angular/material/button";
+import {MatIconModule} from "@angular/material/icon";
+import {MatGridListModule} from "@angular/material/grid-list";
 
 @NgModule({
   declarations: [
     AppComponent,
-    ListPackagesComponent
+    ListPackagesComponent,
+    SearchPackagesComponent
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    SharedModule,
-    AppRoutingModule,
-    RouterOutlet,
-  ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        SharedModule,
+        AppRoutingModule,
+        RouterOutlet,
+        MatListModule,
+        MatCardModule,
+        FormsModule,
+        MatButtonModule,
+        MatIconModule,
+        MatGridListModule,
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
