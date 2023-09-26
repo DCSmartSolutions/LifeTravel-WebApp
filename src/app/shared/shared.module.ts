@@ -28,6 +28,7 @@ import {UserComponent} from "./widgets/user.component";
 import {MatListModule} from "@angular/material/list";
 import {NgxPermissionsRestrictStubDirective} from "ngx-permissions";
 import {MatInputModule} from "@angular/material/input";
+import {MatDialogModule} from "@angular/material/dialog";
 
 
 
@@ -63,7 +64,6 @@ import {MatInputModule} from "@angular/material/input";
     MatRippleModule,
     MatToolbarModule,
     MatTooltipModule,
-
     RouterLink,
     RouterLinkActive,
     RouterOutlet,
@@ -71,7 +71,7 @@ import {MatInputModule} from "@angular/material/input";
     MatListModule,
     NgxPermissionsRestrictStubDirective,
     MatInputModule,
-
+    MatDialogModule
   ]
 })
 export class SharedModule { }

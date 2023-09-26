@@ -3,6 +3,8 @@ import {CommonModule} from '@angular/common';
 import {RouterModule, Routes} from "@angular/router";
 import {ListPackagesComponent} from "./components/list-packages/list-packages.component";
 import { SearchPlacesModalComponent } from './components/search-places.modal/search-places.modal.component';
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatButtonModule} from "@angular/material/button";
 
 
 const routes: Routes = [
@@ -18,6 +20,8 @@ const routes: Routes = [
   ],
   imports: [
     RouterModule.forChild(routes),
+    MatDialogModule,
+    MatButtonModule,
   ],
   exports: [RouterModule],
 })
