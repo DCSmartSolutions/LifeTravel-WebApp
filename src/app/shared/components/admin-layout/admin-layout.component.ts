@@ -83,6 +83,9 @@ export class AdminLayoutComponent implements OnDestroy {
     this.options.theme = 'dark';
     this.options.navPos = 'side';
     this.options.sidenavOpened = false;
+    this.options.sidenavCollapsed = false;
+    this.options.showHeader = true;
+    this.settings.setOptions(this.options);
     this.updateOptions(this.options);
   }
 
