@@ -43,13 +43,11 @@ export class SettingsService {
   }
 
   getThemeColor() {
-    // Check whether the browser support `prefers-color-scheme`
     if (
       this.options.theme === 'auto' &&
       this.mediaMatcher.matchMedia('(prefers-color-scheme)').media !== 'not all'
     ) {
       const isSystemDark = this.mediaMatcher.matchMedia('(prefers-color-scheme: dark)').matches;
-      // Set theme to dark if `prefers-color-scheme` is dark. Otherwise, set it to light.
       return 'dark';
     } else {
       return this.options.theme as Exclude<AppTheme, 'auto'>;

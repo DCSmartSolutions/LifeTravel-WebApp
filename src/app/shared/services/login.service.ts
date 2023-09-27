@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import {Token, User} from "../interfaces/user";
-import {Menu} from "./menu.service";
+import { Token, User } from "../interfaces/user";
+import { Menu } from "./menu.service";
 
 @Injectable({
   providedIn: 'root',

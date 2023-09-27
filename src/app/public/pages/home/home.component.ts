@@ -11,6 +11,9 @@ export class HomeComponent implements OnInit {
   constructor(private searchService: SearchService) {
   }
   ngOnInit() {
-    this.tourPackages = this.searchService.getAllPackages();
+    this.searchService.getAllPackages().subscribe(packages => {
+      this.tourPackages = packages;
+      console.log("packages", packages);
+    });
   }
 }
