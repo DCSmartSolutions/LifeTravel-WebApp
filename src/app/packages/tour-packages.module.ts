@@ -6,7 +6,7 @@ import {MatDialogModule} from "@angular/material/dialog";
 import {MatButtonModule} from "@angular/material/button";
 import {MatCardModule} from "@angular/material/card";
 import {NgOptimizedImage} from "@angular/common";
-import {SearchPackagesComponent} from "./components/search-packages/search-packages.component";
+import {SearchPackagesComponent} from "./pages/search-packages/search-packages.component";
 
 
 const routes: Routes = [

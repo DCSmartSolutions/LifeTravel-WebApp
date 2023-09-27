@@ -8,7 +8,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {PublicLayoutModule} from "./public/public-layout.module";
 import {AppRoutingModule} from "./app-routing.module";
 import {ListPackagesComponent} from './packages/components/list-packages/list-packages.component';
-import {SearchPackagesComponent} from './packages/components/search-packages/search-packages.component';
+import {SearchPackagesComponent} from './packages/pages/search-packages/search-packages.component';
 import {MatListModule} from "@angular/material/list";
 import {MatCardModule} from "@angular/material/card";
 import {FormsModule} from "@angular/forms";
