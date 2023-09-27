@@ -7,7 +7,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        loadChildren: () => import('./public/public-layout.module').then(m => m.PublicLayoutModule)
+        loadChildren: () => import('./shared/shared-layout.module').then(m => m.SharedLayoutModule)
       }
     ]
   },

@@ -5,7 +5,7 @@ import {AppComponent} from './app.component';
 import {RouterOutlet} from "@angular/router";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {HttpClientModule} from "@angular/common/http";
-import {PublicLayoutModule} from "./public/public-layout.module";
+import {SharedLayoutModule} from "./shared/shared-layout.module";
 import {AppRoutingModule} from "./app-routing.module";
 import {ListPackagesComponent} from './packages/components/list-packages/list-packages.component';
 import {SearchPackagesComponent} from './packages/pages/search-packages/search-packages.component';
@@ -17,7 +17,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatGridListModule} from "@angular/material/grid-list";
 import {NgxPermissionsModule} from "ngx-permissions";
 import {ToastrModule} from "ngx-toastr";
-import { HomeComponent } from './shared/pages/home/home.component';
+import { HomeComponent } from './public/pages/home/home.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +30,7 @@ import { HomeComponent } from './shared/pages/home/home.component';
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    PublicLayoutModule,
+    SharedLayoutModule,
     NgxPermissionsModule.forRoot(),
     ToastrModule.forRoot(),
     AppRoutingModule,

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import {Route, RouterModule} from "@angular/router";
-import {HomeComponent} from "../shared/pages/home/home.component";
+import {HomeComponent} from "../public/pages/home/home.component";
 import {AdminLayoutComponent} from "./pages/admin-layout/admin-layout.component";
 
 const childrenRoutes: Route[] = [
@@ -35,4 +35,4 @@ const routes: Route[] = [
   ],
   exports: [RouterModule],
 })
-export class PublicLayoutRoutingModule { }
+export class SharedRoutingModule { }
