@@ -1,21 +1,24 @@
-<div class="content">
-<div class="card-container">
-    <div *ngFor="let package of packages" class="card">
-      <div class="image-container">
-        <img [src]="package.img" alt="{{ package.destiny }}" class="card-image">
-      </div>
-      <div class="card-content">
-        <div class="description-and-stars">
-            <p>{{ package.description }}</p>
-            <div class="stars">
-              <i class="fa fa-star"></i>
-              {{ package.stars }}
-            </div>
-        </div>
-        <p>{{ package.description }}</p>
-        <p>Agency: {{ package.agency }}</p>
-        <h5> S/.{{ package.price }}</h5>
-      </div>
+<div class="row">
+  <div class="tour-experience-list-container">
+    <div *ngFor="let package of filteredPackages; let i = index">
+      <mat-card class="example-card">
+        <img mat-card-image [src]="package.img" alt="Photo of a Shiba Inu">
+        <mat-card-content>
+          <div class="description-and-stars">
+            <h3><strong>{{ package.destiny }}</strong></h3>
+            <p class="stars-info">Stars:
+              <mat-icon>star</mat-icon>
+              {{ package.stars }}</p>
+          </div>
+          <p>{{ package.description }}</p>
+          <p>Agency: {{ package.agency }}</p>
+          <strong>S/{{ package.price }}</strong>
+        </mat-card-content>
+        <mat-card-actions class="custom-card-actions">
+          <button mat-raised-button color="primary">GO</button>
+        </mat-card-actions>
+      </mat-card>
     </div>
   </div>
+
 </div>

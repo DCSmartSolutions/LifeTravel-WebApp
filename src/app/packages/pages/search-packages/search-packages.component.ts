@@ -10,10 +10,8 @@ import {ActivatedRoute, Router} from "@angular/router";
 export class SearchPackagesComponent implements OnInit {
   filteredPackages: any[] = [];
   region: any;
-
   constructor(private searchService: SearchService,
-              private route: ActivatedRoute,
-              private router: Router) {}
+              private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.route.params.subscribe(params => {

@@ -101,6 +101,9 @@ export class SearchService {
   getPackagesByRegionId(region_id: number) {
     return this.packages.filter(p => p.region_id == region_id)
   }
+  getAllPackages() {
+    return this.packages;
+  }
   getRegions() {
     return this.regions;
   }

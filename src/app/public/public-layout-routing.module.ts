@@ -25,13 +25,7 @@ const routes: Route[] = [
     component: AdminLayoutComponent,
     data: {showMenu: false},
     children: childrenRoutes
-  },
-  {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
   }
-
 ];
 
 @NgModule({

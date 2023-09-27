@@ -11,6 +11,10 @@ import {SearchPackagesComponent} from "./pages/search-packages/search-packages.c
 
 const routes: Routes = [
   {
+    path: '',
+    component: SearchPackagesComponent,
+  },
+  {
     path: ':regionId',
     component: SearchPackagesComponent,
   }

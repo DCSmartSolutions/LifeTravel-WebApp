@@ -20,35 +20,35 @@ export interface MenuChildrenItem {
   permissions?: MenuPermissions;
 }
 export const MENU_ITEMS: Menu[] = [
-  {
-    "route": "peru",
-    "name": "Tour Packages",
-    "type": "sub",
-    "icon": "streetview",
-    "children": [
-      {
-        "route": "tour-packages/1",
-        "name": "Search Tour Packages",
-        "type": "link"
-      },
-      // {
-      //   "route": "reservations",
-      //   "name": "Reservations",
-      //   "type": "link"
-      // }
-    ],
-    "permissions": {
-      "only": [
-        "ADMIN",
-        "MANAGER"
-      ]
-    }
-  },
+  // {
+  //   "route": "peru",
+  //   "name": "Tour Packages",
+  //   "type": "sub",
+  //   "icon": "streetview",
+  //   "children": [
+  //     {
+  //       "route": "tour-packages/1",
+  //       "name": "Search Tour Packages",
+  //       "type": "link"
+  //     },
+  //     // {
+  //     //   "route": "reservations",
+  //     //   "name": "Reservations",
+  //     //   "type": "link"
+  //     // }
+  //   ],
+  //   "permissions": {
+  //     "only": [
+  //       "ADMIN",
+  //       "MANAGER"
+  //     ]
+  //   }
+  // },
   {
     "route": "peru",
     "name": "Booking",
     "type": "sub",
-    "icon": "directions_bus",
+    "icon": "streetview",
     "children": [
       {
         "route": "booking",
