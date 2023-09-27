@@ -10,12 +10,9 @@
 
   <!-- Espacio flexible para alinear elementos a la derecha -->
   <span class="flex-fill"></span>
-  <mat-form-field class="search" (click)="showSearchDialog()">
+  <mat-form-field class="search" (click)="showSearchDialog()" *ngIf="showSearchInput">
     <input matInput placeholder="Search...">
   </mat-form-field>
-  <button mat-icon-button>
-    <mat-icon>search</mat-icon>
-  </button>
 
   <span class="flex-fill"></span>
 

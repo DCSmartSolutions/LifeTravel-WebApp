@@ -1,47 +1,49 @@
-<div class="container">
-  <mat-grid-list cols="2">
-    <mat-grid-tile>
-      <ng-container *ngFor="let _ of filteredPackages; let i = index">
-        <div class="example-card" *ngIf="i % 3 === 0">
-      <mat-card *ngFor="let package of filteredPackages" class="example-card">
-        <img mat-card-image [src]="package.img" alt="Photo of a Shiba Inu">
-        <mat-card-content>
+<div class="container text-center">
+  <div class="region-container">
+    <mat-card style="margin: 60px">
+      <mat-card-header>
+        <mat-card-title>Welcome to {{ region.name }}!</mat-card-title>
+      </mat-card-header>
+      <img class="region-image" [src]="region.img" alt="Picture of {{ region.name }}">
+      <mat-card-content>
+        <h2>Departments</h2>
+        <div class="destinations-columns">
+          <div class="destination-column" *ngFor="let package of filteredPackages; let i = index">
+            <mat-icon>room</mat-icon>
+            <span>{{ package.destiny }}</span>
+          </div>
+        </div>
+        <p>{{ region.description }}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div class="row">
+    <div class="tour-experience-list-container">
+      <div *ngFor="let package of filteredPackages; let i = index">
+        <mat-card class="example-card">
+          <img mat-card-image [src]="package.img" alt="Photo of a Shiba Inu">
           <mat-card-content>
             <div class="description-and-stars">
               <h3><strong>{{ package.destiny }}</strong></h3>
-              <p class="stars-info">Starts: <mat-icon>star</mat-icon> {{ package.stars }}</p>
+              <p class="stars-info">Stars:
+                <mat-icon>star</mat-icon>
+                {{ package.stars }}</p>
             </div>
             <p>{{ package.description }}</p>
             <p>Agency: {{ package.agency }}</p>
             <strong>S/{{ package.price }}</strong>
           </mat-card-content>
-        </mat-card-content>
-        <mat-card-actions class="custom-card-actions">
-          <button mat-raised-button color="primary">GO</button>
-        </mat-card-actions>
-      </mat-card>
-        </div>
-      </ng-container>
-    </mat-grid-tile>
-    <mat-grid-tile>
-      <mat-card class="example-card">
-        <mat-card-header>
-          <mat-card-title>Welcome to {{ region.name }}!</mat-card-title>
-        </mat-card-header>
-        <img mat-card-image [src]="region.img" alt="Picture of {{ region.name }}">
-        <mat-card-content>
-          <mat-card-content>
-            <h2>Departments</h2>
-            <div class="destinations-columns">
-              <div class="destination-column" *ngFor="let package of filteredPackages; let i = index">
-                <mat-icon>room</mat-icon>
-                <span>{{ package.destiny }}</span>
-              </div>
-            </div>
-            <p>{{ region.description }}</p>
-          </mat-card-content>
-        </mat-card-content>
-      </mat-card>
-    </mat-grid-tile>
-  </mat-grid-list>
+          <mat-card-actions class="custom-card-actions">
+            <button mat-raised-button color="primary">GO</button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+
+
+    <!-- Div que se muestra solo en pantallas medianas o más grandes -->
+
+
+  </div>
 </div>

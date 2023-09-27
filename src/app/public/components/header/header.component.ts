@@ -9,8 +9,8 @@ import {
 import screenfull from 'screenfull';
 import {MatDialog} from "@angular/material/dialog";
 import {
-  SearchPlacesModalComponent
-} from "../../../packages/components/search-places.modal/search-places.modal.component";
+  SearchPlacesDialog
+} from "../../../packages/components/search-places.modal/search-places-dialog.component";
 
 @Component({
   selector: 'app-header',
@@ -26,6 +26,7 @@ export class HeaderComponent {
 
   @Output() toggleSidenav = new EventEmitter<void>();
   @Output() toggleSidenavNotice = new EventEmitter<void>();
+  showSearchInput: boolean = true;
 
   constructor(public dialog: MatDialog) {
 
@@ -37,12 +38,16 @@ export class HeaderComponent {
   }
 
   showSearchDialog() {
-    this.dialog.open(SearchPlacesModalComponent, {
+    this.showSearchInput = false;
+    this.dialog.open(SearchPlacesDialog, {
       width: '600px',
       position: {
         top: '60px'
       },
       autoFocus: false,
-    });
+    }).afterClosed().subscribe(() => {
+      this.showSearchInput = true;
+    }
+    );
   }
 }
