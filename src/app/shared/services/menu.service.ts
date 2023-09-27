@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import {map, share} from 'rxjs/operators';
+import { share } from 'rxjs/operators';
 
 export interface MenuTag {
   color: string;

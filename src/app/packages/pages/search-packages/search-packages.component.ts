@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {SearchService} from "../../services/search.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { SearchService } from "../../services/search.service";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: 'app-search-packages',
