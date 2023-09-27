@@ -1,0 +1,40 @@
+.image-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin: 20px;
+}
+
+.image-wrapper {
+  position: relative;
+}
+
+.region-name {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s, transform 0.3s;
+  background-color: #778899;
+  font-weight: bold;
+  color: white;
+  border-radius: 15px;
+  padding: 5px 10px;
+  pointer-events: none;
+}
+
+.image-opacity {
+  opacity: 0.4;
+  transition: opacity 0.3s, transform 0.3s, transform-origin center;
+}
+
+.image-opacity:hover {
+  opacity: 1;
+  transform: scale(1.1);
+  transform-origin: center;
+}
+
+.image-opacity:hover + .region-name {
+  opacity: 1;
+}

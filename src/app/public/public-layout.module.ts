@@ -24,6 +24,7 @@ import {MatListModule} from "@angular/material/list";
 import {NgxPermissionsRestrictStubDirective} from "ngx-permissions";
 import {MatInputModule} from "@angular/material/input";
 import {PublicLayoutRoutingModule} from "./public-layout-routing.module";
+import {MatDialogModule} from "@angular/material/dialog";
 
 
 
@@ -61,7 +62,7 @@ import {PublicLayoutRoutingModule} from "./public-layout-routing.module";
     MatListModule,
     NgxPermissionsRestrictStubDirective,
     MatInputModule,
-
+    MatDialogModule
   ]
 })
 export class PublicLayoutModule { }

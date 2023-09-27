@@ -88,7 +88,7 @@ export class SearchService {
       "id": 2,
       "name": "Sierra",
       "description": "It is mainly characterized by a mountainous and very rugged geography, combined with plateaus and inter-Andean valleys. The Sierra occupies an area of 364,716 km2 (28% of the national territory).",
-      "img": "https://th.bing.com/th/id/OIP.uvU5X2zvdtmciy59MhHyOgHaE4?pid=ImgDet&rs=1"
+      "img": "https://viajerosocultos.com/wp-content/uploads/2023/01/pallay-punchu-of-apu-takllo-new-rainbow-mountain-near-cusco-in-peru.jpg"
     },
     {
       "id": 3,
@@ -99,12 +99,12 @@ export class SearchService {
   ];
 
   getPackagesByRegionId(region_id: number) {
-    return this.packages.filter(p => p.region_id === region_id)
+    return this.packages.filter(p => p.region_id == region_id)
   }
   getRegions() {
     return this.regions;
   }
   getRegionById(region_id: number) {
-    return this.regions.find(r => r.id === region_id)
+    return this.regions.find(r => r.id == region_id)
   }
 }

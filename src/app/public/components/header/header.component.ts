@@ -7,6 +7,10 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import screenfull from 'screenfull';
+import {MatDialog} from "@angular/material/dialog";
+import {
+  SearchPlacesDialog
+} from "../../../packages/components/search-places.modal/search-places-dialog.component";
 
 @Component({
   selector: 'app-header',
@@ -22,10 +26,28 @@ export class HeaderComponent {
 
   @Output() toggleSidenav = new EventEmitter<void>();
   @Output() toggleSidenavNotice = new EventEmitter<void>();
+  showSearchInput: boolean = true;
 
+  constructor(public dialog: MatDialog) {
+
+  }
   toggleFullscreen() {
     if (screenfull.isEnabled) {
       screenfull.toggle();
     }
+  }
+
+  showSearchDialog() {
+    this.showSearchInput = false;
+    this.dialog.open(SearchPlacesDialog, {
+      width: '600px',
+      position: {
+        top: '60px'
+      },
+      autoFocus: false,
+    }).afterClosed().subscribe(() => {
+      this.showSearchInput = true;
+    }
+    );
   }
 }

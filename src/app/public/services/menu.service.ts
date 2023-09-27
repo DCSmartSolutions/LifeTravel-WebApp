@@ -27,15 +27,15 @@ export const MENU_ITEMS: Menu[] = [
     "icon": "streetview",
     "children": [
       {
-        "route": "tour-packages",
+        "route": "tour-packages/1",
         "name": "Search Tour Packages",
         "type": "link"
       },
-      {
-        "route": "reservations",
-        "name": "Reservations",
-        "type": "link"
-      }
+      // {
+      //   "route": "reservations",
+      //   "name": "Reservations",
+      //   "type": "link"
+      // }
     ],
     "permissions": {
       "only": [
@@ -46,13 +46,13 @@ export const MENU_ITEMS: Menu[] = [
   },
   {
     "route": "peru",
-    "name": "Transportation",
+    "name": "Booking",
     "type": "sub",
     "icon": "directions_bus",
     "children": [
       {
-        "route": "transportation",
-        "name": "My vehicles",
+        "route": "booking",
+        "name": "My Bookings",
         "type": "link"
       },
       // {
