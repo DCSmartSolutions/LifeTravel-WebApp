@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SearchPlacesDialog } from './search-places-dialog.component';
+import { SearchPlacesModalComponent } from './search-places-modal.component';
 
 describe('SearchPlacesModalComponent', () => {
-  let component: SearchPlacesDialog;
-  let fixture: ComponentFixture<SearchPlacesDialog>;
+  let component: SearchPlacesModalComponent;
+  let fixture: ComponentFixture<SearchPlacesModalComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [SearchPlacesDialog]
+      declarations: [SearchPlacesModalComponent]
     });
-    fixture = TestBed.createComponent(SearchPlacesDialog);
+    fixture = TestBed.createComponent(SearchPlacesModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

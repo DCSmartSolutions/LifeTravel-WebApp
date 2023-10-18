@@ -1,24 +1,22 @@
 <div class="row">
-  <div class="tour-experience-list-container">
-    <div *ngFor="let package of filteredPackages; let i = index">
-      <mat-card class="example-card">
-        <img mat-card-image [src]="package.img" alt="Photo of a Shiba Inu">
-        <mat-card-content>
-          <div class="description-and-stars">
-            <h3><strong>{{ package.destiny }}</strong></h3>
-            <p class="stars-info">Stars:
-              <mat-icon>star</mat-icon>
-              {{ package.stars }}</p>
-          </div>
-          <p>{{ package.description }}</p>
-          <p>Agency: {{ package.agency }}</p>
-          <strong>S/{{ package.price }}</strong>
-        </mat-card-content>
-        <mat-card-actions class="custom-card-actions">
-          <button mat-raised-button color="primary">GO</button>
-        </mat-card-actions>
-      </mat-card>
-    </div>
+  <div *ngFor="let package of filteredPackages; let i = index" class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 p-3">
+    <mat-card >
+      <img mat-card-image [src]="package.img" alt="Photo of a Shiba Inu">
+      <mat-card-content>
+        <div class="description-and-stars">
+          <h3><strong>{{ package.destiny }}</strong></h3>
+          <p class="stars-info">Stars:
+            <mat-icon>star</mat-icon>
+            {{ package.stars }}</p>
+        </div>
+        <p>{{ package.description }}</p>
+        <p>Agency: {{ package.agency }}</p>
+        <strong>S/{{ package.price }}</strong>
+      </mat-card-content>
+      <mat-card-actions class="custom-card-actions">
+        <button mat-raised-button color="primary">GO</button>
+      </mat-card-actions>
+    </mat-card>
   </div>
 
 </div>

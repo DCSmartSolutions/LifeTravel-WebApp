@@ -6,11 +6,10 @@ import {
   Output,
   ViewEncapsulation,
 } from '@angular/core';
-import screenfull from 'screenfull';
 import {MatDialog} from "@angular/material/dialog";
 import {
-  SearchPlacesDialog
-} from "../../../packages/components/search-places.modal/search-places-dialog.component";
+  SearchPlacesModalComponent
+} from "../../../packages/components/search-places-modal/search-places-modal.component";
 
 @Component({
   selector: 'app-header',
@@ -31,23 +30,20 @@ export class HeaderComponent {
   constructor(public dialog: MatDialog) {
 
   }
-  toggleFullscreen() {
-    if (screenfull.isEnabled) {
-      screenfull.toggle();
-    }
-  }
 
   showSearchDialog() {
     this.showSearchInput = false;
-    this.dialog.open(SearchPlacesDialog, {
-      width: '600px',
-      position: {
-        top: '60px'
-      },
-      autoFocus: false,
-    }).afterClosed().subscribe(() => {
-      this.showSearchInput = true;
-    }
+    const dialogRef = this.dialog.open(SearchPlacesModalComponent, {
+        width: '600px',
+        position: {
+          top: '60px'
+        },
+        panelClass: 'search-places-dialog',
+      }
+    );
+    dialogRef.afterClosed().subscribe(() => {
+        this.showSearchInput = true;
+      }
     );
   }
 }

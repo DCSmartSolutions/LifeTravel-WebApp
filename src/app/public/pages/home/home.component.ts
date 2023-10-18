@@ -1,5 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {SearchService} from "../../../packages/services/search.service";
+import {MatDialog} from "@angular/material/dialog";
+import {
+  FilterPackagesModal
+} from "../../../packages/components/filter-packages-modal/filter-packages-modal.component";
 
 @Component({
   selector: 'app-home',
@@ -8,12 +12,26 @@ import {SearchService} from "../../../packages/services/search.service";
 })
 export class HomeComponent implements OnInit {
   tourPackages: any[] = [];
-  constructor(private searchService: SearchService) {
+  filter:any
+  constructor(private searchService: SearchService,
+              public dialog: MatDialog) {
   }
   ngOnInit() {
     this.searchService.getAllPackages().subscribe(packages => {
       this.tourPackages = packages;
       console.log("packages", packages);
+    });
+  }
+  openDialog(): void {
+    const dialogRef = this.dialog.open(FilterPackagesModal, {
+      maxWidth: '80vw',
+      minWidth: '50vw',
+      maxHeight: '90vh'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.filter = result;
     });
   }
 }

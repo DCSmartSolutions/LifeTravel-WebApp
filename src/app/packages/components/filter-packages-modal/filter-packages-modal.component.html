@@ -1,0 +1,33 @@
+<h1 mat-dialog-title class="d-flex justify-content-center pt-3 fw-bolder">Filter by</h1>
+<div mat-dialog-content>
+  <div class="w-100">
+    <h5 class="fw-bold">Price range</h5>
+    <h6>The average price per night is <b>S/ {{priceRange}}</b></h6>
+    <div class="d-flex justify-content-center">
+      <mat-slider [min]="minN" [max]="maxN" style="width: 80%">
+        <input [(ngModel)]="minValue" matSliderStartThumb style="font-size: 60px">
+        <input [(ngModel)]="maxValue" matSliderEndThumb>
+      </mat-slider>
+    </div>
+    <div class="col-12 p-0 d-flex justify-content-between">
+      <mat-form-field class="col-3">
+        <input matInput type="number" class="w-100" [min]="minValue" [max]="maxValue" [(ngModel)]="minValue"
+               prefix="S/">
+      </mat-form-field>
+      <span class="fw-bold pt-2">to</span>
+      <mat-form-field class="col-3">
+        <input matInput class="w-100" [(ngModel)]="maxValue">
+      </mat-form-field>
+    </div>
+    <hr>
+    <h5 class="fw-bold">Tour Language</h5>
+    <mat-checkbox class="d-block" *ngFor="let language of languages" [(ngModel)]="language.checked">
+      {{language.name}}
+    </mat-checkbox>
+  </div>
+</div>
+<div mat-dialog-actions class="fw-bold">
+  <button mat-flat-button (click)="clear()"><u>Remove all</u>
+  </button>
+  <button mat-raised-button color="primary" [mat-dialog-close]="{minValue: minValue, maxValue: maxValue, languages: languages}">Apply</button>
+</div>
