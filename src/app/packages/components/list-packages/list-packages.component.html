@@ -1,17 +1,20 @@
 <div class="row">
-  <div *ngFor="let package of filteredPackages; let i = index" class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 p-3">
-    <mat-card >
-      <img mat-card-image [src]="package.img" alt="Photo of a Shiba Inu">
-      <mat-card-content>
-        <div class="description-and-stars">
-          <h3><strong>{{ package.destiny }}</strong></h3>
-          <p class="stars-info">Stars:
-            <mat-icon>star</mat-icon>
-            {{ package.stars }}</p>
+  <div *ngFor="let package of filteredPackages; let i = index"
+        [className]="className">
+    <mat-card class="p-3 card-container h-100">
+      <img class="px-3" mat-card-image [src]="package.img" alt="Photo of a Shiba Inu">
+      <mat-card-content class="py-2">
+
+        <div class="d-flex justify-content-between align-items-middle fw-bolder">
+          <div class="fs-4 text-start">{{ package.destiny }}</div>
+          <div class="d-flex align-items-center">
+            <mat-icon class="star-icon">star</mat-icon>
+            <div> {{ package.stars }}</div>
+          </div>
         </div>
-        <p>{{ package.description }}</p>
-        <p>Agency: {{ package.agency }}</p>
-        <strong>S/{{ package.price }}</strong>
+        <label class="d-flex">{{ package.description }}</label>
+        <label class="d-flex">Agency: {{ package.agency }}</label>
+        <label class="d-flex fw-bolder">S/ {{ package.price }}</label>
       </mat-card-content>
       <mat-card-actions class="custom-card-actions">
         <button mat-raised-button color="primary">GO</button>

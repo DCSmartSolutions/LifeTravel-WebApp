@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {max, min} from "rxjs";
 
 @Component({
@@ -20,11 +20,21 @@ export class FilterPackagesModal {
     {name: 'Spanish', checked: false},
     {name: 'French', checked: false},
   ];
-  clear(){
+  activities: any[] = [
+    {name: 'Trekking', selected: false, icon: 'assets/images/filter-packages/trekking.png'},
+    {name: 'Waterway', selected: false, icon: 'assets/images/filter-packages/waterway.png'},
+    {name: 'Cave', selected: false, icon: 'assets/images/filter-packages/cave.png'},
+    {name: 'Others', selected: false, icon: 'assets/images/filter-packages/others.png'},
+  ];
+
+  clear() {
     this.languages.forEach(language => {
       language.checked = false;
     })
     this.minValue = this.minN;
     this.maxValue = this.maxN;
+    this.activities.forEach(activity => {
+      activity.selected = false;
+    })
   }
 }

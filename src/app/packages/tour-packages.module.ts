@@ -3,7 +3,7 @@ import {RouterModule, Routes} from "@angular/router";
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatButtonModule} from "@angular/material/button";
 import {MatCardModule} from "@angular/material/card";
-import {NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
+import {NgClass, NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
 import {SearchPackagesComponent} from "./pages/search-packages/search-packages.component";
 import {FilterPackagesModal} from "./components/filter-packages-modal/filter-packages-modal.component";
 import {MatSliderModule} from "@angular/material/slider";
@@ -43,6 +43,7 @@ const routes: Routes = [
     MatCheckboxModule,
     NgForOf,
     MatIconModule,
+    NgClass,
   ],
   exports: [RouterModule],
 })

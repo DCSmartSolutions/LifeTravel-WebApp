@@ -10,7 +10,7 @@ import {User} from "../interfaces/user";
 <!--      <mat-icon>search</mat-icon>-->
 <!--    </button>-->
     <button mat-icon-button [matMenuTriggerFor]="menu">
-      <mat-icon>account_circle</mat-icon>
+      <mat-icon class="text-white">account_circle</mat-icon>
     </button>
 
     <mat-menu #menu="matMenu">
