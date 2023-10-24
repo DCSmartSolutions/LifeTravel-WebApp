@@ -9,7 +9,7 @@ import {
 import {MatDialog} from "@angular/material/dialog";
 import {
   SearchPlacesModalComponent
-} from "../../../packages/components/search-places-modal/search-places-modal.component";
+} from "../../../tour-experience/components/search-places-modal/search-places-modal.component";
 
 @Component({
   selector: 'app-header',

@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {TourPackageService} from "../../../packages/services/tour-package.service";
+import {TourPackageService} from "../../../tour-experience/services/tour-package.service";
 import {MatDialog} from "@angular/material/dialog";
 import {
   FilterPackagesModal
-} from "../../../packages/components/filter-packages-modal/filter-packages-modal.component";
+} from "../../../tour-experience/components/filter-packages-modal/filter-packages-modal.component";
 
 @Component({
   selector: 'app-home',
