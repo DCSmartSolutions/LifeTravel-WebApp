@@ -55,7 +55,7 @@ export class TourPackageDetailComponent implements OnInit {
   }
 
   back() {
-    this.router.navigate(['peru/tour-packages/my-tour-packages']);
+    this.router.navigate(['peru/tour-packages/my-packages']);
   }
 
 

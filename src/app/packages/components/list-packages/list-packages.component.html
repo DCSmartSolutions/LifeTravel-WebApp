@@ -17,8 +17,8 @@
           <mat-icon class="star-icon">star</mat-icon>
             <div> {{ tourPackage.stars }}</div>
         </div>
-        <label class="d-flex">{{ tourPackage.description }}</label>
-        <label class="d-flex">Agency: {{ tourPackage.agency }}</label>
+        <label class="d-flex" style="text-align: justify; text-justify: inter-word"> {{ (tourPackage.description.length>250)? (tourPackage.description | slice:0:250)+'...':(tourPackage.description) }}  </label>
+        <label class="d-flex" *ngIf="!isAgency">Agency: {{ tourPackage.agency }}</label>
         <label class="d-flex fw-bolder">S/ {{ tourPackage.price }}</label>
       </mat-card-content>
       <mat-card-actions class="custom-card-actions">

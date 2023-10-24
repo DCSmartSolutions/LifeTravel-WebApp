@@ -27,8 +27,13 @@ export const MENU_ITEMS: Menu[] = [
     "icon": "route",
     "children": [
       {
-        "route": "my-tour-packages",
-        "name": "My Tour Packages",
+        "route": "my-packages",
+        "name": "My Packages",
+        "type": "link"
+      },
+      {
+        "route": "my-tour-experiences",
+        "name": "My Tours",
         "type": "link"
       },
     ]
