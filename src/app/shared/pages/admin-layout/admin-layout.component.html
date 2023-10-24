@@ -12,7 +12,7 @@
   <ng-progress></ng-progress>
   <!-- Header Above -->
   <app-header *ngIf="options.showHeader && options.headerPos === 'above'"
-              (toggleSidenav)="sidenav.toggle()"
+              (toggleSidenav)="sidenav.toggle()" [isAgency]="options.isAgency"
               [showBranding]="true">
   </app-header>
 

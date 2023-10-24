@@ -21,14 +21,14 @@ export interface MenuChildrenItem {
 }
 export const MENU_ITEMS: Menu[] = [
   {
-    "route": "peru",
-    "name": "Booking",
+    "route": "peru/tour-packages",
+    "name": "Tour Experience",
     "type": "sub",
-    "icon": "streetview",
+    "icon": "route",
     "children": [
       {
-        "route": "booking",
-        "name": "My Bookings",
+        "route": "my-tour-packages",
+        "name": "My Tour Packages",
         "type": "link"
       },
     ]

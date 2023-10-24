@@ -1,3 +1,63 @@
-$blue: #12263A;
+@use '@angular/material' as mat;
 
+
+$blue: #12263A;
 @import "node_modules/bootstrap/scss/bootstrap";
+
+@include mat.core();
+
+$my-blue-palette: (
+  50: #e3edff,
+  100: #c1d3e9,
+  200: #a2b5ce,
+  300: #8197b5,
+  400: #6881a1,
+  500: #506d8e,
+  600: #425f7e,
+  700: #334c67,
+  800: #243a52,
+  900: #12263a,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: white
+  )
+);
+
+$my-red-palette: (
+  50: #ffeaee,
+  100: #ffcbd1,
+  200: #f89796,
+  300: #f16d6d,
+  400: #fc4747,
+  500: #ff3028,
+  600: #f32329,
+  700: #e11223,
+  800: #d4001b,
+  900: #c4000d,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: white
+  )
+);
+
+
+$my-primary: mat.define-palette($my-blue-palette, 900, 500, 50);
+$my-accent: mat.define-palette(mat.$amber-palette, A200, A400);
+$my-warn: mat.define-palette($my-red-palette, 400, 500, 900);
+$my-secondary: mat.define-palette(mat.$grey-palette, 500, 300, 700);
+
+$my-theme: mat.define-light-theme((
+  color: (
+    primary: $my-primary,
+    accent: $my-accent,
+    warn: $my-warn,
+  ),
+  typography: mat.define-typography-config(),
+  density: 0,
+));
+
+@include mat.all-component-themes($my-theme);

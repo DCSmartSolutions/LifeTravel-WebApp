@@ -4,15 +4,15 @@
     <button mat-icon-button *ngIf="showToggle" (click)="toggleSidenav.emit()">
       <mat-icon class="text-white">menu</mat-icon>
     </button>
-
-    <app-branding *ngIf="showBranding"></app-branding>
+    <app-branding *ngIf="showBranding && !isAgency"></app-branding>
   </div>
 
   <!-- Espacio flexible para alinear elementos a la derecha -->
   <span class="flex-fill"></span>
-  <mat-form-field class="search" (click)="showSearchDialog()" *ngIf="showSearchInput">
+  <mat-form-field class="search" (click)="showSearchDialog()" *ngIf="showSearchInput && !isAgency">
     <input matInput placeholder="Search...">
   </mat-form-field>
+  <app-branding *ngIf="showBranding && isAgency"></app-branding>
 
   <span class="flex-fill"></span>
 

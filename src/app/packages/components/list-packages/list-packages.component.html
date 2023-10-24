@@ -1,23 +1,33 @@
 <div class="row">
-  <div *ngFor="let package of filteredPackages; let i = index"
-        [className]="className">
+  <div *ngFor="let tourPackage of filteredPackages; let i = index"
+       [className]="className">
     <mat-card class="p-3 card-container h-100">
-      <img class="px-3" mat-card-image [src]="package.img" alt="Photo of a Shiba Inu">
+
+      <img class="px-3" mat-card-image [src]="tourPackage.img" alt="Photo of a Shiba Inu">
+      <div *ngIf="isAgency">
+        <button mat-mini-fab color="warn" class="position-absolute start-0 top-0 m-3">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
       <mat-card-content class="py-2">
 
-        <div class="d-flex justify-content-between align-items-middle fw-bolder">
-          <div class="fs-4 text-start">{{ package.destiny }}</div>
-          <div class="d-flex align-items-center">
-            <mat-icon class="star-icon">star</mat-icon>
-            <div> {{ package.stars }}</div>
-          </div>
+        <label class="fs-4 fw-bolder d-flex">{{ tourPackage.destiny }}</label>
+        <label class="fs-6 fw-bolder">{{ tourPackage.title }}</label>
+        <div class="d-flex justify-content-end align-items-middle fw-bolder">
+          <mat-icon class="star-icon">star</mat-icon>
+            <div> {{ tourPackage.stars }}</div>
         </div>
-        <label class="d-flex">{{ package.description }}</label>
-        <label class="d-flex">Agency: {{ package.agency }}</label>
-        <label class="d-flex fw-bolder">S/ {{ package.price }}</label>
+        <label class="d-flex">{{ tourPackage.description }}</label>
+        <label class="d-flex">Agency: {{ tourPackage.agency }}</label>
+        <label class="d-flex fw-bolder">S/ {{ tourPackage.price }}</label>
       </mat-card-content>
       <mat-card-actions class="custom-card-actions">
-        <button mat-raised-button color="primary">GO</button>
+        <button mat-raised-button color="primary" *ngIf="!isAgency">GO</button>
+        <button mat-raised-button color="accent" *ngIf="isAgency" class="fw-bolder"
+                (click)="editTourPackage(tourPackage)">
+          <mat-icon>edit</mat-icon>
+          Edit
+        </button>
       </mat-card-actions>
     </mat-card>
   </div>

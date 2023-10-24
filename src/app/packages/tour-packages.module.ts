@@ -8,27 +8,47 @@ import {SearchPackagesComponent} from "./pages/search-packages/search-packages.c
 import {FilterPackagesModal} from "./components/filter-packages-modal/filter-packages-modal.component";
 import {MatSliderModule} from "@angular/material/slider";
 import {MatInputModule} from "@angular/material/input";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatIconModule} from "@angular/material/icon";
-import { SearchPlacesModalComponent } from './components/search-places-modal/search-places-modal.component';
+import {SearchPlacesModalComponent} from './components/search-places-modal/search-places-modal.component';
+import {
+  ExistingTourPackagesListComponent
+} from './pages/existing-tour-packages-list/existing-tour-packages-list.component';
+import {ListPackagesComponent} from "./components/list-packages/list-packages.component";
+import { TourPackageDetailComponent } from './pages/tour-package-detail/tour-package-detail.component';
 
 
 const routes: Routes = [
   {
-    path: '',
-    component: SearchPackagesComponent,
+    path: 'my-tour-packages',
+    component: ExistingTourPackagesListComponent,
+  },
+  {
+    path: 'detail/:packageId',
+    component: TourPackageDetailComponent,
+  },
+  {
+    path:'add-tour-package',
+    component: TourPackageDetailComponent,
   },
   {
     path: ':regionId',
     component: SearchPackagesComponent,
-  }
+  },
+  {
+    path: '',
+    component: SearchPackagesComponent,
+  },
 ]
 
 @NgModule({
   declarations: [
     FilterPackagesModal,
     SearchPlacesModalComponent,
+    ExistingTourPackagesListComponent,
+    ListPackagesComponent,
+    TourPackageDetailComponent,
   ],
   imports: [
     RouterModule.forChild(routes),
@@ -44,8 +64,9 @@ const routes: Routes = [
     NgForOf,
     MatIconModule,
     NgClass,
+    ReactiveFormsModule,
   ],
-  exports: [RouterModule],
+  exports: [RouterModule, ListPackagesComponent],
 })
 export class TourPackagesModule {
 }

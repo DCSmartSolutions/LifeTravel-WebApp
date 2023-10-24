@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {SearchService} from "../../../packages/services/search.service";
+import {TourPackageService} from "../../../packages/services/tour-package.service";
 import {MatDialog} from "@angular/material/dialog";
 import {
   FilterPackagesModal
@@ -13,7 +13,7 @@ import {
 export class HomeComponent implements OnInit {
   tourPackages: any[] = [];
   filter:any
-  constructor(private searchService: SearchService,
+  constructor(private searchService: TourPackageService,
               public dialog: MatDialog) {
   }
   ngOnInit() {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SearchService } from "../../services/search.service";
+import { TourPackageService } from "../../services/tour-package.service";
 import { ActivatedRoute } from "@angular/router";
 
 @Component({
@@ -10,7 +10,7 @@ import { ActivatedRoute } from "@angular/router";
 export class SearchPackagesComponent implements OnInit {
   filteredPackages: any[] = [];
   region: any;
-  constructor(private searchService: SearchService,
+  constructor(private searchService: TourPackageService,
               private route: ActivatedRoute) {}
 
   ngOnInit() {

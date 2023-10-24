@@ -18,14 +18,14 @@ import {MatGridListModule} from "@angular/material/grid-list";
 import {NgxPermissionsModule} from "ngx-permissions";
 import {ToastrModule} from "ngx-toastr";
 import { HomeComponent } from './public/pages/home/home.component';
+import {TourPackagesModule} from "./packages/tour-packages.module";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    ListPackagesComponent,
-    SearchPackagesComponent,
-    HomeComponent
-  ],
+    declarations: [
+        AppComponent,
+        SearchPackagesComponent,
+        HomeComponent
+    ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -41,9 +41,10 @@ import { HomeComponent } from './public/pages/home/home.component';
     MatButtonModule,
     MatIconModule,
     MatGridListModule,
+    TourPackagesModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+    providers: [],
+    bootstrap: [AppComponent]
 })
 export class AppModule {
 }

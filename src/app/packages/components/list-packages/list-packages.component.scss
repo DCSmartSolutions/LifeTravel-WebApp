@@ -17,3 +17,6 @@
   color: #FFD02A;
   margin-right: 6px;
 }
+:host ::ng-deep .mat-mdc-fab:not(.mdc-fab--extended), .mat-mdc-mini-fab:not(.mdc-fab--extended) {
+  border-radius: 10px;
+}

@@ -80,4 +80,12 @@ export class SettingsService {
       this.htmlElement.classList.remove('theme-dark');
     }
   }
+  setAgencyLayout() {
+    this.options.isAgency = true;
+    this.setOptions(this.options);
+  }
+  setDefaultLayout() {
+    this.options.isAgency = false;
+    this.setOptions(this.options);
+  }
 }

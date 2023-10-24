@@ -2,73 +2,80 @@
   "packages": [
     {
       "id": 1,
-      "img": "assets/images/packages/machu_pichu.jpg",
-      "destiny": "1",
-      "description": "Cusco, Aguas Calientes",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/c/ca/Machu_Picchu%2C_Peru_%282018%29.jpg",
+      "destiny": "Machu Picchu",
+      "title": "Trekking in Machu Picchu",
+      "description": "Machu Picchu, Cusco",
       "agency": "Inca Trek",
       "price": "345",
-      "stars": 4.8,
-      "region_id": 1
+      "stars": 3.4,
+      "regionId": 2
     },
     {
       "id": 2,
-      "img": "assets/images/packages/machu_pichu.jpg",
-      "destiny": "Trekking",
-      "description": "Cusco, Aguas Calientes",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/d/d3/In_Aquas_Calientes%2C_at_1785_m_%288444713101%29.jpg",
+      "destiny": "Aguas Calientes",
+      "title": "Trekking in Aguas Calientes",
+      "description": "Aguas Calientes, Cusco",
       "agency": "Inca Trek",
-      "price": "345",
-      "stars": 4.8,
-      "region_id": 2
+      "price": "125",
+      "stars": 2.9,
+      "regionId": 2
     },
     {
       "id": 3,
-      "img": "assets/images/packages/machu_pichu.jpg",
-      "destiny": "3",
-      "description": "Cusco, Aguas Calientes",
+      "img": "https://www.actualidadambiental.pe/wp-content/uploads/2020/09/0-Paracas-Walter-H.-Wust.jpg",
+      "destiny": "Reserva Nacional de Paracas",
+      "description": "Ica",
+      "title": "Reserva Nacional de Paracas",
       "agency": "Inca Trek",
-      "price": "345",
-      "stars": 4.8,
-      "region_id": 3
+      "price": "144",
+      "stars": 4.2,
+      "regionId": 1
     },
     {
       "id": 4,
-      "img": "assets/images/packages/machu_pichu.jpg",
-      "destiny": "1",
-      "description": "Cusco, Aguas Calientes",
+      "img": "https://www.peru.travel/contenido/experiencia/imagen/es/63/1.2/trekking%20en%20la%20selva.jpg",
+      "destiny": "Senderos de la Amazonía",
+      "description": "Iquitos",
+      "title": "Trekking in Senderos de la Amazonía",
       "agency": "Inca Trek",
-      "price": "345",
-      "stars": 4.8,
-      "region_id": 1
+      "price": "235",
+      "stars": 4.0,
+      "regionId": 3
     },
     {
       "id": 5,
-      "img": "assets/images/packages/machu_pichu.jpg",
-      "destiny": "Inca Trail",
-      "description": "Cusco, Aguas Calientes",
+      "img": "https://www.deaventura.pe/blog/wp-content/uploads/2015/06/Trekking-arequipa.jpg",
+      "destiny": "Llahuar",
+      "description": "Arequipa",
+      "title": "Trekking in Llahuar",
       "agency": "Inca Trek",
-      "price": "345",
-      "stars": 4.8,
-      "region_id": 2
+      "price": "210",
+      "stars": 2.6,
+      "regionId": 2
     },
     {
       "id": 6,
-      "img": "assets/images/packages/machu_pichu.jpg",
-      "destiny": "Salkantay Trek",
-      "description": "Cusco, Aguas Calientes",
+      "img": "https://titicacatravelperu.com/wp-content/uploads/2016/09/excursion-puno-los-uros-llachon-titicaca.jpg",
+      "destiny": "Islas de los Uros",
+      "description": "Puno",
+      "title": "Trekking in Islas de los Uros",
       "agency": "Inca Trek",
-      "price": "345",
-      "stars": 4.8,
-      "region_id": 2
+      "price": "112",
+      "stars": 4.5,
+      "regionId": 2
     },
     {
       "id": 7,
-      "img": "assets/images/packages/machu_pichu.jpg",
-      "destiny": "Puno",
-      "description": "Cusco, Aguas Calientes",
+      "img": "https://www.deaventura.pe/aplication/webroot/imgs/catalogo/aventuras_img_usuarios/16.jpg",
+      "destiny": "Cueva de Pikimachay",
+      "description": "Cajamarca",
+      "title": "Cueva de Pikimachay",
       "agency": "Inca Trek",
       "price": "345",
-      "stars": 4.8,
-      "region_id": 2
+      "stars": 3.9,
+      "regionId": 2
     }
   ],
   "regions" : [

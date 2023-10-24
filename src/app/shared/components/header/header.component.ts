@@ -19,10 +19,9 @@ import {
 })
 export class HeaderComponent {
   @HostBinding('class') class = 'matero-header';
-
+  @Input() isAgency: boolean = false;
   @Input() showToggle = true;
   @Input() showBranding = true;
-
   @Output() toggleSidenav = new EventEmitter<void>();
   @Output() toggleSidenavNotice = new EventEmitter<void>();
   showSearchInput: boolean = true;
