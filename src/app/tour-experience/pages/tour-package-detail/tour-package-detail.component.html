@@ -1,38 +1,32 @@
 <div class="container">
   <mat-card class="w-100 p-3">
     <mat-card-title>
-      <div class="d-flex mb-3">
+      <div class="d-flex">
         <button mat-raised-button class="fw-bolder bg-secondary text-white" (click)="back()">
           <mat-icon>keyboard_arrow_left</mat-icon>
           Back
         </button>
       </div>
-      <label class="fw-bolder fs-3 row justify-content-center">{{title}}</label></mat-card-title>
+      <label class="fw-bolder fs-3 row justify-content-center">{{ title }}</label>
+
+    </mat-card-title>
     <mat-card-content>
       <form [formGroup]="tourForm">
         <hr>
-        <div class="row">
-          <div class="col-12 col-lg-6 mb-2">
-            <label class="fs-5 fw-medium">Title:</label>
-            <mat-form-field class="d-flex">
-              <input matInput type="text" formControlName="title">
-            </mat-form-field>
+        <div class="d-flex justify-content-center">
+          <div>
+            <label class="fs-6" [ngClass]="!isVisible ? 'fw-bolder' : 'fw-normal'">Hidden</label>
+            <mat-slide-toggle hideIcon="true" formControlName="visible"
+                              class="mx-3">
+            </mat-slide-toggle>
+            <label class="fs-6" [ngClass]="isVisible ? 'fw-bolder' : 'fw-normal'">Visible</label>
           </div>
-          <div class="col-12 col-lg-6 mb-2">
-            <label class="fs-5 fw-medium">Destiny:</label>
-            <mat-form-field class="d-flex">
-              <input matInput type="text" formControlName="destiny">
-            </mat-form-field>
-          </div>
-          <div class="col-12 mb-2">
-            <label class="fs-5 fw-medium">Description:</label>
-            <mat-form-field class="d-flex">
-              <textarea matInput type="text" formControlName="description" rows="8"></textarea>
-            </mat-form-field>
-          </div>
-          <div class="col-12">
-            <label class="fs-5 fw-medium d-flex">Picture:</label>
+        </div>
+        <hr>
+        <div class="row justify-content-center">
+          <div class="col-12 col-md-10 col-lg-7 mb-2">
             <div class="d-flex mb-2">
+              <label class="fs-5 fw-medium" style="margin-right: 10px">Picture:</label>
               <button type="button" mat-raised-button (click)="fileInput.click()" color="accent">
                 <mat-icon>image</mat-icon>
                 Choose File
@@ -40,7 +34,36 @@
               <input hidden #fileInput type="file" id="file" (change)="onFileSelected($event)">
             </div>
             <img *ngIf="hasImg" class="w-100" [src]="tourForm.get('img')?.value" alt="tour picture">
-
+            <div *ngIf="!hasImg"
+                 class="d-flex bg-warning-subtle border border-warning rounded text-light-emphasis justify-content-center p-3">
+              No image uploaded
+            </div>
+          </div>
+          <div class="col-12 col-md-10 col-lg-7 mb-2">
+            <label class="fs-5 fw-medium">Title:</label>
+            <mat-form-field class="d-flex">
+              <input matInput type="text" formControlName="title">
+            </mat-form-field>
+          </div>
+          <div class="col-12 col-md-10 col-lg-7 mb-2">
+            <label class="fs-5 fw-medium">Description:</label>
+            <mat-form-field class="d-flex">
+              <textarea matInput type="text" formControlName="description" rows="8"></textarea>
+            </mat-form-field>
+          </div>
+          <div class="col-12 col-md-10 col-lg-7 mb-2 row">
+            <label class="fs-5 fw-medium">Activity Types:</label>
+            <div *ngFor="let activity of activities" class="col border border-2 rounded m-3 px-4 py-3"
+                 [ngClass]="{'bg-dark-subtle border-primary': activity.selected}"
+                 (click)="activity.selected = !activity.selected">
+              <div class="col-12 d-flex justify-content-center">
+                <img [src]="activity.icon" width="70" [alt]="activity.name+'-icon'">
+              </div>
+              <label class="row fw-bold mt-3 justify-content-center text-black">{{activity.name}}</label>
+            </div>
+          </div>
+          <div class="col-12 col-md-10 col-lg-7 mb-2 row">
+            <app-map></app-map>
           </div>
         </div>
       </form>

@@ -19,6 +19,8 @@ import {ListPackagesComponent} from "./components/list-packages/list-packages.co
 import { TourPackageDetailComponent } from './pages/tour-package-detail/tour-package-detail.component';
 import { ExistingTourExperienceListComponent } from './pages/existing-tour-experience-list/existing-tour-experience-list.component';
 import { ExistingVehicleListComponent } from './pages/existing-vehicle-list/existing-vehicle-list.component';
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import { MapComponent } from './components/map/map.component';
 
 
 const routes: Routes = [
@@ -57,6 +59,7 @@ const routes: Routes = [
     TourPackageDetailComponent,
     ExistingTourExperienceListComponent,
     ExistingVehicleListComponent,
+    MapComponent,
   ],
   imports: [
     RouterModule.forChild(routes),
@@ -74,6 +77,7 @@ const routes: Routes = [
     NgClass,
     ReactiveFormsModule,
     SlicePipe,
+    MatSlideToggleModule,
   ],
   exports: [RouterModule, ListPackagesComponent],
 })
