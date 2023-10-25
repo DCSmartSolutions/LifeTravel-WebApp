@@ -62,8 +62,17 @@
               <label class="row fw-bold mt-3 justify-content-center text-black">{{activity.name}}</label>
             </div>
           </div>
-          <div class="col-12 col-md-10 col-lg-7 mb-2 row">
-            <app-map></app-map>
+          <div class="col-12 col-md-10 col-lg-9 mb-2 row" *ngIf="tourForm.get('meetingPointLatitude')?.value">
+            <label class="fs-5 fw-medium mb-2">Meeting Point:</label>
+            <mat-form-field class="d-flex mb-2">
+              <input matInput type="text" readonly [(ngModel)]="displayNameLocation" [ngModelOptions]="{standalone: true}">
+            </mat-form-field>
+            <app-map (displayNameChangedEvent)="getDisplayName($event)"
+                     [latitude]="tourForm.get('meetingPointLatitude')?.value"
+                     [longitude]="tourForm.get('meetingPointLongitude')?.value"
+                     (locationChangedEvent)="getNewLocation($event)">
+            </app-map>
+
           </div>
         </div>
       </form>

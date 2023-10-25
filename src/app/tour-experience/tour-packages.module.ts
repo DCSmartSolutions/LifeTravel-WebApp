@@ -21,6 +21,7 @@ import { ExistingTourExperienceListComponent } from './pages/existing-tour-exper
 import { ExistingVehicleListComponent } from './pages/existing-vehicle-list/existing-vehicle-list.component';
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import { MapComponent } from './components/map/map.component';
+import {SharedLayoutModule} from "../shared/shared-layout.module";
 
 
 const routes: Routes = [
@@ -61,24 +62,25 @@ const routes: Routes = [
     ExistingVehicleListComponent,
     MapComponent,
   ],
-  imports: [
-    RouterModule.forChild(routes),
-    MatDialogModule,
-    MatButtonModule,
-    MatCardModule,
-    NgOptimizedImage,
-    MatSliderModule,
-    MatInputModule,
-    NgIf,
-    FormsModule,
-    MatCheckboxModule,
-    NgForOf,
-    MatIconModule,
-    NgClass,
-    ReactiveFormsModule,
-    SlicePipe,
-    MatSlideToggleModule,
-  ],
+    imports: [
+        RouterModule.forChild(routes),
+        MatDialogModule,
+        MatButtonModule,
+        MatCardModule,
+        NgOptimizedImage,
+        MatSliderModule,
+        MatInputModule,
+        NgIf,
+        FormsModule,
+        MatCheckboxModule,
+        NgForOf,
+        MatIconModule,
+        NgClass,
+        ReactiveFormsModule,
+        SlicePipe,
+        MatSlideToggleModule,
+        SharedLayoutModule,
+    ],
   exports: [RouterModule, ListPackagesComponent],
 })
 export class TourPackagesModule {

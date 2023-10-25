@@ -9,4 +9,16 @@ export class TourPackage {
   stars: number = 0;
   regionId: number = 0;
   visible: boolean = false;
+  meetingPoint: Location | null = null;
+  meetingPointLatitude: number | null = null;
+  meetingPointLongitude: number | null = null;
+}
+
+export class Location{
+  latitude: number;
+  longitude: number;
+  constructor(latitude: number, longitude: number) {
+    this.latitude = latitude;
+    this.longitude = longitude;
+  }
 }

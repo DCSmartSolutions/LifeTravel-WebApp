@@ -11,8 +11,8 @@ export class AzureBlobStorageService {
 
   constructor() { }
   //public an image and get the url
-  public async uploadImage(content: Blob, tourId: string): Promise<string> {
-    const blobName = `${tourId}`;
+  public async uploadImage(content: Blob): Promise<string> {
+    const blobName = `${new Date().getTime()}`;
     const blobClient = this.containerClient().getBlockBlobClient(blobName);
     await blobClient.uploadData(content, {blobHTTPHeaders: {blobContentType: content.type}})
     return blobClient.url;

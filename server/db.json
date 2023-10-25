@@ -14,7 +14,7 @@
     },
     {
       "id": 2,
-      "img": "https://upload.wikimedia.org/wikipedia/commons/d/d3/In_Aquas_Calientes%2C_at_1785_m_%288444713101%29.jpg",
+      "img": "https://nstoragetest.blob.core.windows.net/tour-packages-pictures/2?sp=racwdli&st=2023-10-24T00:12:03Z&se=2024-01-05T08:12:03Z&sv=2022-11-02&sr=c&sig=ihpBcbG09pC7gTDHSdvhmIJCxf7mqwFY7fZ9wTLg2S4%3D",
       "destiny": "Aguas Calientes",
       "title": "Trekking in Aguas Calientes",
       "description": "Aguas Calientes, also known as Machu Picchu Pueblo, is a charming town located at the base of Machu Picchu. It serves as the gateway for visitors to the ancient citadel. Enjoy a trek through lush forests and alongside the Urubamba River as you make your way to Machu Picchu. Aguas Calientes offers a variety of accommodations, hot springs, and local cuisine to enhance your visit.",
@@ -22,7 +22,11 @@
       "price": "125",
       "stars": 2.9,
       "regionId": 2,
-      "visible": false
+      "visible": false,
+      "meetingPoint": {
+        "latitude": -13.163141,
+        "longitude": -72.544963
+      }
     },
     {
       "id": 3,
@@ -34,7 +38,11 @@
       "price": "144",
       "stars": 4.2,
       "regionId": 1,
-      "visible": true
+      "visible": true,
+      "meetingPoint": {
+        "latitude": -13.813835,
+        "longitude": -76.388499
+      }
     },
     {
       "id": 4,
@@ -44,9 +52,13 @@
       "description": "The Amazon Rainforest in the Iquitos region is a treasure trove of biodiversity and adventure. Immerse yourself in the lush greenery and hear the symphony of the jungle. Trek through the jungle to discover visible waterfalls, unique flora, and wildlife, including monkeys and exotic birds. This is an opportunity to experience the natural wonders of the Amazon up close.",
       "agency": "Inca Trek",
       "price": "235",
-      "stars": 4.0,
+      "stars": 4,
       "regionId": 3,
-      "visible": true
+      "visible": true,
+      "meetingPoint": {
+        "latitude": -3.74912,
+        "longitude": -73.25383
+      }
     },
     {
       "id": 5,
@@ -58,7 +70,11 @@
       "price": "210",
       "stars": 2.6,
       "regionId": 2,
-      "visible": true
+      "visible": true,
+      "meetingPoint": {
+        "latitude": -15.629,
+        "longitude": -71.886
+      }
     },
     {
       "id": 6,
@@ -70,7 +86,11 @@
       "price": "112",
       "stars": 4.5,
       "regionId": 2,
-      "visible": false
+      "visible": false,
+      "meetingPoint": {
+        "latitude": -15.85370199713,
+        "longitude": -70.009489725
+      }
     },
     {
       "id": 7,
@@ -82,7 +102,11 @@
       "price": "345",
       "stars": 3.9,
       "regionId": 2,
-      "visible": true
+      "visible": true,
+      "meetingPoint": {
+        "latitude": -7.163,
+        "longitude": -78.512
+      }
     },
     {
       "id": 8,
@@ -94,7 +118,11 @@
       "price": "275",
       "stars": 4.7,
       "regionId": 2,
-      "visible": true
+      "visible": true,
+      "meetingPoint": {
+        "latitude": -13.163141,
+        "longitude": -72.544963
+      }
     },
     {
       "id": 9,
@@ -106,11 +134,15 @@
       "price": "295",
       "stars": 4.8,
       "regionId": 2,
-      "visible": true
+      "visible": true,
+      "meetingPoint": {
+        "latitude": -13.163141,
+        "longitude": -72.544963
+      }
     },
     {
       "id": 10,
-      "img": "https://www.quechuasexpeditions.com/wp-content/uploads/2017/05/tambopata-tour.jpg",
+      "img": "https://nstoragetest.blob.core.windows.net/tour-packages-pictures/10?sp=racwdli&st=2023-10-24T00:12:03Z&se=2024-01-05T08:12:03Z&sv=2022-11-02&sr=c&sig=ihpBcbG09pC7gTDHSdvhmIJCxf7mqwFY7fZ9wTLg2S4%3D",
       "destiny": "Tambopata National Reserve",
       "title": "Wildlife Safari in Tambopata",
       "description": "The Tambopata National Reserve in the Madre de Dios region is a biodiversity hotspot. This package offers an adventure deep into the Amazon rainforest. Explore the jungle, spot diverse wildlife, and cruise the Tambopata River. You'll have the chance to see macaws, jaguars, and other unique creatures while staying in comfortable eco-lodges.",
@@ -118,7 +150,11 @@
       "price": "399",
       "stars": 4.9,
       "regionId": 3,
-      "visible": true
+      "visible": true,
+      "meetingPoint": {
+        "latitude": -12.598,
+        "longitude": -69.183
+      }
     },
     {
       "id": 11,
@@ -130,7 +166,11 @@
       "price": "320",
       "stars": 4.6,
       "regionId": 2,
-      "visible": true
+      "visible": true,
+      "meetingPoint": {
+        "latitude": -15.629,
+        "longitude": -71.886
+      }
     },
     {
       "id": 12,
@@ -142,7 +182,11 @@
       "price": "345",
       "stars": 4.5,
       "regionId": 2,
-      "visible": true
+      "visible": true,
+      "meetingPoint": {
+        "latitude": -13.163141,
+        "longitude": -72.544963
+      }
     },
     {
       "id": 13,
@@ -154,7 +198,11 @@
       "price": "289",
       "stars": 4.4,
       "regionId": 2,
-      "visible": true
+      "visible": true,
+      "meetingPoint": {
+        "latitude": -9.526,
+        "longitude": -77.528
+      }
     }
   ],
   "regions": [

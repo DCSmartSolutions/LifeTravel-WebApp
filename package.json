@@ -23,6 +23,7 @@
     "@azure/storage-blob": "^12.16.0",
     "@fontsource/ibm-plex-sans": "^5.0.12",
     "@fontsource/poppins": "^5.0.8",
+    "@mapbox/mapbox-gl-geocoder": "^5.0.1",
     "angular-font-awesome": "^3.1.2",
     "bootstrap": "^5.3.2",
     "font-awesome": "^4.7.0",
@@ -41,13 +42,18 @@
     "@angular/cli": "~16.2.3",
     "@angular/compiler-cli": "^16.2.0",
     "@types/jasmine": "~4.3.0",
+    "@types/mapbox__mapbox-gl-geocoder": "^4.7.6",
     "@types/mapbox-gl": "^2.7.17",
+    "css-loader": "^6.8.1",
     "jasmine-core": "~4.6.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "node-sass": "^9.0.0",
+    "sass-loader": "^13.3.2",
+    "style-loader": "^3.3.3",
     "typescript": "~5.1.3"
   }
 }
