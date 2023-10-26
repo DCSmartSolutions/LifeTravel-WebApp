@@ -14,6 +14,8 @@ export class MapComponent implements OnInit {
   map: mapboxgl.Map | undefined;
   @Input() longitude: number | null = null;
   @Input() latitude: number | null = null;
+  @Input() isOnlyOneMarker: boolean = true;
+  @Input() destinationsLocations: Location[] = [];
   @Output() displayNameChangedEvent = new EventEmitter<string>();
   @Output() locationChangedEvent = new EventEmitter<Location>();
   marker: mapboxgl.Marker | undefined;
@@ -24,36 +26,31 @@ export class MapComponent implements OnInit {
 
   ngOnInit() {
 
-
     (mapboxgl as any).accessToken = environment.mapBoxKey;
     this.map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/mapbox/streets-v12',
-      center: [0, 0],
-      zoom: 16
+      center: [-76.9879548,-12.0777865],
+      zoom: 12
     });
-    console.log(this.latitude, this.longitude)
+    //console.log(this.latitude, this.longitude)
 
     this.marker = new mapboxgl.Marker({
       draggable: true,
-      color: "#d02922"
     })
-    if (!this.longitude && !this.latitude) this.getLocation();
-    else {
-      console.log("showPosition2")
-      this.showPosition2();
+    if(this.isOnlyOneMarker) {
+      if (!this.longitude && !this.latitude) this.getLocation();
+      else {
+        //console.log("showPosition2")
+        this.showPosition2();
+      }
     }
-    // const geocoder = new MapboxGeocoder({
-    //   accessToken: mapboxgl.accessToken,
-    //   marker: this.marker,
-    //   mapboxgl: mapboxgl
-    // });
     this.map.addControl(new mapboxgl.NavigationControl());
-
+    this.mapClick();
   }
 
   getLocation() {
-    console.log("getLocation")
+    //console.log("getLocation")
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => this.showPosition(position));
     } else {
@@ -65,27 +62,29 @@ export class MapComponent implements OnInit {
     this.longitude = position.coords.longitude;
     this.latitude = position.coords.latitude;
     this.map?.setCenter([this.longitude, this.latitude]);
-    this.setMarker();
-    console.log("Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude);
-    //this.getDisplayName(this.longitude, this.latitude);
+    this.setDefaultMarker();
+    //console.log("Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude);
+    this.getDisplayName(this.longitude, this.latitude);
   }
 
   showPosition2() {
     this.map?.setCenter([this.longitude!, this.latitude!]);
-    this.setMarker();
-    console.log("Latitude: " + this.latitude + "<br>Longitude: " + this.longitude);
-    //this.getDisplayName(this.longitude!, this.latitude!)
+    this.setDefaultMarker();
+    //console.log("Latitude: " + this.latitude + "<br>Longitude: " + this.longitude);
+    this.getDisplayName(this.longitude!, this.latitude!)
   }
 
-  setMarker() {
+  setDefaultMarker() {
     let timeoutId: any;
-    this.marker!.setLngLat([this.longitude!, this.latitude!])
-      .addTo(this.map!);
-
-    this.marker!.on('drag', () => {
+    this.marker = new mapboxgl.Marker({
+      draggable: true,
+      color: "#d02922"
+    }).setLngLat([this.longitude!, this.latitude!])
+      .addTo(this.map!)
+      .on('drag', () => {
       this.longitude = this.marker!.getLngLat().lng;
       this.latitude = this.marker!.getLngLat().lat;
-      console.log(this.marker!.getLngLat());
+      //console.log(this.marker!.getLngLat());
       if (timeoutId) {
         clearTimeout(timeoutId);
       }
@@ -99,11 +98,70 @@ export class MapComponent implements OnInit {
     let displayName = "";
 
     this.mapService.getDisplayName(longitude, latitude).then((response) => {
-      console.log("display", response['display_name']);
+      //console.log("display", response['display_name']);
       displayName = response['display_name'];
       this.displayNameChangedEvent.emit(displayName);
       this.locationChangedEvent.emit(new Location(longitude, latitude));
     });
   }
 
+  mapClick() {
+    if (this.isOnlyOneMarker) {
+      //console.log("isOnlyOneMarker")
+      this.map!.on('click', (e) => {
+        //console.log(e.lngLat);
+        this.longitude = e.lngLat.lng;
+        this.latitude = e.lngLat.lat;
+        this.setNewMarker(this.longitude, this.latitude);
+        this.getDisplayName(this.longitude, this.latitude);
+      });
+    }else{
+      this.map!.on('click', (e) => this.addMarker(e));
+    }
+  }
+  private setNewMarker(longitude: number, latitude: number) {
+    this.marker!.setLngLat([longitude, latitude])
+      .addTo(this.map!);
+    this.marker!.on('drag', () => {
+      this.longitude = this.marker!.getLngLat().lng;
+      this.latitude = this.marker!.getLngLat().lat;
+      //console.log(this.marker!.getLngLat());
+      this.getDisplayName(this.longitude!, this.latitude!);
+    });
+  }
+
+  private addMarker($event: any) {
+    const coordinates = $event.lngLat;
+    //console.log('Lng:', coordinates.lng, 'Lat:', coordinates.lat);
+    const location = new Location(coordinates.lat, coordinates.lng);
+    this.destinationsLocations.push(location);
+    this.createMarker();
+  }
+  createMarker() {
+    this.clearMapFromMarkers();
+    for (let i = 0; i < this.destinationsLocations.length; i++) {
+      const location = this.destinationsLocations[i];
+      let mark = new mapboxgl.Marker({
+        draggable: true,
+        color: "#d02922"
+      })
+        .setLngLat([location.longitude, location.latitude])
+        .addTo(this.map!)
+        .on('drag', () => {
+          location.longitude = mark.getLngLat().lng;
+          location.latitude = mark.getLngLat().lat;
+          //console.log(mark.getLngLat());
+        });
+    }
+  }
+  clearMapFromMarkers() {
+    const allMarkers = document.querySelectorAll('.mapboxgl-marker');
+    if (allMarkers.length > 0) {
+      allMarkers.forEach((marker, index) => {
+        if (index > 0) {
+          marker.remove();
+        }
+      });
+    }
+  }
 }

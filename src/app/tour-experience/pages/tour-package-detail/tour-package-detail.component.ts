@@ -109,14 +109,14 @@ export class TourPackageDetailComponent implements OnInit {
 
   getDisplayName($event: string) {
     this.displayNameLocation = $event;
-    console.log("displayNameLocation", this.displayNameLocation);
+    //console.log("displayNameLocation", this.displayNameLocation);
   }
   get hasMeetingPoint() {
     return this.tourForm.get('meetingPoint')?.value != null;
   }
 
   getNewLocation($event: Location) {
-    console.log("getNewLocation", $event)
+    //console.log("getNewLocation", $event)
     this.tourForm.patchValue({meetingPoint: $event});
   }
 }
