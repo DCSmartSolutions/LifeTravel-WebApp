@@ -10,7 +10,12 @@
       "price": "345",
       "stars": 3.4,
       "regionId": 2,
-      "visible": true
+      "visible": true,
+      "meetingPoint": {
+        "latitude": -13.163141,
+        "longitude": -72.544963
+      },
+      "destinations": []
     },
     {
       "id": 2,
@@ -26,7 +31,24 @@
       "meetingPoint": {
         "latitude": -13.163141,
         "longitude": -72.544963
-      }
+      },
+      "destinations": [
+        {
+          "latitude": -12.060769958949123,
+          "longitude": -77.00348952336095,
+          "name": "a"
+        },
+        {
+          "latitude": -12.071407646368897,
+          "longitude": -76.96081423776124,
+          "name": "e"
+        },
+        {
+          "latitude": -12.095192291649369,
+          "longitude": -77.01929845091345,
+          "name": "r"
+        }
+      ]
     },
     {
       "id": 3,
@@ -42,7 +64,8 @@
       "meetingPoint": {
         "latitude": -13.813835,
         "longitude": -76.388499
-      }
+      },
+      "destinations": []
     },
     {
       "id": 4,

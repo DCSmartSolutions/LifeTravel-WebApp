@@ -3,7 +3,7 @@ import * as mapboxgl from 'mapbox-gl';
 import * as MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import {environment} from "../../../../environments/environment";
 import {MapService} from "../../services/map.service";
-import {Location} from "../../models/tour-package.model";
+import {Location, LocationName} from "../../models/tour-package.model";
 
 @Component({
   selector: 'app-map',
@@ -18,6 +18,7 @@ export class MapComponent implements OnInit {
   @Input() destinationsLocations: Location[] = [];
   @Output() displayNameChangedEvent = new EventEmitter<string>();
   @Output() locationChangedEvent = new EventEmitter<Location>();
+  @Output() destinationsLocationsChangedEvent = new EventEmitter<Location[]>();
   marker: mapboxgl.Marker | undefined;
 
   constructor(private mapService: MapService) {
@@ -30,7 +31,7 @@ export class MapComponent implements OnInit {
     this.map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/mapbox/streets-v12',
-      center: [-76.9879548,-12.0777865],
+      center: [-76.9879548, -12.0777865],
       zoom: 12
     });
     //console.log(this.latitude, this.longitude)
@@ -38,7 +39,7 @@ export class MapComponent implements OnInit {
     this.marker = new mapboxgl.Marker({
       draggable: true,
     })
-    if(this.isOnlyOneMarker) {
+    if (this.isOnlyOneMarker) {
       if (!this.longitude && !this.latitude) this.getLocation();
       else {
         //console.log("showPosition2")
@@ -82,16 +83,16 @@ export class MapComponent implements OnInit {
     }).setLngLat([this.longitude!, this.latitude!])
       .addTo(this.map!)
       .on('drag', () => {
-      this.longitude = this.marker!.getLngLat().lng;
-      this.latitude = this.marker!.getLngLat().lat;
-      //console.log(this.marker!.getLngLat());
-      if (timeoutId) {
-        clearTimeout(timeoutId);
-      }
-      timeoutId = setTimeout(() => {
-        this.getDisplayName(this.longitude!, this.latitude!);
-      }, 1000);
-    });
+        this.longitude = this.marker!.getLngLat().lng;
+        this.latitude = this.marker!.getLngLat().lat;
+        //console.log(this.marker!.getLngLat());
+        if (timeoutId) {
+          clearTimeout(timeoutId);
+        }
+        timeoutId = setTimeout(() => {
+          this.getDisplayName(this.longitude!, this.latitude!);
+        }, 1000);
+      });
   }
 
   getDisplayName(longitude: number, latitude: number) {
@@ -115,10 +116,11 @@ export class MapComponent implements OnInit {
         this.setNewMarker(this.longitude, this.latitude);
         this.getDisplayName(this.longitude, this.latitude);
       });
-    }else{
+    } else {
       this.map!.on('click', (e) => this.addMarker(e));
     }
   }
+
   private setNewMarker(longitude: number, latitude: number) {
     this.marker!.setLngLat([longitude, latitude])
       .addTo(this.map!);
@@ -137,22 +139,45 @@ export class MapComponent implements OnInit {
     this.destinationsLocations.push(location);
     this.createMarker();
   }
+  getMarkerObjectHtml(index: number) {
+    return '<span><i class="fas fa-map-marker fs-2 p-2" style="color: #d02922"></i><b style="position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%); font-size: small; color: white">' + (index + 1) + '</b></span>'
+  }
+  setMarkerObjectHtml(location: Location, i: number) {
+    let el = document.createElement('div');
+    el.innerHTML = this.getMarkerObjectHtml(i);
+    let mark = new mapboxgl.Marker({
+      draggable: true,
+      color: "#d02922",
+      element: el
+    })
+      .setLngLat([location.longitude, location.latitude])
+      .addTo(this.map!)
+      .on('drag', () => {
+        location.longitude = mark.getLngLat().lng;
+        location.latitude = mark.getLngLat().lat;
+        this.destinationsLocationsChangedEvent.emit(this.destinationsLocations);
+      })
+  }
   createMarker() {
+    console.log(this.destinationsLocations)
+    this.destinationsLocationsChangedEvent.emit(this.destinationsLocations);
     this.clearMapFromMarkers();
     for (let i = 0; i < this.destinationsLocations.length; i++) {
       const location = this.destinationsLocations[i];
-      let mark = new mapboxgl.Marker({
-        draggable: true,
-        color: "#d02922"
-      })
-        .setLngLat([location.longitude, location.latitude])
-        .addTo(this.map!)
-        .on('drag', () => {
-          location.longitude = mark.getLngLat().lng;
-          location.latitude = mark.getLngLat().lat;
-          //console.log(mark.getLngLat());
-        });
+      this.setMarkerObjectHtml(location, i);
     }
+  }
+  reDrawMarker(destinations: Location[]) {
+    console.log(destinations)
+    this.clearMapFromMarkers();
+    for (let i = 0; i < destinations.length; i++) {
+      const location = destinations[i];
+      this.setMarkerObjectHtml(location, i);
+    }
+  }
+  refreshMap(destinations: LocationName[]) {
+    this.destinationsLocations = destinations
+    this.reDrawMarker(destinations)
   }
   clearMapFromMarkers() {
     const allMarkers = document.querySelectorAll('.mapboxgl-marker');
