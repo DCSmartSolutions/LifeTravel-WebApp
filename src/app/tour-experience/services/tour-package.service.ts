@@ -19,6 +19,9 @@ export class TourPackageService {
   modifyImage(packageId: number, image: any): Observable<any> {
     return this.http.patch<any>(`${this.baseUrl}packages/${packageId}`, {img: image});
   }
+  modifyPackage(packageId: number, tourPackage: TourPackage): Observable<any> {
+    return this.http.patch<any>(`${this.baseUrl}packages/${packageId}`, tourPackage);
+  }
 
   getAllPackages(): Observable<TourPackage[]> {
     return this.http.get<TourPackage[]>(`${this.baseUrl}packages?visible=true`);

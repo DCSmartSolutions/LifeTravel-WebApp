@@ -9,6 +9,9 @@
   .mat-mdc-dialog-container .mdc-dialog__surface {
     background-color: var(--background);
   }
+  .mat-mdc-fab:not(.mdc-fab--extended), .mat-mdc-mini-fab:not(.mdc-fab--extended) {
+    border-radius: 10px;
+  }
 }
 .text-visible{
   color: #ffd44d;

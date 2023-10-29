@@ -1,18 +1,20 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {TourPackage} from "../../models/tour-package.model";
+import {LocationName, TourPackage} from "../../models/tour-package.model";
 import {TourPackageService} from "../../services/tour-package.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AzureBlobStorageService} from "../../services/azure-blob-storage.service";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {SpinnerComponent} from "../../../shared/components/spinner/spinner.component";
 import {Location} from "../../models/tour-package.model";
+import {MapComponent} from "../../components/map/map.component";
 @Component({
   selector: 'app-tour-package-detail',
   templateUrl: './tour-package-detail.component.html',
   styleUrls: ['./tour-package-detail.component.scss']
 })
 export class TourPackageDetailComponent implements OnInit {
+  @ViewChild(MapComponent, {static: false}) mapComponent: MapComponent | undefined;
   title: string = "Add New Tour Package";
   tourPackage: TourPackage = new TourPackage();
   tourForm: FormGroup = new FormGroup({});
@@ -24,6 +26,7 @@ export class TourPackageDetailComponent implements OnInit {
     {name: 'Others', selected: false, icon: 'assets/images/filter-packages/others.png'},
   ];
   displayNameLocation: any;
+  destinations: LocationName[] = []
   constructor(private route: ActivatedRoute, private router: Router,
               private tourPackageService: TourPackageService,
               private azureBlobStorageService: AzureBlobStorageService,
@@ -39,8 +42,10 @@ export class TourPackageDetailComponent implements OnInit {
       price: [{value: null}, Validators.required],
       regionId: [{value: null}],
       visible: [{value: false}],
+      meetingPoint: [{value: null}],
       meetingPointLatitude: [{value: null}, Validators.required],
       meetingPointLongitude: [{value: null}, Validators.required],
+      destinations: [{value: null}],
     });
     this.tourForm.patchValue(this.tourPackage)
     console.log("this.tourForm", Object.assign({}, this.tourForm.getRawValue()))
@@ -65,6 +70,7 @@ export class TourPackageDetailComponent implements OnInit {
       this.tourForm.patchValue(this.tourPackage);
       this.tourForm.patchValue({meetingPointLatitude: packageData.meetingPoint?.latitude});
       this.tourForm.patchValue({meetingPointLongitude: packageData.meetingPoint?.longitude});
+      this.destinations = packageData.destinations;
       console.log("this.tourForm", this.tourForm)
     });
   }
@@ -118,5 +124,20 @@ export class TourPackageDetailComponent implements OnInit {
   getNewLocation($event: Location) {
     //console.log("getNewLocation", $event)
     this.tourForm.patchValue({meetingPoint: $event});
+  }
+
+  getDestinationList($event: any[]) {
+    this.destinations = $event;
+    //console.log("getDestinationList", this.destinations)
+  }
+  removeDestination(index: number) {
+    this.destinations.splice(index, 1);
+    this.mapComponent?.refreshMap(this.destinations);
+  }
+  savePackage() {
+    this.tourForm.patchValue({destinations: this.destinations});
+    this.tourForm.get('meetingPoint')?.setValue(new Location(this.tourForm.get('meetingPointLatitude')?.value, this.tourForm.get('meetingPointLongitude')?.value));
+    this.tourPackage = Object.assign({}, this.tourForm.getRawValue()) as TourPackage;
+    this.tourPackageService.modifyPackage(this.tourPackage.id, this.tourPackage).subscribe();
   }
 }

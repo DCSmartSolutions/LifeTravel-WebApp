@@ -65,7 +65,8 @@
           <div class="col-12 col-md-10 col-lg-9 mb-2 row" *ngIf="tourForm.get('meetingPointLatitude')?.value">
             <label class="fs-5 fw-medium mb-2">Meeting Point:</label>
             <mat-form-field class="d-flex mb-2">
-              <input matInput type="text" readonly [(ngModel)]="displayNameLocation" [ngModelOptions]="{standalone: true}">
+              <input matInput type="text" readonly [(ngModel)]="displayNameLocation"
+                     [ngModelOptions]="{standalone: true}">
             </mat-form-field>
             <app-map (displayNameChangedEvent)="getDisplayName($event)"
                      [latitude]="tourForm.get('meetingPointLatitude')?.value"
@@ -76,8 +77,28 @@
           </div>
           <div class="col-12 col-md-10 col-lg-9 mb-2 row">
             <label class="fs-5 fw-medium mb-2">Touristic Destinations:</label>
-            <app-map [isOnlyOneMarker]="false"></app-map>
-
+            <app-map [isOnlyOneMarker]="false" [destinationsLocations]="destinations"
+                     (destinationsLocationsChangedEvent)="getDestinationList($event)"></app-map>
+            <div class="col-12 mt-3">
+              <div *ngFor="let item of destinations; index as i"
+                   class="rounded d-flex border mb-2 border-dark-subtle p-2">
+                <label class="d-flex align-items-center fs-5 fw-bold" style="margin-right: 10px">{{i+1}}.-</label>
+                <mat-form-field class="flex-grow-1 ml-3">
+                  <input matInput type="text" [(ngModel)]="item.name" [ngModelOptions]="{standalone: true}">
+                </mat-form-field>
+                <div style="margin-left: 10px;">
+                  <button mat-mini-fab color="warn" (click)="removeDestination(i)">
+                    <mat-icon>remove</mat-icon>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex justify-items-center mt-3">
+            <button mat-raised-button color="accent" class="col-12 col-md-4 offset-md-4" (click)="savePackage()">
+              <mat-icon>save</mat-icon>
+              Save
+            </button>
           </div>
         </div>
       </form>
