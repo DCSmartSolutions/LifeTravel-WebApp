@@ -77,10 +77,10 @@
           </div>
           <div class="col-12 col-md-10 col-lg-9 mb-2 row">
             <label class="fs-5 fw-medium mb-2">Touristic Destinations:</label>
-            <app-map [isOnlyOneMarker]="false" [destinationsLocations]="destinations"
+            <app-map [isOnlyOneMarker]="false" [destinationsLocations]="tourForm.get('destinations')?.value" [events]="eventsSubject.asObservable()"
                      (destinationsLocationsChangedEvent)="getDestinationList($event)"></app-map>
             <div class="col-12 mt-3">
-              <div *ngFor="let item of destinations; index as i"
+              <div *ngFor="let item of tourForm.get('destinations')?.value; index as i"
                    class="rounded d-flex border mb-2 border-dark-subtle p-2">
                 <label class="d-flex align-items-center fs-5 fw-bold" style="margin-right: 10px">{{i+1}}.-</label>
                 <mat-form-field class="flex-grow-1 ml-3">

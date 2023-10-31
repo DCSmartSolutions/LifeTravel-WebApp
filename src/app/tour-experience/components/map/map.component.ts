@@ -1,25 +1,28 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
 import * as MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import {environment} from "../../../../environments/environment";
 import {MapService} from "../../services/map.service";
 import {Location, LocationName} from "../../models/tour-package.model";
+import {Observable, Subscription} from "rxjs";
 
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss']
 })
-export class MapComponent implements OnInit {
+export class MapComponent implements OnInit , OnDestroy{
   map: mapboxgl.Map | undefined;
   @Input() longitude: number | null = null;
   @Input() latitude: number | null = null;
   @Input() isOnlyOneMarker: boolean = true;
   @Input() destinationsLocations: Location[] = [];
+  @Input() events: Observable<void> = new Observable<void>();
   @Output() displayNameChangedEvent = new EventEmitter<string>();
   @Output() locationChangedEvent = new EventEmitter<Location>();
   @Output() destinationsLocationsChangedEvent = new EventEmitter<Location[]>();
   marker: mapboxgl.Marker | undefined;
+  private eventsSubscription: Subscription = new Subscription();
 
   constructor(private mapService: MapService) {
 
@@ -42,12 +45,20 @@ export class MapComponent implements OnInit {
     if (this.isOnlyOneMarker) {
       if (!this.longitude && !this.latitude) this.getLocation();
       else {
-        //console.log("showPosition2")
         this.showPosition2();
       }
+    }else{
+
+      setTimeout(()=>{
+        this.createMarker()
+      }, 1000);
     }
     this.map.addControl(new mapboxgl.NavigationControl());
     this.mapClick();
+    this.eventsSubscription = this.events!.subscribe(() => this.createMarker());
+  }
+  ngOnDestroy() {
+    this.eventsSubscription!.unsubscribe();
   }
 
   getLocation() {
@@ -174,10 +185,6 @@ export class MapComponent implements OnInit {
       const location = destinations[i];
       this.setMarkerObjectHtml(location, i);
     }
-  }
-  refreshMap(destinations: LocationName[]) {
-    this.destinationsLocations = destinations
-    this.reDrawMarker(destinations)
   }
   clearMapFromMarkers() {
     const allMarkers = document.querySelectorAll('.mapboxgl-marker');

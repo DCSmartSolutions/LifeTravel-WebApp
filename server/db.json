@@ -15,7 +15,20 @@
         "latitude": -13.163141,
         "longitude": -72.544963
       },
-      "destinations": []
+      "destinations": [
+        {
+          "latitude": -12.065365768385902,
+          "longitude": -76.98580903278807,
+          "name": "erer"
+        },
+        {
+          "latitude": -12.07812353431612,
+          "longitude": -77.0125882075922,
+          "name": "wrgwr"
+        }
+      ],
+      "meetingPointLatitude": -13.163141,
+      "meetingPointLongitude": -72.544963
     },
     {
       "id": 2,

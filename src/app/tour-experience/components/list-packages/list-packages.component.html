@@ -6,10 +6,7 @@
 
       <img class="px-3" mat-card-image [src]="tourPackage.img" alt="Photo of a Shiba Inu">
       <div *ngIf="isAgency">
-        <button mat-mini-fab color="warn" class="position-absolute start-0 top-0 m-3">
-          <mat-icon>delete</mat-icon>
-        </button>
-        <button mat-raised-button class="position-absolute end-0 top-0 m-3 fw-semibold"
+        <button mat-raised-button class="position-absolute start-0 top-0 m-3 fw-semibold"
                 [ngClass]="tourPackage.visible ? '' : 'bg-dark text-white'">
           <mat-icon>{{ tourPackage.visible ? 'visibility' : 'visibility_off' }}</mat-icon>
           {{ tourPackage.visible ? 'VISIBLE' : 'HIDDEN' }}

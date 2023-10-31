@@ -8,13 +8,13 @@ import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {SpinnerComponent} from "../../../shared/components/spinner/spinner.component";
 import {Location} from "../../models/tour-package.model";
 import {MapComponent} from "../../components/map/map.component";
+import {Subject} from "rxjs";
 @Component({
   selector: 'app-tour-package-detail',
   templateUrl: './tour-package-detail.component.html',
   styleUrls: ['./tour-package-detail.component.scss']
 })
 export class TourPackageDetailComponent implements OnInit {
-  @ViewChild(MapComponent, {static: false}) mapComponent: MapComponent | undefined;
   title: string = "Add New Tour Package";
   tourPackage: TourPackage = new TourPackage();
   tourForm: FormGroup = new FormGroup({});
@@ -50,7 +50,11 @@ export class TourPackageDetailComponent implements OnInit {
     this.tourForm.patchValue(this.tourPackage)
     console.log("this.tourForm", Object.assign({}, this.tourForm.getRawValue()))
   }
+  eventsSubject: Subject<void> = new Subject<void>();
 
+  emitEventToChild() {
+    this.eventsSubject.next();
+  }
   ngOnInit() {
     this.route.params.subscribe(params => {
         const packageId = params['packageId'];
@@ -131,13 +135,19 @@ export class TourPackageDetailComponent implements OnInit {
     //console.log("getDestinationList", this.destinations)
   }
   removeDestination(index: number) {
-    this.destinations.splice(index, 1);
-    this.mapComponent?.refreshMap(this.destinations);
+    this.tourForm.get('destinations')?.value.splice(index, 1);
+    console.log(this.tourForm.get('destinations')?.value)
+    this.emitEventToChild()
+    //this.mapComponent?.refreshMap(destinations);
   }
   savePackage() {
+    this.showSpinnerDialog();
     this.tourForm.patchValue({destinations: this.destinations});
     this.tourForm.get('meetingPoint')?.setValue(new Location(this.tourForm.get('meetingPointLatitude')?.value, this.tourForm.get('meetingPointLongitude')?.value));
     this.tourPackage = Object.assign({}, this.tourForm.getRawValue()) as TourPackage;
-    this.tourPackageService.modifyPackage(this.tourPackage.id, this.tourPackage).subscribe();
+    this.tourPackageService.modifyPackage(this.tourPackage.id, this.tourPackage).subscribe(()=>{
+        this.hideSpinnerDialog()
+      }
+    );
   }
 }
