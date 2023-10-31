@@ -13,8 +13,8 @@ import {Observable, Subscription} from "rxjs";
 })
 export class MapComponent implements OnInit , OnDestroy{
   map: mapboxgl.Map | undefined;
-  @Input() longitude: number | null = null;
-  @Input() latitude: number | null = null;
+  @Input() longitude: number = -76.9879548;
+  @Input() latitude: number = -12.0777865;
   @Input() isOnlyOneMarker: boolean = true;
   @Input() destinationsLocations: Location[] = [];
   @Input() events: Observable<void> = new Observable<void>();
@@ -45,13 +45,14 @@ export class MapComponent implements OnInit , OnDestroy{
     if (this.isOnlyOneMarker) {
       if (!this.longitude && !this.latitude) this.getLocation();
       else {
+        //console.log("showPosition2")
         this.showPosition2();
       }
     }else{
 
-      setTimeout(()=>{
+      setTimeout(()=>{                           // <<<---using ()=> syntax
         this.createMarker()
-      }, 1000);
+      }, 3000);
     }
     this.map.addControl(new mapboxgl.NavigationControl());
     this.mapClick();
