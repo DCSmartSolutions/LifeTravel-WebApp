@@ -50,9 +50,9 @@ export class MapComponent implements OnInit , OnDestroy{
       }
     }else{
 
-      setTimeout(()=>{                           // <<<---using ()=> syntax
+      setTimeout(()=>{
         this.createMarker()
-      }, 3000);
+      }, 1000);
     }
     this.map.addControl(new mapboxgl.NavigationControl());
     this.mapClick();

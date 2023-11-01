@@ -22,6 +22,9 @@ import { ExistingVehicleListComponent } from './pages/existing-vehicle-list/exis
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import { MapComponent } from './components/map/map.component';
 import {SharedLayoutModule} from "../shared/shared-layout.module";
+import {MatTabsModule} from "@angular/material/tabs";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatNativeDateModule} from "@angular/material/core";
 
 
 const routes: Routes = [
@@ -62,25 +65,28 @@ const routes: Routes = [
     ExistingVehicleListComponent,
     MapComponent,
   ],
-    imports: [
-        RouterModule.forChild(routes),
-        MatDialogModule,
-        MatButtonModule,
-        MatCardModule,
-        NgOptimizedImage,
-        MatSliderModule,
-        MatInputModule,
-        NgIf,
-        FormsModule,
-        MatCheckboxModule,
-        NgForOf,
-        MatIconModule,
-        NgClass,
-        ReactiveFormsModule,
-        SlicePipe,
-        MatSlideToggleModule,
-        SharedLayoutModule,
-    ],
+  imports: [
+    RouterModule.forChild(routes),
+    MatDialogModule,
+    MatButtonModule,
+    MatCardModule,
+    NgOptimizedImage,
+    MatSliderModule,
+    MatInputModule,
+    NgIf,
+    FormsModule,
+    MatCheckboxModule,
+    NgForOf,
+    MatIconModule,
+    NgClass,
+    ReactiveFormsModule,
+    SlicePipe,
+    MatSlideToggleModule,
+    SharedLayoutModule,
+    MatTabsModule,
+    MatDatepickerModule,
+    MatNativeDateModule
+  ],
   exports: [RouterModule, ListPackagesComponent],
 })
 export class TourPackagesModule {

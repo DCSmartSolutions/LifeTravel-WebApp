@@ -25,6 +25,15 @@ export class TourPackageDetailComponent implements OnInit {
     {name: 'Cave', selected: false, icon: 'assets/images/filter-packages/cave.png'},
     {name: 'Others', selected: false, icon: 'assets/images/filter-packages/others.png'},
   ];
+  dayList: any[] = [
+    {name:'Monday', selected: false},
+    {name:'Tuesday', selected: false},
+    {name:'Wednesday', selected: false},
+    {name:'Thursday', selected: false},
+    {name:'Friday', selected: false},
+    {name:'Saturday', selected: false},
+    {name:'Sunday', selected: false},
+  ];
   displayNameLocation: any;
   destinations: LocationName[] = []
   constructor(private route: ActivatedRoute, private router: Router,
@@ -165,5 +174,10 @@ export class TourPackageDetailComponent implements OnInit {
         this.hideSpinnerDialog()
       }
     );
+  }
+
+  selectDay(item: any) {
+    item.selected = !item.selected;
+    //this.tourForm.patchValue({dayList: this.dayList});
   }
 }
