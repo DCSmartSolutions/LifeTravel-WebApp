@@ -62,9 +62,25 @@ export class TourPackageDetailComponent implements OnInit {
         if (packageId != null) {
           this.title = "Edit Tour Package";
           this.getPackageById(packageId);
+        }else{
+          this.getUserLocation();
         }
       }
     );
+
+  }
+  getUserLocation() {
+    //console.log("getLocation")
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => this.setUserLocation(position));
+    } else {
+      console.log("Geolocation is not supported by this browser.");
+    }
+  }
+  setUserLocation(position: GeolocationPosition) {
+    this.tourForm.patchValue({meetingPointLatitude: position.coords.latitude});
+    this.tourForm.patchValue({meetingPointLongitude: position.coords.longitude});
+    this.tourForm.patchValue({meetingPoint: new Location(position.coords.latitude, position.coords.longitude)});
   }
 
   getPackageById(packageId: number) {
