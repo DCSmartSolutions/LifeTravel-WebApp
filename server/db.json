@@ -32,6 +32,7 @@
       "schedule": [
         {
           "day": "Monday",
+          "selected": true,
           "hourRange": {
             "start": {
               "hour": "1",
@@ -40,6 +41,22 @@
             },
             "end": {
               "hour": "2",
+              "minute": "30",
+              "dayTime": "PM"
+            }
+          }
+        },
+        {
+          "day": "Friday",
+          "selected": true,
+          "hourRange": {
+            "start": {
+              "hour": "1",
+              "minute": "30",
+              "dayTime": "AM"
+            },
+            "end": {
+              "hour": "4",
               "minute": "30",
               "dayTime": "PM"
             }

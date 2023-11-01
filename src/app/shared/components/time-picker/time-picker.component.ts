@@ -11,9 +11,9 @@ export class TimePickerComponent {
   hourOptions: any[] = [];
   minuteOptions: string[] = ['00', '15', '30', '45'];
   dayTimeOptions: string[] = ['AM', 'PM'];
-  @Input() time: Time = { hour: '', minute: '', dayTime: '' };
+  @Input() time: { hour: string; minute: string; dayTime: string } = { hour: '', minute: '', dayTime: '' };
 
-  @Output() timeChangedEvent = new EventEmitter<Time>();
+  @Output() timeChangedEvent = new EventEmitter<any>();
   constructor() {
     for (let i = 0; i < 24; i++) {
       this.hourOptions.push(
@@ -26,7 +26,6 @@ export class TimePickerComponent {
   }
 
   sendTime() {
-    console.log(this.time);
     this.timeChangedEvent.emit(this.time);
   }
   get isInvalid() {

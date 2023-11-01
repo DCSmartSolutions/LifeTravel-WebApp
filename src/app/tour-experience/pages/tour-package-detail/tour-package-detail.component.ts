@@ -8,7 +8,7 @@ import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {SpinnerComponent} from "../../../shared/components/spinner/spinner.component";
 import {Location} from "../../models/tour-package.model";
 import {Subject} from "rxjs";
-import {Time} from "../../models/time-picker.model";
+import {HourRange, Schedule, Time} from "../../models/time-picker.model";
 @Component({
   selector: 'app-tour-package-detail',
   templateUrl: './tour-package-detail.component.html',
@@ -25,28 +25,14 @@ export class TourPackageDetailComponent implements OnInit {
     {name: 'Cave', selected: false, icon: 'assets/images/filter-packages/cave.png'},
     {name: 'Others', selected: false, icon: 'assets/images/filter-packages/others.png'},
   ];
-  dayList: any[] = [
-    {name:'Monday', selected: false, hourRange:
-        {start: new Time(), end:new Time()},
-      },
-    {name:'Tuesday', selected: false, hourRange:
-        {start: new Time(), end: new Time()},
-      },
-    {name:'Wednesday', selected: false, hourRange:
-        {start: new Time(), end: new Time()},
-      },
-    {name:'Thursday', selected: false, hourRange:
-        {start: new Time(), end: new Time()},
-      },
-    {name:'Friday', selected: false, hourRange:
-        {start: new Time(), end: new Time()},
-      },
-    {name:'Saturday', selected: false, hourRange:
-        {start: new Time(), end: new Time()},
-      },
-    {name:'Sunday', selected: false, hourRange:
-        {start: new Time(), end: new Time()},
-      },
+  dayList: Schedule[] = [
+    {day:'Monday', selected: false, hourRange: new HourRange()},
+    {day:'Tuesday', selected: false, hourRange: new HourRange()},
+    {day:'Wednesday', selected: false, hourRange: new HourRange()},
+    {day:'Thursday', selected: false, hourRange: new HourRange()},
+    {day:'Friday', selected: false, hourRange: new HourRange()},
+    {day:'Saturday', selected: false, hourRange: new HourRange()},
+    {day:'Sunday', selected: false, hourRange: new HourRange()},
   ];
   displayNameLocation: any;
   destinations: LocationName[] = []
@@ -71,7 +57,6 @@ export class TourPackageDetailComponent implements OnInit {
       destinations: [{value: null}],
     });
     this.tourForm.patchValue(this.tourPackage)
-    console.log("this.tourForm", Object.assign({}, this.tourForm.getRawValue()))
   }
   eventsSubject: Subject<void> = new Subject<void>();
 
@@ -81,7 +66,6 @@ export class TourPackageDetailComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
         const packageId = params['packageId'];
-        console.log("packageId", packageId)
         if (packageId != null) {
           this.title = "Edit Tour Package";
           this.getPackageById(packageId);
@@ -114,17 +98,17 @@ export class TourPackageDetailComponent implements OnInit {
       this.tourForm.patchValue({meetingPointLatitude: packageData.meetingPoint?.latitude});
       this.tourForm.patchValue({meetingPointLongitude: packageData.meetingPoint?.longitude});
       this.destinations = packageData.destinations;
-      packageData.schedule.forEach((item: any) => {
-        this.dayList.forEach((day: any) => {
-          if (day.name === item.day) {
-            console.log("day", item)
-            day.selected = true;
+      //replace values in dayList of packageData.schedule to dayList
+      packageData.schedule.forEach((item: Schedule) => {
+        this.dayList.forEach((day: Schedule) => {
+          if (day.day === item.day) {
             day.hourRange = item.hourRange;
+            day.selected = true;
           }
         })
       }
       )
-      console.log("this.tourForm", this.tourForm)
+
     });
   }
 
@@ -185,7 +169,6 @@ export class TourPackageDetailComponent implements OnInit {
   }
   removeDestination(index: number) {
     this.tourForm.get('destinations')?.value.splice(index, 1);
-    console.log(this.tourForm.get('destinations')?.value)
     this.emitEventToChild()
     //this.mapComponent?.refreshMap(destinations);
   }
@@ -206,28 +189,27 @@ export class TourPackageDetailComponent implements OnInit {
   }
 
   assignValueInDayList(event: any, item: any ,range: string) {
-    item.hourRange[range] = event;
-    console.log("this.dayList", this.dayList)
+    this.dayList.forEach((day: any) => {
+      if (day.day === item.day) {
+      day.hourRange[range] = event;
+      }
+    })
   }
   get selectedDayList() {
     return this.dayList.filter(item => item.selected);
   }
-  get getSchedules() {
-    const schedules: any[] = [];
-    this.selectedDayList.forEach(item => {
-      schedules.push({
-        day: item.name,
-        hourRange: item.hourRange
-      })
-    }
-    )
-    return schedules;
-  }
 
   saveSchedule() {
     this.showSpinnerDialog();
-    this.tourPackageService.saveSchedule(this.tourPackage.id, this.getSchedules).subscribe(()=>{
+    this.tourPackageService.saveSchedule(this.tourPackage.id, this.selectedDayList).subscribe(()=>{
       this.hideSpinnerDialog()
     });
   }
+  get cannotBeScheduleSaved() {
+    return this.selectedDayList.some((item: Schedule) => {
+      return item.hourRange.start.hour === '' || item.hourRange.start.minute === '' || item.hourRange.start.dayTime === '' ||
+        item.hourRange.end.hour === '' || item.hourRange.end.minute === '' || item.hourRange.end.dayTime === '';
+    });
+  }
+
 }

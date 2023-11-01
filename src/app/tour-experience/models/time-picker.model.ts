@@ -5,6 +5,7 @@ export class HourRange {
 
 export class Schedule {
   day: string = '';
+  selected: boolean = false;
   hourRange: HourRange = new HourRange();
 }
 export class Time{

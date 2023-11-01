@@ -120,7 +120,7 @@
                  class="col-3 d-flex justify-content-center px-3 py-2 border mx-1 mt-1 rounded day-container"
                  (click)="selectDay(item)"
                  [ngClass]="item.selected ? 'border-primary bg-primary text-white fw-bold' : 'border-dark-subtle' ">
-              {{item.name}}
+              {{item.day}}
             </div>
           </div>
           <label class="fs-5 fw-medium">Hour range</label>
@@ -130,7 +130,7 @@
           <div class="row justify-content-center">
             <div *ngFor="let item of selectedDayList; index as i">
               <div class="border rounded border-black my-2 p-3">
-                <div class="fs-6 fw-bold">{{item.name}}</div>
+                <div class="fs-6 fw-bold">{{item.day}}</div>
                 <app-time-picker [time]="item.hourRange.start"
                                  (timeChangedEvent)="assignValueInDayList($event,item,'start')"></app-time-picker>
                 <label class="d-flex justify-content-center">to</label>
@@ -141,7 +141,7 @@
             </div>
 
           </div>
-          <button mat-raised-button color="accent" class="col-12 col-md-8 offset-md-2" (click)="saveSchedule()">
+          <button mat-raised-button color="accent" class="col-12 col-md-8 offset-md-2" (click)="saveSchedule()" [disabled]="cannotBeScheduleSaved">
             <mat-icon>save</mat-icon>
             Save
           </button>
