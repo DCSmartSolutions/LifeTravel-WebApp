@@ -28,7 +28,24 @@
         }
       ],
       "meetingPointLatitude": -13.163141,
-      "meetingPointLongitude": -72.544963
+      "meetingPointLongitude": -72.544963,
+      "schedule": [
+        {
+          "day": "Monday",
+          "hourRange": {
+            "start": {
+              "hour": "1",
+              "minute": "15",
+              "dayTime": "AM"
+            },
+            "end": {
+              "hour": "2",
+              "minute": "30",
+              "dayTime": "PM"
+            }
+          }
+        }
+      ]
     },
     {
       "id": 2,

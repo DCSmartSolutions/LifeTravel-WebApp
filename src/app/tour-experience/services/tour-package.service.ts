@@ -22,6 +22,9 @@ export class TourPackageService {
   modifyPackage(packageId: number, tourPackage: TourPackage): Observable<any> {
     return this.http.patch<any>(`${this.baseUrl}packages/${packageId}`, tourPackage);
   }
+  saveSchedule(packageId: number, schedule: any): Observable<any> {
+    return this.http.patch<any>(`${this.baseUrl}packages/${packageId}`, {schedule: schedule});
+  }
 
   getAllPackages(): Observable<TourPackage[]> {
     return this.http.get<TourPackage[]>(`${this.baseUrl}packages?visible=true`);

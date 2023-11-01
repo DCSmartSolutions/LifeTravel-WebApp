@@ -1,3 +1,5 @@
+import {Schedule} from "./time-picker.model";
+
 export class TourPackage {
   id: number = 0;
   img: string | null = null;
@@ -13,6 +15,7 @@ export class TourPackage {
   meetingPointLatitude: number | null = null;
   meetingPointLongitude: number | null = null;
   destinations: LocationName[] = [];
+  schedule: Schedule[] = [];
 }
 
 export class Location{

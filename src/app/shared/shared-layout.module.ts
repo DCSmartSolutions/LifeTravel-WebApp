@@ -27,6 +27,8 @@ import {SharedRoutingModule} from "./shared-routing.module";
 import {MatDialogModule} from "@angular/material/dialog";
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import { TimePickerComponent } from './components/time-picker/time-picker.component';
+import {MatSelectModule} from "@angular/material/select";
 
 
 
@@ -42,32 +44,35 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
     BrandingComponent,
     UserComponent,
     SpinnerComponent,
+    TimePickerComponent,
   ],
   exports: [
     AdminLayoutComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    TimePickerComponent
   ],
-    imports: [
-        CommonModule,
-        MatIconModule,
-        MatTabsModule,
-        MatMenuModule,
-        MatSidenavModule,
-        MatSlideToggleModule,
-        MatButtonModule,
-        MatRippleModule,
-        MatToolbarModule,
-        MatTooltipModule,
-        SharedRoutingModule,
-        RouterLink,
-        RouterLinkActive,
-        RouterOutlet,
-        NgProgressComponent,
-        MatListModule,
-        NgxPermissionsRestrictStubDirective,
-        MatInputModule,
-        MatDialogModule,
-        MatProgressSpinnerModule
-    ]
+  imports: [
+    CommonModule,
+    MatIconModule,
+    MatTabsModule,
+    MatMenuModule,
+    MatSidenavModule,
+    MatSlideToggleModule,
+    MatButtonModule,
+    MatRippleModule,
+    MatToolbarModule,
+    MatTooltipModule,
+    SharedRoutingModule,
+    RouterLink,
+    RouterLinkActive,
+    RouterOutlet,
+    NgProgressComponent,
+    MatListModule,
+    NgxPermissionsRestrictStubDirective,
+    MatInputModule,
+    MatDialogModule,
+    MatProgressSpinnerModule,
+    MatSelectModule
+  ]
 })
 export class SharedLayoutModule { }

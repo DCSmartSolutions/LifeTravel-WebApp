@@ -116,20 +116,35 @@
         </mat-card-title>
         <mat-card-content>
           <div class="row justify-content-center mt-3">
-            <div *ngFor="let item of dayList" class="col-3 d-flex justify-content-center px-3 py-2 border mx-1 mt-1 rounded day-container"
+            <div *ngFor="let item of dayList"
+                 class="col-3 d-flex justify-content-center px-3 py-2 border mx-1 mt-1 rounded day-container"
                  (click)="selectDay(item)"
                  [ngClass]="item.selected ? 'border-primary bg-primary text-white fw-bold' : 'border-dark-subtle' ">
               {{item.name}}
             </div>
           </div>
           <label class="fs-5 fw-medium">Hour range</label>
-          <div class="row justify-content-center">
-            <div class="col-6">
-              <mat-form-field class="d-flex">
-                <input matInput type="datetime-local" placeholder="start date">
-              </mat-form-field>
-            </div>
+          <div class="alert bg-danger text-white my-3 py-2" role="alert" *ngIf="selectedDayList.length == 0">
+            This package has no date assigned!
           </div>
+          <div class="row justify-content-center">
+            <div *ngFor="let item of selectedDayList; index as i">
+              <div class="border rounded border-black my-2 p-3">
+                <div class="fs-6 fw-bold">{{item.name}}</div>
+                <app-time-picker [time]="item.hourRange.start"
+                                 (timeChangedEvent)="assignValueInDayList($event,item,'start')"></app-time-picker>
+                <label class="d-flex justify-content-center">to</label>
+                <app-time-picker [time]="item.hourRange.end"
+                                 (timeChangedEvent)="assignValueInDayList($event,item, 'end')"></app-time-picker>
+              </div>
+
+            </div>
+
+          </div>
+          <button mat-raised-button color="accent" class="col-12 col-md-8 offset-md-2" (click)="saveSchedule()">
+            <mat-icon>save</mat-icon>
+            Save
+          </button>
         </mat-card-content>
       </mat-card>
     </div>

@@ -7,8 +7,8 @@ import {AzureBlobStorageService} from "../../services/azure-blob-storage.service
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {SpinnerComponent} from "../../../shared/components/spinner/spinner.component";
 import {Location} from "../../models/tour-package.model";
-import {MapComponent} from "../../components/map/map.component";
 import {Subject} from "rxjs";
+import {Time} from "../../models/time-picker.model";
 @Component({
   selector: 'app-tour-package-detail',
   templateUrl: './tour-package-detail.component.html',
@@ -26,13 +26,27 @@ export class TourPackageDetailComponent implements OnInit {
     {name: 'Others', selected: false, icon: 'assets/images/filter-packages/others.png'},
   ];
   dayList: any[] = [
-    {name:'Monday', selected: false},
-    {name:'Tuesday', selected: false},
-    {name:'Wednesday', selected: false},
-    {name:'Thursday', selected: false},
-    {name:'Friday', selected: false},
-    {name:'Saturday', selected: false},
-    {name:'Sunday', selected: false},
+    {name:'Monday', selected: false, hourRange:
+        {start: new Time(), end:new Time()},
+      },
+    {name:'Tuesday', selected: false, hourRange:
+        {start: new Time(), end: new Time()},
+      },
+    {name:'Wednesday', selected: false, hourRange:
+        {start: new Time(), end: new Time()},
+      },
+    {name:'Thursday', selected: false, hourRange:
+        {start: new Time(), end: new Time()},
+      },
+    {name:'Friday', selected: false, hourRange:
+        {start: new Time(), end: new Time()},
+      },
+    {name:'Saturday', selected: false, hourRange:
+        {start: new Time(), end: new Time()},
+      },
+    {name:'Sunday', selected: false, hourRange:
+        {start: new Time(), end: new Time()},
+      },
   ];
   displayNameLocation: any;
   destinations: LocationName[] = []
@@ -100,6 +114,16 @@ export class TourPackageDetailComponent implements OnInit {
       this.tourForm.patchValue({meetingPointLatitude: packageData.meetingPoint?.latitude});
       this.tourForm.patchValue({meetingPointLongitude: packageData.meetingPoint?.longitude});
       this.destinations = packageData.destinations;
+      packageData.schedule.forEach((item: any) => {
+        this.dayList.forEach((day: any) => {
+          if (day.name === item.day) {
+            console.log("day", item)
+            day.selected = true;
+            day.hourRange = item.hourRange;
+          }
+        })
+      }
+      )
       console.log("this.tourForm", this.tourForm)
     });
   }
@@ -179,5 +203,31 @@ export class TourPackageDetailComponent implements OnInit {
   selectDay(item: any) {
     item.selected = !item.selected;
     //this.tourForm.patchValue({dayList: this.dayList});
+  }
+
+  assignValueInDayList(event: any, item: any ,range: string) {
+    item.hourRange[range] = event;
+    console.log("this.dayList", this.dayList)
+  }
+  get selectedDayList() {
+    return this.dayList.filter(item => item.selected);
+  }
+  get getSchedules() {
+    const schedules: any[] = [];
+    this.selectedDayList.forEach(item => {
+      schedules.push({
+        day: item.name,
+        hourRange: item.hourRange
+      })
+    }
+    )
+    return schedules;
+  }
+
+  saveSchedule() {
+    this.showSpinnerDialog();
+    this.tourPackageService.saveSchedule(this.tourPackage.id, this.getSchedules).subscribe(()=>{
+      this.hideSpinnerDialog()
+    });
   }
 }
