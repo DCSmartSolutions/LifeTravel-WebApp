@@ -10,16 +10,18 @@ export interface AppSettings {
   sidenavOpened: boolean;
   sidenavCollapsed: boolean;
   language: string;
+  isAgency: boolean;
 }
 
 export const defaults: AppSettings = {
   navPos: 'side',
   dir: 'ltr',
   theme: 'dark',
-  showHeader: false,
+  showHeader: true,
   headerPos: 'above',
   showUserPanel: false,
   sidenavOpened: true,
   sidenavCollapsed: false,
   language: 'en-US',
+  isAgency: false,
 };

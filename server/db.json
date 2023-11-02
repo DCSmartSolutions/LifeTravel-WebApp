@@ -1,0 +1,300 @@
+{
+  "packages": [
+    {
+      "id": 1,
+      "img": "https://upload.wikimedia.org/wikipedia/commons/c/ca/Machu_Picchu%2C_Peru_%282018%29.jpg",
+      "destiny": "Machu Picchu",
+      "title": "Trekking in Machu Picchu",
+      "description": "Machu Picchu, located in the Cusco region of Peru, is one of the most iconic archaeological sites in the world. This ancient Inca citadel, nestled high in the Andes, offers breathtaking views and a deep sense of history. Explore its mysterious ruins, terraced fields, and the famous Intihuatana stone. A trek to Machu Picchu is a journey through time and culture.",
+      "agency": "Inca Trek",
+      "price": "345",
+      "stars": 3.4,
+      "regionId": 2,
+      "visible": false,
+      "meetingPoint": {
+        "latitude": -13.163141,
+        "longitude": -72.544963
+      },
+      "destinations": [
+        {
+          "latitude": -12.065365768385902,
+          "longitude": -76.98580903278807,
+          "name": "erer"
+        },
+        {
+          "latitude": -12.07812353431612,
+          "longitude": -77.0125882075922,
+          "name": "wrgwr"
+        }
+      ],
+      "meetingPointLatitude": -13.163141,
+      "meetingPointLongitude": -72.544963,
+      "schedule": [
+        {
+          "day": "Monday",
+          "selected": true,
+          "hourRange": {
+            "start": {
+              "hour": "1",
+              "minute": "15",
+              "dayTime": "AM"
+            },
+            "end": {
+              "hour": "2",
+              "minute": "30",
+              "dayTime": "PM"
+            }
+          }
+        },
+        {
+          "day": "Friday",
+          "selected": true,
+          "hourRange": {
+            "start": {
+              "hour": "1",
+              "minute": "30",
+              "dayTime": "AM"
+            },
+            "end": {
+              "hour": "4",
+              "minute": "30",
+              "dayTime": "PM"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "img": "https://nstoragetest.blob.core.windows.net/tour-packages-pictures/2?sp=racwdli&st=2023-10-24T00:12:03Z&se=2024-01-05T08:12:03Z&sv=2022-11-02&sr=c&sig=ihpBcbG09pC7gTDHSdvhmIJCxf7mqwFY7fZ9wTLg2S4%3D",
+      "destiny": "Aguas Calientes",
+      "title": "Trekking in Aguas Calientes",
+      "description": "Aguas Calientes, also known as Machu Picchu Pueblo, is a charming town located at the base of Machu Picchu. It serves as the gateway for visitors to the ancient citadel. Enjoy a trek through lush forests and alongside the Urubamba River as you make your way to Machu Picchu. Aguas Calientes offers a variety of accommodations, hot springs, and local cuisine to enhance your visit.",
+      "agency": "Inca Trek",
+      "price": "125",
+      "stars": 2.9,
+      "regionId": 2,
+      "visible": true,
+      "meetingPoint": {
+        "latitude": -13.163141,
+        "longitude": -72.544963
+      },
+      "destinations": [
+        {
+          "latitude": -12.060769958949123,
+          "longitude": -77.00348952336095,
+          "name": "a"
+        },
+        {
+          "latitude": -12.071407646368897,
+          "longitude": -76.96081423776124,
+          "name": "e"
+        },
+        {
+          "latitude": -12.095192291649369,
+          "longitude": -77.01929845091345,
+          "name": "r"
+        }
+      ],
+      "meetingPointLatitude": -13.163141,
+      "meetingPointLongitude": -72.544963
+    },
+    {
+      "id": 3,
+      "img": "https://www.actualidadambiental.pe/wp-content/uploads/2020/09/0-Paracas-Walter-H.-Wust.jpg",
+      "destiny": "Reserva Nacional de Paracas",
+      "title": "Reserva Nacional de Paracas",
+      "description": "The Paracas National Reserve, located in the Ica region, is a unique natural wonder. It is home to a diverse marine ecosystem, where you can spot sea lions, penguins, and an array of bird species. Explore the stunning Paracas Peninsula, characterized by dramatic cliffs and red sand beaches. The Ballestas Islands are a must-visit, often referred to as the 'Poor Man's Galapagos' due to their rich biodiversity.",
+      "agency": "Inca Trek",
+      "price": "144",
+      "stars": 4.2,
+      "regionId": 1,
+      "visible": true,
+      "meetingPoint": {
+        "latitude": -13.813835,
+        "longitude": -76.388499
+      },
+      "destinations": []
+    },
+    {
+      "id": 4,
+      "img": "https://www.peru.travel/contenido/experiencia/imagen/es/63/1.2/trekking%20en%20la%20selva.jpg",
+      "destiny": "Senderos de la Amazonía",
+      "title": "Trekking in Senderos de la Amazonía",
+      "description": "The Amazon Rainforest in the Iquitos region is a treasure trove of biodiversity and adventure. Immerse yourself in the lush greenery and hear the symphony of the jungle. Trek through the jungle to discover visible waterfalls, unique flora, and wildlife, including monkeys and exotic birds. This is an opportunity to experience the natural wonders of the Amazon up close.",
+      "agency": "Inca Trek",
+      "price": "235",
+      "stars": 4,
+      "regionId": 3,
+      "visible": true,
+      "meetingPoint": {
+        "latitude": -3.74912,
+        "longitude": -73.25383
+      }
+    },
+    {
+      "id": 5,
+      "img": "https://www.deaventura.pe/blog/wp-content/uploads/2015/06/Trekking-arequipa.jpg",
+      "destiny": "Llahuar",
+      "title": "Trekking in Llahuar",
+      "description": "Llahuar, situated in the Arequipa region, is a visible gem in the Andes. This remote village offers a unique trekking experience, surrounded by stunning landscapes and the Colca River. Hike to natural hot springs with a view of the snow-capped mountains, and immerse yourself in the local culture. Llahuar is a peaceful escape for nature lovers and trekkers.",
+      "agency": "Inca Trek",
+      "price": "210",
+      "stars": 2.6,
+      "regionId": 2,
+      "visible": true,
+      "meetingPoint": {
+        "latitude": -15.629,
+        "longitude": -71.886
+      }
+    },
+    {
+      "id": 6,
+      "img": "https://titicacatravelperu.com/wp-content/uploads/2016/09/excursion-puno-los-uros-llachon-titicaca.jpg",
+      "destiny": "Islas de los Uros",
+      "title": "Trekking in Islas de los Uros",
+      "description": "Explore the floating islands of Los Uros on Lake Titicaca, located in the Puno region. The Uros people have built these unique islands entirely out of reeds. This trekking adventure will take you to these remarkable islands, where you can learn about the Uros culture and their traditional way of life. Enjoy breathtaking views of the highest navigable lake in the world.",
+      "agency": "Inca Trek",
+      "price": "112",
+      "stars": 4.5,
+      "regionId": 2,
+      "visible": false,
+      "meetingPoint": {
+        "latitude": -15.85370199713,
+        "longitude": -70.009489725
+      }
+    },
+    {
+      "id": 7,
+      "img": "https://www.deaventura.pe/aplication/webroot/imgs/catalogo/aventuras_img_usuarios/16.jpg",
+      "destiny": "Cueva de Pikimachay",
+      "title": "Cueva de Pikimachay",
+      "description": "Discover the ancient archaeological site of Cueva de Pikimachay, located in the Cajamarca region. This cave is renowned for its prehistoric rock art and the evidence of early human habitation. Explore the mysterious underground world of Pikimachay with expert guides and delve into the history of the region. A journey to this cave is a journey back in time.",
+      "agency": "Inca Trek",
+      "price": "345",
+      "stars": 3.9,
+      "regionId": 2,
+      "visible": true,
+      "meetingPoint": {
+        "latitude": -7.163,
+        "longitude": -78.512
+      }
+    },
+    {
+      "id": 8,
+      "img": "https://media.cntraveler.com/photos/6436e08720ed5f12e69ddfbc/16:9/w_5615,h_3158,c_limit/Peru's%20Sacred%20Valley_GettyImages-138066196.jpg",
+      "destiny": "Sacred Valley",
+      "title": "Sacred Valley Exploration",
+      "description": "The Sacred Valley, located near Cusco, is a place of immense beauty and historical significance. This package offers a journey through ancient Inca sites, picturesque villages, and stunning landscapes. Visit the agricultural terraces of Moray, the salt mines of Maras, and the vibrant market of Pisac. Immerse yourself in the rich culture of the Andes while exploring this sacred and mystical valley.",
+      "agency": "Inca Trek",
+      "price": "275",
+      "stars": 4.7,
+      "regionId": 2,
+      "visible": true,
+      "meetingPoint": {
+        "latitude": -13.163141,
+        "longitude": -72.544963
+      }
+    },
+    {
+      "id": 9,
+      "img": "https://www.civitatis.com/f/peru/cusco/trekking-montana-arcoiris-589x392.jpg",
+      "destiny": "Rainbow Mountain",
+      "title": "Rainbow Mountain Trek",
+      "description": "Vinicunca, or Rainbow Mountain, is a natural wonder located in the Cusco region. This challenging trek will take you to the breathtakingly colorful mountain. Hike through the Andean highlands, passing local communities, and reaching the summit to witness the vibrant hues of Vinicunca. It's a once-in-a-lifetime experience for adventure seekers and nature enthusiasts.",
+      "agency": "Inca Trek",
+      "price": "295",
+      "stars": 4.8,
+      "regionId": 2,
+      "visible": true,
+      "meetingPoint": {
+        "latitude": -13.163141,
+        "longitude": -72.544963
+      }
+    },
+    {
+      "id": 10,
+      "img": "https://nstoragetest.blob.core.windows.net/tour-packages-pictures/10?sp=racwdli&st=2023-10-24T00:12:03Z&se=2024-01-05T08:12:03Z&sv=2022-11-02&sr=c&sig=ihpBcbG09pC7gTDHSdvhmIJCxf7mqwFY7fZ9wTLg2S4%3D",
+      "destiny": "Tambopata National Reserve",
+      "title": "Wildlife Safari in Tambopata",
+      "description": "The Tambopata National Reserve in the Madre de Dios region is a biodiversity hotspot. This package offers an adventure deep into the Amazon rainforest. Explore the jungle, spot diverse wildlife, and cruise the Tambopata River. You'll have the chance to see macaws, jaguars, and other unique creatures while staying in comfortable eco-lodges.",
+      "agency": "Inca Trek",
+      "price": "399",
+      "stars": 4.9,
+      "regionId": 3,
+      "visible": true,
+      "meetingPoint": {
+        "latitude": -12.598,
+        "longitude": -69.183
+      }
+    },
+    {
+      "id": 11,
+      "img": "https://upload.wikimedia.org/wikipedia/commons/1/13/Colca_Canyon_Puno.jpg",
+      "destiny": "Colca Canyon",
+      "title": "Colca Canyon Adventure",
+      "description": "Colca Canyon, located in the Arequipa region, is one of the world's deepest canyons. This package offers a thrilling trek into the canyon, where you can witness Andean condors soaring in their natural habitat. Explore ancient terraces, remote villages, and relax in natural hot springs. The Colca Canyon is a false wonder of nature and culture.",
+      "agency": "Inca Trek",
+      "price": "320",
+      "stars": 4.6,
+      "regionId": 2,
+      "visible": true,
+      "meetingPoint": {
+        "latitude": -15.629,
+        "longitude": -71.886
+      }
+    },
+    {
+      "id": 12,
+      "img": "https://www.quechuasexpeditions.com/wp-content/uploads/2018/03/Luxury-Choquequirao-Machupicchu-Trek-5-Days-12.jpg",
+      "destiny": "Choquequirao",
+      "title": "Choquequirao Expedition",
+      "description": "Choquequirao, often called the 'Sister of Machu Picchu,' is a remote Inca ruin nestled in the Vilcabamba range. This challenging trek will take you to this visible gem, offering panoramic views of the Andes. Explore the terraces, temples, and plazas of Choquequirao, and witness its archaeological beauty. It's an adventure for the intrepid traveler.",
+      "agency": "Inca Trek",
+      "price": "345",
+      "stars": 4.5,
+      "regionId": 2,
+      "visible": true,
+      "meetingPoint": {
+        "latitude": -13.163141,
+        "longitude": -72.544963
+      }
+    },
+    {
+      "id": 13,
+      "img": "https://adventurecatcher.com/wp-content/uploads/2017/12/Best-Hiking-and-Trekking-Trails-in-Huaraz.jpg",
+      "destiny": "Huaraz",
+      "title": "Trekking in Huaraz",
+      "description": "Huaraz, located in the Ancash region, is a paradise for trekkers and mountaineers. This package takes you to the Cordillera Blanca, home to stunning glacial lakes, snow-capped peaks, and pristine wilderness. Trek to Laguna 69, explore the Huascarán National Park, and immerse yourself in the grandeur of the Andes. Huaraz is a haven for adventure enthusiasts.",
+      "agency": "Inca Trek",
+      "price": "289",
+      "stars": 4.4,
+      "regionId": 2,
+      "visible": true,
+      "meetingPoint": {
+        "latitude": -9.526,
+        "longitude": -77.528
+      }
+    }
+  ],
+  "regions": [
+    {
+      "id": 1,
+      "name": "Costa",
+      "description": "The Coast of Peru, a country located in western South America, covers a narrow but long territory (2,250 kilometers) facing the Pacific Ocean. It begins in Boca de Capones in the town of Tumbes and reaches the border with La Concordia (Chile).",
+      "img": "https://th.bing.com/th/id/OIP.4ZZNY7-rvbW6YH-0CUO6jAHaEK?pid=ImgDet&rs=1"
+    },
+    {
+      "id": 2,
+      "name": "Sierra",
+      "description": "It is mainly characterized by a mountainous and very rugged geography, combined with plateaus and inter-Andean valleys. The Sierra occupies an area of 364,716 km2 (28% of the national territory).",
+      "img": "https://viajerosocultos.com/wp-content/uploads/2023/01/pallay-punchu-of-apu-takllo-new-rainbow-mountain-near-cusco-in-peru.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Selva",
+      "description": "The origin of the Amazon rainforest began 20 million years ago, when tectonic movements in the region produced the gradual uplift of the Andes Mountains, causing the Amazon basin to become a system of lakes.",
+      "img": "https://th.bing.com/th/id/R.eab77adc3a6a438df519527e3452347f?rik=rid8rpX%2bhgym0Q&pid=ImgRaw&r=0"
+    }
+  ]
+}

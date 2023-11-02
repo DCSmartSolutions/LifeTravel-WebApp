@@ -25,7 +25,13 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              {
+                "input": "node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
+              },
+              "node_modules/font-awesome/css/font-awesome.min.css",
+              "node_modules/@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css",
+              "src/styles.css",
+              "scss/custom.scss"
             ],
             "scripts": []
           },
@@ -34,13 +40,13 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "50mb",
-                  "maximumError": "5mb"
+                  "maximumWarning": "10mb",
+                  "maximumError": "50mb"
                 },
                 {
                   "type": "anyComponentStyle",
                   "maximumWarning": "5mb",
-                  "maximumError": "5mb"
+                  "maximumError": "10mb"
                 }
               ],
               "outputHashing": "all"
@@ -87,6 +93,8 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/font-awesome/css/font-awesome.min.css",
+              "node_modules/@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -96,6 +104,6 @@
     }
   },
   "cli": {
-    "analytics": "d793d2ac-44b5-4ff2-abc1-a435a9070d28"
+    "analytics": "72d986f0-da35-4311-bfcf-665a8682ad49"
   }
 }

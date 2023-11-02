@@ -1,0 +1,28 @@
+<div class="d-flex fs-6 fw-medium" *ngIf="isInvalid">
+  <mat-error>Invalid time</mat-error>
+</div>
+<div class="d-flex fs-5">
+  <mat-form-field>
+    <mat-select [(value)]="time.hour">
+      <mat-option *ngFor="let hour of hourOptions" [value]="hour.value" (click)="sendTime()">
+        {{hour.label}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <label class="fw-bold px-1">:</label>
+  <mat-form-field>
+    <mat-select [(value)]="time.minute">
+      <mat-option *ngFor="let minute of minuteOptions" [value]="minute" (click)="sendTime()">
+        {{minute}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <label class="fw-bold px-1">-</label>
+  <mat-form-field>
+    <mat-select [(value)]="time.dayTime">
+      <mat-option *ngFor="let t of dayTimeOptions" [value]="t" (click)="sendTime()">
+        {{t}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

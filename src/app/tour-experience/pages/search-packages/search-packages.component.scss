@@ -1,0 +1,20 @@
+.mat-mdc-card {
+  border-radius: 10px;
+}
+.example-card {
+  max-width: 500px;
+  min-width: 400px;
+  margin: 30px;
+}
+.region-image {
+  height: 200px; /* Establece la altura fija en 100px */
+  object-fit: cover; /* Opcional: Ajusta la imagen para cubrir el área especificada */
+  width: 100%; /* Opcional: Asegura que la imagen se ajuste automáticamente al ancho del contenedor */
+}
+.region-container{
+  display: contents;
+  margin: 60px;
+}
+.mdc-card__actions {
+  justify-content: flex-end;
+}

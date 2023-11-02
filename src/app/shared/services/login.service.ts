@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import {Token, User} from "../interfaces/user";
-import {Menu} from "./menu.service";
+import { Token, User } from "../interfaces/user";
+import { Menu } from "./menu.service";
 
 @Injectable({
   providedIn: 'root',
@@ -27,6 +27,6 @@ export class LoginService {
   }
 
   menu() {
-    return this.http.get<{ menu: Menu[] }>('/me/menu').pipe(map(res => res.menu));
+    return this.http.get<{ menu: Menu[] }>('assets/data/menu.json').pipe(map(res => res.menu));
   }
 }

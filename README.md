@@ -6,22 +6,26 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## Json Server (Local)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+You can use JSON Server locally to simulate a backend server for your application. To do this, follow these steps:
 
-## Build
+1. Install JSON Server globally if you haven't already:
+```sh
+npm install -g json-server
+```
+2. Start JSON Server with your local JSON data file and routes (adjust the paths as needed):
+```sh
+json-server --watch server/db.json --routes server/routes.json
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+3. JSON Server will be running at `http://localhost:3000/`, and you can access your data using this URL.
 
-## Running unit tests
+## Json Server (Typicode)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Alternatively, you can use a public JSON server like `typicode` for testing and development. This eliminates the need to set up a local server. Replace your `baseUrl` in your Angular service with the following:
 
-## Running end-to-end tests
+```typescript
+private baseUrl = 'https://my-json-server.typicode.com/DominikMendoza/data/';
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.

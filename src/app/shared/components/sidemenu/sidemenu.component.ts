@@ -1,5 +1,5 @@
-import { Component, Input, ViewEncapsulation } from '@angular/core';
-import {MenuService} from "../../services/menu.service";
+import {Component, Input, ViewEncapsulation} from '@angular/core';
+import {MENU_ITEMS, MenuService} from "../../services/menu.service";
 
 @Component({
   selector: 'app-sidemenu',
@@ -11,9 +11,11 @@ export class SidemenuComponent {
   // Note: Ripple effect make page flashing on mobile
   @Input() ripple = false;
 
-  menu$ = this.menu.getAll();
+  menu$ = MENU_ITEMS;
 
   buildRoute = this.menu.buildRoute;
 
-  constructor(private menu: MenuService) {}
+  constructor(private menu: MenuService) {
+    console.log(this.menu$)
+  }
 }

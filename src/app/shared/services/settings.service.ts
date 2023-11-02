@@ -3,9 +3,9 @@ import { MediaMatcher } from '@angular/cdk/layout';
 import { DOCUMENT } from '@angular/common';
 import { Inject, Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import {AppSettings, AppTheme, defaults} from "../interfaces/settings";
-import {LocalStorageService} from "./storage.service";
-import {AppDirectionality} from "./directionality.service";
+import { AppSettings, AppTheme, defaults } from "../interfaces/settings";
+import { LocalStorageService } from "./storage.service";
+import { AppDirectionality } from "./directionality.service";
 
 @Injectable({
   providedIn: 'root',
@@ -43,13 +43,11 @@ export class SettingsService {
   }
 
   getThemeColor() {
-    // Check whether the browser support `prefers-color-scheme`
     if (
       this.options.theme === 'auto' &&
       this.mediaMatcher.matchMedia('(prefers-color-scheme)').media !== 'not all'
     ) {
       const isSystemDark = this.mediaMatcher.matchMedia('(prefers-color-scheme: dark)').matches;
-      // Set theme to dark if `prefers-color-scheme` is dark. Otherwise, set it to light.
       return 'dark';
     } else {
       return this.options.theme as Exclude<AppTheme, 'auto'>;
@@ -81,5 +79,13 @@ export class SettingsService {
     } else {
       this.htmlElement.classList.remove('theme-dark');
     }
+  }
+  setAgencyLayout() {
+    this.options.isAgency = true;
+    this.setOptions(this.options);
+  }
+  setDefaultLayout() {
+    this.options.isAgency = false;
+    this.setOptions(this.options);
   }
 }

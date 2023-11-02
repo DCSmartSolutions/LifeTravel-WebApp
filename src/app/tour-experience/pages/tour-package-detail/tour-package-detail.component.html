@@ -1,0 +1,155 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-lg-8">
+      <mat-card class="w-100 p-3">
+        <mat-card-title>
+          <div class="d-flex">
+            <button mat-raised-button class="fw-bolder bg-secondary text-white" (click)="back()">
+              <mat-icon>keyboard_arrow_left</mat-icon>
+              Back
+            </button>
+          </div>
+          <label class="fw-bolder fs-3 row justify-content-center">{{ title }}</label>
+
+        </mat-card-title>
+        <mat-card-content>
+          <form [formGroup]="tourForm">
+            <hr>
+            <div class="d-flex justify-content-center">
+              <div>
+                <label class="fs-6" [ngClass]="!isVisible ? 'fw-bolder' : 'fw-normal'">Hidden</label>
+                <mat-slide-toggle hideIcon="true" formControlName="visible"
+                                  class="mx-3">
+                </mat-slide-toggle>
+                <label class="fs-6" [ngClass]="isVisible ? 'fw-bolder' : 'fw-normal'">Visible</label>
+              </div>
+            </div>
+            <hr>
+            <div class="row justify-content-center">
+              <div class="col-12 col-md-10 col-lg-7 mb-2">
+                <div class="d-flex mb-2">
+                  <label class="fs-5 fw-medium" style="margin-right: 10px">Picture:</label>
+                  <button type="button" mat-raised-button (click)="fileInput.click()" color="accent">
+                    <mat-icon>image</mat-icon>
+                    Choose File
+                  </button>
+                  <input hidden #fileInput type="file" id="file" (change)="onFileSelected($event)">
+                </div>
+                <img *ngIf="hasImg" class="w-100" [src]="tourForm.get('img')?.value" alt="tour picture">
+                <div *ngIf="!hasImg"
+                     class="d-flex bg-warning-subtle border border-warning rounded text-light-emphasis justify-content-center p-3">
+                  No image uploaded
+                </div>
+              </div>
+              <div class="col-12 col-md-10 col-lg-7 mb-2">
+                <label class="fs-5 fw-medium">Title:</label>
+                <mat-form-field class="d-flex">
+                  <input matInput type="text" formControlName="title">
+                </mat-form-field>
+              </div>
+              <div class="col-12 col-md-10 col-lg-7 mb-2">
+                <label class="fs-5 fw-medium">Description:</label>
+                <mat-form-field class="d-flex">
+                  <textarea matInput type="text" formControlName="description" rows="8"></textarea>
+                </mat-form-field>
+              </div>
+              <div class="col-12 col-md-10 col-lg-7 mb-2 row">
+                <label class="fs-5 fw-medium">Activity Types:</label>
+                <div *ngFor="let activity of activities" class="col border border-2 rounded m-3 px-4 py-3"
+                     [ngClass]="{'bg-dark-subtle border-primary': activity.selected}"
+                     (click)="activity.selected = !activity.selected">
+                  <div class="col-12 d-flex justify-content-center">
+                    <img [src]="activity.icon" width="70" [alt]="activity.name+'-icon'">
+                  </div>
+                  <label class="row fw-bold mt-3 justify-content-center text-black">{{activity.name}}</label>
+                </div>
+              </div>
+              <div class="col-12 col-md-10 col-lg-9 mb-2 row" *ngIf="tourForm.get('meetingPointLatitude')?.value">
+                <label class="fs-5 fw-medium mb-2">Meeting Point:</label>
+                <mat-form-field class="d-flex mb-2">
+                  <input matInput type="text" readonly [(ngModel)]="displayNameLocation"
+                         [ngModelOptions]="{standalone: true}">
+                </mat-form-field>
+                <app-map (displayNameChangedEvent)="getDisplayName($event)"
+                         [latitude]="tourForm.get('meetingPointLatitude')?.value"
+                         [longitude]="tourForm.get('meetingPointLongitude')?.value"
+                         (locationChangedEvent)="getNewLocation($event)">
+                </app-map>
+
+              </div>
+              <div class="col-12 col-md-10 col-lg-9 mb-2 row">
+                <label class="fs-5 fw-medium mb-2">Touristic Destinations:</label>
+                <app-map [isOnlyOneMarker]="false" [destinationsLocations]="tourForm.get('destinations')?.value"
+                         [events]="eventsSubject.asObservable()"
+                         (destinationsLocationsChangedEvent)="getDestinationList($event)"></app-map>
+                <div class="col-12 mt-3">
+                  <div *ngFor="let item of tourForm.get('destinations')?.value; index as i"
+                       class="rounded d-flex border mb-2 border-dark-subtle p-2">
+                    <label class="d-flex align-items-center fs-5 fw-bold" style="margin-right: 10px">{{i + 1}}.-</label>
+                    <mat-form-field class="flex-grow-1 ml-3">
+                      <input matInput type="text" [(ngModel)]="item.name" [ngModelOptions]="{standalone: true}">
+                    </mat-form-field>
+                    <div style="margin-left: 10px;">
+                      <button mat-mini-fab color="warn" (click)="removeDestination(i)">
+                        <mat-icon>remove</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="d-flex justify-items-center mt-3">
+                <button mat-raised-button color="accent" class="col-12 col-md-4 offset-md-4" (click)="savePackage()">
+                  <mat-icon>save</mat-icon>
+                  Save
+                </button>
+              </div>
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="col-12 col-lg-4 mt-4 mt-lg-0">
+      <mat-card class="w-100">
+        <mat-card-title class="bg-primary rounded-top p-3 text-white">
+          <label class="fw-bold fs-4 row justify-content-center">Assign Schedule</label>
+
+        </mat-card-title>
+        <mat-card-content>
+          <div class="row justify-content-center mt-3">
+            <div *ngFor="let item of dayList"
+                 class="col-3 d-flex justify-content-center px-3 py-2 border mx-1 mt-1 rounded day-container"
+                 (click)="selectDay(item)"
+                 [ngClass]="item.selected ? 'border-primary bg-primary text-white fw-bold' : 'border-dark-subtle' ">
+              {{item.day}}
+            </div>
+          </div>
+          <label class="fs-5 fw-medium">Hour range</label>
+          <div class="alert bg-danger text-white my-3 py-2" role="alert" *ngIf="selectedDayList.length == 0">
+            This package has no date assigned!
+          </div>
+          <div class="row justify-content-center">
+            <div *ngFor="let item of selectedDayList; index as i">
+              <div class="border rounded border-black my-2 p-3">
+                <div class="fs-6 fw-bold">{{item.day}}</div>
+                <app-time-picker [time]="item.hourRange.start"
+                                 (timeChangedEvent)="assignValueInDayList($event,item,'start')"></app-time-picker>
+                <label class="d-flex justify-content-center">to</label>
+                <app-time-picker [time]="item.hourRange.end"
+                                 (timeChangedEvent)="assignValueInDayList($event,item, 'end')"></app-time-picker>
+              </div>
+
+            </div>
+
+          </div>
+          <button mat-raised-button color="accent" class="col-12 col-md-8 offset-md-2" (click)="saveSchedule()" [disabled]="cannotBeScheduleSaved">
+            <mat-icon>save</mat-icon>
+            Save
+          </button>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+
+  </div>
+
+</div>
