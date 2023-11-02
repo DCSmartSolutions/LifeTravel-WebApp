@@ -12,13 +12,15 @@ import {MatListModule} from "@angular/material/list";
 import {NgxPermissionsRestrictStubDirective} from "ngx-permissions";
 import {MatInputModule} from "@angular/material/input";
 import {LoginComponent} from "./pages/login/login.component";
+import {LoginCardComponent} from "./components/login-card/login-card.component";
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 
 @NgModule({
   declarations: [
-    LoginComponent
-
+    LoginComponent,
+    LoginCardComponent,
   ],
   exports: [
   ],
@@ -38,6 +40,7 @@ import {LoginComponent} from "./pages/login/login.component";
     MatListModule,
     NgxPermissionsRestrictStubDirective,
     MatInputModule,
+    ReactiveFormsModule,
 
   ]
 })

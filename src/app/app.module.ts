@@ -18,6 +18,7 @@ import {NgxPermissionsModule} from "ngx-permissions";
 import {ToastrModule} from "ngx-toastr";
 import { HomeComponent } from './public/pages/home/home.component';
 import {TourPackagesModule} from "./tour-experience/tour-packages.module";
+import {AuthModule} from "@angular/fire/auth";
 
 @NgModule({
     declarations: [
@@ -29,6 +30,7 @@ import {TourPackagesModule} from "./tour-experience/tour-packages.module";
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    AuthModule,
     SharedLayoutModule,
     NgxPermissionsModule.forRoot(),
     ToastrModule.forRoot(),
