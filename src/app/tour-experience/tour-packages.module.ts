@@ -17,7 +17,6 @@ import {
 } from './pages/existing-packages-list/existing-packages-list.component';
 import {ListPackagesComponent} from "./components/list-packages/list-packages.component";
 import { TourPackageDetailComponent } from './pages/tour-package-detail/tour-package-detail.component';
-import { ExistingTourExperienceListComponent } from './pages/existing-tour-experience-list/existing-tour-experience-list.component';
 import { ExistingVehicleListComponent } from './pages/existing-vehicle-list/existing-vehicle-list.component';
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import { MapComponent } from './components/map/map.component';
@@ -31,10 +30,6 @@ const routes: Routes = [
   {
     path: 'my-packages',
     component: ExistingPackagesListComponent,
-  },
-  {
-    path: 'my-tour-experiences',
-    component: ExistingTourExperienceListComponent
   },
   {
     path: 'detail/:packageId',
@@ -61,7 +56,6 @@ const routes: Routes = [
     ExistingPackagesListComponent,
     ListPackagesComponent,
     TourPackageDetailComponent,
-    ExistingTourExperienceListComponent,
     ExistingVehicleListComponent,
     MapComponent,
   ],

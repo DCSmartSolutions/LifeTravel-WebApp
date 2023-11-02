@@ -10,7 +10,7 @@
       "price": "345",
       "stars": 3.4,
       "regionId": 2,
-      "visible": true,
+      "visible": false,
       "meetingPoint": {
         "latitude": -13.163141,
         "longitude": -72.544963
@@ -74,7 +74,7 @@
       "price": "125",
       "stars": 2.9,
       "regionId": 2,
-      "visible": false,
+      "visible": true,
       "meetingPoint": {
         "latitude": -13.163141,
         "longitude": -72.544963
@@ -95,7 +95,9 @@
           "longitude": -77.01929845091345,
           "name": "r"
         }
-      ]
+      ],
+      "meetingPointLatitude": -13.163141,
+      "meetingPointLongitude": -72.544963
     },
     {
       "id": 3,
