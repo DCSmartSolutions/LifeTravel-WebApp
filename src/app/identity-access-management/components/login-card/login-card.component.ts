@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from "@angular/forms";
 import { Router } from '@angular/router';
-import { FirebaseAuthCustomService } from 'src/app/services/firebase-auth.service';
+import {FirebaseAuthCustomService} from "../../services/firebase-auth.service";
 
 @Component({
   selector: 'app-login-card',
@@ -28,11 +28,11 @@ export class LoginCardComponent implements OnInit {
 
   onSubmit() {
     this.fireAuthCustomService.login(this.loginForm.value)
-      .then(response => {
+      .then((response: any) => {
         console.log(response);
         this.router.navigate(['/main', 'generate']);
       })
-      .catch(error => {
+      .catch((error: any) => {
         console.log(error);
         this.credentialsError = true;
       });
@@ -41,12 +41,12 @@ export class LoginCardComponent implements OnInit {
 
   onClick() {
     this.fireAuthCustomService.loginWithGoogle()
-      .then(response => {
+      .then((response: { user: any; }) => {
         localStorage.setItem('user', JSON.stringify(response.user));
         console.log(response);
         this.router.navigate(['/main']);
       })
-      .catch(error => console.log(error))
+      .catch((error: any) => console.log(error))
   }
 
   goToRegister() {
