@@ -16,22 +16,20 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatGridListModule} from "@angular/material/grid-list";
 import {NgxPermissionsModule} from "ngx-permissions";
 import {ToastrModule} from "ngx-toastr";
-import { HomeComponent } from './public/pages/home/home.component';
+import {HomeComponent} from './public/pages/home/home.component';
 import {TourPackagesModule} from "./tour-experience/tour-packages.module";
-import {AuthModule} from "@angular/fire/auth";
+import {IdentityAccessManagementModule} from "./identity-access-management/identity-access-management.module";
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        SearchPackagesComponent,
-        HomeComponent
-    ],
+  declarations: [
+    AppComponent,
+    SearchPackagesComponent,
+    HomeComponent
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    AuthModule,
-    SharedLayoutModule,
     NgxPermissionsModule.forRoot(),
     ToastrModule.forRoot(),
     AppRoutingModule,
@@ -43,9 +41,10 @@ import {AuthModule} from "@angular/fire/auth";
     MatIconModule,
     MatGridListModule,
     TourPackagesModule,
+    IdentityAccessManagementModule,
   ],
-    providers: [],
-    bootstrap: [AppComponent]
+  providers: [],
+  bootstrap: [AppComponent]
 })
 export class AppModule {
 }

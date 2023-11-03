@@ -1,5 +1,52 @@
-<div class="grid flex justify-content-center align-items-center h-screen">
-    <div class="lg:col-3 md:col-6 col-10 container">
-      <app-login-card></app-login-card>
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <div class="container p-0">
+    <div class="d-flex justify-content-center align-items-center vh-100 ">
+      <div class="col-11 col-md-6">
+        <div class="bg-secondary-subtle rounded shadow">
+          <div class="col-12 p-0 justify-content-center">
+            <div class="d-flex justify-content-center bg-primary py-3 rounded-top">
+              <img src="assets/images/logo.png" width="100" alt="life-travel-logo">
+            </div>
+          </div>
+          <div class="col-12 p-3">
+            <h3>Welcome back!</h3>
+            <div class="col-12">
+              <mat-form-field class="d-flex">
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email">
+              </mat-form-field>
+              <small *ngIf="email?.errors?.['email'] && !email?.errors?.['required']" class="p-error block">Email not
+                valid.</small>
+              <small *ngIf="credentialsError" class="p-error block">Incorrect Credentials.</small>
+            </div>
+            <div class="col-12 mb-3">
+              <mat-form-field class="d-flex">
+                <mat-label>Password</mat-label>
+                <input matInput formControlName="password">
+              </mat-form-field>
+              <small id="password-help" *ngIf="credentialsError" class="p-error">Incorrect Credentials.</small>
+            </div>
+            <div class="col-12">
+              <div class="d-flex justify-content-center mb-4">
+                <button type="submit" color="primary" class="col-6" mat-raised-button>Continue</button>
+              </div>
+              <div class="d-flex justify-content-center">
+                <a (click)="goToRegister()" class="fw-underline">Don't have an account?</a>
+              </div>
+              <div class="separator d-flex justify-content-center mb-2"><span>or</span></div>
+              <div class="d-flex justify-content-center">
+                <button type="submit" class="col-7 rounded-2" style="height: 50px" mat-raised-button
+                        (click)="onClick()">
+                  <img src="https://www.vectorlogo.zone/logos/google/google-icon.svg" loading="eager"
+                       alt="Google logo" aria-hidden="false" width="35">
+                  Continue with Google
+                </button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-</div>
+  </div>
+</form>

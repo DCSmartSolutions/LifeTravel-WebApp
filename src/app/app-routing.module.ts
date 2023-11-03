@@ -1,7 +1,5 @@
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from "@angular/router";
-import {LoginComponent} from "./identity-access-management/pages/login/login.component";
-
 const routes: Routes = [
   {
     path: 'peru',
@@ -10,16 +8,21 @@ const routes: Routes = [
         path: '',
         loadChildren: () => import('./shared/shared-layout.module').then(m => m.SharedLayoutModule)
       }
-    ]
+      ]
   },
   {
     path: 'sign-in',
-    component: LoginComponent
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('./identity-access-management/identity-access-management.module').then(m => m.IdentityAccessManagementModule)
+      }
+    ]
   },
   {
     path: '',
-    redirectTo: 'sign-in'
-    , pathMatch: 'full'
+    redirectTo: 'sign-in',
+    pathMatch: 'full'
   }
 ];
 
@@ -27,4 +30,5 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}
