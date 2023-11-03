@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-12 col-lg-8">
+    <div class="col-12" [ngClass]="isEdit? 'col-lg-8':''">
       <mat-card class="w-100 p-3">
         <mat-card-title>
           <div class="d-flex">
@@ -26,7 +26,7 @@
             </div>
             <hr>
             <div class="row justify-content-center">
-              <div class="col-12 col-md-10 col-lg-7 mb-2">
+              <div class="col-12 mb-2">
                 <div class="d-flex mb-2">
                   <label class="fs-5 fw-medium" style="margin-right: 10px">Picture:</label>
                   <button type="button" mat-raised-button (click)="fileInput.click()" color="accent">
@@ -41,19 +41,25 @@
                   No image uploaded
                 </div>
               </div>
-              <div class="col-12 col-md-10 col-lg-7 mb-2">
+              <div class="col-12 mb-2">
                 <label class="fs-5 fw-medium">Title:</label>
                 <mat-form-field class="d-flex">
                   <input matInput type="text" formControlName="title">
                 </mat-form-field>
               </div>
-              <div class="col-12 col-md-10 col-lg-7 mb-2">
+              <div class="col-12 mb-2">
                 <label class="fs-5 fw-medium">Description:</label>
                 <mat-form-field class="d-flex">
                   <textarea matInput type="text" formControlName="description" rows="8"></textarea>
                 </mat-form-field>
               </div>
-              <div class="col-12 col-md-10 col-lg-7 mb-2 row">
+              <div class="col-12 mb-2">
+                <label class="fs-5 fw-medium">Price:</label>
+                <mat-form-field class="d-flex">
+                  <input matInput type="number" formControlName="price">
+                </mat-form-field>
+              </div>
+              <div class="col-12 mb-2 row">
                 <label class="fs-5 fw-medium">Activity Types:</label>
                 <div *ngFor="let activity of activities" class="col border border-2 rounded m-3 px-4 py-3"
                      [ngClass]="{'bg-dark-subtle border-primary': activity.selected}"
@@ -64,20 +70,19 @@
                   <label class="row fw-bold mt-3 justify-content-center text-black">{{activity.name}}</label>
                 </div>
               </div>
-              <div class="col-12 col-md-10 col-lg-9 mb-2 row" *ngIf="tourForm.get('meetingPointLatitude')?.value">
+              <div class="col-12 mb-2 row" *ngIf="tourForm.get('meetingPointLatitude')?.value">
                 <label class="fs-5 fw-medium mb-2">Meeting Point:</label>
-                <mat-form-field class="d-flex mb-2">
-                  <input matInput type="text" readonly [(ngModel)]="displayNameLocation"
-                         [ngModelOptions]="{standalone: true}">
-                </mat-form-field>
-                <app-map (displayNameChangedEvent)="getDisplayName($event)"
-                         [latitude]="tourForm.get('meetingPointLatitude')?.value"
+                <!--                <mat-form-field class="d-flex mb-2">-->
+                <!--                  <input matInput type="text" readonly [(ngModel)]="displayNameLocation"-->
+                <!--                         [ngModelOptions]="{standalone: true}">-->
+                <!--                </mat-form-field>-->
+                <app-map [latitude]="tourForm.get('meetingPointLatitude')?.value"
                          [longitude]="tourForm.get('meetingPointLongitude')?.value"
                          (locationChangedEvent)="getNewLocation($event)">
                 </app-map>
 
               </div>
-              <div class="col-12 col-md-10 col-lg-9 mb-2 row">
+              <div class="col-12 mb-2 row">
                 <label class="fs-5 fw-medium mb-2">Touristic Destinations:</label>
                 <app-map [isOnlyOneMarker]="false" [destinationsLocations]="tourForm.get('destinations')?.value"
                          [events]="eventsSubject.asObservable()"
@@ -108,7 +113,7 @@
         </mat-card-content>
       </mat-card>
     </div>
-    <div class="col-12 col-lg-4 mt-4 mt-lg-0">
+    <div class="col-12 col-lg-4 mt-4 mt-lg-0" *ngIf="isEdit">
       <mat-card class="w-100">
         <mat-card-title class="bg-primary rounded-top p-3 text-white">
           <label class="fw-bold fs-4 row justify-content-center">Assign Schedule</label>
@@ -141,7 +146,8 @@
             </div>
 
           </div>
-          <button mat-raised-button color="accent" class="col-12 col-md-8 offset-md-2" (click)="saveSchedule()" [disabled]="cannotBeScheduleSaved">
+          <button mat-raised-button color="accent" class="col-12 col-md-8 offset-md-2" (click)="saveSchedule()"
+                  [disabled]="cannotBeScheduleSaved">
             <mat-icon>save</mat-icon>
             Save
           </button>

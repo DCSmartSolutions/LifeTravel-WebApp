@@ -10,6 +10,7 @@ export class TourPackage {
   price: number = 0;
   stars: number = 0;
   regionId: number = 0;
+  activities: string[] = [];
   visible: boolean = false;
   meetingPoint: Location | null = null;
   meetingPointLatitude: number | null = null;
