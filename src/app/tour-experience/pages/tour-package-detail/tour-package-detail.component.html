@@ -26,7 +26,7 @@
             </div>
             <hr>
             <div class="row justify-content-center">
-              <div class="col-12 mb-2">
+              <div class="col-12 mb-2" [ngClass]="isEdit? '':'col-lg-8'">
                 <div class="d-flex mb-2">
                   <label class="fs-5 fw-medium" style="margin-right: 10px">Picture:</label>
                   <button type="button" mat-raised-button (click)="fileInput.click()" color="accent">
@@ -41,25 +41,25 @@
                   No image uploaded
                 </div>
               </div>
-              <div class="col-12 mb-2">
+              <div class="col-12 mb-2" [ngClass]="isEdit? '':'col-lg-8'">
                 <label class="fs-5 fw-medium">Title:</label>
                 <mat-form-field class="d-flex">
                   <input matInput type="text" formControlName="title">
                 </mat-form-field>
               </div>
-              <div class="col-12 mb-2">
+              <div class="col-12 mb-2" [ngClass]="isEdit? '':'col-lg-8'">
                 <label class="fs-5 fw-medium">Description:</label>
                 <mat-form-field class="d-flex">
                   <textarea matInput type="text" formControlName="description" rows="8"></textarea>
                 </mat-form-field>
               </div>
-              <div class="col-12 mb-2">
+              <div class="col-12 mb-2" [ngClass]="isEdit? '':'col-lg-8'">
                 <label class="fs-5 fw-medium">Price:</label>
                 <mat-form-field class="d-flex">
                   <input matInput type="number" formControlName="price">
                 </mat-form-field>
               </div>
-              <div class="col-12 mb-2 row">
+              <div class="col-12 mb-2 row" [ngClass]="isEdit? '':'col-lg-8'">
                 <label class="fs-5 fw-medium">Activity Types:</label>
                 <div *ngFor="let activity of activities" class="col border border-2 rounded m-3 px-4 py-3"
                      [ngClass]="{'bg-dark-subtle border-primary': activity.selected}"
@@ -70,7 +70,7 @@
                   <label class="row fw-bold mt-3 justify-content-center text-black">{{activity.name}}</label>
                 </div>
               </div>
-              <div class="col-12 mb-2 row" *ngIf="tourForm.get('meetingPointLatitude')?.value">
+              <div class="col-12 mb-2 row" *ngIf="tourForm.get('meetingPointLatitude')?.value" [ngClass]="isEdit? '':'col-lg-8'">
                 <label class="fs-5 fw-medium mb-2">Meeting Point:</label>
                 <!--                <mat-form-field class="d-flex mb-2">-->
                 <!--                  <input matInput type="text" readonly [(ngModel)]="displayNameLocation"-->
@@ -82,7 +82,7 @@
                 </app-map>
 
               </div>
-              <div class="col-12 mb-2 row">
+              <div class="col-12 mb-2 row" [ngClass]="isEdit? '':'col-lg-8'">
                 <label class="fs-5 fw-medium mb-2">Touristic Destinations:</label>
                 <app-map [isOnlyOneMarker]="false" [destinationsLocations]="tourForm.get('destinations')?.value"
                          [events]="eventsSubject.asObservable()"
