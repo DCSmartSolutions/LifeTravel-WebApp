@@ -11,7 +11,7 @@ const routes: Routes = [
       ]
   },
   {
-    path: 'sign-in',
+    path: 'authentication',
     children: [
       {
         path: '',
@@ -21,7 +21,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'sign-in',
+    redirectTo: 'authentication',
     pathMatch: 'full'
   }
 ];

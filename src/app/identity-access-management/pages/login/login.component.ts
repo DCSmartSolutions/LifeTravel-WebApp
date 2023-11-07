@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit{
   ) {
     this.loginForm = this.formBuilder.group({
       email: ['', { validators: [Validators.required, Validators.email],updateOn: 'change'}],
-      password: ['', { validators: [Validators.required, Validators.minLength(6)],updateOn: 'change'}],
+      password: ['', { validators: [Validators.required]}]
     });
   }
 
@@ -28,6 +28,7 @@ export class LoginComponent implements OnInit{
   }
 
   onSubmit() {
+    console.log(this.loginForm.value)
     this.fireAuthCustomService.login(this.loginForm.value)
       .then((response: any) => {
         console.log(response);
@@ -51,7 +52,7 @@ export class LoginComponent implements OnInit{
   }
 
   goToRegister() {
-    this.router.navigate(['/auth', 'register']);
+    this.router.navigate(['/authentication', 'sign-up']);
   }
 
   get password() {
