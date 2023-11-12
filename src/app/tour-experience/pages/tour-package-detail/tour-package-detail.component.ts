@@ -38,6 +38,7 @@ export class TourPackageDetailComponent implements OnInit {
   ];
   displayNameLocation: any;
   destinations: LocationName[] = []
+  isOnlyViewInfo: boolean = false;
 
   constructor(private route: ActivatedRoute, private router: Router,
               private tourPackageService: TourPackageService,
@@ -65,14 +66,19 @@ export class TourPackageDetailComponent implements OnInit {
   }
 
   eventsSubject: Subject<void> = new Subject<void>();
+  disableMapClick: Subject<boolean> = new Subject<boolean>();
 
   emitEventToChild() {
     this.eventsSubject.next();
   }
-
+  emitDisableMapClickToChild() {
+    console.log("emitDisableMapClickToChild", this.isOnlyViewInfo)
+    this.disableMapClick.next(this.isOnlyViewInfo);
+  }
   ngOnInit() {
     this.route.params.subscribe(params => {
         const packageId = params['packageId'];
+        this.isOnlyViewInfo = params['detail-type'] === 'detail-info';
         if (packageId != null) {
           this.title = "Edit Tour Package";
           this.isEdit = true;
@@ -80,6 +86,7 @@ export class TourPackageDetailComponent implements OnInit {
         } else {
           this.getUserLocation();
         }
+        this.emitDisableMapClickToChild();
       }
     );
 

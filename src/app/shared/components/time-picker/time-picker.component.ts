@@ -12,7 +12,7 @@ export class TimePickerComponent {
   minuteOptions: string[] = ['00', '15', '30', '45'];
   dayTimeOptions: string[] = ['AM', 'PM'];
   @Input() time: { hour: string; minute: string; dayTime: string } = { hour: '', minute: '', dayTime: '' };
-
+  @Input() readonly = false;
   @Output() timeChangedEvent = new EventEmitter<any>();
   constructor() {
     for (let i = 0; i < 24; i++) {

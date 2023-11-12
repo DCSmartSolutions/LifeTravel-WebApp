@@ -23,4 +23,8 @@ export class ListPackagesComponent implements OnInit {
   editTourPackage(tourPackage: any) {
     this.router.navigate(['peru/tour-packages/detail',tourPackage.id]);
   }
+
+  goToDetail(tourPackage: any) {
+    this.router.navigate(['peru/tour-packages/detail-info',tourPackage.id]);
+  }
 }
