@@ -10,7 +10,7 @@
       "price": "345",
       "stars": 3.4,
       "regionId": 2,
-      "visible": false,
+      "visible": true,
       "meetingPoint": {
         "latitude": -13.163141,
         "longitude": -72.544963
@@ -19,12 +19,12 @@
         {
           "latitude": -12.065365768385902,
           "longitude": -76.98580903278807,
-          "name": "erer"
+          "name": "Urbanización El Pino"
         },
         {
           "latitude": -12.07812353431612,
           "longitude": -77.0125882075922,
-          "name": "wrgwr"
+          "name": "Av Javier Prado"
         }
       ],
       "meetingPointLatitude": -13.163141,
@@ -101,7 +101,25 @@
         }
       ],
       "meetingPointLatitude": -13.163141,
-      "meetingPointLongitude": -72.544963
+      "meetingPointLongitude": -72.544963,
+      "schedule": [
+        {
+          "day": "Saturday",
+          "selected": true,
+          "hourRange": {
+            "start": {
+              "hour": "14",
+              "minute": "30",
+              "dayTime": "PM"
+            },
+            "end": {
+              "hour": "19",
+              "minute": "30",
+              "dayTime": "PM"
+            }
+          }
+        }
+      ]
     },
     {
       "id": 3,
@@ -166,7 +184,24 @@
       "meetingPoint": {
         "latitude": -15.85370199713,
         "longitude": -70.009489725
-      }
+      },
+      "meetingPointLatitude": -15.85370199713,
+      "meetingPointLongitude": -70.009489725,
+      "destinations": [
+        {
+          "latitude": -12.0733721963432,
+          "longitude": -77.00356906938839,
+          "name": "Hostal Imperial"
+        },
+        {
+          "latitude": -12.107713252448406,
+          "longitude": -76.99563872493513,
+          "name": "Jr Romero Hidalgo"
+        }
+      ],
+      "activities": [
+        "Trekking"
+      ]
     },
     {
       "id": 7,
