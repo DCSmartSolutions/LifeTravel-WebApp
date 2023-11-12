@@ -9,11 +9,8 @@ import {SpinnerComponent} from "../../../shared/components/spinner/spinner.compo
 import {Location} from "../../models/tour-package.model";
 import {Subject} from "rxjs";
 import {HourRange, Schedule, Time} from "../../models/time-picker.model";
-import {MatCalendarCellClassFunction, MatCalendarCellCssClasses} from "@angular/material/datepicker";
-import {
-  ConfirmationMessageComponent
-} from "../../../shared/components/confirmation-message/confirmation-message.component";
-
+import {MatCalendarCellClassFunction} from "@angular/material/datepicker";
+import {ConfirmationMessageComponent} from "../../../shared/components/confirmation-message/confirmation-message.component";
 @Component({
   selector: 'app-tour-package-detail',
   templateUrl: './tour-package-detail.component.html',
@@ -40,10 +37,8 @@ export class TourPackageDetailComponent implements OnInit {
     {day: 'Saturday', selected: false, hourRange: new HourRange()},
     {day: 'Sunday', selected: false, hourRange: new HourRange()},
   ];
-  displayNameLocation: any;
   destinations: LocationName[] = []
   isOnlyViewInfo: boolean = false;
-
   constructor(private route: ActivatedRoute, private router: Router,
               private tourPackageService: TourPackageService,
               private azureBlobStorageService: AzureBlobStorageService,
@@ -79,12 +74,10 @@ export class TourPackageDetailComponent implements OnInit {
   }
 
   emitDisableMapClickToChild() {
-    console.log("emitDisableMapClickToChild", this.isOnlyViewInfo)
     this.disableMapClick.next(this.isOnlyViewInfo);
   }
 
   ngOnInit() {
-    console.log(new Date().toLocaleDateString('en-US', {weekday: 'long'}))
     this.route.params.subscribe(params => {
         const packageId = params['packageId'];
         this.isOnlyViewInfo = params['detail-type'] === 'detail-info';
@@ -99,11 +92,9 @@ export class TourPackageDetailComponent implements OnInit {
         this.emitDisableMapClickToChild();
       }
     );
-
   }
 
   getUserLocation() {
-    //console.log("getLocation")
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => this.setUserLocation(position));
     } else {
@@ -121,13 +112,11 @@ export class TourPackageDetailComponent implements OnInit {
     this.tourForm.reset()
     this.tourForm.patchValue({id: packageId});
     this.tourPackageService.getPackageById(packageId).subscribe(packageData => {
-      console.log("packageData", packageData);
       this.tourPackage = packageData;
       this.tourForm.patchValue(this.tourPackage);
       this.tourForm.patchValue({meetingPointLatitude: packageData.meetingPoint?.latitude});
       this.tourForm.patchValue({meetingPointLongitude: packageData.meetingPoint?.longitude});
       this.destinations = packageData.destinations;
-      //replace values in dayList of packageData.schedule to dayList
       packageData.schedule?.forEach((item: Schedule) => {
           this.dayList.forEach((day: Schedule) => {
             if (day.day === item.day) {
@@ -147,13 +136,10 @@ export class TourPackageDetailComponent implements OnInit {
       })
     });
   }
-
   back() {
     if (this.isOnlyViewInfo) this.router.navigate(['peru/']);
     else this.router.navigate(['peru/tour-packages/my-packages']);
   }
-
-
   onFileSelected($event: any) {
     this.showSpinnerDialog();
     const file = $event.target.files[0];
@@ -167,7 +153,6 @@ export class TourPackageDetailComponent implements OnInit {
       }
     );
   }
-
   get hasImg() {
     return this.tourForm.get('img')?.value != null;
   }
@@ -185,10 +170,6 @@ export class TourPackageDetailComponent implements OnInit {
 
   hideSpinnerDialog() {
     this.dialog?.close();
-  }
-
-  getDisplayName($event: string) {
-    this.displayNameLocation = $event;
   }
   getNewLocation($event: Location) {
     this.tourForm.patchValue({meetingPoint: $event});
@@ -276,7 +257,6 @@ export class TourPackageDetailComponent implements OnInit {
   }
 
   dateClass: MatCalendarCellClassFunction<Date> = (cellDate, view) => {
-    console.log("cellDate", cellDate)
     if (view === 'month') {
       return this.isDayDisabled(cellDate) ? 'pe-none' : '';
     }
