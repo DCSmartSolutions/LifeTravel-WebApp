@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-branding',
   template: `
-      <a class="navbar-brand" href="/">
+      <a class="navbar-brand" href="/peru">
           <img src="./assets/images/life-travel.png" class="brand-logo align-middle" alt="logo"/>
       </a>
   `,

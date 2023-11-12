@@ -16,3 +16,11 @@
 .text-visible{
   color: #ffd44d;
 }
+.disabled-day {
+  opacity: 0.5;  // Puedes ajustar el estilo a tu preferencia
+  pointer-events: none;  // Evita que se puedan seleccionar los días deshabilitados
+}
+.example-custom-date-class {
+  background: orange;
+  border-radius: 100%;
+}

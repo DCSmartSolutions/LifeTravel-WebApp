@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {LocationName, TourPackage} from "../../models/tour-package.model";
 import {TourPackageService} from "../../services/tour-package.service";
@@ -9,6 +9,7 @@ import {SpinnerComponent} from "../../../shared/components/spinner/spinner.compo
 import {Location} from "../../models/tour-package.model";
 import {Subject} from "rxjs";
 import {HourRange, Schedule, Time} from "../../models/time-picker.model";
+import {MatCalendarCellClassFunction, MatCalendarCellCssClasses} from "@angular/material/datepicker";
 
 @Component({
   selector: 'app-tour-package-detail',
@@ -44,6 +45,7 @@ export class TourPackageDetailComponent implements OnInit {
               private tourPackageService: TourPackageService,
               private azureBlobStorageService: AzureBlobStorageService,
               private matDialog: MatDialog,
+              private cdr: ChangeDetectorRef,
               private formBuilder: FormBuilder) {
     this.tourForm = this.formBuilder.group({
       id: [{value: null}],
@@ -67,22 +69,27 @@ export class TourPackageDetailComponent implements OnInit {
 
   eventsSubject: Subject<void> = new Subject<void>();
   disableMapClick: Subject<boolean> = new Subject<boolean>();
+  selectedDate: any;
 
   emitEventToChild() {
     this.eventsSubject.next();
   }
+
   emitDisableMapClickToChild() {
     console.log("emitDisableMapClickToChild", this.isOnlyViewInfo)
     this.disableMapClick.next(this.isOnlyViewInfo);
   }
+
   ngOnInit() {
+    console.log(new Date().toLocaleDateString('en-US', {weekday: 'long'}))
     this.route.params.subscribe(params => {
         const packageId = params['packageId'];
         this.isOnlyViewInfo = params['detail-type'] === 'detail-info';
         if (packageId != null) {
-          this.title = "Edit Tour Package";
+          this.title = this.isOnlyViewInfo ? "Tour Package Detail" : "Edit Tour Package";
           this.isEdit = true;
           this.getPackageById(packageId);
+
         } else {
           this.getUserLocation();
         }
@@ -125,6 +132,7 @@ export class TourPackageDetailComponent implements OnInit {
           })
         }
       )
+      this.cdr.detectChanges();
       packageData.activities.forEach((item: string) => {
         this.activities.forEach((activity: any) => {
           if (activity.name === item) {
@@ -136,7 +144,8 @@ export class TourPackageDetailComponent implements OnInit {
   }
 
   back() {
-    this.router.navigate(['peru/tour-packages/my-packages']);
+    if (this.isOnlyViewInfo) this.router.navigate(['peru/']);
+    else this.router.navigate(['peru/tour-packages/my-packages']);
   }
 
 
@@ -186,15 +195,18 @@ export class TourPackageDetailComponent implements OnInit {
     //console.log("getNewLocation", $event)
     this.tourForm.patchValue({meetingPoint: $event});
   }
+
   getDestinationList($event: any[]) {
     this.destinations = $event;
     //console.log("getDestinationList", this.destinations)
   }
+
   removeDestination(index: number) {
     this.tourForm.get('destinations')?.value.splice(index, 1);
     this.emitEventToChild()
     //this.mapComponent?.refreshMap(destinations);
   }
+
   savePackage() {
     this.showSpinnerDialog();
     this.tourForm.patchValue({destinations: this.destinations});
@@ -214,6 +226,7 @@ export class TourPackageDetailComponent implements OnInit {
   }
 
   selectDay(item: any) {
+    if (this.isOnlyViewInfo) return;
     item.selected = !item.selected;
     //this.tourForm.patchValue({dayList: this.dayList});
   }
@@ -246,4 +259,26 @@ export class TourPackageDetailComponent implements OnInit {
     });
   }
 
+  getDateStringFromTime(time: Time) {
+    return time.hour + ':' + time.minute + ' ' + time.dayTime;
+  }
+
+  isDayDisabled(date: Date): boolean {
+    if (this.selectedDayList.length === 0) {
+      return true;
+    }
+    if (date < new Date()) {
+      return true;
+    }
+    const dayName = new Intl.DateTimeFormat('en-US', {weekday: 'long'}).format(date);
+    return !this.selectedDayList.some(item => item.day.toLowerCase() === dayName.toLowerCase());
+  }
+
+  dateClass: MatCalendarCellClassFunction<Date> = (cellDate, view) => {
+    console.log("cellDate", cellDate)
+    if (view === 'month') {
+      return this.isDayDisabled(cellDate) ? 'pe-none' : '';
+    }
+    return '';
+  };
 }
