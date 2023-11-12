@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {LocationName, TourPackage} from "../../models/tour-package.model";
 import {TourPackageService} from "../../services/tour-package.service";
@@ -9,7 +9,8 @@ import {SpinnerComponent} from "../../../shared/components/spinner/spinner.compo
 import {Location} from "../../models/tour-package.model";
 import {Subject} from "rxjs";
 import {HourRange, Schedule, Time} from "../../models/time-picker.model";
-
+import {MatCalendarCellClassFunction} from "@angular/material/datepicker";
+import {ConfirmationMessageComponent} from "../../../shared/components/confirmation-message/confirmation-message.component";
 @Component({
   selector: 'app-tour-package-detail',
   templateUrl: './tour-package-detail.component.html',
@@ -36,13 +37,13 @@ export class TourPackageDetailComponent implements OnInit {
     {day: 'Saturday', selected: false, hourRange: new HourRange()},
     {day: 'Sunday', selected: false, hourRange: new HourRange()},
   ];
-  displayNameLocation: any;
   destinations: LocationName[] = []
-
+  isOnlyViewInfo: boolean = false;
   constructor(private route: ActivatedRoute, private router: Router,
               private tourPackageService: TourPackageService,
               private azureBlobStorageService: AzureBlobStorageService,
               private matDialog: MatDialog,
+              private cdr: ChangeDetectorRef,
               private formBuilder: FormBuilder) {
     this.tourForm = this.formBuilder.group({
       id: [{value: null}],
@@ -65,28 +66,35 @@ export class TourPackageDetailComponent implements OnInit {
   }
 
   eventsSubject: Subject<void> = new Subject<void>();
+  disableMapClick: Subject<boolean> = new Subject<boolean>();
+  selectedDate: any;
 
   emitEventToChild() {
     this.eventsSubject.next();
   }
 
+  emitDisableMapClickToChild() {
+    this.disableMapClick.next(this.isOnlyViewInfo);
+  }
+
   ngOnInit() {
     this.route.params.subscribe(params => {
         const packageId = params['packageId'];
+        this.isOnlyViewInfo = params['detail-type'] === 'detail-info';
         if (packageId != null) {
-          this.title = "Edit Tour Package";
+          this.title = this.isOnlyViewInfo ? "Tour Package Detail" : "Edit Tour Package";
           this.isEdit = true;
           this.getPackageById(packageId);
+
         } else {
           this.getUserLocation();
         }
+        this.emitDisableMapClickToChild();
       }
     );
-
   }
 
   getUserLocation() {
-    //console.log("getLocation")
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => this.setUserLocation(position));
     } else {
@@ -101,14 +109,14 @@ export class TourPackageDetailComponent implements OnInit {
   }
 
   getPackageById(packageId: number) {
+    this.tourForm.reset()
+    this.tourForm.patchValue({id: packageId});
     this.tourPackageService.getPackageById(packageId).subscribe(packageData => {
-      console.log("packageData", packageData);
       this.tourPackage = packageData;
       this.tourForm.patchValue(this.tourPackage);
       this.tourForm.patchValue({meetingPointLatitude: packageData.meetingPoint?.latitude});
       this.tourForm.patchValue({meetingPointLongitude: packageData.meetingPoint?.longitude});
       this.destinations = packageData.destinations;
-      //replace values in dayList of packageData.schedule to dayList
       packageData.schedule?.forEach((item: Schedule) => {
           this.dayList.forEach((day: Schedule) => {
             if (day.day === item.day) {
@@ -118,6 +126,7 @@ export class TourPackageDetailComponent implements OnInit {
           })
         }
       )
+      this.cdr.detectChanges();
       packageData.activities.forEach((item: string) => {
         this.activities.forEach((activity: any) => {
           if (activity.name === item) {
@@ -127,12 +136,10 @@ export class TourPackageDetailComponent implements OnInit {
       })
     });
   }
-
   back() {
-    this.router.navigate(['peru/tour-packages/my-packages']);
+    if (this.isOnlyViewInfo) this.router.navigate(['peru/']);
+    else this.router.navigate(['peru/tour-packages/my-packages']);
   }
-
-
   onFileSelected($event: any) {
     this.showSpinnerDialog();
     const file = $event.target.files[0];
@@ -146,7 +153,6 @@ export class TourPackageDetailComponent implements OnInit {
       }
     );
   }
-
   get hasImg() {
     return this.tourForm.get('img')?.value != null;
   }
@@ -165,29 +171,21 @@ export class TourPackageDetailComponent implements OnInit {
   hideSpinnerDialog() {
     this.dialog?.close();
   }
-
-  getDisplayName($event: string) {
-    this.displayNameLocation = $event;
-    //console.log("displayNameLocation", this.displayNameLocation);
-  }
-
-  get hasMeetingPoint() {
-    return this.tourForm.get('meetingPoint')?.value != null;
-  }
-
   getNewLocation($event: Location) {
-    //console.log("getNewLocation", $event)
     this.tourForm.patchValue({meetingPoint: $event});
   }
   getDestinationList($event: any[]) {
     this.destinations = $event;
-    //console.log("getDestinationList", this.destinations)
   }
+
   removeDestination(index: number) {
     this.tourForm.get('destinations')?.value.splice(index, 1);
+    if(this.tourForm.get('destinations')?.value.length === 0) {
+      this.tourForm.get('visible')?.setValue(false);
+    }
     this.emitEventToChild()
-    //this.mapComponent?.refreshMap(destinations);
   }
+
   savePackage() {
     this.showSpinnerDialog();
     this.tourForm.patchValue({destinations: this.destinations});
@@ -207,8 +205,11 @@ export class TourPackageDetailComponent implements OnInit {
   }
 
   selectDay(item: any) {
+    if (this.isOnlyViewInfo) return;
     item.selected = !item.selected;
-    //this.tourForm.patchValue({dayList: this.dayList});
+    if(this.selectedDayList.length === 0) {
+      this.tourForm.get('visible')?.setValue(false);
+    }
   }
 
   assignValueInDayList(event: any, item: any, range: string) {
@@ -229,6 +230,7 @@ export class TourPackageDetailComponent implements OnInit {
       this.tourPackageService.saveSchedule(this.tourPackage.id, this.selectedDayList).subscribe(() => {
         this.hideSpinnerDialog()
       });
+      this.getPackageById(this.tourPackage.id);
     }
   }
 
@@ -239,4 +241,53 @@ export class TourPackageDetailComponent implements OnInit {
     });
   }
 
+  getDateStringFromTime(time: Time) {
+    return time.hour + ':' + time.minute + ' ' + time.dayTime;
+  }
+
+  isDayDisabled(date: Date): boolean {
+    if (this.selectedDayList.length === 0) {
+      return true;
+    }
+    if (date < new Date()) {
+      return true;
+    }
+    const dayName = new Intl.DateTimeFormat('en-US', {weekday: 'long'}).format(date);
+    return !this.selectedDayList.some(item => item.day.toLowerCase() === dayName.toLowerCase());
+  }
+
+  dateClass: MatCalendarCellClassFunction<Date> = (cellDate, view) => {
+    if (view === 'month') {
+      return this.isDayDisabled(cellDate) ? 'pe-none' : '';
+    }
+    return '';
+  };
+
+  showVisibleConfirmationMessage() {
+    if (this.tourForm.get('visible')?.value && this.selectedDayList.length === 0) {
+      this.dialog = this.matDialog.open(ConfirmationMessageComponent, {
+          data: {
+            title: "Can't be visible",
+            content: 'This package must have at least assigned a day in the schedule to be visible.'
+          }
+        }
+      )
+      this.dialog.afterClosed().subscribe(() => {
+          this.tourForm.patchValue({visible: false})
+        }
+      )
+    } else if (this.tourForm.get('destinations')?.value.length === 0) {
+      this.dialog = this.matDialog.open(ConfirmationMessageComponent, {
+          data: {
+            title: "Can't be visible",
+            content: 'This package must have at least one destination to be visible.'
+          }
+        }
+      )
+      this.dialog.afterClosed().subscribe(() => {
+          this.tourForm.patchValue({visible: false})
+        }
+      )
+    }
+  }
 }

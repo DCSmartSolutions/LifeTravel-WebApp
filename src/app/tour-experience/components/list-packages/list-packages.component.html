@@ -25,7 +25,8 @@
         <label class="d-flex fw-bolder">S/ {{ tourPackage.price }}</label>
       </mat-card-content>
       <mat-card-actions class="custom-card-actions">
-        <button mat-raised-button color="primary" *ngIf="!isAgency">GO</button>
+        <button mat-raised-button color="primary" *ngIf="!isAgency"
+                (click)="goToDetail(tourPackage)">GO</button>
         <button mat-raised-button color="accent" *ngIf="isAgency" class="fw-bolder"
                 (click)="editTourPackage(tourPackage)">
           <mat-icon>edit</mat-icon>

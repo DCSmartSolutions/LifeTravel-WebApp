@@ -11,18 +11,20 @@ import {Observable, Subscription} from "rxjs";
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss']
 })
-export class MapComponent implements OnInit , OnDestroy{
+export class MapComponent implements OnInit, OnDestroy {
   map: mapboxgl.Map | undefined;
   @Input() longitude: number = -76.9879548;
   @Input() latitude: number = -12.0777865;
   @Input() isOnlyOneMarker: boolean = true;
   @Input() destinationsLocations: Location[] = [];
   @Input() events: Observable<void> = new Observable<void>();
+  @Input() mapClickEnabled: boolean = true;
   @Output() displayNameChangedEvent = new EventEmitter<string>();
   @Output() locationChangedEvent = new EventEmitter<Location>();
   @Output() destinationsLocationsChangedEvent = new EventEmitter<Location[]>();
   marker: mapboxgl.Marker | undefined;
   private eventsSubscription: Subscription = new Subscription();
+
 
   constructor(private mapService: MapService) {
 
@@ -48,16 +50,20 @@ export class MapComponent implements OnInit , OnDestroy{
         //console.log("showPosition2")
         this.showPosition2();
       }
-    }else{
+    } else {
 
-      setTimeout(()=>{
+      setTimeout(() => {
         this.createMarker()
       }, 1000);
     }
     this.map.addControl(new mapboxgl.NavigationControl());
     this.mapClick();
-    this.eventsSubscription = this.events!.subscribe(() => this.createMarker());
+    this.eventsSubscription = this.events!.subscribe(() => {
+      console.log("events")
+      this.createMarker()
+    });
   }
+
   ngOnDestroy() {
     this.eventsSubscription!.unsubscribe();
   }
@@ -120,18 +126,23 @@ export class MapComponent implements OnInit , OnDestroy{
 
   mapClick() {
     if (this.isOnlyOneMarker) {
-      //console.log("isOnlyOneMarker")
       this.map!.on('click', (e) => {
-        //console.log(e.lngLat);
-        this.longitude = e.lngLat.lng;
-        this.latitude = e.lngLat.lat;
-        this.setNewMarker(this.longitude, this.latitude);
-        this.getDisplayName(this.longitude, this.latitude);
+        if (this.mapClickEnabled) {
+          this.longitude = e.lngLat.lng;
+          this.latitude = e.lngLat.lat;
+          this.setNewMarker(this.longitude, this.latitude);
+          this.getDisplayName(this.longitude, this.latitude);
+        }
       });
     } else {
-      this.map!.on('click', (e) => this.addMarker(e));
+      this.map!.on('click', (e) => {
+        if (this.mapClickEnabled) {
+          this.addMarker(e);
+        }
+      });
     }
   }
+
 
   private setNewMarker(longitude: number, latitude: number) {
     this.marker!.setLngLat([longitude, latitude])
@@ -151,9 +162,11 @@ export class MapComponent implements OnInit , OnDestroy{
     this.destinationsLocations.push(location);
     this.createMarker();
   }
+
   getMarkerObjectHtml(index: number) {
     return '<span><i class="fas fa-map-marker fs-2 p-2" style="color: #d02922"></i><b style="position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%); font-size: small; color: white">' + (index + 1) + '</b></span>'
   }
+
   setMarkerObjectHtml(location: Location, i: number) {
     let el = document.createElement('div');
     el.innerHTML = this.getMarkerObjectHtml(i);
@@ -170,6 +183,7 @@ export class MapComponent implements OnInit , OnDestroy{
         this.destinationsLocationsChangedEvent.emit(this.destinationsLocations);
       })
   }
+
   createMarker() {
     console.log(this.destinationsLocations)
     this.destinationsLocationsChangedEvent.emit(this.destinationsLocations);
@@ -179,6 +193,7 @@ export class MapComponent implements OnInit , OnDestroy{
       this.setMarkerObjectHtml(location, i);
     }
   }
+
   reDrawMarker(destinations: Location[]) {
     console.log(destinations)
     this.clearMapFromMarkers();
@@ -187,6 +202,7 @@ export class MapComponent implements OnInit , OnDestroy{
       this.setMarkerObjectHtml(location, i);
     }
   }
+
   clearMapFromMarkers() {
     const allMarkers = document.querySelectorAll('.mapboxgl-marker');
     if (allMarkers.length > 0) {
@@ -197,4 +213,5 @@ export class MapComponent implements OnInit , OnDestroy{
       });
     }
   }
+
 }

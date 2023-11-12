@@ -32,7 +32,7 @@ const routes: Routes = [
     component: ExistingPackagesListComponent,
   },
   {
-    path: 'detail/:packageId',
+    path: ':detail-type/:packageId',
     component: TourPackageDetailComponent,
   },
   {

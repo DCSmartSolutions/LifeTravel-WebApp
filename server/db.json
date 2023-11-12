@@ -19,12 +19,12 @@
         {
           "latitude": -12.065365768385902,
           "longitude": -76.98580903278807,
-          "name": "Urbanización El Pino"
+          "name": "erer"
         },
         {
           "latitude": -12.07812353431612,
           "longitude": -77.0125882075922,
-          "name": "Av Javier Prado"
+          "name": "wrgwr"
         }
       ],
       "meetingPointLatitude": -13.163141,
@@ -78,7 +78,7 @@
       "price": "125",
       "stars": 2.9,
       "regionId": 2,
-      "visible": true,
+      "visible": false,
       "meetingPoint": {
         "latitude": -13.163141,
         "longitude": -72.544963
@@ -104,18 +104,18 @@
       "meetingPointLongitude": -72.544963,
       "schedule": [
         {
-          "day": "Saturday",
+          "day": "Friday",
           "selected": true,
           "hourRange": {
             "start": {
-              "hour": "14",
-              "minute": "30",
-              "dayTime": "PM"
+              "hour": "1",
+              "minute": "15",
+              "dayTime": "AM"
             },
             "end": {
-              "hour": "19",
-              "minute": "30",
-              "dayTime": "PM"
+              "hour": "3",
+              "minute": "15",
+              "dayTime": "AM"
             }
           }
         }
@@ -131,7 +131,7 @@
       "price": "144",
       "stars": 4.2,
       "regionId": 1,
-      "visible": true,
+      "visible": false,
       "meetingPoint": {
         "latitude": -13.813835,
         "longitude": -76.388499
@@ -148,7 +148,7 @@
       "price": "235",
       "stars": 4,
       "regionId": 3,
-      "visible": true,
+      "visible": false,
       "meetingPoint": {
         "latitude": -3.74912,
         "longitude": -73.25383
@@ -164,7 +164,7 @@
       "price": "210",
       "stars": 2.6,
       "regionId": 2,
-      "visible": true,
+      "visible": false,
       "meetingPoint": {
         "latitude": -15.629,
         "longitude": -71.886
@@ -184,24 +184,7 @@
       "meetingPoint": {
         "latitude": -15.85370199713,
         "longitude": -70.009489725
-      },
-      "meetingPointLatitude": -15.85370199713,
-      "meetingPointLongitude": -70.009489725,
-      "destinations": [
-        {
-          "latitude": -12.0733721963432,
-          "longitude": -77.00356906938839,
-          "name": "Hostal Imperial"
-        },
-        {
-          "latitude": -12.107713252448406,
-          "longitude": -76.99563872493513,
-          "name": "Jr Romero Hidalgo"
-        }
-      ],
-      "activities": [
-        "Trekking"
-      ]
+      }
     },
     {
       "id": 7,
@@ -213,7 +196,7 @@
       "price": "345",
       "stars": 3.9,
       "regionId": 2,
-      "visible": true,
+      "visible": false,
       "meetingPoint": {
         "latitude": -7.163,
         "longitude": -78.512
@@ -229,7 +212,7 @@
       "price": "275",
       "stars": 4.7,
       "regionId": 2,
-      "visible": true,
+      "visible": false,
       "meetingPoint": {
         "latitude": -13.163141,
         "longitude": -72.544963
@@ -245,7 +228,7 @@
       "price": "295",
       "stars": 4.8,
       "regionId": 2,
-      "visible": true,
+      "visible": false,
       "meetingPoint": {
         "latitude": -13.163141,
         "longitude": -72.544963
@@ -261,7 +244,7 @@
       "price": "399",
       "stars": 4.9,
       "regionId": 3,
-      "visible": true,
+      "visible": false,
       "meetingPoint": {
         "latitude": -12.598,
         "longitude": -69.183
@@ -277,7 +260,7 @@
       "price": "320",
       "stars": 4.6,
       "regionId": 2,
-      "visible": true,
+      "visible": false,
       "meetingPoint": {
         "latitude": -15.629,
         "longitude": -71.886
@@ -293,7 +276,7 @@
       "price": "345",
       "stars": 4.5,
       "regionId": 2,
-      "visible": true,
+      "visible": false,
       "meetingPoint": {
         "latitude": -13.163141,
         "longitude": -72.544963
@@ -309,7 +292,7 @@
       "price": "289",
       "stars": 4.4,
       "regionId": 2,
-      "visible": true,
+      "visible": false,
       "meetingPoint": {
         "latitude": -9.526,
         "longitude": -77.528
@@ -349,7 +332,7 @@
       "agency": "",
       "price": 160,
       "regionId": 0,
-      "visible": true,
+      "visible": false,
       "meetingPoint": {
         "latitude": -11.8723788,
         "longitude": -77.0449214
