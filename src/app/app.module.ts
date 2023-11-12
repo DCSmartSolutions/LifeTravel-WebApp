@@ -4,8 +4,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {AppComponent} from './app.component';
 import {RouterOutlet} from "@angular/router";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {HttpClientModule} from "@angular/common/http";
-import {SharedLayoutModule} from "./shared/shared-layout.module";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {AppRoutingModule} from "./app-routing.module";
 import {SearchPackagesComponent} from './tour-experience/pages/search-packages/search-packages.component';
 import {MatListModule} from "@angular/material/list";
@@ -19,6 +18,7 @@ import {ToastrModule} from "ngx-toastr";
 import {HomeComponent} from './public/pages/home/home.component';
 import {TourPackagesModule} from "./tour-experience/tour-packages.module";
 import {IdentityAccessManagementModule} from "./identity-access-management/identity-access-management.module";
+import {TokenInterceptorService} from "./guard/token-interceptor.service";
 
 @NgModule({
   declarations: [
@@ -43,7 +43,7 @@ import {IdentityAccessManagementModule} from "./identity-access-management/ident
     TourPackagesModule,
     IdentityAccessManagementModule,
   ],
-  providers: [],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule {

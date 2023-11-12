@@ -26,9 +26,9 @@
         [ngClass]="{'bg-dark-subtle border-primary': activity.selected}" (click)="activity.selected = !activity.selected"
       >
         <div class="col-12 d-flex justify-content-center">
-          <img [src]="activity.icon" width="70" [alt]="activity.name+'-icon'">
+          <img [src]="activity.imgUrl" width="70" [alt]="activity.title+'-icon'">
         </div>
-        <label class="row fw-bold mt-3 justify-content-center text-black">{{activity.name}}</label>
+        <label class="row fw-bold mt-3 justify-content-center text-black">{{activity.title}}</label>
       </div>
     </div>
     <hr>

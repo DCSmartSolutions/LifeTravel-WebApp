@@ -1,12 +1,16 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {max, min} from "rxjs";
+import {Activity} from "../../models/activity.model";
+import {TourPackageService} from "../../services/tour-package.service";
 
 @Component({
   selector: 'app-filter-packages-modal',
   templateUrl: './filter-packages-modal.component.html',
   styleUrls: ['./filter-packages-modal.component.scss']
 })
-export class FilterPackagesModal {
+export class FilterPackagesModal implements OnInit {
+
+
   minValue: number = 180;
   maxValue: number = 400;
   priceRange: number = 130;
@@ -20,12 +24,19 @@ export class FilterPackagesModal {
     {name: 'Spanish', checked: false},
     {name: 'French', checked: false},
   ];
-  activities: any[] = [
-    {name: 'Trekking', selected: false, icon: 'assets/images/filter-packages/trekking.png'},
-    {name: 'Waterway', selected: false, icon: 'assets/images/filter-packages/waterway.png'},
-    {name: 'Cave', selected: false, icon: 'assets/images/filter-packages/cave.png'},
-    {name: 'Others', selected: false, icon: 'assets/images/filter-packages/others.png'},
-  ];
+  activities: Activity[] = [];
+
+  constructor(private tourPackageService: TourPackageService) {
+  }
+
+  ngOnInit() {
+    this.tourPackageService.getActivities().subscribe(activities => {
+        this.activities = activities;
+      }, error => {
+        console.log(error);
+      }
+    )
+  }
 
   clear() {
     this.languages.forEach(language => {
