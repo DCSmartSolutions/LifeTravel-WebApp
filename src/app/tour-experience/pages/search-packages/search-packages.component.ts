@@ -16,14 +16,11 @@ export class SearchPackagesComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
         const regionId = params['regionId'];
-        console.log("regionId", regionId)
         this.searchService.getRegionById(regionId).subscribe(region => {
           this.region = region;
-          console.log("region", region);
         });
         this.searchService.getPackagesByRegionId(regionId).subscribe(packages => {
           this.filteredPackages = packages;
-          console.log("packages", packages);
         });
       }
     );

@@ -28,7 +28,6 @@ export class SignUpComponent implements OnInit{
   signUp(){
     this.fireAuthCustomService.register(this.signUpForm.value)
       .then((response: any) => {
-        console.log(response);
         this.router.navigate(['/authentication', 'login']);
       })
       .catch((error: any) => {

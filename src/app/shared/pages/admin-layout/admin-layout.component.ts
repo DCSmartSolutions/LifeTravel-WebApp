@@ -78,7 +78,6 @@ export class AdminLayoutComponent implements OnDestroy {
       }
       this.content.scrollTo({ top: 0 });
     });
-    console.log(this.options)
     this.options.headerPos = 'above';
     this.options.theme = 'dark';
     this.options.navPos = 'side';

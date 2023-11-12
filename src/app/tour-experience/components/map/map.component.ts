@@ -59,7 +59,6 @@ export class MapComponent implements OnInit, OnDestroy {
     this.map.addControl(new mapboxgl.NavigationControl());
     this.mapClick();
     this.eventsSubscription = this.events!.subscribe(() => {
-      console.log("events")
       this.createMarker()
     });
   }
@@ -185,7 +184,6 @@ export class MapComponent implements OnInit, OnDestroy {
   }
 
   createMarker() {
-    console.log(this.destinationsLocations)
     this.destinationsLocationsChangedEvent.emit(this.destinationsLocations);
     this.clearMapFromMarkers();
     for (let i = 0; i < this.destinationsLocations.length; i++) {
@@ -195,7 +193,6 @@ export class MapComponent implements OnInit, OnDestroy {
   }
 
   reDrawMarker(destinations: Location[]) {
-    console.log(destinations)
     this.clearMapFromMarkers();
     for (let i = 0; i < destinations.length; i++) {
       const location = destinations[i];

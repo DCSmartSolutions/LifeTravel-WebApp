@@ -4,13 +4,14 @@ import {
   signInWithEmailAndPassword, signOut,
   signInWithPopup, GoogleAuthProvider
 } from '@angular/fire/auth';
+import {CookieService} from "ngx-cookie-service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class FirebaseAuthCustomService {
 
-  constructor(private auth: Auth) { }
+  constructor(private auth: Auth,private cookieService: CookieService) { }
 
   register({ email, password }: any) {
     return createUserWithEmailAndPassword(this.auth, email, password);
@@ -25,9 +26,7 @@ export class FirebaseAuthCustomService {
   }
 
   logout() {
+    this.cookieService.delete('JSESSIONID');
     return signOut(this.auth);
   }
-
-
-
 }

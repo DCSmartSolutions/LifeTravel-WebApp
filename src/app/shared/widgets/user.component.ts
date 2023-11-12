@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {SettingsService} from "../services/settings.service";
 import {User} from "../interfaces/user";
+import {FirebaseAuthCustomService} from "../../identity-access-management/services/firebase-auth.service";
 
 @Component({
   selector: 'app-user',
@@ -14,18 +15,18 @@ import {User} from "../interfaces/user";
     </button>
 
     <mat-menu #menu="matMenu">
-      <button routerLink="/profile/overview" mat-menu-item>
-        <mat-icon>account_circle</mat-icon>
-        <span>{{ 'profile'  }}</span>
-      </button>
-      <button routerLink="/profile/settings" mat-menu-item>
-        <mat-icon>edit</mat-icon>
-        <span>{{ 'edit_profile' }}</span>
-      </button>
-      <button mat-menu-item (click)="restore()">
-        <mat-icon>restore</mat-icon>
-        <span>{{ 'restore_defaults' }}</span>
-      </button>
+<!--      <button routerLink="/profile/overview" mat-menu-item>-->
+<!--        <mat-icon>account_circle</mat-icon>-->
+<!--        <span>{{ 'profile'  }}</span>-->
+<!--      </button>-->
+<!--      <button routerLink="/profile/settings" mat-menu-item>-->
+<!--        <mat-icon>edit</mat-icon>-->
+<!--        <span>{{ 'edit_profile' }}</span>-->
+<!--      </button>-->
+<!--      <button mat-menu-item (click)="restore()">-->
+<!--        <mat-icon>restore</mat-icon>-->
+<!--        <span>{{ 'restore_defaults' }}</span>-->
+<!--      </button>-->
       <button mat-menu-item (click)="logout()">
         <mat-icon>exit_to_app</mat-icon>
         <span>{{ 'logout' }}</span>
@@ -50,7 +51,8 @@ export class UserComponent implements OnInit {
   constructor(
     private router: Router,
     private cdr: ChangeDetectorRef,
-    private settings: SettingsService
+    private settings: SettingsService,
+    private fireAuthCustomService: FirebaseAuthCustomService,
   ) {}
 
   ngOnInit(): void {
@@ -58,6 +60,13 @@ export class UserComponent implements OnInit {
   }
 
   logout() {
+    this.fireAuthCustomService.logout()
+      .then(() => {
+        this.router.navigate(['/authentication']);
+      })
+      .catch((error: any) => {
+        console.log(error);
+      })
   }
 
   restore() {

@@ -1,20 +1,22 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {FormGroup, UntypedFormBuilder, Validators} from "@angular/forms";
 import {FirebaseAuthCustomService} from "../../services/firebase-auth.service";
 import {Router} from "@angular/router";
+import {CookieService} from "ngx-cookie-service";
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit{
+export class LoginComponent implements OnInit, AfterViewInit{
   loginForm: FormGroup = new FormGroup({});
   credentialsError: boolean = false;
 
   constructor(
     private fireAuthCustomService: FirebaseAuthCustomService,
     private formBuilder: UntypedFormBuilder,
+    private cookieService: CookieService,
     private router: Router
   ) {
     this.loginForm = this.formBuilder.group({
@@ -26,13 +28,16 @@ export class LoginComponent implements OnInit{
   ngOnInit():void {
 
   }
-
+  ngAfterViewInit() {
+    if (this.cookieService.get('JSESSIONID')) {
+      this.router.navigate(['/peru']);
+    }
+  }
   onSubmit() {
-    console.log(this.loginForm.value)
     this.fireAuthCustomService.login(this.loginForm.value)
       .then((response: any) => {
-        console.log(response);
-        this.router.navigate(['./peru']);
+        this.cookieService.set('JSESSIONID', response.user.accessToken);
+        this.router.navigate(['/peru']);
       })
       .catch((error: any) => {
         console.log(error);
@@ -44,8 +49,7 @@ export class LoginComponent implements OnInit{
   onClick() {
     this.fireAuthCustomService.loginWithGoogle()
       .then((response: { user: any; }) => {
-        localStorage.setItem('user', JSON.stringify(response.user));
-        console.log(response);
+        this.cookieService.set('JSESSIONID', response.user.accessToken);
         this.router.navigate(['/peru']);
       })
       .catch((error: any) => console.log(error))

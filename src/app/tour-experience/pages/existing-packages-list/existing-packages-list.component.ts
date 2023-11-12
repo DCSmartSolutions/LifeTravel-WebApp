@@ -24,7 +24,6 @@ export class ExistingPackagesListComponent implements OnInit {
   ngOnInit() {
     this.searchService.getAllPackagesByAgency().subscribe(packages => {
       this.tourPackages = packages;
-      console.log("packages", packages);
     });
     this.settingsService.setDefaultLayout();
   }
