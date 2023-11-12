@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit{
     this.fireAuthCustomService.login(this.loginForm.value)
       .then((response: any) => {
         console.log(response);
-        this.router.navigate(['/peru', 'generate']);
+        this.router.navigate(['./peru']);
       })
       .catch((error: any) => {
         console.log(error);

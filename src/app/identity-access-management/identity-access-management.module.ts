@@ -7,7 +7,7 @@ import {environment} from "../../environments/environment";
 import {AngularFireModule} from "@angular/fire/compat";
 import {initializeApp, provideFirebaseApp} from "@angular/fire/app";
 import {MatButtonModule} from "@angular/material/button";
-import {CommonModule, NgIf} from "@angular/common";
+import {CommonModule, NgClass, NgForOf, NgIf} from "@angular/common";
 import {MatInputModule} from "@angular/material/input";
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import {MatIconModule} from "@angular/material/icon";
@@ -42,7 +42,9 @@ const routes: Routes = [
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     MatInputModule,
-    MatIconModule
+    MatIconModule,
+    NgForOf,
+    NgClass
   ]
 })
 export class IdentityAccessManagementModule {
