@@ -18,7 +18,7 @@
             <div class="d-flex justify-content-center" *ngIf="!isOnlyViewInfo">
               <div>
                 <label class="fs-6" [ngClass]="!isVisible ? 'fw-bolder' : 'fw-normal'">Hidden</label>
-                <mat-slide-toggle hideIcon="true" formControlName="visible"
+                <mat-slide-toggle hideIcon="true" formControlName="visible" (click)="showVisibleConfirmationMessage()"
                                   class="mx-3">
                 </mat-slide-toggle>
                 <label class="fs-6" [ngClass]="isVisible ? 'fw-bolder' : 'fw-normal'">Visible</label>

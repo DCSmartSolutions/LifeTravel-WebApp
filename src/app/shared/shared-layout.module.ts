@@ -29,6 +29,7 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import { TimePickerComponent } from './components/time-picker/time-picker.component';
 import {MatSelectModule} from "@angular/material/select";
+import { ConfirmationMessageComponent } from './components/confirmation-message/confirmation-message.component';
 
 
 
@@ -45,6 +46,7 @@ import {MatSelectModule} from "@angular/material/select";
     UserComponent,
     SpinnerComponent,
     TimePickerComponent,
+    ConfirmationMessageComponent,
   ],
   exports: [
     AdminLayoutComponent,

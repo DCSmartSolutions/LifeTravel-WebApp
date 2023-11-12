@@ -10,6 +10,9 @@ import {Location} from "../../models/tour-package.model";
 import {Subject} from "rxjs";
 import {HourRange, Schedule, Time} from "../../models/time-picker.model";
 import {MatCalendarCellClassFunction, MatCalendarCellCssClasses} from "@angular/material/datepicker";
+import {
+  ConfirmationMessageComponent
+} from "../../../shared/components/confirmation-message/confirmation-message.component";
 
 @Component({
   selector: 'app-tour-package-detail',
@@ -115,6 +118,8 @@ export class TourPackageDetailComponent implements OnInit {
   }
 
   getPackageById(packageId: number) {
+    this.tourForm.reset()
+    this.tourForm.patchValue({id: packageId});
     this.tourPackageService.getPackageById(packageId).subscribe(packageData => {
       console.log("packageData", packageData);
       this.tourPackage = packageData;
@@ -184,27 +189,20 @@ export class TourPackageDetailComponent implements OnInit {
 
   getDisplayName($event: string) {
     this.displayNameLocation = $event;
-    //console.log("displayNameLocation", this.displayNameLocation);
   }
-
-  get hasMeetingPoint() {
-    return this.tourForm.get('meetingPoint')?.value != null;
-  }
-
   getNewLocation($event: Location) {
-    //console.log("getNewLocation", $event)
     this.tourForm.patchValue({meetingPoint: $event});
   }
-
   getDestinationList($event: any[]) {
     this.destinations = $event;
-    //console.log("getDestinationList", this.destinations)
   }
 
   removeDestination(index: number) {
     this.tourForm.get('destinations')?.value.splice(index, 1);
+    if(this.tourForm.get('destinations')?.value.length === 0) {
+      this.tourForm.get('visible')?.setValue(false);
+    }
     this.emitEventToChild()
-    //this.mapComponent?.refreshMap(destinations);
   }
 
   savePackage() {
@@ -228,7 +226,9 @@ export class TourPackageDetailComponent implements OnInit {
   selectDay(item: any) {
     if (this.isOnlyViewInfo) return;
     item.selected = !item.selected;
-    //this.tourForm.patchValue({dayList: this.dayList});
+    if(this.selectedDayList.length === 0) {
+      this.tourForm.get('visible')?.setValue(false);
+    }
   }
 
   assignValueInDayList(event: any, item: any, range: string) {
@@ -249,6 +249,7 @@ export class TourPackageDetailComponent implements OnInit {
       this.tourPackageService.saveSchedule(this.tourPackage.id, this.selectedDayList).subscribe(() => {
         this.hideSpinnerDialog()
       });
+      this.getPackageById(this.tourPackage.id);
     }
   }
 
@@ -281,4 +282,32 @@ export class TourPackageDetailComponent implements OnInit {
     }
     return '';
   };
+
+  showVisibleConfirmationMessage() {
+    if (this.tourForm.get('visible')?.value && this.selectedDayList.length === 0) {
+      this.dialog = this.matDialog.open(ConfirmationMessageComponent, {
+          data: {
+            title: "Can't be visible",
+            content: 'This package must have at least assigned a day in the schedule to be visible.'
+          }
+        }
+      )
+      this.dialog.afterClosed().subscribe(() => {
+          this.tourForm.patchValue({visible: false})
+        }
+      )
+    } else if (this.tourForm.get('destinations')?.value.length === 0) {
+      this.dialog = this.matDialog.open(ConfirmationMessageComponent, {
+          data: {
+            title: "Can't be visible",
+            content: 'This package must have at least one destination to be visible.'
+          }
+        }
+      )
+      this.dialog.afterClosed().subscribe(() => {
+          this.tourForm.patchValue({visible: false})
+        }
+      )
+    }
+  }
 }
