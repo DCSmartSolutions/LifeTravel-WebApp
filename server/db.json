@@ -375,6 +375,20 @@
       }
     }
   ],
+  "transportations": [
+    {
+      "id": 1,
+      "brand": "Toyota",
+      "model": "Yaris",
+      "plate": "B3R-123",
+      "capacity": 4,
+      "agencyId": "c4O2PMViokW4gzD3tB3Mfkn7g1l2",
+      "driverName": "Juan Perez",
+      "weight": 150,
+      "img": "https://cdn.rodati.cl/images/listings/2023-08/bigThmb/91fd6a03-1691495331-393.jpg",
+      "status": "OPERATIONAL"
+    }
+  ],
   "regions": [
     {
       "id": 1,

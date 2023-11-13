@@ -1,0 +1,17 @@
+<mat-card class="p-3 card-container h-100">
+  <img class="px-3" mat-card-image [src]="vehicle.img" [alt]="vehicle.model+'-image'">
+  <mat-card-content class="py-2">
+    <label class="fs-5 fw-bolder d-flex">{{vehicle.driverName}}</label>
+    <label class="fs-6 d-flex">Brand: <label class="fw-bolder">{{vehicle.brand}}</label></label>
+    <label class="fs-6 d-flex">Model: <label class="fw-bolder">{{vehicle.model}}</label></label>
+    <label class="fs-6 d-flex">Plate: <label class="fw-bolder">{{vehicle.plate}}</label></label>
+    <label class="fs-6 d-flex">Capacity: <label class="fw-bolder">{{vehicle.capacity}}</label></label>
+    <label class="fs-6 d-flex">Max-weight: <label class="fw-bolder">{{vehicle.weight}} kg</label></label>
+  </mat-card-content>
+  <mat-card-actions class="custom-card-actions">
+    <button mat-raised-button color="accent" class="fw-bolder" (click)="goToVehicleDetail()">
+      <mat-icon>edit</mat-icon>
+      Edit
+    </button>
+  </mat-card-actions>
+</mat-card>
