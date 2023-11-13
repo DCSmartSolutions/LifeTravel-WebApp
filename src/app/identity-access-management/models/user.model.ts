@@ -5,7 +5,6 @@ export class User {
   name: string = '';
   role: USER_ROLE = USER_ROLE.AGENCY;
 }
-
 export class SaveUser{
   id: string = '';
   name: string = '';

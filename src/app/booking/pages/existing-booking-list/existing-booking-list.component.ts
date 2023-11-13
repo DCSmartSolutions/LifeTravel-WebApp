@@ -6,5 +6,4 @@ import { Component } from '@angular/core';
   styleUrls: ['./existing-booking-list.component.scss']
 })
 export class ExistingBookingListComponent {
-
 }
