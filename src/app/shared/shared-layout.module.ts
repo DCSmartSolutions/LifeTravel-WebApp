@@ -29,6 +29,7 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import { TimePickerComponent } from './components/time-picker/time-picker.component';
 import {MatSelectModule} from "@angular/material/select";
+import { AlertMessageComponent } from './components/alert-message/alert-message.component';
 import { ConfirmationMessageComponent } from './components/confirmation-message/confirmation-message.component';
 
 
@@ -46,6 +47,7 @@ import { ConfirmationMessageComponent } from './components/confirmation-message/
     UserComponent,
     SpinnerComponent,
     TimePickerComponent,
+    AlertMessageComponent,
     ConfirmationMessageComponent,
   ],
   exports: [

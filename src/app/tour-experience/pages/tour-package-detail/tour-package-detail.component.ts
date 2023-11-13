@@ -1,6 +1,6 @@
 import {ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import { TourPackage} from "../../models/tour-package.model";
+import {TourPackage} from "../../models/tour-package.model";
 import {TourPackageService} from "../../services/tour-package.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AzureBlobStorageService} from "../../services/azure-blob-storage.service";
@@ -10,12 +10,15 @@ import {Subject} from "rxjs";
 import {HourRange, Schedule, Time} from "../../models/time-picker.model";
 import {MatCalendarCellClassFunction} from "@angular/material/datepicker";
 import {
-  ConfirmationMessageComponent
-} from "../../../shared/components/confirmation-message/confirmation-message.component";
+  AlertMessageComponent
+} from "../../../shared/components/alert-message/alert-message.component";
 import {Activity} from "../../models/activity.model";
 import {ActivityService} from "../../services/activity.service";
 import {TourExperienceService} from "../../services/tour-experience.service";
 import {Location, LocationName} from "../../models/map.model";
+import {
+  ConfirmationMessageComponent
+} from "../../../shared/components/confirmation-message/confirmation-message.component";
 
 @Component({
   selector: 'app-tour-package-detail',
@@ -294,7 +297,7 @@ export class TourPackageDetailComponent implements OnInit {
 
   showVisibleConfirmationMessage() {
     if (this.tourForm.get('visible')?.value && this.selectedDayList.length === 0) {
-      this.dialog = this.matDialog.open(ConfirmationMessageComponent, {
+      this.dialog = this.matDialog.open(AlertMessageComponent, {
           data: {
             title: "Can't be visible",
             content: 'This package must have at least assigned a day in the schedule to be visible.'
@@ -306,7 +309,7 @@ export class TourPackageDetailComponent implements OnInit {
         }
       )
     } else if (this.tourForm.get('destinations')?.value.length === 0) {
-      this.dialog = this.matDialog.open(ConfirmationMessageComponent, {
+      this.dialog = this.matDialog.open(AlertMessageComponent, {
           data: {
             title: "Can't be visible",
             content: 'This package must have at least one destination to be visible.'
@@ -321,6 +324,21 @@ export class TourPackageDetailComponent implements OnInit {
   }
 
   createBooking() {
-
+    this.dialog = this.matDialog.open(ConfirmationMessageComponent, {
+        data: {
+          title: "Are you sure to create a booking?",
+          content: 'This action will create a booking for this package.'
+        }
+      }
+    )
+    // this.dialog.afterClosed().subscribe((response) => {
+    //   if (response) {
+    //     this.showSpinnerDialog();
+    //     this.tourPackageService.createBooking(this.tourPackage.id).subscribe(() => {
+    //       this.hideSpinnerDialog();
+    //       this.router.navigate(['peru/tour-packages/my-packages']);
+    //     });
+    //   }
+    // }
   }
 }

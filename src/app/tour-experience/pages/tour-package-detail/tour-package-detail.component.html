@@ -179,10 +179,10 @@
               <mat-calendar [(selected)]="selectedDate" [dateClass]="dateClass"></mat-calendar>
             </mat-card>
           </div>
-          <button mat-raised-button class="col-12 col-md-8 offset-md-2 bg-success" (click)="createBooking()"
-                  [disabled]="cannotBeScheduleSaved">
+          <button mat-raised-button class="col-12 col-md-8 offset-md-2" color="accent" (click)="createBooking()"
+                  [disabled]="!selectedDate">
             <mat-icon>save</mat-icon>
-            Save
+            Create Booking
           </button>
         </mat-card-content>
       </mat-card>
