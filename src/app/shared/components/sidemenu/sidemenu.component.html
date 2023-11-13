@@ -5,7 +5,7 @@
 <ng-template #menuListTpl let-menuList="menuList" let-parentRoute="parentRoute" let-level="level">
   <ul navAccordion class="sidemenu level-{{level}}" [class.submenu]="level>0">
     <ng-container *ngFor="let menuItem of menuList">
-      <ng-container >
+      <ng-container *ngIf="role == menuItem.role">
         <li navAccordionItem class="menu-item" routerLinkActive="active"
             [route]="menuItem.route" [type]="menuItem.type">
 

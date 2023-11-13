@@ -18,7 +18,6 @@ import {HomeComponent} from './public/pages/home/home.component';
 import {TourPackagesModule} from "./tour-experience/tour-packages.module";
 import {IdentityAccessManagementModule} from "./identity-access-management/identity-access-management.module";
 import {TokenInterceptorService} from "./guard/token-interceptor.service";
-
 @NgModule({
   declarations: [
     AppComponent,

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { share } from 'rxjs/operators';
+import {USER_ROLE} from "../../identity-access-management/enums/role";
 
 export interface MenuTag {
   color: string;
@@ -15,6 +16,7 @@ export interface MenuPermissions {
 export interface MenuChildrenItem {
   route: string;
   name: string;
+  role: USER_ROLE;
   type: 'link' | 'sub' | 'extLink' | 'extTabLink';
   children?: MenuChildrenItem[];
   permissions?: MenuPermissions;
@@ -25,19 +27,72 @@ export const MENU_ITEMS: Menu[] = [
     "name": "Tour Experience",
     "type": "sub",
     "icon": "route",
+    "role": USER_ROLE.AGENCY,
     "children": [
       {
         "route": "my-packages",
         "name": "My Packages",
-        "type": "link"
+        "role": USER_ROLE.AGENCY,
+        "type": "link",
       },
       {
-        "route": "my-tour-experiences",
-        "name": "My Tours",
+        "route": "add-tour-package",
+        "name": "Add Package",
+        "role": USER_ROLE.AGENCY,
         "type": "link"
-      },
+      }
     ]
   },
+  {
+    "route": "peru/transportations",
+    "name": "Transportation",
+    "type": "sub",
+    "icon": "directions_bus",
+    "role": USER_ROLE.AGENCY,
+    "children": [
+      {
+        "route": "my-transports",
+        "name": "My Transports",
+        "role": USER_ROLE.AGENCY,
+        "type": "link",
+      },
+      {
+        "route": "assign-transport",
+        "name": "Assign Transport",
+        "role": USER_ROLE.AGENCY,
+        "type": "link"
+      }
+    ]
+  },
+  {
+    "route": "peru/my-subscription",
+    "name": "My Subscription",
+    "type": "link",
+    "icon": "payment",
+    "role": USER_ROLE.AGENCY
+  },
+  {
+    "route": "peru/",
+    "name": "Search Packages",
+    "type": "link",
+    "icon": "search",
+    "role": USER_ROLE.TOURIST
+  },
+  {
+    "route": "peru/my-bookings",
+    "name": "My Bookings",
+    'type': 'link',
+    "icon": "local_library",
+    "role": USER_ROLE.TOURIST
+  },
+  {
+    "route": "peru/my-reviews",
+    "name": "My Reviews",
+    'type': 'link',
+    "icon": "rate_review",
+    "role": USER_ROLE.TOURIST
+  }
+
 ];
 
 export interface Menu {
@@ -45,6 +100,7 @@ export interface Menu {
   name: string;
   type: 'link' | 'sub' | 'extLink' | 'extTabLink';
   icon: string;
+  role: USER_ROLE;
   label?: MenuTag;
   badge?: MenuTag;
   children?: MenuChildrenItem[];
