@@ -22,7 +22,7 @@ import {TokenInterceptorService} from "./guard/token-interceptor.service";
   declarations: [
     AppComponent,
     SearchPackagesComponent,
-    HomeComponent
+    HomeComponent,
   ],
   imports: [
     BrowserModule,

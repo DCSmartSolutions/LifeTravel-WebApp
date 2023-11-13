@@ -17,4 +17,7 @@ export class TransportService {
   createTransportation(transport: Transport): Observable<any> {
     return this.http.post<any>(`${this.base}`, transport);
   }
+  modifyTransportation(transportId: number, transport: Transport): Observable<any> {
+    return this.http.patch<any>(`${this.base}/${transportId}`, transport);
+  }
 }

@@ -44,15 +44,15 @@ export const MENU_ITEMS: Menu[] = [
     ]
   },
   {
-    "route": "peru/transportations",
+    "route": "peru/transportation",
     "name": "Transportation",
     "type": "sub",
     "icon": "directions_bus",
     "role": USER_ROLE.AGENCY,
     "children": [
       {
-        "route": "my-transports",
-        "name": "My Transports",
+        "route": "my-vehicles",
+        "name": "My Vehicles",
         "role": USER_ROLE.AGENCY,
         "type": "link",
       },

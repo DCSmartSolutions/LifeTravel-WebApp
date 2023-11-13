@@ -15,6 +15,10 @@ const childrenRoutes: Route[] = [
   {
     path: 'booking',
     loadChildren: () => import('../booking/booking.module').then(m => m.BookingModule)
+  },
+  {
+    path: 'transportation',
+    loadChildren: () => import('../transportation/transportation.module').then(m => m.TransportationModule)
   }
 ];
 
