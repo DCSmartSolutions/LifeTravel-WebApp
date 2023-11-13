@@ -43,20 +43,20 @@
                 </div>
               </div>
               <div class="col-12 mb-2" [ngClass]="isEdit? '':'col-lg-8'">
-                <label class="fs-5 fw-medium">Title:</label>
+                <label class="fs-6 fw-medium">Title:</label>
                 <mat-form-field class="d-flex">
                   <input matInput type="text" formControlName="title" [readonly]="isOnlyViewInfo">
                 </mat-form-field>
               </div>
               <div class="col-12 mb-2" [ngClass]="isEdit? '':'col-lg-8'">
-                <label class="fs-5 fw-medium">Description:</label>
+                <label class="fs-6 fw-medium">Description:</label>
                 <mat-form-field class="d-flex">
                   <textarea matInput type="text" formControlName="description" rows="8"
                             [readonly]="isOnlyViewInfo"></textarea>
                 </mat-form-field>
               </div>
               <div class="col-12 mb-2" [ngClass]="isEdit? '':'col-lg-8'">
-                <label class="fs-5 fw-medium">Price:</label>
+                <label class="fs-6 fw-medium">Price:</label>
                 <mat-form-field class="d-flex">
                   <input matInput type="number" formControlName="price" [readonly]="isOnlyViewInfo">
                 </mat-form-field>
@@ -93,7 +93,7 @@
                 <div class="col-12 mt-3">
                   <div *ngFor="let item of tourForm.get('destinations')?.value; index as i"
                        class="rounded d-flex border mb-2 border-dark-subtle p-2">
-                    <label class="d-flex align-items-center fs-5 fw-bold" style="margin-right: 10px">{{i + 1}}.-</label>
+                    <label class="d-flex align-items-center fs-6 fw-bold" style="margin-right: 10px">{{i + 1}}.-</label>
                     <mat-form-field class="flex-grow-1 ml-3">
                       <input matInput type="text" [(ngModel)]="item.name" [ngModelOptions]="{standalone: true}"
                              [readonly]="isOnlyViewInfo">
@@ -122,7 +122,6 @@
         <mat-card-title class="bg-primary rounded-top p-3 text-white">
           <label
             class="fw-bold fs-4 row justify-content-center">{{isOnlyViewInfo ? 'Schedule' : 'Assign Schedule'}}</label>
-
         </mat-card-title>
         <mat-card-content>
           <div class="row justify-content-center mt-3">
@@ -159,8 +158,42 @@
           <button mat-raised-button color="accent" class="col-12 col-md-8 offset-md-2" (click)="saveSchedule()"
                   *ngIf="!isOnlyViewInfo"
                   [disabled]="cannotBeScheduleSaved">
-            <mat-icon>save</mat-icon>Save
+            <mat-icon>save</mat-icon>
+            Save
           </button>
+        </mat-card-content>
+      </mat-card>
+      <mat-card class="w-100 mt-3" *ngIf="isEdit">
+        <mat-card-title class="bg-secondary rounded-top p-3 text-white">
+          <label class="fw-bold fs-4 row justify-content-center">Assign Transport</label>
+        </mat-card-title>
+        <mat-card-content>
+          <div class="d-flex justify-content-between py-3">
+            <label class="fs-5 fw-medium mt-2">Vehicles</label>
+            <button mat-mini-fab class=" text-white" (click)="openAddVehicleDialog()"
+                    [disabled]="vehicleList.length>=2"
+                    [ngClass]="vehicleList.length>=2 ? 'bg-secondary-subtle':'bg-success'">
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+          <div *ngFor="let item of vehicleList"
+               class="d-flex justify-content-center align-items-center border border-2 rounded px-3 py-2 my-2">
+            <img [src]="item.img" alt="vehicle" class="me-3" style="width: 100px">
+            <div class="flex-grow-1">
+              <div class="fw-bold">{{item.driverName}}</div>
+              <div class="text-muted">Brand: {{item.brand}}</div>
+              <div class="text-muted">Model: {{item.model}}</div>
+              <div class="text-muted">Plate: {{item.plate}}</div>
+              <div class="text-muted">Capacity: {{item.capacity}}</div>
+              <div class="text-muted">Max-weight: {{item.weight}} kg</div>
+            </div>
+            <button mat-mini-fab color="warn" (click)="removeVehicle(item)">
+              <mat-icon>remove</mat-icon>
+            </button>
+          </div>
+          <div class="alert bg-danger text-white mt-1 mb-3 py-2" role="alert" *ngIf="vehicleList.length == 0">
+            This package has no assigned vehicles!
+          </div>
         </mat-card-content>
       </mat-card>
       <mat-card class="w-100 mt-3" *ngIf="isOnlyViewInfo">
@@ -170,12 +203,13 @@
         <mat-card-content class="bg-secondary-subtle">
           <div class="row justify-content-center mt-3">
           </div>
-          <label class="fs-6 fw-medium">{{isBooked?'You have a booking the day: ': 'Choose a day'}} <label class="fw-bold">{{isBooked? getDateStringOfBooking: ''}}</label></label>
+          <label class="fs-6 fw-medium">{{isBooked ? 'You have a booking the day: ' : 'Choose a day'}} <label
+            class="fw-bold">{{isBooked ? getDateStringOfBooking : ''}}</label></label>
           <div class="alert bg-danger text-white my-3 py-2" role="alert" *ngIf="selectedDayList.length == 0">
             This package has no date assigned!
           </div>
           <div class="row justify-content-center p-3">
-            <mat-card class="demo-inline-calendar-card"  *ngIf="selectedDayList.length > 0">
+            <mat-card class="demo-inline-calendar-card" *ngIf="selectedDayList.length > 0">
               <mat-calendar [(selected)]="selectedDate" [dateClass]="dateClass"
               ></mat-calendar>
             </mat-card>

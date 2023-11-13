@@ -12,3 +12,9 @@ export class Vehicle {
   img: string | null = null;
   status: VEHICLE_STATUS = VEHICLE_STATUS.OPERATIONAL;
 }
+export class AssignedVehicle{
+  id: number = 0;
+  assignedDate: Date = new Date();
+  vehicleId: number = 0;
+  tourPackageId: number = 0;
+}

@@ -82,11 +82,12 @@ export class UserComponent implements OnInit {
     this.showSpinnerDialog();
     this.cookieService.delete('JSESSIONID');
     this.cookieService.delete('JUID');
+    this.cookieService.deleteAll();
     setTimeout(
       () => {
         this.router.navigate(['/authentication']);
         this.hideSpinnerDialog();
-      }, 1000);
+      }, 3000);
   }
 
   restore() {

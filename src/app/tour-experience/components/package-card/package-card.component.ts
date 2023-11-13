@@ -19,7 +19,7 @@ export class PackageCardComponent implements OnInit {
               private router: Router) {
   }
   ngOnInit() {
-    this.getAgencyName(this.tourPackage.agencyId);
+    if(!this.isAgency) this.getAgencyName(this.tourPackage.agencyId);
   }
 
   editTourPackage(tourPackage: any) {

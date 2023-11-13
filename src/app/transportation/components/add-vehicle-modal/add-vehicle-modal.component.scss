@@ -1,0 +1,8 @@
+:host ::ng-deep{
+  .mat-mdc-radio-button .mdc-form-field {
+    width: 100%;
+  }
+  .mdc-form-field>label {
+    width: 100%;
+  }
+}

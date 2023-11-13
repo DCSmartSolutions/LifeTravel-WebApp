@@ -12,7 +12,10 @@ import { VehicleDetailComponent } from './pages/vehicle-detail/vehicle-detail.co
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { AddVehicleModalComponent } from './components/add-vehicle-modal/add-vehicle-modal.component';
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatRadioModule} from "@angular/material/radio";
 
 const routes: Routes = [
   {
@@ -34,7 +37,8 @@ const routes: Routes = [
     ExistingVehicleListComponent,
     VehicleCardComponent,
     VehiclesListComponent,
-    VehicleDetailComponent
+    VehicleDetailComponent,
+    AddVehicleModalComponent
   ],
   imports: [
     RouterModule.forChild(routes),
@@ -50,6 +54,9 @@ const routes: Routes = [
     MatInputModule,
     MatSlideToggleModule,
     ReactiveFormsModule,
+    MatDialogModule,
+    MatRadioModule,
+    FormsModule,
   ]
 })
 export class TransportationModule { }

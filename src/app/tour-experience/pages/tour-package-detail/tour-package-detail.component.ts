@@ -23,6 +23,11 @@ import {BookingService} from "../../../booking/services/booking.service";
 import {Booking} from "../../../booking/models/booking.model";
 import {TourExperience} from "../../models/tour-experience.model";
 import {UserService} from "../../../identity-access-management/services/user.service";
+import {AssignedVehicle, Vehicle} from "../../../transportation/models/vehicle.model";
+import {
+  AddVehicleModalComponent
+} from "../../../transportation/components/add-vehicle-modal/add-vehicle-modal.component";
+import {TransportService} from "../../../transportation/services/transport.service";
 
 @Component({
   selector: 'app-tour-package-detail',
@@ -33,8 +38,9 @@ export class TourPackageDetailComponent implements OnInit {
   title: string = "Add New Tour Package";
   tourPackage: TourPackage = new TourPackage();
   tourExperience: TourExperience = new TourExperience();
-  booking: Booking |null = null;
+  booking: Booking | null = null;
   tourForm: FormGroup = new FormGroup({});
+  vehicleList: Vehicle[] = []
   isEdit: boolean = false;
   private dialog: MatDialogRef<SpinnerComponent> | undefined;
   activities: Activity[] = [];
@@ -55,6 +61,7 @@ export class TourPackageDetailComponent implements OnInit {
               private activityService: ActivityService,
               private tourExperienceService: TourExperienceService,
               private bookingService: BookingService,
+              private transportService: TransportService,
               private userService: UserService,
               private azureBlobStorageService: AzureBlobStorageService,
               private matDialog: MatDialog,
@@ -78,7 +85,6 @@ export class TourPackageDetailComponent implements OnInit {
       stars: [{value: null}],
     });
     this.tourForm.patchValue(this.tourPackage)
-
   }
 
   eventsSubject: Subject<void> = new Subject<void>();
@@ -141,13 +147,14 @@ export class TourPackageDetailComponent implements OnInit {
   getPackageById(packageId: number) {
     this.tourForm.reset()
     this.tourForm.patchValue({id: packageId});
+
     this.tourPackageService.getPackageById(packageId).subscribe(packageData => {
       this.tourPackage = packageData;
       this.tourForm.patchValue(this.tourPackage);
       this.tourForm.patchValue({meetingPointLatitude: packageData.meetingPoint?.latitude});
       this.tourForm.patchValue({meetingPointLongitude: packageData.meetingPoint?.longitude});
       this.destinations = packageData.destinations;
-
+      this.getVehiclesByTourPackageId();
       this.tourExperienceService.getSchedule(packageId).subscribe(tourExperience => {
         this.tourExperience = tourExperience;
         tourExperience.schedule.forEach((item: Schedule) => {
@@ -330,6 +337,18 @@ export class TourPackageDetailComponent implements OnInit {
           this.tourForm.patchValue({visible: false})
         }
       )
+    } else if (this.vehicleList.length ===0 ){
+      this.dialog = this.matDialog.open(AlertMessageComponent, {
+          data: {
+            title: "Can't be visible",
+            content: 'This package must have at least one vehicle to be visible.'
+          }
+        }
+      )
+      this.dialog.afterClosed().subscribe(() => {
+          this.tourForm.patchValue({visible: false})
+        }
+      )
     }
   }
 
@@ -360,23 +379,92 @@ export class TourPackageDetailComponent implements OnInit {
       }
     )
   }
-  getBookingByTourExperienceIdAndTouristId(){
+
+  getBookingByTourExperienceIdAndTouristId() {
     this.bookingService.getBookingByTourExperienceIdAndTouristId(this.tourExperience.id, this.userService.getUserIdFromCookies()).subscribe((response) => {
       this.booking = response;
       console.log(this.booking)
-      if(response) this.selectedDate = new Date(response.date);
+      if (response) this.selectedDate = new Date(response.date);
       console.log(this.selectedDate)
     })
   }
-  get isBooked(){
+
+  get isBooked() {
     return this.booking != null;
   }
-  getHourRangeByDayInSchedule(date: Date){
+
+  getHourRangeByDayInSchedule(date: Date) {
     const dayName = new Intl.DateTimeFormat('en-US', {weekday: 'long'}).format(date);
     return this.tourExperience.schedule.find(item => item.day === dayName)?.hourRange;
   }
-  get getDateStringOfBooking(){ //format: 2021-08-01
+
+  get getDateStringOfBooking() { //format: 2021-08-01
     const date = new Date(this.booking!.date);
     return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+  }
+
+  openAddVehicleDialog() {
+    const previousVehicle = this.vehicleList.length > 0 ? this.vehicleList[0] : null;
+    this.dialog = this.matDialog.open(AddVehicleModalComponent, {
+      data: {
+        vehicle: previousVehicle
+      }
+    })
+    this.dialog.afterClosed().subscribe((vehicle: Vehicle) => {
+      if (vehicle) {
+        const assignedVehicle = new AssignedVehicle();
+        assignedVehicle.vehicleId = vehicle.id;
+        assignedVehicle.tourPackageId = this.tourPackage.id;
+        this.transportService.assignVehicle(assignedVehicle).subscribe(() => {
+            this.getVehiclesByTourPackageId();
+          }
+        )
+      }
+    })
+  }
+
+  private getVehiclesByTourPackageId() {
+    this.showSpinnerDialog()
+    this.transportService.getAssignedVehiclesByTourPackageId(this.tourPackage.id).subscribe((vehicles: AssignedVehicle[]) => {
+      this.vehicleList = [];
+      vehicles.forEach((item: AssignedVehicle) => {
+          this.transportService.getTransportationById(item.vehicleId).subscribe((vehicle: Vehicle) => {
+            this.vehicleList.push(vehicle);
+          })
+        }
+      )
+      this.validateEmptyVehicleList();
+      this.hideSpinnerDialog()
+    })
+  }
+
+  removeVehicle(item: Vehicle) {
+    this.dialog = this.matDialog.open(ConfirmationMessageComponent, {
+      data: {
+        title: "Are you sure to remove this vehicle?",
+        content: 'This action will remove the vehicle with plate ' + item.plate + ' from this tour package.',
+        confirmationButtonText: 'Remove',
+        confirmationIcon: 'delete',
+        className: 'bg-danger'
+      }
+
+    })
+    this.dialog.afterClosed().subscribe((response) => {
+      if (response) {
+        this.showSpinnerDialog()
+        this.transportService.getAssignedVehicleByVehicleIdAndTourPackageId(item.id, this.tourPackage.id).subscribe((response) => {
+          const assignedVehicle = Array.isArray(response) ? response[0] : response;
+          this.hideSpinnerDialog()
+          this.transportService.removeAssignedVehicle(assignedVehicle.id).subscribe(() => {
+              this.getVehiclesByTourPackageId();
+            })
+        })
+      }
+    })
+  }
+  validateEmptyVehicleList(){
+    if (this.vehicleList.length === 0){
+      this.tourForm.patchValue({visible: false})
+    }
   }
 }
