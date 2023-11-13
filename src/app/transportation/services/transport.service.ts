@@ -15,6 +15,12 @@ export class TransportService {
     const agencyId = this.userService.getUserIdFromCookies();
     return this.http.get<Vehicle[]>(`${this.base}?agencyId=${agencyId}&status=${status}`);
   }
+  getTransportationById(transportId: number): Observable<Vehicle> {
+    return this.http.get<Vehicle>(`${this.base}/${transportId}`);
+  }
+  modifyImage(transportId: number, image: string): Observable<any> {
+    return this.http.patch<any>(`${this.base}/${transportId}`, {img: image});
+  }
   createTransportation(transport: Vehicle): Observable<any> {
     return this.http.post<any>(`${this.base}`, transport);
   }
