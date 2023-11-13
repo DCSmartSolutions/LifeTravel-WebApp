@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./vehicle-detail.component.scss']
 })
 export class VehicleDetailComponent {
+  isEdit: any;
 
 }

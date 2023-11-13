@@ -21,6 +21,7 @@ import {SharedLayoutModule} from "../shared/shared-layout.module";
 import {MatTabsModule} from "@angular/material/tabs";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
+import { PackageCardComponent } from './components/package-card/package-card.component';
 
 const routes: Routes = [
   {
@@ -53,6 +54,7 @@ const routes: Routes = [
     ListPackagesComponent,
     TourPackageDetailComponent,
     MapComponent,
+    PackageCardComponent,
   ],
   imports: [
     RouterModule.forChild(routes),

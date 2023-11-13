@@ -1,39 +1,7 @@
 <div class="row">
   <div *ngFor="let tourPackage of filteredPackages; let i = index"
        [className]="className">
-    <mat-card class="p-3 card-container h-100"
-              [ngClass]="tourPackage.visible? '':'bg-dark-subtle'">
-
-      <img class="px-3" mat-card-image [src]="tourPackage.img" [alt]="tourPackage.title+'-image'">
-      <div *ngIf="isAgency">
-        <button mat-raised-button class="position-absolute start-0 top-0 m-3 fw-semibold"
-                [ngClass]="tourPackage.visible ? '' : 'bg-dark text-white'">
-          <mat-icon>{{ tourPackage.visible ? 'visibility' : 'visibility_off' }}</mat-icon>
-          {{ tourPackage.visible ? 'VISIBLE' : 'HIDDEN' }}
-        </button>
-      </div>
-      <mat-card-content class="py-2">
-        <label class="fs-4 fw-bolder d-flex">{{ tourPackage.destiny }}</label>
-        <label class="fs-6 fw-bolder">{{ tourPackage.title }}</label>
-        <div class="d-flex justify-content-end align-items-middle fw-bolder">
-          <mat-icon class="star-icon">star</mat-icon>
-          <div> {{ tourPackage.stars }}</div>
-        </div>
-        <label class="d-flex"
-               style="text-align: justify; text-justify: inter-word"> {{ (tourPackage.description.length > 250) ? (tourPackage.description | slice:0:250) + '...' : (tourPackage.description) }}  </label>
-        <label class="d-flex" *ngIf="!isAgency">Agency: {{ tourPackage.agency }}</label>
-        <label class="d-flex fw-bolder">S/ {{ tourPackage.price }}</label>
-      </mat-card-content>
-      <mat-card-actions class="custom-card-actions">
-        <button mat-raised-button color="primary" *ngIf="!isAgency"
-                (click)="goToDetail(tourPackage)">GO</button>
-        <button mat-raised-button color="accent" *ngIf="isAgency" class="fw-bolder"
-                (click)="editTourPackage(tourPackage)">
-          <mat-icon>edit</mat-icon>
-          Edit
-        </button>
-      </mat-card-actions>
-    </mat-card>
+    <app-package-card [tourPackage]="tourPackage" [isAgency]="isAgency"></app-package-card>
   </div>
 
 </div>

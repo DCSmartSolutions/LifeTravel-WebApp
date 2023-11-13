@@ -1,6 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {Vehicle} from "../../models/vehicle.model";
-import {TransportService} from "../../services/transport.service";
 import {Router} from "@angular/router";
 
 @Component({
