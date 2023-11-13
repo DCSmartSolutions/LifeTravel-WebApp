@@ -10,7 +10,7 @@ export class UserService {
   private baseUrl = environment.baseUrl+'users'
   constructor(private http: HttpClient, private cookieService: CookieService) { }
 
-  getUserId(): string {
+  getUserIdForBooking(): string {
     return this.cookieService.get('JUID');
   }
 }
