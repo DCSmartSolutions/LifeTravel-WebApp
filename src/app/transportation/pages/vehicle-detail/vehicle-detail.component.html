@@ -11,7 +11,17 @@
             </button>
           </div>
           <label class="fw-bolder fs-3 row justify-content-center">{{ title }}</label>
-
+          <hr>
+          <div class="d-flex justify-content-center">
+            <mat-chip-listbox aria-label="Vehicle status selection" [disabled]="getStatus == VEHICLE_STATUS.IN_USE">
+              <mat-chip-option [selected]="getStatus == VEHICLE_STATUS.OPERATIONAL" (click)="setStatus(VEHICLE_STATUS.OPERATIONAL)">Operational
+              </mat-chip-option>
+              <mat-chip-option color="accent" [selected]="getStatus == VEHICLE_STATUS.IN_USE" (click)="setStatus(VEHICLE_STATUS.IN_USE)" disabled>In use
+              </mat-chip-option>
+              <mat-chip-option color="warn" [selected]="getStatus == VEHICLE_STATUS.OUT_OF_SERVICE" (click)="setStatus(VEHICLE_STATUS.OUT_OF_SERVICE)">Out of service
+              </mat-chip-option>
+            </mat-chip-listbox>
+          </div>
         </mat-card-title>
         <mat-card-content>
           <form [formGroup]="vehicleForm">

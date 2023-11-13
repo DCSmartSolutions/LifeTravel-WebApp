@@ -7,6 +7,7 @@ import {SpinnerComponent} from "../../../shared/components/spinner/spinner.compo
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {AzureBlobStorageService} from "../../../tour-experience/services/azure-blob-storage.service";
 import {Vehicle} from "../../models/vehicle.model";
+import {VEHICLE_STATUS} from "../../enums/vehicle-status.enum";
 
 @Component({
   selector: 'app-vehicle-detail',
@@ -106,8 +107,17 @@ export class VehicleDetailComponent implements OnInit {
     } else {
       this.transportService.createTransportation(this.vehicleForm.value).subscribe(() => {
         this.hideSpinnerDialog();
-        this.router.navigate(['peru/transportation/my-vehicles']);
+        this.back()
       });
     }
+  }
+
+  protected readonly VEHICLE_STATUS = VEHICLE_STATUS;
+
+  setStatus(status: VEHICLE_STATUS) {
+    this.vehicleForm.patchValue({status: status});
+  }
+  get getStatus() {
+    return this.vehicleForm.get('status')?.value;
   }
 }
