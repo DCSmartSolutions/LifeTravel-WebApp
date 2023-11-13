@@ -36,8 +36,8 @@ export class VehicleDetailComponent implements OnInit {
         agencyId: [''],
         driverName: ['', Validators.required],
         weight: ['', Validators.required],
-        img: ['', Validators.required],
-        status: ['', Validators.required]
+        img: [null, Validators.required],
+        status: [VEHICLE_STATUS.OPERATIONAL, Validators.required]
       }
     );
     this.vehicleForm.get('agencyId')?.setValue(this.userService.getUserIdFromCookies());
@@ -62,10 +62,12 @@ export class VehicleDetailComponent implements OnInit {
   private getVehicleById(vehicleId: number) {
     this.showSpinnerDialog()
     this.vehicleForm.reset()
+    this.vehicleForm.enable()
     this.vehicleForm.patchValue({agencyId: this.userService.getUserIdFromCookies(), id: vehicleId});
     this.transportService.getTransportationById(vehicleId).subscribe((vehicle) => {
         this.vehicle = vehicle;
         this.vehicleForm.patchValue(vehicle);
+        if(this.vehicle.status == VEHICLE_STATUS.IN_USE) this.vehicleForm.disable()
         this.hideSpinnerDialog();
       }
     );

@@ -22,6 +22,10 @@ const routes: Routes = [
   {
     path: 'vehicle-detail/:vehicleId',
     component: VehicleDetailComponent,
+  },
+  {
+    path: 'add-vehicle',
+    component: VehicleDetailComponent,
   }
 ]
 

@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Vehicle} from "../../models/vehicle.model";
 import {TransportService} from "../../services/transport.service";
 import {VEHICLE_STATUS} from "../../enums/vehicle-status.enum";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-existing-vehicle-list',
@@ -10,8 +11,10 @@ import {VEHICLE_STATUS} from "../../enums/vehicle-status.enum";
 })
 export class ExistingVehicleListComponent implements OnInit {
   existingVehicles: Vehicle[] = [];
-  constructor(private transportService: TransportService) {}
+  constructor(private transportService: TransportService,
+              private router: Router) {}
   addVehicle() {
+    this.router.navigate(['peru/transportation/add-vehicle']);
   }
   ngOnInit() {
     this.transportService.getAllTransportationsByAgencyId().subscribe((vehicles: Vehicle[]) => {
@@ -29,5 +32,5 @@ export class ExistingVehicleListComponent implements OnInit {
   }
 
   protected readonly VEHICLE_STATUS = VEHICLE_STATUS;
-  selectedStatus: string = '';
+  selectedStatus: string = 'OPERATIONAL';
 }

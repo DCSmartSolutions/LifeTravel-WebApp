@@ -9,6 +9,6 @@ export class Vehicle {
   agencyId: string = '';
   driverName: string = '';
   weight: number = 0;
-  img: string = '';
+  img: string | null = null;
   status: VEHICLE_STATUS = VEHICLE_STATUS.OPERATIONAL;
 }
