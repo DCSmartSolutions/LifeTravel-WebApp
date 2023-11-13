@@ -56,12 +56,6 @@ export const MENU_ITEMS: Menu[] = [
         "role": USER_ROLE.AGENCY,
         "type": "link",
       },
-      {
-        "route": "assign-transport",
-        "name": "Assign Transport",
-        "role": USER_ROLE.AGENCY,
-        "type": "link"
-      }
     ]
   },
   {
