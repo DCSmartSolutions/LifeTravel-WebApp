@@ -1,0 +1,4 @@
+export enum USER_ROLE {
+  TOURIST = 'ROLE_TOURIST',
+  AGENCY = 'ROLE_AGENCY',
+}

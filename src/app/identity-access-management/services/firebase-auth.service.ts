@@ -11,7 +11,7 @@ import {CookieService} from "ngx-cookie-service";
 })
 export class FirebaseAuthCustomService {
 
-  constructor(private auth: Auth,private cookieService: CookieService) { }
+  constructor(private auth: Auth) { }
 
   register({ email, password }: any) {
     return createUserWithEmailAndPassword(this.auth, email, password);
@@ -26,7 +26,6 @@ export class FirebaseAuthCustomService {
   }
 
   logout() {
-    this.cookieService.delete('JSESSIONID');
     return signOut(this.auth);
   }
 }

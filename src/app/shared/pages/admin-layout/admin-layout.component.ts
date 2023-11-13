@@ -1,5 +1,5 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { Component, HostBinding, OnDestroy, ViewChild, ViewEncapsulation } from '@angular/core';
+import {Component, HostBinding, OnDestroy, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import { MatSidenav, MatSidenavContent } from '@angular/material/sidenav';
 import { NavigationEnd, Router } from '@angular/router';
 
@@ -7,6 +7,11 @@ import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import {SettingsService} from "../../services/settings.service";
 import {AppSettings} from "../../interfaces/settings";
+import {SpinnerComponent} from "../../components/spinner/spinner.component";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {UserService} from "../../../identity-access-management/services/user.service";
+import {CookieService} from "ngx-cookie-service";
+import {USER_ROLE} from "../../../identity-access-management/enums/role";
 
 const MOBILE_MEDIAQUERY = 'screen and (max-width: 599px)';
 const TABLET_MEDIAQUERY = 'screen and (min-width: 600px) and (max-width: 959px)';
@@ -18,11 +23,12 @@ const MONITOR_MEDIAQUERY = 'screen and (min-width: 960px)';
   styleUrls: ['./admin-layout.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class AdminLayoutComponent implements OnDestroy {
+export class AdminLayoutComponent implements OnDestroy, OnInit {
   @ViewChild('sidenav', { static: true }) sidenav!: MatSidenav;
   @ViewChild('content', { static: true }) content!: MatSidenavContent;
-
+  private dialog: MatDialogRef<SpinnerComponent> | undefined;
   options = this.settings.options;
+  isAgency: boolean = false;
 
   get themeColor() {
     return this.settings.themeColor;
@@ -31,7 +37,16 @@ export class AdminLayoutComponent implements OnDestroy {
   get isOver(): boolean {
     return this.isMobileScreen;
   }
+  showSpinnerDialog() {
+    this.dialog = this.matDialog.open(SpinnerComponent, {
+      panelClass: 'custom-dialog',
+      disableClose: true
+    });
+  }
 
+  hideSpinnerDialog() {
+    this.dialog?.close();
+  }
   private isMobileScreen = false;
 
   @HostBinding('class.matero-content-width-fix') get contentWidthFix() {
@@ -59,7 +74,10 @@ export class AdminLayoutComponent implements OnDestroy {
   constructor(
     private router: Router,
     private breakpointObserver: BreakpointObserver,
-    private settings: SettingsService
+    private settings: SettingsService,
+    private matDialog: MatDialog,
+    private userService: UserService,
+    private cookieService: CookieService
   ) {
     this.layoutChangesSubscription = this.breakpointObserver
       .observe([MOBILE_MEDIAQUERY, TABLET_MEDIAQUERY, MONITOR_MEDIAQUERY])
@@ -86,8 +104,17 @@ export class AdminLayoutComponent implements OnDestroy {
     this.options.showHeader = true;
     this.settings.setOptions(this.options);
     this.updateOptions(this.options);
+    const uid = this.cookieService.get('JUID');
+    this.userService.getUserById(uid).subscribe(
+      (user: any) => {
+        console.log(user)
+        this.isAgency = user.role === USER_ROLE.AGENCY;
+      }
+    )
   }
+  ngOnInit() {
 
+  }
   ngOnDestroy() {
     this.layoutChangesSubscription.unsubscribe();
   }

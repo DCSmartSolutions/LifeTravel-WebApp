@@ -14,7 +14,6 @@ export class TokenInterceptorService implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     this.auth.currentUser?.getIdToken(true).then(
       (token: string) => {
-        console.log(token)
         this.cookieService.set('JSESSIONID', token);
       }
     )
