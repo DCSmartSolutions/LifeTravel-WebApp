@@ -67,9 +67,9 @@
                      [ngClass]="{'bg-dark-subtle border-primary': activity.selected}"
                      (click)="!isOnlyViewInfo && (activity.selected = !activity.selected)">
                   <div class="col-12 d-flex justify-content-center">
-                    <img [src]="activity.icon" width="70" [alt]="activity.name+'-icon'">
+                    <img [src]="activity.imgUrl" width="70" [alt]="activity.title+'-icon'">
                   </div>
-                  <label class="row fw-bold mt-3 justify-content-center text-black">{{activity.name}}</label>
+                  <label class="row fw-bold mt-3 justify-content-center text-black">{{activity.title}}</label>
                 </div>
               </div>
               <div class="col-12 mb-2 row" *ngIf="tourForm.get('meetingPointLatitude')?.value"
@@ -179,8 +179,7 @@
               <mat-calendar [(selected)]="selectedDate" [dateClass]="dateClass"></mat-calendar>
             </mat-card>
           </div>
-          <button mat-raised-button color="accent" class="col-12 col-md-8 offset-md-2" (click)="saveSchedule()"
-                  *ngIf="!isOnlyViewInfo"
+          <button mat-raised-button class="col-12 col-md-8 offset-md-2 bg-success" (click)="createBooking()"
                   [disabled]="cannotBeScheduleSaved">
             <mat-icon>save</mat-icon>
             Save

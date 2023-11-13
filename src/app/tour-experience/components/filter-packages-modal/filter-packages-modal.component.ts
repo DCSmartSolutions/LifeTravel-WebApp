@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {max, min} from "rxjs";
 import {Activity} from "../../models/activity.model";
 import {TourPackageService} from "../../services/tour-package.service";
+import {ActivityService} from "../../services/activity.service";
 
 @Component({
   selector: 'app-filter-packages-modal',
@@ -26,11 +27,11 @@ export class FilterPackagesModal implements OnInit {
   ];
   activities: Activity[] = [];
 
-  constructor(private tourPackageService: TourPackageService) {
+  constructor(private activityService: ActivityService) {
   }
 
   ngOnInit() {
-    this.tourPackageService.getActivities().subscribe(activities => {
+    this.activityService.getActivities().subscribe(activities => {
         this.activities = activities;
       }, error => {
         console.log(error);

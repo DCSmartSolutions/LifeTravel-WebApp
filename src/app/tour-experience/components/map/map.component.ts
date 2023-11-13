@@ -3,8 +3,8 @@ import * as mapboxgl from 'mapbox-gl';
 import * as MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import {environment} from "../../../../environments/environment";
 import {MapService} from "../../services/map.service";
-import {Location, LocationName} from "../../models/tour-package.model";
 import {Observable, Subscription} from "rxjs";
+import {Location} from "../../models/map.model";
 
 @Component({
   selector: 'app-map',

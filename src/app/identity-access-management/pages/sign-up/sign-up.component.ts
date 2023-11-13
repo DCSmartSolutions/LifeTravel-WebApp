@@ -20,7 +20,7 @@ export class SignUpComponent implements OnInit{
     });
   }
   roles: any[] = [
-    {name: 'Agency', selected: false, icon: 'assets/images/authentication/travel-agency.png'},
+    {name: 'Agency', selected: true, icon: 'assets/images/authentication/travel-agency.png'},
     {name: 'Tourist', selected: false, icon: 'assets/images/authentication/tour-guide.png'},
   ]
   ngOnInit() {

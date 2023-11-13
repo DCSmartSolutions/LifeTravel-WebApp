@@ -29,43 +29,19 @@
       ],
       "meetingPointLatitude": -13.163141,
       "meetingPointLongitude": -72.544963,
-      "schedule": [
+      "activities": [
         {
-          "day": "Monday",
-          "selected": true,
-          "hourRange": {
-            "start": {
-              "hour": "1",
-              "minute": "15",
-              "dayTime": "AM"
-            },
-            "end": {
-              "hour": "2",
-              "minute": "30",
-              "dayTime": "PM"
-            }
-          }
+          "id": "2",
+          "title": "Hiking",
+          "imgUrl": "https://iot20232.blob.core.windows.net/imgs/activities/hiking.png",
+          "selected": true
         },
         {
-          "day": "Friday",
-          "selected": true,
-          "hourRange": {
-            "start": {
-              "hour": "1",
-              "minute": "30",
-              "dayTime": "AM"
-            },
-            "end": {
-              "hour": "4",
-              "minute": "30",
-              "dayTime": "PM"
-            }
-          }
+          "id": "5",
+          "title": "Cycling",
+          "imgUrl": "https://iot20232.blob.core.windows.net/imgs/activities/cycling.png",
+          "selected": true
         }
-      ],
-      "activities": [
-        "Trekking",
-        "Cave"
       ]
     },
     {
@@ -101,25 +77,7 @@
         }
       ],
       "meetingPointLatitude": -13.163141,
-      "meetingPointLongitude": -72.544963,
-      "schedule": [
-        {
-          "day": "Friday",
-          "selected": true,
-          "hourRange": {
-            "start": {
-              "hour": "1",
-              "minute": "15",
-              "dayTime": "AM"
-            },
-            "end": {
-              "hour": "3",
-              "minute": "15",
-              "dayTime": "AM"
-            }
-          }
-        }
-      ]
+      "meetingPointLongitude": -72.544963
     },
     {
       "id": 3,
@@ -357,6 +315,28 @@
       "stars": 0
     }
   ],
+  "tourExperiences": {
+    "id": 1,
+    "tourPackageId": 1,
+    "schedule": [
+      {
+        "day": "Friday",
+        "selected": true,
+        "hourRange": {
+          "start": {
+            "hour": "1",
+            "minute": "15",
+            "dayTime": "AM"
+          },
+          "end": {
+            "hour": "3",
+            "minute": "00",
+            "dayTime": "PM"
+          }
+        }
+      }
+    ]
+  },
   "regions": [
     {
       "id": 1,

@@ -1,4 +1,5 @@
-import {Schedule} from "./time-picker.model";
+import {Activity} from "./activity.model";
+import {LocationName, Location} from "./map.model";
 
 export class TourPackage {
   id: number = 0;
@@ -10,30 +11,10 @@ export class TourPackage {
   price: number = 0;
   stars: number = 0;
   regionId: number = 0;
-  activities: string[] = [];
+  activities: Activity[] = [];
   visible: boolean = false;
   meetingPoint: Location | null = null;
   meetingPointLatitude: number | null = null;
   meetingPointLongitude: number | null = null;
   destinations: LocationName[] = [];
-  schedule: Schedule[] = [];
-}
-
-export class Location{
-  latitude: number;
-  longitude: number;
-  constructor(latitude: number, longitude: number) {
-    this.latitude = latitude;
-    this.longitude = longitude;
-  }
-}
-
-export class LocationName {
-  latitude: number;
-  longitude: number;
-  name: string | null = null;
-  constructor(latitude: number, longitude: number) {
-    this.latitude = latitude;
-    this.longitude = longitude;
-  }
 }

@@ -7,7 +7,7 @@ import {ActivatedRoute, Router} from "@angular/router";
   styleUrls: ['./search-places-modal.component.scss']
 })
 export class SearchPlacesModalComponent {
-  constructor(private router: Router, private route: ActivatedRoute) {
+  constructor(private router: Router) {
   }
   goToSearchTourPackages(number: number) {
     this.router.navigate([`peru/tour-packages/${number}`]);
