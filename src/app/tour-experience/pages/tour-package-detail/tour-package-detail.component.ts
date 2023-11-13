@@ -19,6 +19,10 @@ import {Location, LocationName} from "../../models/map.model";
 import {
   ConfirmationMessageComponent
 } from "../../../shared/components/confirmation-message/confirmation-message.component";
+import {BookingService} from "../../../booking/services/booking.service";
+import {Booking} from "../../../booking/models/booking.model";
+import {TourExperience} from "../../models/tour-experience.model";
+import {UserService} from "../../../identity-access-management/services/user.service";
 
 @Component({
   selector: 'app-tour-package-detail',
@@ -28,6 +32,8 @@ import {
 export class TourPackageDetailComponent implements OnInit {
   title: string = "Add New Tour Package";
   tourPackage: TourPackage = new TourPackage();
+  tourExperience: TourExperience = new TourExperience();
+  booking: Booking |null = null;
   tourForm: FormGroup = new FormGroup({});
   isEdit: boolean = false;
   private dialog: MatDialogRef<SpinnerComponent> | undefined;
@@ -48,6 +54,8 @@ export class TourPackageDetailComponent implements OnInit {
               private tourPackageService: TourPackageService,
               private activityService: ActivityService,
               private tourExperienceService: TourExperienceService,
+              private bookingService: BookingService,
+              private userService: UserService,
               private azureBlobStorageService: AzureBlobStorageService,
               private matDialog: MatDialog,
               private cdr: ChangeDetectorRef,
@@ -141,6 +149,7 @@ export class TourPackageDetailComponent implements OnInit {
       this.destinations = packageData.destinations;
 
       this.tourExperienceService.getSchedule(packageId).subscribe(tourExperience => {
+        this.tourExperience = tourExperience;
         tourExperience.schedule.forEach((item: Schedule) => {
             this.dayList.forEach((day: Schedule) => {
               if (day.day === item.day) {
@@ -150,6 +159,7 @@ export class TourPackageDetailComponent implements OnInit {
             })
           }
         )
+        this.getBookingByTourExperienceIdAndTouristId();
       });
       this.cdr.detectChanges();
       packageData.activities?.forEach((item: Activity) => {
@@ -290,7 +300,7 @@ export class TourPackageDetailComponent implements OnInit {
 
   dateClass: MatCalendarCellClassFunction<Date> = (cellDate, view) => {
     if (view === 'month') {
-      return this.isDayDisabled(cellDate) ? 'pe-none' : '';
+      return this.isDayDisabled(cellDate) || this.isBooked ? 'pe-none' : '';
     }
     return '';
   };
@@ -331,14 +341,42 @@ export class TourPackageDetailComponent implements OnInit {
         }
       }
     )
-    // this.dialog.afterClosed().subscribe((response) => {
-    //   if (response) {
-    //     this.showSpinnerDialog();
-    //     this.tourPackageService.createBooking(this.tourPackage.id).subscribe(() => {
-    //       this.hideSpinnerDialog();
-    //       this.router.navigate(['peru/tour-packages/my-packages']);
-    //     });
-    //   }
-    // }
+    this.dialog.afterClosed().subscribe((response) => {
+        if (response) {
+          this.showSpinnerDialog()
+          const booking: Booking = new Booking();
+          booking.tourExperienceId = this.tourExperience.id;
+          booking.touristId = this.userService.getUserId();
+          booking.date = this.selectedDate;
+          booking.hourRange = this.getHourRangeByDayInSchedule(this.selectedDate);
+          this.bookingService.createBooking(booking).subscribe((response) => {
+              console.log(response);
+              this.getBookingByTourExperienceIdAndTouristId();
+              this.hideSpinnerDialog()
+              // this.router.navigate(['peru/tour-packages/my-packages']);
+            }
+          )
+        }
+      }
+    )
+  }
+  getBookingByTourExperienceIdAndTouristId(){
+    this.bookingService.getBookingByTourExperienceIdAndTouristId(this.tourExperience.id, this.userService.getUserId()).subscribe((response) => {
+      this.booking = response;
+      console.log(this.booking)
+      if(response) this.selectedDate = new Date(response.date);
+      console.log(this.selectedDate)
+    })
+  }
+  get isBooked(){
+    return this.booking != null;
+  }
+  getHourRangeByDayInSchedule(date: Date){
+    const dayName = new Intl.DateTimeFormat('en-US', {weekday: 'long'}).format(date);
+    return this.tourExperience.schedule.find(item => item.day === dayName)?.hourRange;
+  }
+  get getDateStringOfBooking(){ //format: 2021-08-01
+    const date = new Date(this.booking!.date);
+    return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
   }
 }

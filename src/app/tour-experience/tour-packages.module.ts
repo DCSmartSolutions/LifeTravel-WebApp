@@ -48,7 +48,6 @@ const routes: Routes = [
     component: SearchPackagesComponent,
   },
 ]
-
 @NgModule({
   declarations: [
     FilterPackagesModal,

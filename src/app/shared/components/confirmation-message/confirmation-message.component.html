@@ -1,8 +1,9 @@
-<h2 mat-dialog-title><mat-icon>warning</mat-icon>{{title}}</h2>
+<div mat-dialog-title class="d-flex py-3 align-items-center">
+  <mat-icon>warning</mat-icon><label class="fs-5 fw-bold" style="margin-left: 10px">{{title}}</label></div>
 <mat-dialog-content class="mat-typography">
   <h3>{{content}}</h3>
 </mat-dialog-content>
-<mat-dialog-actions align="between">
-  <button mat-button [matDialogClose]="false">Cancel</button>
-  <button mat-button [matDialogClose]="true">Create</button>
+<mat-dialog-actions class="d-flex justify-content-between p-3">
+  <button mat-raised-button [matDialogClose]="false">Cancel</button>
+  <button mat-raised-button class="bg-success text-white fw-normal" [matDialogClose]="true"><mat-icon>save</mat-icon>Create</button>
 </mat-dialog-actions>

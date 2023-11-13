@@ -337,6 +337,26 @@
       }
     ]
   },
+  "bookings": [
+    {
+      "id": 1,
+      "tourExperienceId": 1,
+      "touristId": "tUw8E6JkswQiMpO7lAb3z31hld12",
+      "date": "2023-12-17T05:00:00.000Z",
+      "hourRange": {
+        "start": {
+          "hour": "1",
+          "minute": "15",
+          "dayTime": "AM"
+        },
+        "end": {
+          "hour": "3",
+          "minute": "00",
+          "dayTime": "PM"
+        }
+      }
+    }
+  ],
   "regions": [
     {
       "id": 1,
