@@ -9,7 +9,7 @@ import {CookieService} from "ngx-cookie-service";
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit, AfterViewInit{
+export class LoginComponent implements OnInit, AfterViewInit {
   loginForm: FormGroup = new FormGroup({});
   credentialsError: boolean = false;
 
@@ -20,22 +20,27 @@ export class LoginComponent implements OnInit, AfterViewInit{
     private router: Router
   ) {
     this.loginForm = this.formBuilder.group({
-      email: ['', { validators: [Validators.required, Validators.email],updateOn: 'change'}],
-      password: ['', { validators: [Validators.required]}]
+      email: ['', {validators: [Validators.required, Validators.email], updateOn: 'change'}],
+      password: ['', {validators: [Validators.required]}]
     });
   }
 
-  ngOnInit():void {
+  ngOnInit(): void {
 
   }
+
   ngAfterViewInit() {
     if (this.cookieService.get('JSESSIONID')) {
       this.router.navigate(['/peru']);
     }
   }
+
   onSubmit() {
+    this.clearCookies()
     this.fireAuthCustomService.login(this.loginForm.value)
       .then((response: any) => {
+        console.log(response)
+        this.cookieService.set('JUID', response.user.uid);
         this.cookieService.set('JSESSIONID', response.user.accessToken);
         this.router.navigate(['/peru']);
       })
@@ -47,8 +52,10 @@ export class LoginComponent implements OnInit, AfterViewInit{
   }
 
   onClick() {
+    this.clearCookies()
     this.fireAuthCustomService.loginWithGoogle()
       .then((response: { user: any; }) => {
+        this.cookieService.set('JUID', response.user.uid);
         this.cookieService.set('JSESSIONID', response.user.accessToken);
         this.router.navigate(['/peru']);
       })
@@ -67,4 +74,8 @@ export class LoginComponent implements OnInit, AfterViewInit{
     return this.loginForm.get('email');
   }
 
+  clearCookies() {
+    this.cookieService.delete('JUID');
+    this.cookieService.delete('JSESSIONID');
+  }
 }

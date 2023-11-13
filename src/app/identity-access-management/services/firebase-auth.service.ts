@@ -26,7 +26,10 @@ export class FirebaseAuthCustomService {
   }
 
   logout() {
-    this.cookieService.delete('JSESSIONID');
+    setTimeout(() => {
+      this.cookieService.delete('JSESSIONID');
+      this.cookieService.delete('JUID');
+    }, 3000);
     return signOut(this.auth);
   }
 }
