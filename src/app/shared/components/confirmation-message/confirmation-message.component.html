@@ -1,7 +1,8 @@
-<h2 mat-dialog-title>{{title}}</h2>
+<h2 mat-dialog-title><mat-icon>warning</mat-icon>{{title}}</h2>
 <mat-dialog-content class="mat-typography">
   <h3>{{content}}</h3>
 </mat-dialog-content>
-<mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>OK</button>
+<mat-dialog-actions align="between">
+  <button mat-button [matDialogClose]="false">Cancel</button>
+  <button mat-button [matDialogClose]="true">Create</button>
 </mat-dialog-actions>

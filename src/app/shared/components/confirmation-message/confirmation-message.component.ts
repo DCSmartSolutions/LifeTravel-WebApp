@@ -1,8 +1,6 @@
-import {Component, Inject, Input} from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
-
-class DialogData {
-}
+import {DialogData} from "../alert-message/alert-message.component";
 
 @Component({
   selector: 'app-confirmation-message',
@@ -13,9 +11,7 @@ export class ConfirmationMessageComponent {
   title: string = '';
   content: string = '';
   constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData) {
-    // @ts-ignore
-    this.title = data['title'];
-    // @ts-ignore
-    this.content = data['content'];
+    this.title = data.title;
+    this.content = data.content;
   }
 }
