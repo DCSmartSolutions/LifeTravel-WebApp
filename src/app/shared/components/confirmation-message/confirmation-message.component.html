@@ -5,5 +5,8 @@
 </mat-dialog-content>
 <mat-dialog-actions class="d-flex justify-content-between p-3">
   <button mat-raised-button [matDialogClose]="false">Cancel</button>
-  <button mat-raised-button class="bg-success text-white fw-normal" [matDialogClose]="true"><mat-icon>save</mat-icon>Create</button>
+  <button mat-raised-button class="text-white fw-normal"
+          [ngClass]="confirmationButtonText === 'Remove' ? 'bg-danger' : 'bg-success'"
+          [matDialogClose]="true"><mat-icon>{{confirmationIcon}}</mat-icon>
+    {{confirmationButtonText}}</button>
 </mat-dialog-actions>

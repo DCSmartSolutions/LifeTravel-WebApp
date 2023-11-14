@@ -44,22 +44,22 @@ export const MENU_ITEMS: Menu[] = [
     ]
   },
   {
-    "route": "peru/transportations",
+    "route": "peru/transportation",
     "name": "Transportation",
     "type": "sub",
     "icon": "directions_bus",
     "role": USER_ROLE.AGENCY,
     "children": [
       {
-        "route": "my-transports",
-        "name": "My Transports",
+        "route": "my-vehicles",
+        "name": "My Vehicles",
         "role": USER_ROLE.AGENCY,
         "type": "link",
       },
     ]
   },
   {
-    "route": "peru/my-subscription",
+    "route": "peru/subscriptions/my-subscription",
     "name": "My Subscription",
     "type": "link",
     "icon": "payment",
@@ -73,14 +73,14 @@ export const MENU_ITEMS: Menu[] = [
     "role": USER_ROLE.TOURIST
   },
   {
-    "route": "peru/my-bookings",
+    "route": "peru/booking/my-bookings",
     "name": "My Bookings",
     'type': 'link',
     "icon": "local_library",
     "role": USER_ROLE.TOURIST
   },
   {
-    "route": "peru/my-reviews",
+    "route": "peru/reviews/my-reviews",
     "name": "My Reviews",
     'type': 'link',
     "icon": "rate_review",

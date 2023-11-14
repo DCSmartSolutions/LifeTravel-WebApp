@@ -6,11 +6,11 @@
       "destiny": "Machu Picchu",
       "title": "Trekking in Machu Picchu",
       "description": "Machu Picchu, located in the Cusco region of Peru, is one of the most iconic archaeological sites in the world. This ancient Inca citadel, nestled high in the Andes, offers breathtaking views and a deep sense of history. Explore its mysterious ruins, terraced fields, and the famous Intihuatana stone. A trek to Machu Picchu is a journey through time and culture.",
-      "agency": "Inca Trek",
+      "agencyId": "c4O2PMViokW4gzD3tB3Mfkn7g1l2",
       "price": "345",
       "stars": 3.4,
       "regionId": 2,
-      "visible": true,
+      "visible": false,
       "meetingPoint": {
         "latitude": -13.163141,
         "longitude": -72.544963
@@ -42,7 +42,8 @@
           "imgUrl": "https://iot20232.blob.core.windows.net/imgs/activities/cycling.png",
           "selected": true
         }
-      ]
+      ],
+      "agency": null
     },
     {
       "id": 2,
@@ -50,7 +51,7 @@
       "destiny": "Aguas Calientes",
       "title": "Trekking in Aguas Calientes",
       "description": "Aguas Calientes, also known as Machu Picchu Pueblo, is a charming town located at the base of Machu Picchu. It serves as the gateway for visitors to the ancient citadel. Enjoy a trek through lush forests and alongside the Urubamba River as you make your way to Machu Picchu. Aguas Calientes offers a variety of accommodations, hot springs, and local cuisine to enhance your visit.",
-      "agency": "Inca Trek",
+      "agencyId": "c4O2PMViokW4gzD3tB3Mfkn7g1l2",
       "price": "125",
       "stars": 2.9,
       "regionId": 2,
@@ -85,7 +86,7 @@
       "destiny": "Reserva Nacional de Paracas",
       "title": "Reserva Nacional de Paracas",
       "description": "The Paracas National Reserve, located in the Ica region, is a unique natural wonder. It is home to a diverse marine ecosystem, where you can spot sea lions, penguins, and an array of bird species. Explore the stunning Paracas Peninsula, characterized by dramatic cliffs and red sand beaches. The Ballestas Islands are a must-visit, often referred to as the 'Poor Man's Galapagos' due to their rich biodiversity.",
-      "agency": "Inca Trek",
+      "agencyId": "c4O2PMViokW4gzD3tB3Mfkn7g1l2",
       "price": "144",
       "stars": 4.2,
       "regionId": 1,
@@ -102,7 +103,7 @@
       "destiny": "Senderos de la Amazonía",
       "title": "Trekking in Senderos de la Amazonía",
       "description": "The Amazon Rainforest in the Iquitos region is a treasure trove of biodiversity and adventure. Immerse yourself in the lush greenery and hear the symphony of the jungle. Trek through the jungle to discover visible waterfalls, unique flora, and wildlife, including monkeys and exotic birds. This is an opportunity to experience the natural wonders of the Amazon up close.",
-      "agency": "Inca Trek",
+      "agencyId": "c4O2PMViokW4gzD3tB3Mfkn7g1l2",
       "price": "235",
       "stars": 4,
       "regionId": 3,
@@ -118,7 +119,7 @@
       "destiny": "Llahuar",
       "title": "Trekking in Llahuar",
       "description": "Llahuar, situated in the Arequipa region, is a visible gem in the Andes. This remote village offers a unique trekking experience, surrounded by stunning landscapes and the Colca River. Hike to natural hot springs with a view of the snow-capped mountains, and immerse yourself in the local culture. Llahuar is a peaceful escape for nature lovers and trekkers.",
-      "agency": "Inca Trek",
+      "agencyId": "c4O2PMViokW4gzD3tB3Mfkn7g1l2",
       "price": "210",
       "stars": 2.6,
       "regionId": 2,
@@ -134,7 +135,7 @@
       "destiny": "Islas de los Uros",
       "title": "Trekking in Islas de los Uros",
       "description": "Explore the floating islands of Los Uros on Lake Titicaca, located in the Puno region. The Uros people have built these unique islands entirely out of reeds. This trekking adventure will take you to these remarkable islands, where you can learn about the Uros culture and their traditional way of life. Enjoy breathtaking views of the highest navigable lake in the world.",
-      "agency": "Inca Trek",
+      "agencyId": "c4O2PMViokW4gzD3tB3Mfkn7g1l2",
       "price": "112",
       "stars": 4.5,
       "regionId": 2,
@@ -150,7 +151,7 @@
       "destiny": "Cueva de Pikimachay",
       "title": "Cueva de Pikimachay",
       "description": "Discover the ancient archaeological site of Cueva de Pikimachay, located in the Cajamarca region. This cave is renowned for its prehistoric rock art and the evidence of early human habitation. Explore the mysterious underground world of Pikimachay with expert guides and delve into the history of the region. A journey to this cave is a journey back in time.",
-      "agency": "Inca Trek",
+      "agencyId": "c4O2PMViokW4gzD3tB3Mfkn7g1l2",
       "price": "345",
       "stars": 3.9,
       "regionId": 2,
@@ -166,7 +167,7 @@
       "destiny": "Sacred Valley",
       "title": "Sacred Valley Exploration",
       "description": "The Sacred Valley, located near Cusco, is a place of immense beauty and historical significance. This package offers a journey through ancient Inca sites, picturesque villages, and stunning landscapes. Visit the agricultural terraces of Moray, the salt mines of Maras, and the vibrant market of Pisac. Immerse yourself in the rich culture of the Andes while exploring this sacred and mystical valley.",
-      "agency": "Inca Trek",
+      "agencyId": "c4O2PMViokW4gzD3tB3Mfkn7g1l2",
       "price": "275",
       "stars": 4.7,
       "regionId": 2,
@@ -182,7 +183,7 @@
       "destiny": "Rainbow Mountain",
       "title": "Rainbow Mountain Trek",
       "description": "Vinicunca, or Rainbow Mountain, is a natural wonder located in the Cusco region. This challenging trek will take you to the breathtakingly colorful mountain. Hike through the Andean highlands, passing local communities, and reaching the summit to witness the vibrant hues of Vinicunca. It's a once-in-a-lifetime experience for adventure seekers and nature enthusiasts.",
-      "agency": "Inca Trek",
+      "agencyId": "c4O2PMViokW4gzD3tB3Mfkn7g1l2",
       "price": "295",
       "stars": 4.8,
       "regionId": 2,
@@ -198,7 +199,7 @@
       "destiny": "Tambopata National Reserve",
       "title": "Wildlife Safari in Tambopata",
       "description": "The Tambopata National Reserve in the Madre de Dios region is a biodiversity hotspot. This package offers an adventure deep into the Amazon rainforest. Explore the jungle, spot diverse wildlife, and cruise the Tambopata River. You'll have the chance to see macaws, jaguars, and other unique creatures while staying in comfortable eco-lodges.",
-      "agency": "Inca Trek",
+      "agencyId": "c4O2PMViokW4gzD3tB3Mfkn7g1l2",
       "price": "399",
       "stars": 4.9,
       "regionId": 3,
@@ -214,7 +215,7 @@
       "destiny": "Colca Canyon",
       "title": "Colca Canyon Adventure",
       "description": "Colca Canyon, located in the Arequipa region, is one of the world's deepest canyons. This package offers a thrilling trek into the canyon, where you can witness Andean condors soaring in their natural habitat. Explore ancient terraces, remote villages, and relax in natural hot springs. The Colca Canyon is a false wonder of nature and culture.",
-      "agency": "Inca Trek",
+      "agencyId": "c4O2PMViokW4gzD3tB3Mfkn7g1l2",
       "price": "320",
       "stars": 4.6,
       "regionId": 2,
@@ -230,7 +231,7 @@
       "destiny": "Choquequirao",
       "title": "Choquequirao Expedition",
       "description": "Choquequirao, often called the 'Sister of Machu Picchu,' is a remote Inca ruin nestled in the Vilcabamba range. This challenging trek will take you to this visible gem, offering panoramic views of the Andes. Explore the terraces, temples, and plazas of Choquequirao, and witness its archaeological beauty. It's an adventure for the intrepid traveler.",
-      "agency": "Inca Trek",
+      "agencyId": "c4O2PMViokW4gzD3tB3Mfkn7g1l2",
       "price": "345",
       "stars": 4.5,
       "regionId": 2,
@@ -246,7 +247,7 @@
       "destiny": "Huaraz",
       "title": "Trekking in Huaraz",
       "description": "Huaraz, located in the Ancash region, is a paradise for trekkers and mountaineers. This package takes you to the Cordillera Blanca, home to stunning glacial lakes, snow-capped peaks, and pristine wilderness. Trek to Laguna 69, explore the Huascarán National Park, and immerse yourself in the grandeur of the Andes. Huaraz is a haven for adventure enthusiasts.",
-      "agency": "Inca Trek",
+      "agencyId": "c4O2PMViokW4gzD3tB3Mfkn7g1l2",
       "price": "289",
       "stars": 4.4,
       "regionId": 2,
@@ -255,64 +256,6 @@
         "latitude": -9.526,
         "longitude": -77.528
       }
-    },
-    {
-      "id": 14,
-      "img": "https://nstoragetest.blob.core.windows.net/tour-packages-pictures/1699050226876?sp=racwdli&st=2023-10-24T00:12:03Z&se=2024-01-05T08:12:03Z&sv=2022-11-02&sr=c&sig=ihpBcbG09pC7gTDHSdvhmIJCxf7mqwFY7fZ9wTLg2S4%3D",
-      "destiny": "",
-      "title": "Trekking in Huanuco",
-      "description": "Huánuco (Spanish pronunciation: [ˈwanuko]; Quechua: Wanuku) is a city in central Peru. It had a population of 196,627 as of 2017[2] and in 2015 it had a population of 175,068. It is the capital of the Huánuco Region and the Huánuco District. It is the seat of the diocese of Huánuco. The metropolitan city of Huanuco is 170,000 hab (2011, urban pop, INEI). It has three districts, Huanuco (head), Amarilis, and Pillco Marca. In this city, the Higueras river meets the Huallaga river, one of the largest rivers in the country.",
-      "agency": "",
-      "price": 120,
-      "regionId": 0,
-      "visible": false,
-      "meetingPoint": {
-        "latitude": -11.8723788,
-        "longitude": -77.0449214
-      },
-      "meetingPointLatitude": -11.8723788,
-      "meetingPointLongitude": -77.0449214,
-      "destinations": [
-        {
-          "latitude": -12.071161132304965,
-          "longitude": -76.99258965717851,
-          "name": "primer"
-        }
-      ],
-      "activities": []
-    },
-    {
-      "id": 15,
-      "img": "https://nstoragetest.blob.core.windows.net/tour-packages-pictures/1699051211880?sp=racwdli&st=2023-10-24T00:12:03Z&se=2024-01-05T08:12:03Z&sv=2022-11-02&sr=c&sig=ihpBcbG09pC7gTDHSdvhmIJCxf7mqwFY7fZ9wTLg2S4%3D",
-      "destiny": "",
-      "title": "Juliaca Walking",
-      "description": "Juliaca ([xuˈlja.ka]; Quechua and Aymara: Hullaqa) is the capital of San Román Province in the Puno Region of southeastern Peru. It is the region's largest city with a population of 276,110 inhabitants (2017).[2] On the Altiplano, Juliaca is 3,825 metres (12,549 ft) above sea level, is located on the Collao Plateau and is northwest of Lake Titicaca (45 km). It is the largest trade center in the Puno region.\n\nJuliaca is near Chachas Lake, the Maravillas river, and near the ruins of Sillustani.\n\nThe city hosts Juliaca's Carnival each year between February and March. During this very popular event participants, dressed in colorful costumes, gather on the streets to dance in the style of the Collao Plateau. Saint Sebastian's feast is celebrated on 20 January of every year.\n\nJuliaca's citizens rely on cars, trains, and bicycles. It is a major transit point in the region and has strong ties with Peru's southern cities, including Arequipa, Puno, Tacna, Cuzco, Ilo, and with La Rinconada and Bolivia.",
-      "agency": "",
-      "price": 160,
-      "regionId": 0,
-      "visible": false,
-      "meetingPoint": {
-        "latitude": -11.8723788,
-        "longitude": -77.0449214
-      },
-      "meetingPointLatitude": -11.8723788,
-      "meetingPointLongitude": -77.0449214,
-      "destinations": [
-        {
-          "latitude": -12.073254199664916,
-          "longitude": -77.00374764668013,
-          "name": "primer"
-        },
-        {
-          "latitude": -12.080136551455439,
-          "longitude": -76.95860070454088,
-          "name": "segundo"
-        }
-      ],
-      "activities": [
-        "Trekking"
-      ],
-      "stars": 0
     }
   ],
   "tourExperiences": {
@@ -337,24 +280,51 @@
       }
     ]
   },
-  "bookings": [
+  "bookings": [],
+  "transportations": [
     {
       "id": 1,
-      "tourExperienceId": 1,
-      "touristId": "tUw8E6JkswQiMpO7lAb3z31hld12",
-      "date": "2023-12-17T05:00:00.000Z",
-      "hourRange": {
-        "start": {
-          "hour": "1",
-          "minute": "15",
-          "dayTime": "AM"
-        },
-        "end": {
-          "hour": "3",
-          "minute": "00",
-          "dayTime": "PM"
-        }
-      }
+      "brand": "Toyota",
+      "model": "Yaris",
+      "plate": "B3R-123",
+      "capacity": 4,
+      "agencyId": "c4O2PMViokW4gzD3tB3Mfkn7g1l2",
+      "driverName": "Juan Lope Perez Quispe",
+      "weight": 150,
+      "img": "https://cdn.rodati.cl/images/listings/2023-08/bigThmb/91fd6a03-1691495331-393.jpg",
+      "status": "IN_USE"
+    },
+    {
+      "id": 2,
+      "brand": "Toyota",
+      "model": "Yaris",
+      "plate": "ASD-451",
+      "capacity": 7,
+      "agencyId": "c4O2PMViokW4gzD3tB3Mfkn7g1l2",
+      "driverName": "Manuel Merced Pino",
+      "weight": 200,
+      "img": "https://nstoragetest.blob.core.windows.net/tour-packages-pictures/1699905975411?sp=racwdli&st=2023-10-24T00:12:03Z&se=2024-01-05T08:12:03Z&sv=2022-11-02&sr=c&sig=ihpBcbG09pC7gTDHSdvhmIJCxf7mqwFY7fZ9wTLg2S4%3D",
+      "status": "OPERATIONAL"
+    },
+    {
+      "id": 3,
+      "brand": "Hyundai",
+      "model": "Staria",
+      "plate": "D70-957",
+      "capacity": 5,
+      "agencyId": "c4O2PMViokW4gzD3tB3Mfkn7g1l2",
+      "driverName": "Felipe Lozano Piedra",
+      "weight": 120,
+      "img": "https://nstoragetest.blob.core.windows.net/tour-packages-pictures/1699910131640?sp=racwdli&st=2023-10-24T00:12:03Z&se=2024-01-05T08:12:03Z&sv=2022-11-02&sr=c&sig=ihpBcbG09pC7gTDHSdvhmIJCxf7mqwFY7fZ9wTLg2S4%3D",
+      "status": "OPERATIONAL"
+    }
+  ],
+  "assignedVehicles": [
+    {
+      "id": 1,
+      "assignedDate": "2023-11-13T23:35:57.972Z",
+      "vehicleId": 3,
+      "tourPackageId": 1
     }
   ],
   "regions": [

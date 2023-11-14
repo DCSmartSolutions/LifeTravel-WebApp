@@ -8,7 +8,6 @@ const routes: Routes = [
     component: ExistingBookingListComponent,
   }
 ]
-
 @NgModule({
   declarations: [
     ExistingBookingListComponent

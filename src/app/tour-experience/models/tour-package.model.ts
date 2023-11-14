@@ -7,7 +7,7 @@ export class TourPackage {
   destiny: string = '';
   title: string = '';
   description: string = '';
-  agency: string = '';
+  agencyId: string = '';
   price: number = 0;
   stars: number = 0;
   regionId: number = 0;

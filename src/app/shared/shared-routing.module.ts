@@ -12,6 +12,14 @@ const childrenRoutes: Route[] = [
     path: 'tour-packages',
     loadChildren: () => import('../tour-experience/tour-packages.module').then(m => m.TourPackagesModule)
   },
+  {
+    path: 'booking',
+    loadChildren: () => import('../booking/booking.module').then(m => m.BookingModule)
+  },
+  {
+    path: 'transportation',
+    loadChildren: () => import('../transportation/transportation.module').then(m => m.TransportationModule)
+  }
 ];
 
 const routes: Route[] = [

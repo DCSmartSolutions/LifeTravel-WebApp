@@ -10,8 +10,14 @@ import {DialogData} from "../alert-message/alert-message.component";
 export class ConfirmationMessageComponent {
   title: string = '';
   content: string = '';
-  constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData) {
+  confirmationButtonText: string = 'Create';
+  confirmationIcon: string = 'add';
+  className: string = 'bg-success';
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
     this.title = data.title;
     this.content = data.content;
+    if (data.confirmationButtonText) this.confirmationButtonText = data.confirmationButtonText;
+    if (data.confirmationIcon) this.confirmationIcon = data.confirmationIcon;
+    if (data.className) this.className = data.className;
   }
 }

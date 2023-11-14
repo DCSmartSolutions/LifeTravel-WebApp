@@ -12,19 +12,16 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatIconModule} from "@angular/material/icon";
 import {SearchPlacesModalComponent} from './components/search-places-modal/search-places-modal.component';
-import {
-  ExistingPackagesListComponent
-} from './pages/existing-packages-list/existing-packages-list.component';
+import {ExistingPackagesListComponent} from './pages/existing-packages-list/existing-packages-list.component';
 import {ListPackagesComponent} from "./components/list-packages/list-packages.component";
-import { TourPackageDetailComponent } from './pages/tour-package-detail/tour-package-detail.component';
-import { ExistingVehicleListComponent } from './pages/existing-vehicle-list/existing-vehicle-list.component';
+import {TourPackageDetailComponent} from './pages/tour-package-detail/tour-package-detail.component';
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
-import { MapComponent } from './components/map/map.component';
+import {MapComponent} from './components/map/map.component';
 import {SharedLayoutModule} from "../shared/shared-layout.module";
 import {MatTabsModule} from "@angular/material/tabs";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
-
+import { PackageCardComponent } from './components/package-card/package-card.component';
 
 const routes: Routes = [
   {
@@ -36,7 +33,7 @@ const routes: Routes = [
     component: TourPackageDetailComponent,
   },
   {
-    path:'add-tour-package',
+    path: 'add-tour-package',
     component: TourPackageDetailComponent,
   },
   {
@@ -48,6 +45,7 @@ const routes: Routes = [
     component: SearchPackagesComponent,
   },
 ]
+
 @NgModule({
   declarations: [
     FilterPackagesModal,
@@ -55,8 +53,8 @@ const routes: Routes = [
     ExistingPackagesListComponent,
     ListPackagesComponent,
     TourPackageDetailComponent,
-    ExistingVehicleListComponent,
     MapComponent,
+    PackageCardComponent,
   ],
   imports: [
     RouterModule.forChild(routes),
