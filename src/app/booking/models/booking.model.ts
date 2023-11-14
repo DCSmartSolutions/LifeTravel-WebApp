@@ -1,4 +1,5 @@
 import {HourRange} from "../../tour-experience/models/time-picker.model";
+import {BOOKING_STATUS} from "../enums/booking-status.enum";
 
 export class Booking {
   id: number = 0;
@@ -6,4 +7,5 @@ export class Booking {
   touristId: string = '';
   date: Date = new Date();
   hourRange: HourRange | undefined = new HourRange() ;
+  status: BOOKING_STATUS = BOOKING_STATUS.CREATED
 }
