@@ -58,13 +58,13 @@ export const MENU_ITEMS: Menu[] = [
       },
     ]
   },
-  {
-    "route": "peru/my-subscription",
-    "name": "My Subscription",
-    "type": "link",
-    "icon": "payment",
-    "role": USER_ROLE.AGENCY
-  },
+  // {
+  //   "route": "peru/my-subscription",
+  //   "name": "My Subscription",
+  //   "type": "link",
+  //   "icon": "payment",
+  //   "role": USER_ROLE.AGENCY
+  // },
   {
     "route": "peru/",
     "name": "Search Packages",
@@ -72,20 +72,20 @@ export const MENU_ITEMS: Menu[] = [
     "icon": "search",
     "role": USER_ROLE.TOURIST
   },
-  {
-    "route": "peru/my-bookings",
-    "name": "My Bookings",
-    'type': 'link',
-    "icon": "local_library",
-    "role": USER_ROLE.TOURIST
-  },
-  {
-    "route": "peru/my-reviews",
-    "name": "My Reviews",
-    'type': 'link',
-    "icon": "rate_review",
-    "role": USER_ROLE.TOURIST
-  }
+  // {
+  //   "route": "peru/my-bookings",
+  //   "name": "My Bookings",
+  //   'type': 'link',
+  //   "icon": "local_library",
+  //   "role": USER_ROLE.TOURIST
+  // },
+  // {
+  //   "route": "peru/my-reviews",
+  //   "name": "My Reviews",
+  //   'type': 'link',
+  //   "icon": "rate_review",
+  //   "role": USER_ROLE.TOURIST
+  // }
 
 ];
 
