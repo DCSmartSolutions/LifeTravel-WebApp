@@ -10,7 +10,7 @@
       "price": "345",
       "stars": 3.4,
       "regionId": 2,
-      "visible": false,
+      "visible": true,
       "meetingPoint": {
         "latitude": -13.163141,
         "longitude": -72.544963
@@ -29,21 +29,25 @@
       ],
       "meetingPointLatitude": -13.163141,
       "meetingPointLongitude": -72.544963,
-      "activities": [
+      "activities": [],
+      "schedule": [
         {
-          "id": "2",
-          "title": "Hiking",
-          "imgUrl": "https://iot20232.blob.core.windows.net/imgs/activities/hiking.png",
-          "selected": true
-        },
-        {
-          "id": "5",
-          "title": "Cycling",
-          "imgUrl": "https://iot20232.blob.core.windows.net/imgs/activities/cycling.png",
-          "selected": true
+          "day": "Friday",
+          "selected": true,
+          "hourRange": {
+            "start": {
+              "hour": "1",
+              "minute": "15",
+              "dayTime": "AM"
+            },
+            "end": {
+              "hour": "3",
+              "minute": "00",
+              "dayTime": "PM"
+            }
+          }
         }
-      ],
-      "agency": null
+      ]
     },
     {
       "id": 2,
@@ -258,29 +262,26 @@
       }
     }
   ],
-  "tourExperiences": {
-    "id": 1,
-    "tourPackageId": 1,
-    "schedule": [
-      {
-        "day": "Friday",
-        "selected": true,
-        "hourRange": {
-          "start": {
-            "hour": "1",
-            "minute": "15",
-            "dayTime": "AM"
-          },
-          "end": {
-            "hour": "3",
-            "minute": "00",
-            "dayTime": "PM"
-          }
+  "bookings": [
+    {
+      "id": 1,
+      "tourPackageId": 1,
+      "touristId": "6WKjj6oyzrMTUfuw8j7vEks3Yuu1",
+      "date": "2023-11-24T05:00:00.000Z",
+      "hourRange": {
+        "start": {
+          "hour": "1",
+          "minute": "15",
+          "dayTime": "AM"
+        },
+        "end": {
+          "hour": "3",
+          "minute": "00",
+          "dayTime": "PM"
         }
       }
-    ]
-  },
-  "bookings": [],
+    }
+  ],
   "transportations": [
     {
       "id": 1,
@@ -322,8 +323,14 @@
   "assignedVehicles": [
     {
       "id": 1,
-      "assignedDate": "2023-11-13T23:35:57.972Z",
+      "assignedDate": "2023-11-14T16:36:30.821Z",
       "vehicleId": 3,
+      "tourPackageId": 1
+    },
+    {
+      "id": 2,
+      "assignedDate": "2023-11-14T16:36:34.272Z",
+      "vehicleId": 2,
       "tourPackageId": 1
     }
   ],
