@@ -7,5 +7,4 @@ export class Booking {
   touristId: string = '';
   date: Date = new Date();
   hourRange: HourRange | undefined = new HourRange() ;
-  status: BOOKING_STATUS = BOOKING_STATUS.CREATED
 }
