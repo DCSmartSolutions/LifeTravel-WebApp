@@ -14,14 +14,13 @@ import {
 } from "../../../shared/components/alert-message/alert-message.component";
 import {Activity} from "../../models/activity.model";
 import {ActivityService} from "../../services/activity.service";
-import {TourExperienceService} from "../../services/tour-experience.service";
+// import {TourExperienceService} from "../../services/tour-experience.service";
 import {Location, LocationName} from "../../models/map.model";
 import {
   ConfirmationMessageComponent
 } from "../../../shared/components/confirmation-message/confirmation-message.component";
 import {BookingService} from "../../../booking/services/booking.service";
 import {Booking} from "../../../booking/models/booking.model";
-import {TourExperience} from "../../models/tour-experience.model";
 import {UserService} from "../../../identity-access-management/services/user.service";
 import {AssignedVehicle, Vehicle} from "../../../transportation/models/vehicle.model";
 import {
@@ -37,7 +36,6 @@ import {TransportService} from "../../../transportation/services/transport.servi
 export class TourPackageDetailComponent implements OnInit {
   title: string = "Add New Tour Package";
   tourPackage: TourPackage = new TourPackage();
-  tourExperience: TourExperience = new TourExperience();
   booking: Booking | null = null;
   tourForm: FormGroup = new FormGroup({});
   vehicleList: Vehicle[] = []
@@ -59,7 +57,7 @@ export class TourPackageDetailComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router,
               private tourPackageService: TourPackageService,
               private activityService: ActivityService,
-              private tourExperienceService: TourExperienceService,
+              // private tourExperienceService: TourExperienceService,
               private bookingService: BookingService,
               private transportService: TransportService,
               private userService: UserService,
@@ -83,6 +81,7 @@ export class TourPackageDetailComponent implements OnInit {
       destinations: [{value: null}],
       activities: [{value: null}],
       stars: [{value: null}],
+      schedule: [{value: null}]
     });
     this.tourForm.patchValue(this.tourPackage)
   }
@@ -150,24 +149,29 @@ export class TourPackageDetailComponent implements OnInit {
 
     this.tourPackageService.getPackageById(packageId).subscribe(packageData => {
       this.tourPackage = packageData;
+      console.log(packageData)
       this.tourForm.patchValue(this.tourPackage);
       this.tourForm.patchValue({meetingPointLatitude: packageData.meetingPoint?.latitude});
       this.tourForm.patchValue({meetingPointLongitude: packageData.meetingPoint?.longitude});
       this.destinations = packageData.destinations;
-      this.getVehiclesByTourPackageId();
-      this.tourExperienceService.getSchedule(packageId).subscribe(tourExperience => {
-        this.tourExperience = tourExperience;
-        tourExperience.schedule.forEach((item: Schedule) => {
-            this.dayList.forEach((day: Schedule) => {
-              if (day.day === item.day) {
-                day.hourRange = item.hourRange;
-                day.selected = true;
-              }
-            })
+      packageData.schedule.forEach((schedule: Schedule) => {
+        this.dayList.forEach((day: Schedule) => {
+          if (day.day === schedule.day) {
+            day.hourRange = schedule.hourRange;
+            day.selected = true;
           }
-        )
-        this.getBookingByTourExperienceIdAndTouristId();
-      });
+        })
+      })
+      this.getBookingByTourPackageIdAndTouristId();
+      this.getVehiclesByTourPackageId();
+      // this.tourExperienceService.getSchedule(packageId).subscribe(tourExperience => {
+      //   this.tourExperience = tourExperience;
+      //   tourExperience.schedule.forEach((item: Schedule) => {
+      //
+      //     }
+      //   )
+      //
+      // });
       this.cdr.detectChanges();
       packageData.activities?.forEach((item: Activity) => {
           this.activities.forEach((activity: Activity) => {
@@ -276,7 +280,7 @@ export class TourPackageDetailComponent implements OnInit {
   saveSchedule() {
     this.showSpinnerDialog();
     if (this.isEdit) {
-      this.tourExperienceService.saveSchedule(this.tourPackage.id, this.selectedDayList, this.tourForm.get('visible')?.value).subscribe(() => {
+      this.tourPackageService.saveSchedule(this.tourPackage.id, this.selectedDayList, this.tourForm.get('visible')?.value).subscribe(() => {
         this.hideSpinnerDialog();
       });
       this.getPackageById(this.tourPackage.id);
@@ -364,13 +368,13 @@ export class TourPackageDetailComponent implements OnInit {
         if (response) {
           this.showSpinnerDialog()
           const booking: Booking = new Booking();
-          booking.tourExperienceId = this.tourExperience.id;
+          booking.tourPackageId = this.tourPackage.id;
           booking.touristId = this.userService.getUserIdFromCookies();
           booking.date = this.selectedDate;
           booking.hourRange = this.getHourRangeByDayInSchedule(this.selectedDate);
           this.bookingService.createBooking(booking).subscribe((response) => {
               console.log(response);
-              this.getBookingByTourExperienceIdAndTouristId();
+              this.getBookingByTourPackageIdAndTouristId();
               this.hideSpinnerDialog()
               // this.router.navigate(['peru/tour-packages/my-packages']);
             }
@@ -380,8 +384,8 @@ export class TourPackageDetailComponent implements OnInit {
     )
   }
 
-  getBookingByTourExperienceIdAndTouristId() {
-    this.bookingService.getBookingByTourExperienceIdAndTouristId(this.tourExperience.id, this.userService.getUserIdFromCookies()).subscribe((response) => {
+  getBookingByTourPackageIdAndTouristId() {
+    this.bookingService.getBookingByTourPackageIdAndTouristId(this.tourPackage.id, this.userService.getUserIdFromCookies()).subscribe((response) => {
       this.booking = response;
       console.log(this.booking)
       if (response) this.selectedDate = new Date(response.date);
@@ -395,7 +399,7 @@ export class TourPackageDetailComponent implements OnInit {
 
   getHourRangeByDayInSchedule(date: Date) {
     const dayName = new Intl.DateTimeFormat('en-US', {weekday: 'long'}).format(date);
-    return this.tourExperience.schedule.find(item => item.day === dayName)?.hourRange;
+    return this.tourPackage.schedule.find(item => item.day === dayName)?.hourRange;
   }
 
   get getDateStringOfBooking() { //format: 2021-08-01

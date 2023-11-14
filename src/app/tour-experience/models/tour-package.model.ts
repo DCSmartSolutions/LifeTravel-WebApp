@@ -1,5 +1,6 @@
 import {Activity} from "./activity.model";
 import {LocationName, Location} from "./map.model";
+import {Schedule} from "./time-picker.model";
 
 export class TourPackage {
   id: number = 0;
@@ -17,4 +18,5 @@ export class TourPackage {
   meetingPointLatitude: number | null = null;
   meetingPointLongitude: number | null = null;
   destinations: LocationName[] = [];
+  schedule: Schedule[] = [];
 }

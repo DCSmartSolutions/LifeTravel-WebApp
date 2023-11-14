@@ -10,17 +10,17 @@ import {map} from "rxjs/operators";
 })
 export class BookingService {
   private bookingService = environment.baseUrl + 'bookings'
-  private base = 'http://localhost:3000/';
+  private base = 'http://localhost:3000/bookings';
 
   constructor(private http: HttpClient) {
   }
 
   createBooking(booking: Booking): Observable<any> {
-    return this.http.post<any>(`${this.base}bookings`, booking);
+    return this.http.post<any>(`${this.base}`, booking);
   }
-  getBookingByTourExperienceIdAndTouristId(tourExperienceId: number, touristId: string): Observable<Booking> {
+  getBookingByTourPackageIdAndTouristId(tourPackageId: number, touristId: string): Observable<Booking> {
     // @ts-ignore
-    return this.http.get<Booking[]>(`${this.base}bookings?tourExperienceId=${tourExperienceId}&touristId=${touristId}`)
+    return this.http.get<Booking[]>(`${this.base}?tourPackageId=${tourPackageId}&touristId=${touristId}`)
       .pipe(
         map(bookings => (bookings && bookings.length > 0) ? bookings[0] : null)
       );
