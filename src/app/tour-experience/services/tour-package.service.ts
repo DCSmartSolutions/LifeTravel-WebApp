@@ -7,7 +7,8 @@ import {TourPackage} from "../models/tour-package.model";
 })
 export class TourPackageService {
 
-  private base = 'http://localhost:3000/packages';
+   private base = 'http://localhost:3000/packages';
+  //private base = 'http://localhost:8080/tour-packages';
 
   constructor(private http: HttpClient) { }
   getPackagesByRegionId(regionId: number): Observable<TourPackage[]> {

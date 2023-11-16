@@ -1,7 +1,7 @@
 <mat-card class="p-3 card-container h-100"
           [ngClass]="tourPackage.visible? '':'bg-dark-subtle'">
 
-  <img class="px-3" mat-card-image [src]="tourPackage.img" [alt]="tourPackage.title+'-image'">
+  <img class="px-3" mat-card-image [src]="tourPackage.imgUrl" [alt]="tourPackage.title+'-image'">
   <div *ngIf="isAgency">
     <button mat-raised-button class="position-absolute start-0 top-0 m-3 fw-semibold"
             [ngClass]="tourPackage.visible ? '' : 'bg-dark text-white'">
@@ -14,7 +14,7 @@
     <label class="fs-6 fw-bolder">{{ tourPackage.title }}</label>
     <div class="d-flex justify-content-end align-items-middle fw-bolder">
       <mat-icon class="star-icon">star</mat-icon>
-      <div> {{ tourPackage.stars }}</div>
+      <div> {{ tourPackage.rating }}</div>
     </div>
     <label class="d-flex"
            style="text-align: justify; text-justify: inter-word"> {{ (tourPackage.description.length > 250) ? (tourPackage.description | slice:0:250) + '...' : (tourPackage.description) }}  </label>

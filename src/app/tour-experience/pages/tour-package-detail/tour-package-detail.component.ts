@@ -67,20 +67,17 @@ export class TourPackageDetailComponent implements OnInit {
               private formBuilder: FormBuilder) {
     this.tourForm = this.formBuilder.group({
       id: [{value: null}],
-      img: [{value: null}, Validators.required],
+      imgUrl: [{value: null}, Validators.required],
       destiny: [{value: null}, Validators.required],
       title: [{value: ''}, Validators.required],
       description: [{value: ""}, Validators.required],
-      agency: [{value: null}],
+      agencyId: [{value: null}],
       price: [{value: null}, Validators.required],
-      regionId: [{value: null}],
       visible: [{value: false}],
-      meetingPoint: [{value: null}],
       meetingPointLatitude: [{value: null}, Validators.required],
       meetingPointLongitude: [{value: null}, Validators.required],
       destinations: [{value: null}],
       activities: [{value: null}],
-      stars: [{value: null}],
       schedule: [{value: null}]
     });
     this.tourForm.patchValue(this.tourPackage)
@@ -140,7 +137,6 @@ export class TourPackageDetailComponent implements OnInit {
   setUserLocation(position: GeolocationPosition) {
     this.tourForm.patchValue({meetingPointLatitude: position.coords.latitude});
     this.tourForm.patchValue({meetingPointLongitude: position.coords.longitude});
-    this.tourForm.patchValue({meetingPoint: new Location(position.coords.latitude, position.coords.longitude)});
   }
 
   getPackageById(packageId: number) {
@@ -151,8 +147,6 @@ export class TourPackageDetailComponent implements OnInit {
       this.tourPackage = packageData;
       console.log(packageData)
       this.tourForm.patchValue(this.tourPackage);
-      this.tourForm.patchValue({meetingPointLatitude: packageData.meetingPoint?.latitude});
-      this.tourForm.patchValue({meetingPointLongitude: packageData.meetingPoint?.longitude});
       this.destinations = packageData.destinations;
       packageData.schedule.forEach((schedule: Schedule) => {
         this.dayList.forEach((day: Schedule) => {
@@ -191,11 +185,13 @@ export class TourPackageDetailComponent implements OnInit {
   }
 
   onFileSelected($event: any) {
+    console.log(this.tourForm.getRawValue() as TourPackage)
     this.showSpinnerDialog();
     const file = $event.target.files[0];
     this.azureBlobStorageService.uploadImage(file).then(url => {
-        this.tourPackage.img = url;
-        this.tourForm.patchValue({img: url});
+        this.tourPackage.imgUrl = url;
+      console.log(url)
+        this.tourForm.patchValue({imgUrl: url});
         if (this.tourPackage.id) {
           this.tourPackageService.modifyImage(this.tourPackage.id, url).subscribe();
         }
@@ -205,7 +201,7 @@ export class TourPackageDetailComponent implements OnInit {
   }
 
   get hasImg() {
-    return this.tourForm.get('img')?.value != null;
+    return this.tourForm.get('imgUrl')?.value != null;
   }
 
   get isVisible() {
@@ -224,7 +220,8 @@ export class TourPackageDetailComponent implements OnInit {
   }
 
   getNewLocation($event: Location) {
-    this.tourForm.patchValue({meetingPoint: $event});
+    this.tourForm.patchValue({meetingPointLatitude: $event.latitude});
+    this.tourForm.patchValue({meetingPointLongitude: $event.longitude});
   }
 
   getDestinationList($event: any[]) {
@@ -241,20 +238,20 @@ export class TourPackageDetailComponent implements OnInit {
 
   savePackage() {
     this.showSpinnerDialog();
-    this.tourForm.patchValue({destinations: this.destinations});
-    this.tourForm.get('meetingPoint')?.setValue(new Location(this.tourForm.get('meetingPointLatitude')?.value, this.tourForm.get('meetingPointLongitude')?.value));
+    this.tourForm.patchValue({destinations: this.destinations, agencyId: this.userService.getUserIdFromCookies()});
     this.tourForm.patchValue({activities: this.activities.filter(item => item.selected)});
     this.tourPackage = Object.assign({}, this.tourForm.getRawValue()) as TourPackage;
-    if (this.isEdit) {
-      this.tourPackageService.modifyPackage(this.tourPackage.id, this.tourPackage).subscribe(() => {
-        this.hideSpinnerDialog()
-      });
-    } else {
-      this.tourPackageService.createPackage(this.tourPackage).subscribe(() => {
-        this.hideSpinnerDialog()
-        this.back()
-      })
-    }
+    console.log(this.tourPackage)
+    // if (this.isEdit) {
+    //   this.tourPackageService.modifyPackage(this.tourPackage.id, this.tourPackage).subscribe(() => {
+    //     this.hideSpinnerDialog()
+    //   });
+    // } else {
+    //   this.tourPackageService.createPackage(this.tourPackage).subscribe(() => {
+    //     this.hideSpinnerDialog()
+    //     this.back()
+    //   })
+    // }
   }
 
   selectDay(item: any) {

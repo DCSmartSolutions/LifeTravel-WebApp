@@ -36,11 +36,17 @@
                   </button>
                   <input hidden #fileInput type="file" id="file" (change)="onFileSelected($event)">
                 </div>
-                <img *ngIf="hasImg" class="w-100" [src]="tourForm.get('img')?.value" alt="tour picture">
+                <img *ngIf="hasImg" class="w-100" [src]="tourForm.get('imgUrl')?.value" alt="tour picture">
                 <div *ngIf="!hasImg"
                      class="d-flex bg-warning-subtle border border-warning rounded text-light-emphasis justify-content-center p-3">
                   No image uploaded
                 </div>
+              </div>
+              <div class="col-12 mb-2" [ngClass]="isEdit? '':'col-lg-8'">
+                <label class="fs-6 fw-medium">Destiny:</label>
+                <mat-form-field class="d-flex">
+                  <input matInput type="text" formControlName="destiny" [readonly]="isOnlyViewInfo">
+                </mat-form-field>
               </div>
               <div class="col-12 mb-2" [ngClass]="isEdit? '':'col-lg-8'">
                 <label class="fs-6 fw-medium">Title:</label>

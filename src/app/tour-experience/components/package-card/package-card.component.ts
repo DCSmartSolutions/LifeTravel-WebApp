@@ -11,7 +11,7 @@ import {TourPackage} from "../../models/tour-package.model";
   styleUrls: ['./package-card.component.scss']
 })
 export class PackageCardComponent implements OnInit {
-  @Input() tourPackage: any = new TourPackage();
+  @Input() tourPackage: TourPackage = new TourPackage();
   @Input() isAgency: boolean = false;
   agencyName: string = '';
   constructor(private http: HttpClient,
