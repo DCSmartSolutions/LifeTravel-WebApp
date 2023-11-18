@@ -41,9 +41,6 @@ export class TransportService {
   removeAssignedVehicle(assignedVehicleId: number): Observable<any> {
     return this.http.delete<any>(`${this.assignedVehicleService}/${assignedVehicleId}`);
   }
-  removeAssignedVehicleByVehicleIdAndTourPackageId(vehicleId: number, tourPackageId: number): Observable<any> {
-    return this.http.delete<any>(`${this.assignedVehicleService}?vehicleId=${vehicleId}&tourPackageId=${tourPackageId}`);
-  }
   getAssignedVehicleByVehicleIdAndTourPackageId(vehicleId: number, tourPackageId: number): Observable<AssignedVehicle> {
     return this.http.get<AssignedVehicle>(`${this.assignedVehicleService}?vehicleId=${vehicleId}&tourPackageId=${tourPackageId}`);
   }

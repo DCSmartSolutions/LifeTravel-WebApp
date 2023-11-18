@@ -45,7 +45,19 @@
               <div class="col-12 mb-2" [ngClass]="isEdit? '':'col-lg-8'">
                 <label class="fs-6 fw-medium">Destiny:</label>
                 <mat-form-field class="d-flex">
-                  <input matInput type="text" formControlName="destiny" [readonly]="isOnlyViewInfo">
+                  <input #input
+                         type="text"
+                         placeholder="Select a department"
+                         matInput class="form-control"
+                         formControlName="destiny"
+                         [matAutocomplete]="auto"
+                         (input)="filter()"
+                         (focus)="filter()" [readonly]="isOnlyViewInfo">
+                  <mat-autocomplete requireSelection #auto="matAutocomplete">
+                    <div *ngFor="let option of filteredOptions">
+                      <mat-option [value]="option">{{option}}</mat-option>
+                    </div>
+                  </mat-autocomplete>
                 </mat-form-field>
               </div>
               <div class="col-12 mb-2" [ngClass]="isEdit? '':'col-lg-8'">
@@ -81,10 +93,6 @@
               <div class="col-12 mb-2 row" *ngIf="tourForm.get('meetingPointLatitude')?.value"
                    [ngClass]="isEdit? '':'col-lg-8'">
                 <label class="fs-5 fw-medium mb-2">Meeting Point:</label>
-                <!--                <mat-form-field class="d-flex mb-2">-->
-                <!--                  <input matInput type="text" readonly [(ngModel)]="displayNameLocation"-->
-                <!--                         [ngModelOptions]="{standalone: true}">-->
-                <!--                </mat-form-field>-->
                 <app-map [latitude]="tourForm.get('meetingPointLatitude')?.value"
                          [longitude]="tourForm.get('meetingPointLongitude')?.value" [mapClickEnabled]="!isOnlyViewInfo"
                          (locationChangedEvent)="getNewLocation($event)">
@@ -113,7 +121,7 @@
                 </div>
               </div>
               <div class="d-flex justify-items-center mt-3" *ngIf="!isOnlyViewInfo">
-                <button mat-raised-button color="accent" class="col-12 col-md-4 offset-md-4" (click)="savePackage()">
+                <button mat-raised-button color="accent" class="col-12 col-md-4 offset-md-4" (click)="savePackage()" [disabled]="tourForm.invalid">
                   <mat-icon>save</mat-icon>
                   Save
                 </button>

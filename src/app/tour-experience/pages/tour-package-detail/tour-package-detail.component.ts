@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {TourPackage} from "../../models/tour-package.model";
 import {TourPackageService} from "../../services/tour-package.service";
@@ -15,7 +15,7 @@ import {
 import {Activity} from "../../models/activity.model";
 import {ActivityService} from "../../services/activity.service";
 // import {TourExperienceService} from "../../services/tour-experience.service";
-import {Location, LocationName} from "../../models/map.model";
+import {LocationName} from "../../models/map.model";
 import {
   ConfirmationMessageComponent
 } from "../../../shared/components/confirmation-message/confirmation-message.component";
@@ -43,17 +43,19 @@ export class TourPackageDetailComponent implements OnInit {
   private dialog: MatDialogRef<SpinnerComponent> | undefined;
   activities: Activity[] = [];
   dayList: Schedule[] = [
-    {day: 'Monday', selected: false, hourRange: new HourRange()},
-    {day: 'Tuesday', selected: false, hourRange: new HourRange()},
-    {day: 'Wednesday', selected: false, hourRange: new HourRange()},
-    {day: 'Thursday', selected: false, hourRange: new HourRange()},
-    {day: 'Friday', selected: false, hourRange: new HourRange()},
-    {day: 'Saturday', selected: false, hourRange: new HourRange()},
-    {day: 'Sunday', selected: false, hourRange: new HourRange()},
+    {id : 0,day: 'Monday', selected: false, hourRange: new HourRange()},
+    {id : 0,day: 'Tuesday', selected: false, hourRange: new HourRange()},
+    {id : 0,day: 'Wednesday', selected: false, hourRange: new HourRange()},
+    {id : 0,day: 'Thursday', selected: false, hourRange: new HourRange()},
+    {id : 0,day: 'Friday', selected: false, hourRange: new HourRange()},
+    {id : 0,day: 'Saturday', selected: false, hourRange: new HourRange()},
+    {id : 0,day: 'Sunday', selected: false, hourRange: new HourRange()},
   ];
   destinations: LocationName[] = []
   isOnlyViewInfo: boolean = false;
-
+  departments: string[] = [];
+  filteredOptions: string[] = [];
+  @ViewChild('input') input: ElementRef<HTMLInputElement> | undefined;
   constructor(private route: ActivatedRoute, private router: Router,
               private tourPackageService: TourPackageService,
               private activityService: ActivityService,
@@ -97,6 +99,7 @@ export class TourPackageDetailComponent implements OnInit {
           item.selected = false;
         })
         this.activities = activities;
+      console.log(this.activities)
       }
     )
   }
@@ -106,17 +109,15 @@ export class TourPackageDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.showSpinnerDialog()
     this.getActivities();
+    this.getDepartmentsName();
     this.route.params.subscribe(params => {
         const packageId = params['packageId'];
         this.isOnlyViewInfo = params['detail-type'] === 'detail-info';
         if (packageId != null) {
           this.title = this.isOnlyViewInfo ? "Tour Package Detail" : "Edit Tour Package";
           this.isEdit = true;
-          setTimeout(() => {
-            this.getPackageById(packageId);
-          }, 500);
+          this.getPackageById(packageId);
         } else {
           this.getUserLocation();
         }
@@ -124,7 +125,11 @@ export class TourPackageDetailComponent implements OnInit {
       }
     );
   }
-
+  getDepartmentsName(){
+    this.tourPackageService.getDepartments().subscribe(departments => {
+      this.departments = departments.map(item => item.name);
+    })
+  }
   getUserLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => this.setUserLocation(position));
@@ -133,57 +138,49 @@ export class TourPackageDetailComponent implements OnInit {
     }
     this.hideSpinnerDialog()
   }
-
   setUserLocation(position: GeolocationPosition) {
     this.tourForm.patchValue({meetingPointLatitude: position.coords.latitude});
     this.tourForm.patchValue({meetingPointLongitude: position.coords.longitude});
   }
-
   getPackageById(packageId: number) {
+    this.showSpinnerDialog()
     this.tourForm.reset()
     this.tourForm.patchValue({id: packageId});
 
     this.tourPackageService.getPackageById(packageId).subscribe(packageData => {
-      this.tourPackage = packageData;
-      console.log(packageData)
-      this.tourForm.patchValue(this.tourPackage);
       this.destinations = packageData.destinations;
-      packageData.schedule.forEach((schedule: Schedule) => {
-        this.dayList.forEach((day: Schedule) => {
-          if (day.day === schedule.day) {
-            day.hourRange = schedule.hourRange;
-            day.selected = true;
-          }
-        })
-      })
-      this.getBookingByTourPackageIdAndTouristId();
-      this.getVehiclesByTourPackageId();
-      // this.tourExperienceService.getSchedule(packageId).subscribe(tourExperience => {
-      //   this.tourExperience = tourExperience;
-      //   tourExperience.schedule.forEach((item: Schedule) => {
-      //
-      //     }
-      //   )
-      //
-      // });
-      this.cdr.detectChanges();
-      packageData.activities?.forEach((item: Activity) => {
-          this.activities.forEach((activity: Activity) => {
-            if (activity.id == item.id) {
-              activity.selected = true;
+      this.tourPackageService.getScheduleByPackageId(packageId).subscribe((schedule: Schedule[]) => {
+        packageData.schedule = schedule;
+        console.log(this.destinations)
+        packageData.schedule?.forEach((schedule: Schedule) => {
+          this.dayList.forEach((day: Schedule) => {
+            if (day.day === schedule.day) {
+              day.hourRange = schedule.hourRange;
+              day.selected = true;
             }
           })
-        }
-      )
+        })
+        this.getBookingByTourPackageIdAndTouristId();
+        this.getVehiclesByTourPackageId();
+        this.cdr.detectChanges();
+        packageData.activities?.forEach((item: Activity) => {
+            this.activities.forEach((activity: Activity) => {
+              if (activity.id == item.id) {
+                activity.selected = true;
+              }
+            })
+          }
+        )
+        this.tourPackage = packageData;
+        this.tourForm.patchValue(this.tourPackage);
+      })
     });
     this.hideSpinnerDialog();
   }
-
   back() {
     if (this.isOnlyViewInfo) this.router.navigate(['peru/']);
     else this.router.navigate(['peru/tour-packages/my-packages']);
   }
-
   onFileSelected($event: any) {
     console.log(this.tourForm.getRawValue() as TourPackage)
     this.showSpinnerDialog();
@@ -199,7 +196,6 @@ export class TourPackageDetailComponent implements OnInit {
       }
     );
   }
-
   get hasImg() {
     return this.tourForm.get('imgUrl')?.value != null;
   }
@@ -219,12 +215,13 @@ export class TourPackageDetailComponent implements OnInit {
     this.dialog?.close();
   }
 
-  getNewLocation($event: Location) {
+  getNewLocation($event: LocationName) {
     this.tourForm.patchValue({meetingPointLatitude: $event.latitude});
     this.tourForm.patchValue({meetingPointLongitude: $event.longitude});
   }
 
   getDestinationList($event: any[]) {
+    console.log($event)
     this.destinations = $event;
   }
 
@@ -242,16 +239,16 @@ export class TourPackageDetailComponent implements OnInit {
     this.tourForm.patchValue({activities: this.activities.filter(item => item.selected)});
     this.tourPackage = Object.assign({}, this.tourForm.getRawValue()) as TourPackage;
     console.log(this.tourPackage)
-    // if (this.isEdit) {
-    //   this.tourPackageService.modifyPackage(this.tourPackage.id, this.tourPackage).subscribe(() => {
-    //     this.hideSpinnerDialog()
-    //   });
-    // } else {
-    //   this.tourPackageService.createPackage(this.tourPackage).subscribe(() => {
-    //     this.hideSpinnerDialog()
-    //     this.back()
-    //   })
-    // }
+    if (this.isEdit) {
+      this.tourPackageService.modifyPackage(this.tourPackage.id, this.tourPackage).subscribe(() => {
+        this.hideSpinnerDialog()
+      });
+    } else {
+      this.tourPackageService.createPackage(this.tourPackage).subscribe(() => {
+        this.hideSpinnerDialog()
+        this.back()
+      })
+    }
   }
 
   selectDay(item: any) {
@@ -275,12 +272,13 @@ export class TourPackageDetailComponent implements OnInit {
   }
 
   saveSchedule() {
-    this.showSpinnerDialog();
+
     if (this.isEdit) {
-      this.tourPackageService.saveSchedule(this.tourPackage.id, this.selectedDayList, this.tourForm.get('visible')?.value).subscribe(() => {
-        this.hideSpinnerDialog();
+      this.showSpinnerDialog();
+      this.tourPackageService.saveSchedule(this.tourPackage.id, this.selectedDayList).subscribe(() => {
+        this.hideSpinnerDialog()
+        this.savePackage();
       });
-      this.getPackageById(this.tourPackage.id);
     }
   }
 
@@ -467,5 +465,9 @@ export class TourPackageDetailComponent implements OnInit {
     if (this.vehicleList.length === 0){
       this.tourForm.patchValue({visible: false})
     }
+  }
+  filter(): void {
+    const filterValue = this.input!.nativeElement.value.toLowerCase();
+    this.filteredOptions = this.departments.filter(o => o.toLowerCase().includes(filterValue));
   }
 }

@@ -2,49 +2,62 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {TourPackage} from "../models/tour-package.model";
+import {environment} from "../../../environments/environment";
+import {Schedule} from "../models/time-picker.model";
+import {UserService} from "../../identity-access-management/services/user.service";
+import {Department} from "../models/department.model";
 @Injectable({
   providedIn: 'root'
 })
 export class TourPackageService {
 
-   private base = 'http://localhost:3000/packages';
-  //private base = 'http://localhost:8080/tour-packages';
+   // private base = 'http://localhost:3000/packages';
+   private _departmentService =  environment.baseUrl + 'departments';
+  private _tourPackageService = environment.baseUrl + 'tour-packages';
+  private _scheduleService = environment.baseUrl + 'schedules';
+  private _regionService = environment.baseUrl + 'regions';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+              private userService: UserService) { }
+  getDepartments(): Observable<Department[]> {
+    return this.http.get<Department[]>(`${this._departmentService}`);
+  }
   getPackagesByRegionId(regionId: number): Observable<TourPackage[]> {
-    return this.http.get<TourPackage[]>(`${this.base}?regionId=${regionId}&visible=true`);
+    return this.http.get<TourPackage[]>(`${this._tourPackageService}/region/${regionId}`);
   }
   getPackageById(packageId: number): Observable<TourPackage> {
-    return this.http.get<TourPackage>(`${this.base}/${packageId}`);
+    return this.http.get<TourPackage>(`${this._tourPackageService}/${packageId}`);
   }
-  modifyImage(packageId: number, image: any): Observable<any> {
-    return this.http.patch<any>(`${this.base}/${packageId}`, {img: image});
+  modifyImage(packageId: number, image: string): Observable<any> {
+    return this.http.put<any>(`${this._tourPackageService}/img/${packageId}`, {imgUrl: image});
   }
   modifyPackage(packageId: number, tourPackage: TourPackage): Observable<any> {
-    return this.http.patch<any>(`${this.base}/${packageId}`, tourPackage);
+    return this.http.put<any>(`${this._tourPackageService}/${packageId}`, tourPackage);
   }
-  saveSchedule(tourPackageId: number, schedule: any, visible: boolean): Observable<any> {
-    return this.http.patch<any>(`${this.base}?tourPackageId=${tourPackageId}`, {
-      schedule: schedule,
-      visible: visible
-    }); //modify visible of tourPackage
+  saveSchedule(tourPackageId: number, schedule: Schedule[]): Observable<any> {
+    return this.http.post<any>(`${this._scheduleService}/package/${tourPackageId}`, schedule) //modify visible of tourPackage
+  }
+  getScheduleByPackageId(packageId: number): Observable<Schedule[]> {
+    return this.http.get<Schedule[]>(`${this._scheduleService}/package/${packageId}`);
   }
   createPackage(tourPackage: TourPackage): Observable<any> {
-    return this.http.post<any>(`${this.base}`, tourPackage);
+    return this.http.post<any>(`${this._tourPackageService}`, tourPackage);
   }
   getAllPackages(): Observable<TourPackage[]> {
-    return this.http.get<TourPackage[]>(`${this.base}?visible=true`);
+    return this.http.get<TourPackage[]>(`${this._tourPackageService}`);
   }
   getAllPackagesByAgency(): Observable<TourPackage[]> {
-    return this.http.get<TourPackage[]>(`${this.base}`);
+    return this.http.get<TourPackage[]>(`${this._tourPackageService}`);
   }
   getAllHiddenPackagesByAgency(): Observable<TourPackage[]> {
-    return this.http.get<TourPackage[]>(`${this.base}?visible=false`);
+    const agencyId = this.userService.getUserIdFromCookies();
+    return this.http.get<TourPackage[]>(`${this._tourPackageService}/all-visible-packages-by-agency/${agencyId}`);
   }
   getAllVisiblePackagesByAgency(): Observable<TourPackage[]> {
-    return this.http.get<TourPackage[]>(`${this.base}?visible=true`);
+    const agencyId = this.userService.getUserIdFromCookies();
+    return this.http.get<TourPackage[]>(`${this._tourPackageService}/all-hidden-packages-by-agency/${agencyId}`);
   }
   getRegionById(regionId: number): Observable<any> {
-    return this.http.get<any>(`${this.base}regions/${regionId}`);
+    return this.http.get<any>(`${this._regionService}/${regionId}`);
   }
 }
