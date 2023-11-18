@@ -7,7 +7,7 @@ import {TourPackage} from "../../models/tour-package.model";
   styleUrls: ['./list-packages.component.scss']
 })
 export class ListPackagesComponent {
-  @Input() className: string = "col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 p-4";
+  @Input() className: string = "col-12 col-sm-12 col-md-6 col-lg-4 p-4";
   @Input() isAgency: boolean = false;
   packages: any[] = [];
   @Input() filteredPackages: TourPackage[] = [];

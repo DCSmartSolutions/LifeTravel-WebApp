@@ -22,6 +22,7 @@ import {MatTabsModule} from "@angular/material/tabs";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
 import { PackageCardComponent } from './components/package-card/package-card.component';
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
 
 const routes: Routes = [
   {
@@ -56,28 +57,29 @@ const routes: Routes = [
     MapComponent,
     PackageCardComponent,
   ],
-  imports: [
-    RouterModule.forChild(routes),
-    MatDialogModule,
-    MatButtonModule,
-    MatCardModule,
-    NgOptimizedImage,
-    MatSliderModule,
-    MatInputModule,
-    NgIf,
-    FormsModule,
-    MatCheckboxModule,
-    NgForOf,
-    MatIconModule,
-    NgClass,
-    ReactiveFormsModule,
-    SlicePipe,
-    MatSlideToggleModule,
-    SharedLayoutModule,
-    MatTabsModule,
-    MatDatepickerModule,
-    MatNativeDateModule
-  ],
+    imports: [
+        RouterModule.forChild(routes),
+        MatDialogModule,
+        MatButtonModule,
+        MatCardModule,
+        NgOptimizedImage,
+        MatSliderModule,
+        MatInputModule,
+        NgIf,
+        FormsModule,
+        MatCheckboxModule,
+        NgForOf,
+        MatIconModule,
+        NgClass,
+        ReactiveFormsModule,
+        SlicePipe,
+        MatSlideToggleModule,
+        SharedLayoutModule,
+        MatTabsModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatAutocompleteModule
+    ],
   exports: [RouterModule, ListPackagesComponent],
 })
 export class TourPackagesModule {

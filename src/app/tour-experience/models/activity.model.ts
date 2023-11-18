@@ -1,5 +1,5 @@
 export class Activity {
-  id: string = '';
+  id: number = 0;
   title: string = '';
   imgUrl: string = '';
   selected: boolean = false;

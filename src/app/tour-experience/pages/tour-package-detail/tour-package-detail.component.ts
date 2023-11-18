@@ -148,7 +148,6 @@ export class TourPackageDetailComponent implements OnInit {
   }
 
   getPackageById(packageId: number) {
-    this.showSpinnerDialog()
     this.tourForm.reset()
     this.tourForm.patchValue({id: packageId});
 
@@ -190,7 +189,6 @@ export class TourPackageDetailComponent implements OnInit {
   }
 
   onFileSelected($event: any) {
-    console.log(this.tourForm.getRawValue() as TourPackage)
     this.showSpinnerDialog();
     const file = $event.target.files[0];
     this.azureBlobStorageService.uploadImage(file).then(url => {
@@ -288,6 +286,7 @@ export class TourPackageDetailComponent implements OnInit {
         this.hideSpinnerDialog()
         this.savePackage();
       });
+      this.getPackageById(this.tourPackage.id);
     }
   }
 

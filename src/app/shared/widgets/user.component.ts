@@ -81,6 +81,8 @@ export class UserComponent implements OnInit {
   logout() {
     this.showSpinnerDialog();
     this.cookieService.delete('JSESSIONID');
+    this.cookieService.delete('JSESSIONID');
+    this.cookieService.delete('JSESSIONID');
     this.cookieService.delete('JUID');
     this.cookieService.deleteAll();
     setTimeout(
