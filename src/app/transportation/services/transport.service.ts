@@ -1,50 +1,40 @@
 import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
-import {AssignedVehicle, Vehicle} from "../models/vehicle.model";
+import {Vehicle} from "../models/vehicle.model";
 import {HttpClient} from "@angular/common/http";
 import {UserService} from "../../identity-access-management/services/user.service";
 import {VEHICLE_STATUS} from "../enums/vehicle-status.enum";
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class TransportService {
-  private base = 'http://localhost:3000/transportations';
-  private assignedVehicleService = 'http://localhost:3000/assignedVehicles';
+  private base = environment.baseUrl + 'vehicles';
   constructor(private http: HttpClient, private userService: UserService) { }
   getAllTransportationsByAgencyId(status: VEHICLE_STATUS = VEHICLE_STATUS.OPERATIONAL): Observable<Vehicle[]> {
     const agencyId = this.userService.getUserIdFromCookies();
-    return this.http.get<Vehicle[]>(`${this.base}?agencyId=${agencyId}&status=${status}`);
+    return this.http.get<Vehicle[]>(`${this.base}/all-vehicles-by-agency-user-id-and-status/${agencyId}/${status}`);
   }
   getTransportationById(transportId: number): Observable<Vehicle> {
     return this.http.get<Vehicle>(`${this.base}/${transportId}`);
   }
-  getOperationalTransportationsByAgencyId(): Observable<Vehicle[]> {
-    const agencyId = this.userService.getUserIdFromCookies();
-    return this.http.get<Vehicle[]>(`${this.base}?agencyId=${agencyId}&status=${VEHICLE_STATUS.OPERATIONAL}`);
-  }
   modifyImage(transportId: number, image: string): Observable<any> {
-    return this.http.patch<any>(`${this.base}/${transportId}`, {img: image});
+    return this.http.put<any>(`${this.base}/img/${transportId}`, {image});
   }
   createTransportation(transport: Vehicle): Observable<any> {
-    return this.http.post<any>(`${this.base}`, transport);
+    return this.http.post<any>(`${this.base}/create`, transport);
   }
   modifyTransportation(transportId: number, transport: Vehicle): Observable<any> {
-    return this.http.patch<any>(`${this.base}/${transportId}`, transport);
+    return this.http.patch<any>(`${this.base}/modify/${transportId}`, transport);
   }
-  assignVehicle(assignedVehicle: AssignedVehicle): Observable<any> {
-    return this.http.post<any>(`${this.assignedVehicleService}`, assignedVehicle);
+  assignVehicle(vehicleId: number, tourPackageId: number): Observable<any> {
+    return this.http.put<any>(`${this.base}/assign-vehicle-to-tour-package/${vehicleId}/${tourPackageId}`, null);
   }
-  getAssignedVehiclesByTourPackageId(tourPackageId: number): Observable<AssignedVehicle[]> {
-    return this.http.get<AssignedVehicle[]>(`${this.assignedVehicleService}?tourPackageId=${tourPackageId}`);
+  getAssignedVehiclesByTourPackageId(tourPackageId: number): Observable<Vehicle[]> {
+    return this.http.get<Vehicle[]>(`${this.base}/all-vehicles-by-tour-package/${tourPackageId}`);
   }
-  removeAssignedVehicle(assignedVehicleId: number): Observable<any> {
-    return this.http.delete<any>(`${this.assignedVehicleService}/${assignedVehicleId}`);
-  }
-  removeAssignedVehicleByVehicleIdAndTourPackageId(vehicleId: number, tourPackageId: number): Observable<any> {
-    return this.http.delete<any>(`${this.assignedVehicleService}?vehicleId=${vehicleId}&tourPackageId=${tourPackageId}`);
-  }
-  getAssignedVehicleByVehicleIdAndTourPackageId(vehicleId: number, tourPackageId: number): Observable<AssignedVehicle> {
-    return this.http.get<AssignedVehicle>(`${this.assignedVehicleService}?vehicleId=${vehicleId}&tourPackageId=${tourPackageId}`);
+  removeAssignedVehicle(vehicleId: number, tourPackageId: number): Observable<any> {
+    return this.http.delete<any>(`${this.base}/remove-vehicle-to-tour-package/${vehicleId}/${tourPackageId}`);
   }
 }

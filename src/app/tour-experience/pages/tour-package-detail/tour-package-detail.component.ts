@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {TourPackage} from "../../models/tour-package.model";
 import {TourPackageService} from "../../services/tour-package.service";
@@ -15,14 +15,14 @@ import {
 import {Activity} from "../../models/activity.model";
 import {ActivityService} from "../../services/activity.service";
 // import {TourExperienceService} from "../../services/tour-experience.service";
-import {Location, LocationName} from "../../models/map.model";
+import {LocationName} from "../../models/map.model";
 import {
   ConfirmationMessageComponent
 } from "../../../shared/components/confirmation-message/confirmation-message.component";
 import {BookingService} from "../../../booking/services/booking.service";
 import {Booking} from "../../../booking/models/booking.model";
 import {UserService} from "../../../identity-access-management/services/user.service";
-import {AssignedVehicle, Vehicle} from "../../../transportation/models/vehicle.model";
+import {Vehicle} from "../../../transportation/models/vehicle.model";
 import {
   AddVehicleModalComponent
 } from "../../../transportation/components/add-vehicle-modal/add-vehicle-modal.component";
@@ -43,16 +43,19 @@ export class TourPackageDetailComponent implements OnInit {
   private dialog: MatDialogRef<SpinnerComponent> | undefined;
   activities: Activity[] = [];
   dayList: Schedule[] = [
-    {day: 'Monday', selected: false, hourRange: new HourRange()},
-    {day: 'Tuesday', selected: false, hourRange: new HourRange()},
-    {day: 'Wednesday', selected: false, hourRange: new HourRange()},
-    {day: 'Thursday', selected: false, hourRange: new HourRange()},
-    {day: 'Friday', selected: false, hourRange: new HourRange()},
-    {day: 'Saturday', selected: false, hourRange: new HourRange()},
-    {day: 'Sunday', selected: false, hourRange: new HourRange()},
+    {id: 0, day: 'Monday', selected: false, hourRange: new HourRange()},
+    {id: 0, day: 'Tuesday', selected: false, hourRange: new HourRange()},
+    {id: 0, day: 'Wednesday', selected: false, hourRange: new HourRange()},
+    {id: 0, day: 'Thursday', selected: false, hourRange: new HourRange()},
+    {id: 0, day: 'Friday', selected: false, hourRange: new HourRange()},
+    {id: 0, day: 'Saturday', selected: false, hourRange: new HourRange()},
+    {id: 0, day: 'Sunday', selected: false, hourRange: new HourRange()},
   ];
   destinations: LocationName[] = []
   isOnlyViewInfo: boolean = false;
+  departments: string[] = [];
+  filteredOptions: string[] = [];
+  @ViewChild('input') input: ElementRef<HTMLInputElement> | undefined;
 
   constructor(private route: ActivatedRoute, private router: Router,
               private tourPackageService: TourPackageService,
@@ -67,20 +70,17 @@ export class TourPackageDetailComponent implements OnInit {
               private formBuilder: FormBuilder) {
     this.tourForm = this.formBuilder.group({
       id: [{value: null}],
-      img: [{value: null}, Validators.required],
+      imgUrl: [{value: null}, Validators.required],
       destiny: [{value: null}, Validators.required],
       title: [{value: ''}, Validators.required],
       description: [{value: ""}, Validators.required],
-      agency: [{value: null}],
+      agencyId: [{value: null}],
       price: [{value: null}, Validators.required],
-      regionId: [{value: null}],
       visible: [{value: false}],
-      meetingPoint: [{value: null}],
       meetingPointLatitude: [{value: null}, Validators.required],
       meetingPointLongitude: [{value: null}, Validators.required],
       destinations: [{value: null}],
       activities: [{value: null}],
-      stars: [{value: null}],
       schedule: [{value: null}]
     });
     this.tourForm.patchValue(this.tourPackage)
@@ -100,6 +100,7 @@ export class TourPackageDetailComponent implements OnInit {
           item.selected = false;
         })
         this.activities = activities;
+        console.log(this.activities)
       }
     )
   }
@@ -109,23 +110,27 @@ export class TourPackageDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.showSpinnerDialog()
     this.getActivities();
+    this.getDepartmentsName();
     this.route.params.subscribe(params => {
         const packageId = params['packageId'];
         this.isOnlyViewInfo = params['detail-type'] === 'detail-info';
         if (packageId != null) {
           this.title = this.isOnlyViewInfo ? "Tour Package Detail" : "Edit Tour Package";
           this.isEdit = true;
-          setTimeout(() => {
-            this.getPackageById(packageId);
-          }, 500);
+          this.getPackageById(packageId);
         } else {
           this.getUserLocation();
         }
         this.emitDisableMapClickToChild();
       }
     );
+  }
+
+  getDepartmentsName() {
+    this.tourPackageService.getDepartments().subscribe(departments => {
+      this.departments = departments.map(item => item.name);
+    })
   }
 
   getUserLocation() {
@@ -140,47 +145,41 @@ export class TourPackageDetailComponent implements OnInit {
   setUserLocation(position: GeolocationPosition) {
     this.tourForm.patchValue({meetingPointLatitude: position.coords.latitude});
     this.tourForm.patchValue({meetingPointLongitude: position.coords.longitude});
-    this.tourForm.patchValue({meetingPoint: new Location(position.coords.latitude, position.coords.longitude)});
   }
 
   getPackageById(packageId: number) {
+    this.showSpinnerDialog()
     this.tourForm.reset()
     this.tourForm.patchValue({id: packageId});
 
     this.tourPackageService.getPackageById(packageId).subscribe(packageData => {
-      this.tourPackage = packageData;
-      console.log(packageData)
-      this.tourForm.patchValue(this.tourPackage);
-      this.tourForm.patchValue({meetingPointLatitude: packageData.meetingPoint?.latitude});
-      this.tourForm.patchValue({meetingPointLongitude: packageData.meetingPoint?.longitude});
       this.destinations = packageData.destinations;
-      packageData.schedule.forEach((schedule: Schedule) => {
-        this.dayList.forEach((day: Schedule) => {
-          if (day.day === schedule.day) {
-            day.hourRange = schedule.hourRange;
-            day.selected = true;
-          }
-        })
-      })
-      this.getBookingByTourPackageIdAndTouristId();
-      this.getVehiclesByTourPackageId();
-      // this.tourExperienceService.getSchedule(packageId).subscribe(tourExperience => {
-      //   this.tourExperience = tourExperience;
-      //   tourExperience.schedule.forEach((item: Schedule) => {
-      //
-      //     }
-      //   )
-      //
-      // });
-      this.cdr.detectChanges();
-      packageData.activities?.forEach((item: Activity) => {
-          this.activities.forEach((activity: Activity) => {
-            if (activity.id == item.id) {
-              activity.selected = true;
+      this.tourPackageService.getScheduleByPackageId(packageId).subscribe((schedule: Schedule[]) => {
+        packageData.schedule = schedule;
+        console.log(this.destinations)
+        packageData.schedule?.forEach((schedule: Schedule) => {
+          this.dayList.forEach((day: Schedule) => {
+            if (day.day === schedule.day) {
+              day.hourRange = schedule.hourRange;
+              day.selected = true;
             }
           })
-        }
-      )
+        })
+
+        this.cdr.detectChanges();
+        packageData.activities?.forEach((item: Activity) => {
+            this.activities.forEach((activity: Activity) => {
+              if (activity.id == item.id) {
+                activity.selected = true;
+              }
+            })
+          }
+        )
+        this.tourPackage = packageData;
+        this.tourForm.patchValue(this.tourPackage);
+        this.getBookingByTourPackageIdAndTouristId();
+        this.getVehiclesByTourPackageId();
+      })
     });
     this.hideSpinnerDialog();
   }
@@ -191,11 +190,13 @@ export class TourPackageDetailComponent implements OnInit {
   }
 
   onFileSelected($event: any) {
+    console.log(this.tourForm.getRawValue() as TourPackage)
     this.showSpinnerDialog();
     const file = $event.target.files[0];
     this.azureBlobStorageService.uploadImage(file).then(url => {
-        this.tourPackage.img = url;
-        this.tourForm.patchValue({img: url});
+        this.tourPackage.imgUrl = url;
+        console.log(url)
+        this.tourForm.patchValue({imgUrl: url});
         if (this.tourPackage.id) {
           this.tourPackageService.modifyImage(this.tourPackage.id, url).subscribe();
         }
@@ -205,7 +206,7 @@ export class TourPackageDetailComponent implements OnInit {
   }
 
   get hasImg() {
-    return this.tourForm.get('img')?.value != null;
+    return this.tourForm.get('imgUrl')?.value != null;
   }
 
   get isVisible() {
@@ -223,11 +224,13 @@ export class TourPackageDetailComponent implements OnInit {
     this.dialog?.close();
   }
 
-  getNewLocation($event: Location) {
-    this.tourForm.patchValue({meetingPoint: $event});
+  getNewLocation($event: LocationName) {
+    this.tourForm.patchValue({meetingPointLatitude: $event.latitude});
+    this.tourForm.patchValue({meetingPointLongitude: $event.longitude});
   }
 
   getDestinationList($event: any[]) {
+    console.log($event)
     this.destinations = $event;
   }
 
@@ -241,10 +244,10 @@ export class TourPackageDetailComponent implements OnInit {
 
   savePackage() {
     this.showSpinnerDialog();
-    this.tourForm.patchValue({destinations: this.destinations});
-    this.tourForm.get('meetingPoint')?.setValue(new Location(this.tourForm.get('meetingPointLatitude')?.value, this.tourForm.get('meetingPointLongitude')?.value));
+    this.tourForm.patchValue({destinations: this.destinations, agencyId: this.userService.getUserIdFromCookies()});
     this.tourForm.patchValue({activities: this.activities.filter(item => item.selected)});
     this.tourPackage = Object.assign({}, this.tourForm.getRawValue()) as TourPackage;
+    console.log(this.tourPackage)
     if (this.isEdit) {
       this.tourPackageService.modifyPackage(this.tourPackage.id, this.tourPackage).subscribe(() => {
         this.hideSpinnerDialog()
@@ -278,12 +281,13 @@ export class TourPackageDetailComponent implements OnInit {
   }
 
   saveSchedule() {
-    this.showSpinnerDialog();
+
     if (this.isEdit) {
-      this.tourPackageService.saveSchedule(this.tourPackage.id, this.selectedDayList, this.tourForm.get('visible')?.value).subscribe(() => {
-        this.hideSpinnerDialog();
+      this.showSpinnerDialog();
+      this.tourPackageService.saveSchedule(this.tourPackage.id, this.selectedDayList).subscribe(() => {
+        this.hideSpinnerDialog()
+        this.savePackage();
       });
-      this.getPackageById(this.tourPackage.id);
     }
   }
 
@@ -341,7 +345,7 @@ export class TourPackageDetailComponent implements OnInit {
           this.tourForm.patchValue({visible: false})
         }
       )
-    } else if (this.vehicleList.length ===0 ){
+    } else if (this.vehicleList.length === 0) {
       this.dialog = this.matDialog.open(AlertMessageComponent, {
           data: {
             title: "Can't be visible",
@@ -416,10 +420,7 @@ export class TourPackageDetailComponent implements OnInit {
     })
     this.dialog.afterClosed().subscribe((vehicle: Vehicle) => {
       if (vehicle) {
-        const assignedVehicle = new AssignedVehicle();
-        assignedVehicle.vehicleId = vehicle.id;
-        assignedVehicle.tourPackageId = this.tourPackage.id;
-        this.transportService.assignVehicle(assignedVehicle).subscribe(() => {
+        this.transportService.assignVehicle(vehicle.id, this.tourPackage.id).subscribe(() => {
             this.getVehiclesByTourPackageId();
           }
         )
@@ -429,14 +430,8 @@ export class TourPackageDetailComponent implements OnInit {
 
   private getVehiclesByTourPackageId() {
     this.showSpinnerDialog()
-    this.transportService.getAssignedVehiclesByTourPackageId(this.tourPackage.id).subscribe((vehicles: AssignedVehicle[]) => {
-      this.vehicleList = [];
-      vehicles.forEach((item: AssignedVehicle) => {
-          this.transportService.getTransportationById(item.vehicleId).subscribe((vehicle: Vehicle) => {
-            this.vehicleList.push(vehicle);
-          })
-        }
-      )
+    this.transportService.getAssignedVehiclesByTourPackageId(this.tourPackage.id).subscribe((vehicles: Vehicle[]) => {
+      this.vehicleList = vehicles;
       this.validateEmptyVehicleList();
       this.hideSpinnerDialog()
     })
@@ -456,19 +451,22 @@ export class TourPackageDetailComponent implements OnInit {
     this.dialog.afterClosed().subscribe((response) => {
       if (response) {
         this.showSpinnerDialog()
-        this.transportService.getAssignedVehicleByVehicleIdAndTourPackageId(item.id, this.tourPackage.id).subscribe((response) => {
-          const assignedVehicle = Array.isArray(response) ? response[0] : response;
+        this.transportService.removeAssignedVehicle(item.id, this.tourPackage.id).subscribe(() => {
           this.hideSpinnerDialog()
-          this.transportService.removeAssignedVehicle(assignedVehicle.id).subscribe(() => {
-              this.getVehiclesByTourPackageId();
-            })
+          this.getVehiclesByTourPackageId();
         })
       }
     })
   }
-  validateEmptyVehicleList(){
-    if (this.vehicleList.length === 0){
+
+  validateEmptyVehicleList() {
+    if (this.vehicleList.length === 0) {
       this.tourForm.patchValue({visible: false})
     }
+  }
+
+  filter(): void {
+    const filterValue = this.input!.nativeElement.value.toLowerCase();
+    this.filteredOptions = this.departments.filter(o => o.toLowerCase().includes(filterValue));
   }
 }

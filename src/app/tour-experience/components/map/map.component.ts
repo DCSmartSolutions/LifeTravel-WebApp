@@ -4,7 +4,7 @@ import * as MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import {environment} from "../../../../environments/environment";
 import {MapService} from "../../services/map.service";
 import {Observable, Subscription} from "rxjs";
-import {Location} from "../../models/map.model";
+import {Location, LocationName} from "../../models/map.model";
 
 @Component({
   selector: 'app-map',
@@ -16,12 +16,12 @@ export class MapComponent implements OnInit, OnDestroy {
   @Input() longitude: number = -76.9879548;
   @Input() latitude: number = -12.0777865;
   @Input() isOnlyOneMarker: boolean = true;
-  @Input() destinationsLocations: Location[] = [];
+  @Input() destinationsLocations: LocationName[] = [];
   @Input() events: Observable<void> = new Observable<void>();
   @Input() mapClickEnabled: boolean = true;
   @Output() displayNameChangedEvent = new EventEmitter<string>();
-  @Output() locationChangedEvent = new EventEmitter<Location>();
-  @Output() destinationsLocationsChangedEvent = new EventEmitter<Location[]>();
+  @Output() locationChangedEvent = new EventEmitter<LocationName>();
+  @Output() destinationsLocationsChangedEvent = new EventEmitter<LocationName[]>();
   marker: mapboxgl.Marker | undefined;
   private eventsSubscription: Subscription = new Subscription();
 
@@ -54,7 +54,7 @@ export class MapComponent implements OnInit, OnDestroy {
 
       setTimeout(() => {
         this.createMarker()
-      }, 1000);
+      }, 3000);
     }
     this.map.addControl(new mapboxgl.NavigationControl());
     this.mapClick();
@@ -119,7 +119,7 @@ export class MapComponent implements OnInit, OnDestroy {
       //console.log("display", response['display_name']);
       displayName = response['display_name'];
       this.displayNameChangedEvent.emit(displayName);
-      this.locationChangedEvent.emit(new Location(longitude, latitude));
+      this.locationChangedEvent.emit(new LocationName(latitude,longitude));
     });
   }
 
@@ -157,7 +157,7 @@ export class MapComponent implements OnInit, OnDestroy {
   private addMarker($event: any) {
     const coordinates = $event.lngLat;
     //console.log('Lng:', coordinates.lng, 'Lat:', coordinates.lat);
-    const location = new Location(coordinates.lat, coordinates.lng);
+    const location = new LocationName(coordinates.lat, coordinates.lng);
     this.destinationsLocations.push(location);
     this.createMarker();
   }
@@ -186,12 +186,23 @@ export class MapComponent implements OnInit, OnDestroy {
   createMarker() {
     this.destinationsLocationsChangedEvent.emit(this.destinationsLocations);
     this.clearMapFromMarkers();
-    for (let i = 0; i < this.destinationsLocations.length; i++) {
+    this.centerMapToFitMarkers();
+    for (let i = 0; i < this.destinationsLocations?.length; i++) {
       const location = this.destinationsLocations[i];
       this.setMarkerObjectHtml(location, i);
     }
   }
-
+  centerMapToFitMarkers() {
+    if (this.destinationsLocations.length > 0) {
+      const bounds = new mapboxgl.LngLatBounds();
+      this.destinationsLocations.forEach((location) => {
+        bounds.extend([location.longitude, location.latitude]);
+      });
+      this.map!.fitBounds(bounds, {
+        padding: 40
+      });
+    }
+  }
   reDrawMarker(destinations: Location[]) {
     this.clearMapFromMarkers();
     for (let i = 0; i < destinations.length; i++) {

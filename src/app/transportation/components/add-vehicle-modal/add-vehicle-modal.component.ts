@@ -2,6 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {TransportService} from "../../services/transport.service";
 import {Vehicle} from "../../models/vehicle.model";
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
+import {VEHICLE_STATUS} from "../../enums/vehicle-status.enum";
 
 class DialogData {
   constructor(public vehicle: Vehicle) {
@@ -23,7 +24,7 @@ export class AddVehicleModalComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.transportService.getOperationalTransportationsByAgencyId().subscribe((vehicles: Vehicle[]) => {
+    this.transportService.getAllTransportationsByAgencyId(VEHICLE_STATUS.OPERATIONAL).subscribe((vehicles: Vehicle[]) => {
       this.previousVehicle = this.data.vehicle;
       if (this.previousVehicle) {
         this.availableVehicles = vehicles.filter(vehicle => vehicle.id !== this.previousVehicle?.id &&
