@@ -37,44 +37,39 @@ export class SignUpComponent implements OnInit {
   ]
 
   ngOnInit() {
+
   }
 
   signUp() {
-    setTimeout(() => {
-      this.clearCookies()
-    }, 1000);
 
+    this.cookieService.delete('JSESSIONID')
+    this.cookieService.delete('JUID')
     this.showSpinnerDialog();
     this.signUpForm.get('role')?.setValue(this.roles.find(role => role.selected)?.name);
     const user = this.signUpForm.value;
 
     this.fireAuthCustomService.register(this.signUpForm.value)
-      .then((response: any) => {
+      .then(async (response: any) => {
         user.id = response.user.uid;
-        setTimeout(
-          () => {
-            this.cookieService.delete('JSESSIONID')
-            this.cookieService.delete('JUID')
-            this.cookieService.set('JUID', response.user.uid);
-            this.cookieService.set('JSESSIONID', response.user.accessToken);
-          },1000);
+
+        await this.cookieService.set('JUID', response.user.uid, 1, '/');
+        await this.cookieService.set('JSESSIONID', response.user.accessToken, 1, '/');
 
         if (user.role === 'Agency') {
-          this.userService.registerAgency(user).subscribe(
+          this.userService.registerAgency(user, response.user.accessToken).subscribe(
             () => {
               this.hideSpinnerDialog()
               this.router.navigate(['/authentication', 'login']);
             },
           )
         } else {
-          this.userService.registerTourist(user).subscribe(
+          this.userService.registerTourist(user, response.user.accessToken6).subscribe(
             () => {
               this.hideSpinnerDialog()
               this.router.navigate(['/authentication', 'login']);
             }
           )
         }
-
       })
       .catch((error: any) => {
         //console.log(error);

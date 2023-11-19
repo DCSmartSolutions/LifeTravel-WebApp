@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {CookieService} from "ngx-cookie-service";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {SpinnerComponent} from "../../../shared/components/spinner/spinner.component";
+import {Auth, getAuth} from "@angular/fire/auth";
 
 @Component({
   selector: 'app-login',
@@ -21,29 +22,26 @@ export class LoginComponent implements OnInit {
     private cookieService: CookieService,
     private router: Router,
     private matDialog: MatDialog,
+    private auth:Auth
   ) {
     this.loginForm = this.formBuilder.group({
       email: ['', {validators: [Validators.required, Validators.email], updateOn: 'change'}],
       password: ['', {validators: [Validators.required]}]
     });
   }
-
   ngOnInit(): void {
     if (this.cookieService.get('JSESSIONID')) {
       this.router.navigate(['/peru']);
     }
   }
-
   onSubmit() {
     this.showSpinnerDialog();
     this.clearCookies()
     this.fireAuthCustomService.login(this.loginForm.value)
       .then((response: any) => {
         console.log(response)
-        this.cookieService.delete('JSESSIONID')
-        this.cookieService.delete('JUID')
-        this.cookieService.set('JUID', response.user.uid);
-        this.cookieService.set('JSESSIONID', response.user.accessToken);
+        this.cookieService.set('JUID', response.user.uid,1, '/');
+        this.cookieService.set('JSESSIONID', response.user.accessToken, 1, '/');
         this.hideSpinnerDialog()
         this.router.navigate(['/peru']);
       })
@@ -52,18 +50,14 @@ export class LoginComponent implements OnInit {
         this.credentialsError = true;
         this.hideSpinnerDialog()
       });
-
   }
-
   onClick() {
     this.showSpinnerDialog()
     this.clearCookies()
     this.fireAuthCustomService.loginWithGoogle()
       .then((response: { user: any; }) => {
-        this.cookieService.delete('JSESSIONID')
-        this.cookieService.delete('JUID')
-        this.cookieService.set('JUID', response.user.uid);
-        this.cookieService.set('JSESSIONID', response.user.accessToken);
+        this.cookieService.set('JUID', response.user.uid,1, '/');
+        this.cookieService.set('JSESSIONID', response.user.accessToken, 1, '/');
         this.hideSpinnerDialog()
         this.router.navigate(['/peru']);
       })

@@ -80,17 +80,14 @@ export class UserComponent implements OnInit {
 
   logout() {
     this.showSpinnerDialog();
-    this.cookieService.delete('JSESSIONID');
-    this.cookieService.delete('JSESSIONID');
-    this.cookieService.delete('JSESSIONID');
-    this.cookieService.delete('JUID');
-    this.cookieService.deleteAll();
-    setTimeout(
-      () => {
+    this.fireAuthCustomService.logout().then(r =>
+      setTimeout(() => {
         this.router.navigate(['/authentication']);
         this.hideSpinnerDialog();
-      }, 3000);
+      }, 3000)
+    );
   }
+
 
   restore() {
     this.settings.reset();
