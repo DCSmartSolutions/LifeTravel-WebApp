@@ -53,6 +53,8 @@ export class SignUpComponent implements OnInit {
         user.id = response.user.uid;
         setTimeout(
           () => {
+            this.cookieService.delete('JSESSIONID')
+            this.cookieService.delete('JUID')
             this.cookieService.set('JUID', response.user.uid);
             this.cookieService.set('JSESSIONID', response.user.accessToken);
           },1000);

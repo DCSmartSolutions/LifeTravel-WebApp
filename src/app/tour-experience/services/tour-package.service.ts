@@ -51,11 +51,11 @@ export class TourPackageService {
   }
   getAllHiddenPackagesByAgency(): Observable<TourPackage[]> {
     const agencyId = this.userService.getUserIdFromCookies();
-    return this.http.get<TourPackage[]>(`${this._tourPackageService}/all-visible-packages-by-agency/${agencyId}`);
+    return this.http.get<TourPackage[]>(`${this._tourPackageService}/all-hidden-packages-by-agency/${agencyId}`);
   }
   getAllVisiblePackagesByAgency(): Observable<TourPackage[]> {
     const agencyId = this.userService.getUserIdFromCookies();
-    return this.http.get<TourPackage[]>(`${this._tourPackageService}/all-hidden-packages-by-agency/${agencyId}`);
+    return this.http.get<TourPackage[]>(`${this._tourPackageService}/all-visible-packages-by-agency/${agencyId}`);
   }
   getRegionById(regionId: number): Observable<any> {
     return this.http.get<any>(`${this._regionService}/${regionId}`);

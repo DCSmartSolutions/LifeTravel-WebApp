@@ -26,7 +26,7 @@ export class TransportService {
     return this.http.post<any>(`${this.base}/create`, transport);
   }
   modifyTransportation(transportId: number, transport: Vehicle): Observable<any> {
-    return this.http.patch<any>(`${this.base}/modify/${transportId}`, transport);
+    return this.http.put<any>(`${this.base}/modify/${transportId}`, transport);
   }
   assignVehicle(vehicleId: number, tourPackageId: number): Observable<any> {
     return this.http.put<any>(`${this.base}/assign-vehicle-to-tour-package/${vehicleId}/${tourPackageId}`, null);

@@ -11,7 +11,7 @@ import {SpinnerComponent} from "../../../shared/components/spinner/spinner.compo
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit, AfterViewInit {
+export class LoginComponent implements OnInit {
   loginForm: FormGroup = new FormGroup({});
   credentialsError: boolean = false;
   private dialog: MatDialogRef<SpinnerComponent> | undefined;
@@ -29,10 +29,6 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-
-  }
-
-  ngAfterViewInit() {
     if (this.cookieService.get('JSESSIONID')) {
       this.router.navigate(['/peru']);
     }
@@ -44,6 +40,8 @@ export class LoginComponent implements OnInit, AfterViewInit {
     this.fireAuthCustomService.login(this.loginForm.value)
       .then((response: any) => {
         console.log(response)
+        this.cookieService.delete('JSESSIONID')
+        this.cookieService.delete('JUID')
         this.cookieService.set('JUID', response.user.uid);
         this.cookieService.set('JSESSIONID', response.user.accessToken);
         this.hideSpinnerDialog()
@@ -62,6 +60,8 @@ export class LoginComponent implements OnInit, AfterViewInit {
     this.clearCookies()
     this.fireAuthCustomService.loginWithGoogle()
       .then((response: { user: any; }) => {
+        this.cookieService.delete('JSESSIONID')
+        this.cookieService.delete('JUID')
         this.cookieService.set('JUID', response.user.uid);
         this.cookieService.set('JSESSIONID', response.user.accessToken);
         this.hideSpinnerDialog()
