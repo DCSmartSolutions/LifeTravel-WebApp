@@ -77,7 +77,7 @@ export class SignUpComponent implements OnInit {
 
       })
       .catch((error: any) => {
-        console.log(error);
+        //console.log(error);
         this.hideSpinnerDialog();
       });
   }

@@ -34,7 +34,7 @@ export class FilterPackagesModal implements OnInit {
     this.activityService.getActivities().subscribe(activities => {
         this.activities = activities;
       }, error => {
-        console.log(error);
+        //console.log(error);
       }
     )
   }

@@ -107,7 +107,7 @@ export class AdminLayoutComponent implements OnDestroy, OnInit {
     const uid = this.cookieService.get('JUID');
     this.userService.getUserById(uid).subscribe(
       (user: any) => {
-        console.log(user)
+        //console.log(user)
         this.isAgency = user.role === USER_ROLE.AGENCY;
       }
     )

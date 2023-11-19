@@ -21,7 +21,7 @@ export class SidemenuComponent {
 
   constructor(private menu: MenuService,private route: ActivatedRoute,private userService: UserService) {
     const userId = this.userService.getUserIdFromCookies();
-    console.log(this.menu$)
+    //console.log(this.menu$)
     this.userService.getUserById(userId).subscribe(user => {
         this.role = user.role;
       }
