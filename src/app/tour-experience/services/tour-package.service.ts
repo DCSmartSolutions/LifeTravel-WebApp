@@ -47,7 +47,7 @@ export class TourPackageService {
     return this.http.get<TourPackage[]>(`${this._tourPackageService}`);
   }
   getAllPackagesByAgency(): Observable<TourPackage[]> {
-    return this.http.get<TourPackage[]>(`${this._tourPackageService}`);
+    return this.http.get<TourPackage[]>(`${this._tourPackageService}/agency/${this.userService.getUserIdFromCookies()}`);
   }
   getAllHiddenPackagesByAgency(): Observable<TourPackage[]> {
     const agencyId = this.userService.getUserIdFromCookies();

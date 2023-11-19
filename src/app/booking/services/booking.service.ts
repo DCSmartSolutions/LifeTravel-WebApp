@@ -20,9 +20,7 @@ export class BookingService {
   }
   getBookingByTourPackageIdAndTouristId(tourPackageId: number, touristId: string): Observable<Booking> {
     // @ts-ignore
-    return this.http.get<Booking[]>(`${this.base}?tourPackageId=${tourPackageId}&touristId=${touristId}`)
-      .pipe(
-        map(bookings => (bookings && bookings.length > 0) ? bookings[0] : null)
-      );
+    return this.http.get<Booking[]>(`${this.base}/package/${tourPackageId}/tourist/${touristId}`)
+
   }
 }

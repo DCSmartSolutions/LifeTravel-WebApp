@@ -72,7 +72,7 @@ export class MapComponent implements OnInit, OnDestroy {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => this.showPosition(position));
     } else {
-      console.log("Geolocation is not supported by this browser.");
+      //console.log("Geolocation is not supported by this browser.");
     }
   }
 
@@ -193,7 +193,7 @@ export class MapComponent implements OnInit, OnDestroy {
     }
   }
   centerMapToFitMarkers() {
-    if (this.destinationsLocations.length > 0) {
+    if (this.destinationsLocations?.length > 0) {
       const bounds = new mapboxgl.LngLatBounds();
       this.destinationsLocations.forEach((location) => {
         bounds.extend([location.longitude, location.latitude]);

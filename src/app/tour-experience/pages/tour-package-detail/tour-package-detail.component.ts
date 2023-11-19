@@ -100,7 +100,7 @@ export class TourPackageDetailComponent implements OnInit {
           item.selected = false;
         })
         this.activities = activities;
-        console.log(this.activities)
+        //console.log(this.activities)
       }
     )
   }
@@ -110,6 +110,7 @@ export class TourPackageDetailComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.showSpinnerDialog()
     this.getActivities();
     this.getDepartmentsName();
     this.route.params.subscribe(params => {
@@ -137,7 +138,7 @@ export class TourPackageDetailComponent implements OnInit {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => this.setUserLocation(position));
     } else {
-      console.log("Geolocation is not supported by this browser.");
+      //console.log("Geolocation is not supported by this browser.");
     }
     this.hideSpinnerDialog()
   }
@@ -155,7 +156,7 @@ export class TourPackageDetailComponent implements OnInit {
       this.destinations = packageData.destinations;
       this.tourPackageService.getScheduleByPackageId(packageId).subscribe((schedule: Schedule[]) => {
         packageData.schedule = schedule;
-        console.log(this.destinations)
+        //console.log(this.destinations)
         packageData.schedule?.forEach((schedule: Schedule) => {
           this.dayList.forEach((day: Schedule) => {
             if (day.day === schedule.day) {
@@ -174,13 +175,14 @@ export class TourPackageDetailComponent implements OnInit {
             })
           }
         )
+        this.hideSpinnerDialog();
         this.tourPackage = packageData;
         this.tourForm.patchValue(this.tourPackage);
-        this.getBookingByTourPackageIdAndTouristId();
+        if(this.isOnlyViewInfo) this.getBookingByTourPackageIdAndTouristId();
         this.getVehiclesByTourPackageId();
       })
     });
-    this.hideSpinnerDialog();
+
   }
 
   back() {
@@ -193,7 +195,7 @@ export class TourPackageDetailComponent implements OnInit {
     const file = $event.target.files[0];
     this.azureBlobStorageService.uploadImage(file).then(url => {
         this.tourPackage.imgUrl = url;
-        console.log(url)
+        //console.log(url)
         this.tourForm.patchValue({imgUrl: url});
         if (this.tourPackage.id) {
           this.tourPackageService.modifyImage(this.tourPackage.id, url).subscribe();
@@ -228,7 +230,7 @@ export class TourPackageDetailComponent implements OnInit {
   }
 
   getDestinationList($event: any[]) {
-    console.log($event)
+    //console.log($event)
     this.destinations = $event;
   }
 
@@ -245,7 +247,7 @@ export class TourPackageDetailComponent implements OnInit {
     this.tourForm.patchValue({destinations: this.destinations, agencyId: this.userService.getUserIdFromCookies()});
     this.tourForm.patchValue({activities: this.activities.filter(item => item.selected)});
     this.tourPackage = Object.assign({}, this.tourForm.getRawValue()) as TourPackage;
-    console.log(this.tourPackage)
+    //console.log(this.tourPackage)
     if (this.isEdit) {
       this.tourPackageService.modifyPackage(this.tourPackage.id, this.tourPackage).subscribe(() => {
         this.hideSpinnerDialog()
@@ -373,10 +375,10 @@ export class TourPackageDetailComponent implements OnInit {
           const booking: Booking = new Booking();
           booking.tourPackageId = this.tourPackage.id;
           booking.touristId = this.userService.getUserIdFromCookies();
-          booking.date = this.selectedDate;
+          booking.selectedDate = this.selectedDate;
           booking.hourRange = this.getHourRangeByDayInSchedule(this.selectedDate);
           this.bookingService.createBooking(booking).subscribe((response) => {
-              console.log(response);
+              //console.log(response);
               this.getBookingByTourPackageIdAndTouristId();
               this.hideSpinnerDialog()
               // this.router.navigate(['peru/tour-packages/my-packages']);
@@ -390,9 +392,9 @@ export class TourPackageDetailComponent implements OnInit {
   getBookingByTourPackageIdAndTouristId() {
     this.bookingService.getBookingByTourPackageIdAndTouristId(this.tourPackage.id, this.userService.getUserIdFromCookies()).subscribe((response) => {
       this.booking = response;
-      console.log(this.booking)
-      if (response) this.selectedDate = new Date(response.date);
-      console.log(this.selectedDate)
+      //console.log(this.booking)
+      if (response) this.selectedDate = new Date(response.selectedDate);
+      //console.log(this.selectedDate)
     })
   }
 
@@ -406,7 +408,7 @@ export class TourPackageDetailComponent implements OnInit {
   }
 
   get getDateStringOfBooking() { //format: 2021-08-01
-    const date = new Date(this.booking!.date);
+    const date = new Date(this.booking!.selectedDate);
     return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
   }
 
