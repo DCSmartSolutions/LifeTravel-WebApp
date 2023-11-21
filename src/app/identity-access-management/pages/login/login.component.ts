@@ -39,14 +39,14 @@ export class LoginComponent implements OnInit {
     this.clearCookies()
     this.fireAuthCustomService.login(this.loginForm.value)
       .then((response: any) => {
-        console.log(response)
+        //console.log(response)
         this.cookieService.set('JUID', response.user.uid,1, '/');
         this.cookieService.set('JSESSIONID', response.user.accessToken, 1, '/');
         this.hideSpinnerDialog()
         this.router.navigate(['/peru']);
       })
       .catch((error: any) => {
-        console.log(error);
+        //console.log(error);
         this.credentialsError = true;
         this.hideSpinnerDialog()
       });
@@ -61,7 +61,9 @@ export class LoginComponent implements OnInit {
         this.hideSpinnerDialog()
         this.router.navigate(['/peru']);
       })
-      .catch((error: any) => console.log(error))
+      .catch((error: any) =>
+        console.log(error)
+      )
   }
 
   goToRegister() {

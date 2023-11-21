@@ -374,7 +374,7 @@ export class TourPackageDetailComponent implements OnInit {
           this.showSpinnerDialog()
           const booking: Booking = new Booking();
           booking.tourPackageId = this.tourPackage.id;
-          booking.touristId = this.userService.getUserIdFromCookies();
+          booking.touristUserId = this.userService.getUserIdFromCookies();
           booking.selectedDate = this.selectedDate;
           booking.hourRange = this.getHourRangeByDayInSchedule(this.selectedDate);
           this.bookingService.createBooking(booking).subscribe((response) => {
@@ -393,7 +393,10 @@ export class TourPackageDetailComponent implements OnInit {
     this.bookingService.getBookingByTourPackageIdAndTouristId(this.tourPackage.id, this.userService.getUserIdFromCookies()).subscribe((response) => {
       this.booking = response;
       //console.log(this.booking)
-      if (response) this.selectedDate = new Date(response.selectedDate);
+      if (response) {
+        this.selectedDate = new Date(response.tourDate);
+        this.booking.selectedDate = new Date(response.tourDate);
+      }
       //console.log(this.selectedDate)
     })
   }
