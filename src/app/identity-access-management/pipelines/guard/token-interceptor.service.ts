@@ -33,7 +33,8 @@ export class TokenInterceptorService implements HttpInterceptor {
           return next.handle(jwtToken);
         }),
         catchError((error) => {
-          this.router.navigate(['/authentication']);
+          this.cookieService.delete('JSESSIONID', '/');
+          this.cookieService.delete('JUID', '/');
           return throwError(error);
         })
       );
