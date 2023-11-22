@@ -8,8 +8,8 @@ import {
 } from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {
-  SearchPlacesModalComponent
-} from "../../../tour-experience/components/search-places-modal/search-places-modal.component";
+  PlaceSearchModalComponent
+} from "../../../tour-experience/components/place-search-modal/place-search-modal.component";
 
 @Component({
   selector: 'app-header',
@@ -32,7 +32,7 @@ export class HeaderComponent {
 
   showSearchDialog() {
     this.showSearchInput = false;
-    const dialogRef = this.dialog.open(SearchPlacesModalComponent, {
+    const dialogRef = this.dialog.open(PlaceSearchModalComponent, {
         width: '600px',
         position: {
           top: '60px'

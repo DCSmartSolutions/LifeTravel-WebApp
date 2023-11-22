@@ -5,11 +5,11 @@ import {VEHICLE_STATUS} from "../../enums/vehicle-status.enum";
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-existing-vehicle-list',
-  templateUrl: './existing-vehicle-list.component.html',
-  styleUrls: ['./existing-vehicle-list.component.scss']
+  selector: 'app-vehicle-list',
+  templateUrl: './vehicle-list.component.html',
+  styleUrls: ['./vehicle-list.component.scss']
 })
-export class ExistingVehicleListComponent implements OnInit {
+export class VehicleListComponent implements OnInit {
   existingVehicles: Vehicle[] = [];
   constructor(private transportService: TransportService,
               private router: Router) {}

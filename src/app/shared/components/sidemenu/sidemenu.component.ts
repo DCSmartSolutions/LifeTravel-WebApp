@@ -1,8 +1,8 @@
 import {Component, Input, ViewEncapsulation} from '@angular/core';
 import {MENU_ITEMS, MenuService} from "../../services/menu.service";
 import {ActivatedRoute} from "@angular/router";
-import {UserService} from "../../../identity-access-management/services/user.service";
-import {USER_ROLE} from "../../../identity-access-management/enums/role";
+import {UserService} from "../../../iam/services/user.service";
+import {USER_ROLE} from "../../../iam/enums/role";
 
 @Component({
   selector: 'app-sidemenu',

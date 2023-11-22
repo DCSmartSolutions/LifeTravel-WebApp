@@ -2,7 +2,7 @@ import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {SettingsService} from "../services/settings.service";
 import {User} from "../interfaces/user";
-import {FirebaseAuthCustomService} from "../../identity-access-management/services/firebase-auth.service";
+import {FirebaseAuthCustomService} from "../../iam/services/firebase-auth.service";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {SpinnerComponent} from "../components/spinner/spinner.component";
 import {CookieService} from "ngx-cookie-service";

@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import {RouterModule, Routes} from "@angular/router";
-import { ExistingVehicleListComponent } from './pages/existing-vehicle-list/existing-vehicle-list.component';
+import { VehicleListComponent } from './pages/vehicle-list/vehicle-list.component';
 import { VehicleCardComponent } from './components/vehicle-card/vehicle-card.component';
-import { VehiclesListComponent } from './components/vehicles-list/vehicles-list.component';
+import { VehiclesGridComponent } from './components/vehicle-grid/vehicles-grid.component';
 import {MatButtonModule} from "@angular/material/button";
 import {MatCardModule} from "@angular/material/card";
 import {MatIconModule} from "@angular/material/icon";
 import {NgClass, NgForOf, NgIf, SlicePipe} from "@angular/common";
 import {MatChipsModule} from "@angular/material/chips";
-import { VehicleDetailComponent } from './pages/vehicle-detail/vehicle-detail.component';
+import { VehicleInfoComponent } from './pages/vehicle-info/vehicle-info.component';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
@@ -20,24 +20,24 @@ import {MatRadioModule} from "@angular/material/radio";
 const routes: Routes = [
   {
     path: 'my-vehicles',
-    component: ExistingVehicleListComponent,
+    component: VehicleListComponent,
   },
   {
-    path: 'vehicle-detail/:vehicleId',
-    component: VehicleDetailComponent,
+    path: 'vehicle-info/:vehicleId',
+    component: VehicleInfoComponent,
   },
   {
     path: 'add-vehicle',
-    component: VehicleDetailComponent,
+    component: VehicleInfoComponent,
   }
 ]
 
 @NgModule({
   declarations: [
-    ExistingVehicleListComponent,
+    VehicleListComponent,
     VehicleCardComponent,
-    VehiclesListComponent,
-    VehicleDetailComponent,
+    VehiclesGridComponent,
+    VehicleInfoComponent,
     AddVehicleModalComponent
   ],
   imports: [

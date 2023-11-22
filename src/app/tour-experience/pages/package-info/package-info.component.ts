@@ -21,7 +21,7 @@ import {
 } from "../../../shared/components/confirmation-message/confirmation-message.component";
 import {BookingService} from "../../../booking/services/booking.service";
 import {Booking} from "../../../booking/models/booking.model";
-import {UserService} from "../../../identity-access-management/services/user.service";
+import {UserService} from "../../../iam/services/user.service";
 import {Vehicle} from "../../../transportation/models/vehicle.model";
 import {
   AddVehicleModalComponent
@@ -29,11 +29,11 @@ import {
 import {TransportService} from "../../../transportation/services/transport.service";
 
 @Component({
-  selector: 'app-tour-package-detail',
-  templateUrl: './tour-package-detail.component.html',
-  styleUrls: ['./tour-package-detail.component.scss']
+  selector: 'app-package-info',
+  templateUrl: './package-info.component.html',
+  styleUrls: ['./package-info.component.scss']
 })
-export class TourPackageDetailComponent implements OnInit {
+export class PackageInfoComponent implements OnInit {
   title: string = "Add New Tour Package";
   tourPackage: TourPackage = new TourPackage();
   booking: Booking | null = null;

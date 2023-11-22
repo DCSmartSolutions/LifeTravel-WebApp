@@ -4,17 +4,17 @@ import {MatDialogModule} from "@angular/material/dialog";
 import {MatButtonModule} from "@angular/material/button";
 import {MatCardModule} from "@angular/material/card";
 import {NgClass, NgForOf, NgIf, NgOptimizedImage, SlicePipe} from "@angular/common";
-import {SearchPackagesComponent} from "./pages/search-packages/search-packages.component";
-import {FilterPackagesModal} from "./components/filter-packages-modal/filter-packages-modal.component";
+import {PackageSearchComponent} from "./pages/package-search/package-search.component";
+import {PackageFilterModal} from "./components/package-filter-modal/package-filter-modal.component";
 import {MatSliderModule} from "@angular/material/slider";
 import {MatInputModule} from "@angular/material/input";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatIconModule} from "@angular/material/icon";
-import {SearchPlacesModalComponent} from './components/search-places-modal/search-places-modal.component';
-import {ExistingPackagesListComponent} from './pages/existing-packages-list/existing-packages-list.component';
-import {ListPackagesComponent} from "./components/list-packages/list-packages.component";
-import {TourPackageDetailComponent} from './pages/tour-package-detail/tour-package-detail.component';
+import {PlaceSearchModalComponent} from './components/place-search-modal/place-search-modal.component';
+import {PackageListComponent} from './pages/package-list/package-list.component';
+import {PackageGridComponent} from "./components/package-grid/package-grid.component";
+import {PackageInfoComponent} from './pages/package-info/package-info.component';
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {MapComponent} from './components/map/map.component';
 import {SharedLayoutModule} from "../shared/shared-layout.module";
@@ -27,33 +27,33 @@ import {MatAutocompleteModule} from "@angular/material/autocomplete";
 const routes: Routes = [
   {
     path: 'my-packages',
-    component: ExistingPackagesListComponent,
+    component: PackageListComponent,
   },
   {
     path: ':detail-type/:packageId',
-    component: TourPackageDetailComponent,
+    component: PackageInfoComponent,
   },
   {
     path: 'add-tour-package',
-    component: TourPackageDetailComponent,
+    component: PackageInfoComponent,
   },
   {
     path: ':regionId',
-    component: SearchPackagesComponent,
+    component: PackageSearchComponent,
   },
   {
     path: '',
-    component: SearchPackagesComponent,
+    component: PackageSearchComponent,
   },
 ]
 
 @NgModule({
   declarations: [
-    FilterPackagesModal,
-    SearchPlacesModalComponent,
-    ExistingPackagesListComponent,
-    ListPackagesComponent,
-    TourPackageDetailComponent,
+    PackageFilterModal,
+    PlaceSearchModalComponent,
+    PackageListComponent,
+    PackageGridComponent,
+    PackageInfoComponent,
     MapComponent,
     PackageCardComponent,
   ],
@@ -80,7 +80,7 @@ const routes: Routes = [
         MatNativeDateModule,
         MatAutocompleteModule
     ],
-  exports: [RouterModule, ListPackagesComponent],
+  exports: [RouterModule, PackageGridComponent],
 })
 export class TourPackagesModule {
 }

@@ -2,10 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {TourPackageService} from "../../../tour-experience/services/tour-package.service";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {
-  FilterPackagesModal
-} from "../../../tour-experience/components/filter-packages-modal/filter-packages-modal.component";
-import {UserService} from "../../../identity-access-management/services/user.service";
-import {USER_ROLE} from "../../../identity-access-management/enums/role";
+  PackageFilterModal
+} from "../../../tour-experience/components/package-filter-modal/package-filter-modal.component";
+import {UserService} from "../../../iam/services/user.service";
+import {USER_ROLE} from "../../../iam/enums/role";
 import {Router} from "@angular/router";
 import {SpinnerComponent} from "../../../shared/components/spinner/spinner.component";
 
@@ -44,7 +44,7 @@ export class HomeComponent implements OnInit {
 
   }
   openDialog(): void {
-    const dialogRef = this.dialog.open(FilterPackagesModal, {
+    const dialogRef = this.dialog.open(PackageFilterModal, {
       maxWidth: '80vw',
       minWidth: '50vw',
       maxHeight: '90vh'

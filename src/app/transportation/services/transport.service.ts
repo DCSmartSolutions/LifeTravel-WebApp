@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
 import {Vehicle} from "../models/vehicle.model";
 import {HttpClient} from "@angular/common/http";
-import {UserService} from "../../identity-access-management/services/user.service";
+import {UserService} from "../../iam/services/user.service";
 import {VEHICLE_STATUS} from "../enums/vehicle-status.enum";
 import {environment} from "../../../environments/environment";
 

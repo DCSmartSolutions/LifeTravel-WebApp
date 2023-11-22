@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import {Route, RouterModule} from "@angular/router";
 import {HomeComponent} from "../public/pages/home/home.component";
-import {AdminLayoutComponent} from "./pages/admin-layout/admin-layout.component";
+import {AdminLayoutComponent} from "./pages/layout/admin-layout.component";
 
 const childrenRoutes: Route[] = [
   {

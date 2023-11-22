@@ -31,15 +31,10 @@
         <label class="row fw-bold mt-3 justify-content-center text-black">{{activity.title}}</label>
       </div>
     </div>
-    <hr>
-    <h5 class="fw-bold">Tour Language</h5>
-    <mat-checkbox class="d-block" *ngFor="let language of languages" [(ngModel)]="language.checked">
-      {{language.name}}
-    </mat-checkbox>
   </div>
 </div>
 <div mat-dialog-actions class="fw-bold">
   <button mat-flat-button (click)="clear()"><u>Remove all</u>
   </button>
-  <button mat-raised-button color="primary" [mat-dialog-close]="{minValue: minValue, maxValue: maxValue, languages: languages}">Apply</button>
+  <button mat-raised-button color="primary" [mat-dialog-close]="{minValue: minValue, maxValue: maxValue}">Apply</button>
 </div>

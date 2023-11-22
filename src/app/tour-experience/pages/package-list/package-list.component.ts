@@ -7,11 +7,11 @@ import {TourPackage} from "../../models/tour-package.model";
 import {SpinnerComponent} from "../../../shared/components/spinner/spinner.component";
 
 @Component({
-  selector: 'app-existing-packages-list',
-  templateUrl: './existing-packages-list.component.html',
-  styleUrls: ['./existing-packages-list.component.scss']
+  selector: 'app-package-list',
+  templateUrl: './package-list.component.html',
+  styleUrls: ['./package-list.component.scss']
 })
-export class ExistingPackagesListComponent implements OnInit {
+export class PackageListComponent implements OnInit {
   tourPackages: TourPackage[] = [];
   showVisiblePackage: boolean = true;
   showHiddenPackage: boolean = true;

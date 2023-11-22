@@ -3,10 +3,10 @@ import {Vehicle} from "../../models/vehicle.model";
 import {TransportService} from "../../services/transport.service";
 
 @Component({
-  selector: 'app-vehicles-list',
-  templateUrl: './vehicles-list.component.html',
-  styleUrls: ['./vehicles-list.component.scss']
+  selector: 'app-vehicle-grid',
+  templateUrl: './vehicles-grid.component.html',
+  styleUrls: ['./vehicles-grid.component.scss']
 })
-export class VehiclesListComponent {
+export class VehiclesGridComponent {
   @Input() existingVehicles: Vehicle[] = [];
 }

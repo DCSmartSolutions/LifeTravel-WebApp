@@ -9,5 +9,5 @@
   <div class="fw-bold fs-5 d-flex" style="padding-left: 10px;">Filter by:</div>
   <mat-checkbox [(ngModel)]="showVisiblePackage" (click)="getVisiblePackage()">Visible</mat-checkbox>
   <mat-checkbox [(ngModel)]="showHiddenPackage" (click)="getHiddenPackage()">Hidden</mat-checkbox>
-  <app-list-packages [filteredPackages]="tourPackages" [isAgency]="true"></app-list-packages>
+  <app-package-grid [filteredPackages]="tourPackages" [isAgency]="true"></app-package-grid>
 </div>

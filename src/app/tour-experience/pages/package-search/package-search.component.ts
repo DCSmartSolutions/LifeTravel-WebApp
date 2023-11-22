@@ -3,11 +3,11 @@ import { TourPackageService } from "../../services/tour-package.service";
 import { ActivatedRoute } from "@angular/router";
 
 @Component({
-  selector: 'app-search-packages',
-  templateUrl: './search-packages.component.html',
-  styleUrls: ['./search-packages.component.scss']
+  selector: 'app-package-search',
+  templateUrl: './package-search.component.html',
+  styleUrls: ['./package-search.component.scss']
 })
-export class SearchPackagesComponent implements OnInit {
+export class PackageSearchComponent implements OnInit {
   filteredPackages: any[] = [];
   region: any;
   constructor(private searchService: TourPackageService,

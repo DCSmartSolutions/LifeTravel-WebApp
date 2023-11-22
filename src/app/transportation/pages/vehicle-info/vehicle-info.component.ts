@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {UserService} from "../../../identity-access-management/services/user.service";
+import {UserService} from "../../../iam/services/user.service";
 import {TransportService} from "../../services/transport.service";
 import {SpinnerComponent} from "../../../shared/components/spinner/spinner.component";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
@@ -10,11 +10,11 @@ import {Vehicle} from "../../models/vehicle.model";
 import {VEHICLE_STATUS} from "../../enums/vehicle-status.enum";
 
 @Component({
-  selector: 'app-vehicle-detail',
-  templateUrl: './vehicle-detail.component.html',
-  styleUrls: ['./vehicle-detail.component.scss']
+  selector: 'app-vehicle-info',
+  templateUrl: './vehicle-info.component.html',
+  styleUrls: ['./vehicle-info.component.scss']
 })
-export class VehicleDetailComponent implements OnInit {
+export class VehicleInfoComponent implements OnInit {
   private dialog: MatDialogRef<SpinnerComponent> | undefined;
   isEdit: any;
   title: string = 'Add Vehicle'

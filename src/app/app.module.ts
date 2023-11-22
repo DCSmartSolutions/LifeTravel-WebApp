@@ -5,7 +5,7 @@ import {RouterOutlet} from "@angular/router";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {AppRoutingModule} from "./app-routing.module";
-import {SearchPackagesComponent} from './tour-experience/pages/search-packages/search-packages.component';
+import {PackageSearchComponent} from './tour-experience/pages/package-search/package-search.component';
 import {MatListModule} from "@angular/material/list";
 import {MatCardModule} from "@angular/material/card";
 import {FormsModule} from "@angular/forms";
@@ -16,12 +16,12 @@ import {NgxPermissionsModule} from "ngx-permissions";
 import {ToastrModule} from "ngx-toastr";
 import {HomeComponent} from './public/pages/home/home.component';
 import {TourPackagesModule} from "./tour-experience/tour-packages.module";
-import {IdentityAccessManagementModule} from "./identity-access-management/identity-access-management.module";
-import {TokenInterceptorService} from "./identity-access-management/pipelines/guard/token-interceptor.service";
+import {IamModule} from "./iam/iam.module";
+import {TokenInterceptorService} from "./iam/pipelines/guard/token-interceptor.service";
 @NgModule({
   declarations: [
     AppComponent,
-    SearchPackagesComponent,
+    PackageSearchComponent,
     HomeComponent,
   ],
   imports: [
@@ -39,7 +39,7 @@ import {TokenInterceptorService} from "./identity-access-management/pipelines/gu
     MatIconModule,
     MatGridListModule,
     TourPackagesModule,
-    IdentityAccessManagementModule,
+    IamModule,
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true}],
   bootstrap: [AppComponent]

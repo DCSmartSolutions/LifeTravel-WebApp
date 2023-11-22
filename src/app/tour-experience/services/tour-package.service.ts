@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import {TourPackage} from "../models/tour-package.model";
 import {environment} from "../../../environments/environment";
 import {Schedule} from "../models/time-picker.model";
-import {UserService} from "../../identity-access-management/services/user.service";
+import {UserService} from "../../iam/services/user.service";
 import {Department} from "../models/department.model";
 @Injectable({
   providedIn: 'root'

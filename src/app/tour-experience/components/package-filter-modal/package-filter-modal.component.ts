@@ -1,15 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {max, min} from "rxjs";
 import {Activity} from "../../models/activity.model";
-import {TourPackageService} from "../../services/tour-package.service";
 import {ActivityService} from "../../services/activity.service";
 
 @Component({
-  selector: 'app-filter-packages-modal',
-  templateUrl: './filter-packages-modal.component.html',
-  styleUrls: ['./filter-packages-modal.component.scss']
+  selector: 'app-package-filter-modal',
+  templateUrl: './package-filter-modal.component.html',
+  styleUrls: ['./package-filter-modal.component.scss']
 })
-export class FilterPackagesModal implements OnInit {
+export class PackageFilterModal implements OnInit {
 
 
   minValue: number = 180;
@@ -20,11 +19,6 @@ export class FilterPackagesModal implements OnInit {
   protected readonly max = max;
   maxN: number = 500;
   minN: number = 50;
-  languages: any[] = [
-    {name: 'English', checked: false},
-    {name: 'Spanish', checked: false},
-    {name: 'French', checked: false},
-  ];
   activities: Activity[] = [];
 
   constructor(private activityService: ActivityService) {
@@ -32,17 +26,11 @@ export class FilterPackagesModal implements OnInit {
 
   ngOnInit() {
     this.activityService.getActivities().subscribe(activities => {
-        this.activities = activities;
-      }, error => {
-        //console.log(error);
-      }
-    )
+      this.activities = activities;
+    });
   }
 
   clear() {
-    this.languages.forEach(language => {
-      language.checked = false;
-    })
     this.minValue = this.minN;
     this.maxValue = this.maxN;
     this.activities.forEach(activity => {

@@ -9,16 +9,16 @@ import {SettingsService} from "../../services/settings.service";
 import {AppSettings} from "../../interfaces/settings";
 import {SpinnerComponent} from "../../components/spinner/spinner.component";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {UserService} from "../../../identity-access-management/services/user.service";
+import {UserService} from "../../../iam/services/user.service";
 import {CookieService} from "ngx-cookie-service";
-import {USER_ROLE} from "../../../identity-access-management/enums/role";
+import {USER_ROLE} from "../../../iam/enums/role";
 
 const MOBILE_MEDIAQUERY = 'screen and (max-width: 599px)';
 const TABLET_MEDIAQUERY = 'screen and (min-width: 600px) and (max-width: 959px)';
 const MONITOR_MEDIAQUERY = 'screen and (min-width: 960px)';
 
 @Component({
-  selector: 'app-admin-layout',
+  selector: 'app-layout',
   templateUrl: './admin-layout.component.html',
   styleUrls: ['./admin-layout.component.scss'],
   encapsulation: ViewEncapsulation.None,

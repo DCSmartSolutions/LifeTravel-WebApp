@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
-  selector: 'app-search-places-modal',
-  templateUrl: './search-places-modal.component.html',
-  styleUrls: ['./search-places-modal.component.scss']
+  selector: 'app-place-search-modal',
+  templateUrl: './place-search-modal.component.html',
+  styleUrls: ['./place-search-modal.component.scss']
 })
-export class SearchPlacesModalComponent {
+export class PlaceSearchModalComponent {
   constructor(private router: Router) {
   }
   goToSearchTourPackages(number: number) {

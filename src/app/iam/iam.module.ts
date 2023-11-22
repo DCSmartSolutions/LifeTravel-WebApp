@@ -47,5 +47,5 @@ const routes: Routes = [
     NgClass
   ]
 })
-export class IdentityAccessManagementModule {
+export class IamModule {
 }

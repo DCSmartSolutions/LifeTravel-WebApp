@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from "@angular/router";
-import {authGuard} from "./identity-access-management/pipelines/guard/auth.guard";
+import {authGuard} from "./iam/pipelines/guard/auth.guard";
 
 const routes: Routes = [
   {
@@ -18,7 +18,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        loadChildren: () => import('./identity-access-management/identity-access-management.module').then(m => m.IdentityAccessManagementModule)
+        loadChildren: () => import('./iam/iam.module').then(m => m.IamModule)
       }
     ]
   },
