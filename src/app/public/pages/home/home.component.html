@@ -1,8 +1,13 @@
 <div class="d-flex justify-content-end">
+<!--  BUTTON TO CLEAR FILTER-->
+  <button mat-raised-button class="fw-bold" *ngIf="hasBeenFiltered" (click)="clearFilters()" style="background: lightgrey;
+   color: black; margin-right: 10px">
+    <mat-icon aria-label="Filter icon">clear</mat-icon>Clear Filters
+  </button>
   <button mat-raised-button (click)="openDialog()" style="background: dimgray; color: white">
     <mat-icon aria-label="Filter icon">filter_list</mat-icon>Filters
   </button>
 </div>
 <div class="px-lg-5">
-  <app-package-grid [filteredPackages]="tourPackages" ></app-package-grid>
+  <app-package-grid [filteredPackages]="tourPackagesFiltered" ></app-package-grid>
 </div>

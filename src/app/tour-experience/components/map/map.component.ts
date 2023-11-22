@@ -47,7 +47,6 @@ export class MapComponent implements OnInit, OnDestroy {
     if (this.isOnlyOneMarker) {
       if (!this.longitude && !this.latitude) this.getLocation();
       else {
-        //console.log("showPosition2")
         this.showPosition2();
       }
     } else {
@@ -68,7 +67,6 @@ export class MapComponent implements OnInit, OnDestroy {
   }
 
   getLocation() {
-    //console.log("getLocation")
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => this.showPosition(position));
     } else {

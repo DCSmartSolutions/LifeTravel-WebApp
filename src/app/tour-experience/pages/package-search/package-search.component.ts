@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TourPackageService } from "../../services/tour-package.service";
 import { ActivatedRoute } from "@angular/router";
+import {Region} from "../../models/region.model";
 
 @Component({
   selector: 'app-package-search',
@@ -9,7 +10,7 @@ import { ActivatedRoute } from "@angular/router";
 })
 export class PackageSearchComponent implements OnInit {
   filteredPackages: any[] = [];
-  region: any;
+  region: Region = new Region();
   constructor(private searchService: TourPackageService,
               private route: ActivatedRoute) {}
 

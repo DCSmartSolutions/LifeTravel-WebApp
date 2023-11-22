@@ -16,7 +16,7 @@
       </mat-form-field>
       <span class="fw-bold pt-2">to</span>
       <mat-form-field class="col-3">
-        <input matInput class="w-100" [(ngModel)]="maxValue">
+        <input matInput class="w-100" [min]="minValue" [max]="maxValue" [(ngModel)]="maxValue">
       </mat-form-field>
     </div>
     <hr>
@@ -36,5 +36,6 @@
 <div mat-dialog-actions class="fw-bold">
   <button mat-flat-button (click)="clear()"><u>Remove all</u>
   </button>
-  <button mat-raised-button color="primary" [mat-dialog-close]="{minValue: minValue, maxValue: maxValue}">Apply</button>
+  <button mat-raised-button color="primary" [disabled]="invalidRange || selectedActivities.length==0" [mat-dialog-close]="{minValue: minValue, maxValue: maxValue,
+  activities: selectedActivities}">Apply</button>
 </div>

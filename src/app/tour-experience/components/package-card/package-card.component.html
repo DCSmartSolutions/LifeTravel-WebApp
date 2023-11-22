@@ -14,11 +14,11 @@
     <label class="fs-6 fw-bolder">{{ tourPackage.title }}</label>
     <div class="d-flex justify-content-end align-items-middle fw-bolder">
       <mat-icon class="star-icon">star</mat-icon>
-      <div> {{ tourPackage.rating }}</div>
+      <div> {{ tourPackage.rating ? tourPackage.rating : 0}}</div>
     </div>
     <label class="d-flex"
            style="text-align: justify; text-justify: inter-word"> {{ (tourPackage.description.length > 250) ? (tourPackage.description | slice:0:250) + '...' : (tourPackage.description) }}  </label>
-    <label class="d-flex" *ngIf="!isAgency">Agency: {{ agencyName }}</label>
+    <label class="d-flex" *ngIf="!isAgency"><b style="margin-right: 5px">Agency:</b> {{ agencyName }}</label>
     <label class="d-flex fw-bolder">S/ {{ tourPackage.price }}</label>
   </mat-card-content>
   <mat-card-actions class="custom-card-actions">

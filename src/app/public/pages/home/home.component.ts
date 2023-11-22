@@ -16,9 +16,12 @@ import {SpinnerComponent} from "../../../shared/components/spinner/spinner.compo
 })
 export class HomeComponent implements OnInit {
   tourPackages: any[] = [];
+  tourPackagesFiltered: any[] = [];
   filter: any
   isAgency: boolean = false;
+  hasBeenFiltered: boolean = false;
   private dialogRef: MatDialogRef<SpinnerComponent> | undefined;
+
   constructor(private searchService: TourPackageService,
               private userService: UserService,
               private router: Router,
@@ -38,22 +41,37 @@ export class HomeComponent implements OnInit {
     this.showSpinnerDialog();
     this.searchService.getAllPackages().subscribe(packages => {
       this.tourPackages = packages;
+      this.tourPackagesFiltered = packages;
       this.hideSpinnerDialog();
     });
 
 
   }
+
   openDialog(): void {
     const dialogRef = this.dialog.open(PackageFilterModal, {
       maxWidth: '80vw',
       minWidth: '50vw',
-      maxHeight: '90vh'
+      maxHeight: '90vh',
+      data: {
+        minValue: this.tourPackages.reduce((min: any, p: any) => p.price < min ? p.price : min, this.tourPackages[0].price),
+        maxValue: this.tourPackages.reduce((max: any, p: any) => p.price > max ? p.price : max, this.tourPackages[0].price),
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.filter = result;
+      this.filterPackages(result)
+      this.hasBeenFiltered = true;
     });
   }
+
+  filterPackages(filter: any) {
+    this.tourPackagesFiltered = this.tourPackages.filter((p: any) => {
+        return p.price >= filter.minValue && p.price <= filter.maxValue || filter.activities.includes(p.activity)
+      }
+    )
+  }
+
   showSpinnerDialog() {
     this.dialogRef = this.matDialog.open(SpinnerComponent, {
       panelClass: 'custom-dialog',
@@ -63,5 +81,10 @@ export class HomeComponent implements OnInit {
 
   hideSpinnerDialog() {
     this.dialogRef?.close();
+  }
+
+  clearFilters() {
+    this.tourPackagesFiltered = this.tourPackages;
+    this.hasBeenFiltered = false;
   }
 }
