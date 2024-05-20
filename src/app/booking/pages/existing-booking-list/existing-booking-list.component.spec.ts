@@ -8,7 +8,7 @@ describe('ExistingBookingListComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ExistingBookingListComponent]
+      declarations: [ExistingBookingListComponent],
     });
     fixture = TestBed.createComponent(ExistingBookingListComponent);
     component = fixture.componentInstance;

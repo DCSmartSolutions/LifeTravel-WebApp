@@ -8,7 +8,7 @@ describe('ConfirmationMessageComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [AlertMessageComponent]
+      declarations: [AlertMessageComponent],
     });
     fixture = TestBed.createComponent(AlertMessageComponent);
     component = fixture.componentInstance;

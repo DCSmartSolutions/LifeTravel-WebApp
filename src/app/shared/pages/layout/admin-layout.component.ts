@@ -1,20 +1,28 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
-import {Component, HostBinding, OnDestroy, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import {
+  Component,
+  HostBinding,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  ViewEncapsulation,
+} from '@angular/core';
 import { MatSidenav, MatSidenavContent } from '@angular/material/sidenav';
 import { NavigationEnd, Router } from '@angular/router';
 
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
-import {SettingsService} from "../../services/settings.service";
-import {AppSettings} from "../../interfaces/settings";
-import {SpinnerComponent} from "../../components/spinner/spinner.component";
-import {MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {UserService} from "../../../iam/services/user.service";
-import {CookieService} from "ngx-cookie-service";
-import {USER_ROLE} from "../../../iam/enums/role";
+import { SettingsService } from '../../services/settings.service';
+import { AppSettings } from '../../interfaces/settings';
+import { SpinnerComponent } from '../../components/spinner/spinner.component';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { UserService } from '../../../iam/services/user.service';
+import { CookieService } from 'ngx-cookie-service';
+import { USER_ROLE } from '../../../iam/enums/role';
 
 const MOBILE_MEDIAQUERY = 'screen and (max-width: 599px)';
-const TABLET_MEDIAQUERY = 'screen and (min-width: 600px) and (max-width: 959px)';
+const TABLET_MEDIAQUERY =
+  'screen and (min-width: 600px) and (max-width: 959px)';
 const MONITOR_MEDIAQUERY = 'screen and (min-width: 960px)';
 
 @Component({
@@ -40,7 +48,7 @@ export class AdminLayoutComponent implements OnDestroy, OnInit {
   showSpinnerDialog() {
     this.dialog = this.matDialog.open(SpinnerComponent, {
       panelClass: 'custom-dialog',
-      disableClose: true
+      disableClose: true,
     });
   }
 
@@ -63,7 +71,8 @@ export class AdminLayoutComponent implements OnDestroy, OnInit {
   @HostBinding('class.matero-sidenav-collapsed-fix') get collapsedWidthFix() {
     return (
       this.isCollapsedWidthFixed &&
-      (this.options.navPos === 'top' || (this.options.sidenavOpened && this.isOver))
+      (this.options.navPos === 'top' ||
+        (this.options.sidenavOpened && this.isOver))
     );
   }
 
@@ -77,11 +86,11 @@ export class AdminLayoutComponent implements OnDestroy, OnInit {
     private settings: SettingsService,
     private matDialog: MatDialog,
     private userService: UserService,
-    private cookieService: CookieService
+    private cookieService: CookieService,
   ) {
     this.layoutChangesSubscription = this.breakpointObserver
       .observe([MOBILE_MEDIAQUERY, TABLET_MEDIAQUERY, MONITOR_MEDIAQUERY])
-      .subscribe(state => {
+      .subscribe((state) => {
         // SidenavOpened must be reset true when layout changes
         this.options.sidenavOpened = true;
 
@@ -90,12 +99,14 @@ export class AdminLayoutComponent implements OnDestroy, OnInit {
         this.isContentWidthFixed = state.breakpoints[MONITOR_MEDIAQUERY];
       });
 
-    this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(e => {
-      if (this.isOver) {
-        this.sidenav.close();
-      }
-      this.content.scrollTo({ top: 0 });
-    });
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe((e) => {
+        if (this.isOver) {
+          this.sidenav.close();
+        }
+        this.content.scrollTo({ top: 0 });
+      });
     this.options.headerPos = 'above';
     this.options.theme = 'dark';
     this.options.navPos = 'side';
@@ -105,16 +116,12 @@ export class AdminLayoutComponent implements OnDestroy, OnInit {
     this.settings.setOptions(this.options);
     this.updateOptions(this.options);
     const uid = this.cookieService.get('JUID');
-    this.userService.getUserById(uid).subscribe(
-      (user: any) => {
-        //console.log(user)
-        this.isAgency = user.role === USER_ROLE.AGENCY;
-      }
-    )
+    this.userService.getUserById(uid).subscribe((user: any) => {
+      //console.log(user)
+      this.isAgency = user.role === USER_ROLE.AGENCY;
+    });
   }
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
   ngOnDestroy() {
     this.layoutChangesSubscription.unsubscribe();
   }

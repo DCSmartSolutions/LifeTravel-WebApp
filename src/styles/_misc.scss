@@ -1,6 +1,6 @@
-@use 'scrollbar';
-@use 'badge';
-@use 'icon';
+@use "scrollbar";
+@use "badge";
+@use "icon";
 
 .scrollbar-thin {
   @include scrollbar.thin();

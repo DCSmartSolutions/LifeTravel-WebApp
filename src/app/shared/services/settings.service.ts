@@ -3,9 +3,9 @@ import { MediaMatcher } from '@angular/cdk/layout';
 import { DOCUMENT } from '@angular/common';
 import { Inject, Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { AppSettings, AppTheme, defaults } from "../interfaces/settings";
-import { LocalStorageService } from "./storage.service";
-import { AppDirectionality } from "./directionality.service";
+import { AppSettings, AppTheme, defaults } from '../interfaces/settings';
+import { LocalStorageService } from './storage.service';
+import { AppDirectionality } from './directionality.service';
 
 @Injectable({
   providedIn: 'root',
@@ -29,7 +29,7 @@ export class SettingsService {
     private store: LocalStorageService,
     private mediaMatcher: MediaMatcher,
     @Inject(DOCUMENT) private document: Document,
-    @Inject(Directionality) public dir: AppDirectionality
+    @Inject(Directionality) public dir: AppDirectionality,
   ) {
     const storedOptions = this.store.get(this.key);
     this.options = Object.assign(defaults, storedOptions);
@@ -47,7 +47,9 @@ export class SettingsService {
       this.options.theme === 'auto' &&
       this.mediaMatcher.matchMedia('(prefers-color-scheme)').media !== 'not all'
     ) {
-      const isSystemDark = this.mediaMatcher.matchMedia('(prefers-color-scheme: dark)').matches;
+      const isSystemDark = this.mediaMatcher.matchMedia(
+        '(prefers-color-scheme: dark)',
+      ).matches;
       return 'dark';
     } else {
       return this.options.theme as Exclude<AppTheme, 'auto'>;

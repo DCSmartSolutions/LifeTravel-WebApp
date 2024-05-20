@@ -1,5 +1,8 @@
-:host ::ng-deep{
-  .mdc-text-field--no-label:not(.mdc-text-field--outlined):not(.mdc-text-field--textarea) .mat-mdc-form-field-infix {
+:host ::ng-deep {
+  .mdc-text-field--no-label:not(.mdc-text-field--outlined):not(
+      .mdc-text-field--textarea
+    )
+    .mat-mdc-form-field-infix {
     padding-top: 8px;
     padding-bottom: 8px;
   }
@@ -9,7 +12,8 @@
   .mat-mdc-dialog-container .mdc-dialog__surface {
     background-color: var(--background);
   }
-  .mat-mdc-fab:not(.mdc-fab--extended), .mat-mdc-mini-fab:not(.mdc-fab--extended) {
+  .mat-mdc-fab:not(.mdc-fab--extended),
+  .mat-mdc-mini-fab:not(.mdc-fab--extended) {
     border-radius: 10px;
   }
 }

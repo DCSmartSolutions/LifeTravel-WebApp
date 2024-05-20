@@ -1,8 +1,8 @@
-import {Component, Input, ViewEncapsulation} from '@angular/core';
-import {MENU_ITEMS, MenuService} from "../../services/menu.service";
-import {ActivatedRoute} from "@angular/router";
-import {UserService} from "../../../iam/services/user.service";
-import {USER_ROLE} from "../../../iam/enums/role";
+import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { MENU_ITEMS, MenuService } from '../../services/menu.service';
+import { ActivatedRoute } from '@angular/router';
+import { UserService } from '../../../iam/services/user.service';
+import { USER_ROLE } from '../../../iam/enums/role';
 
 @Component({
   selector: 'app-sidemenu',
@@ -19,11 +19,14 @@ export class SidemenuComponent {
   buildRoute = this.menu.buildRoute;
   userId: string = '';
 
-  constructor(private menu: MenuService,private route: ActivatedRoute,private userService: UserService) {
+  constructor(
+    private menu: MenuService,
+    private route: ActivatedRoute,
+    private userService: UserService,
+  ) {
     const userId = this.userService.getUserIdFromCookies();
-    this.userService.getUserById(userId).subscribe(user => {
-        this.role = user.role;
-      }
-    );
+    this.userService.getUserById(userId).subscribe((user) => {
+      this.role = user.role;
+    });
   }
 }

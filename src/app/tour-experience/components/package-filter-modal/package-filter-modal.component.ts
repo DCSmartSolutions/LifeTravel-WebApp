@@ -1,13 +1,13 @@
-import {Component, Inject, Input, OnInit} from '@angular/core';
-import {max, min} from "rxjs";
-import {Activity} from "../../models/activity.model";
-import {ActivityService} from "../../services/activity.service";
-import {MAT_DIALOG_DATA} from "@angular/material/dialog";
+import { Component, Inject, Input, OnInit } from '@angular/core';
+import { max, min } from 'rxjs';
+import { Activity } from '../../models/activity.model';
+import { ActivityService } from '../../services/activity.service';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-package-filter-modal',
   templateUrl: './package-filter-modal.component.html',
-  styleUrls: ['./package-filter-modal.component.scss']
+  styleUrls: ['./package-filter-modal.component.scss'],
 })
 export class PackageFilterModal implements OnInit {
   minValue: number = 180;
@@ -20,17 +20,20 @@ export class PackageFilterModal implements OnInit {
   minN: number = 0;
   activities: Activity[] = [];
 
-  constructor(private activityService: ActivityService,@Inject(MAT_DIALOG_DATA) public data: any ) {
+  constructor(
+    private activityService: ActivityService,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+  ) {
     this.minValue = data.minValue;
     this.maxValue = data.maxValue;
     this.maxN = data.maxValue;
   }
 
   ngOnInit() {
-    this.activityService.getActivities().subscribe(activities => {
-      activities.forEach(activity => {
+    this.activityService.getActivities().subscribe((activities) => {
+      activities.forEach((activity) => {
         activity.selected = true;
-      })
+      });
       this.activities = activities;
     });
   }
@@ -38,14 +41,19 @@ export class PackageFilterModal implements OnInit {
   clear() {
     this.minValue = this.minN;
     this.maxValue = this.maxN;
-    this.activities.forEach(activity => {
+    this.activities.forEach((activity) => {
       activity.selected = false;
-    })
+    });
   }
   get selectedActivities() {
-    return this.activities.filter(activity => activity.selected);
+    return this.activities.filter((activity) => activity.selected);
   }
   get invalidRange() {
-    return this.minValue > this.maxValue || this.minValue < this.minN || this.maxValue > this.maxN || this.maxValue < this.minN;
+    return (
+      this.minValue > this.maxValue ||
+      this.minValue < this.minN ||
+      this.maxValue > this.maxN ||
+      this.maxValue < this.minN
+    );
   }
 }

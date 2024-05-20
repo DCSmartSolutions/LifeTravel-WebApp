@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { share } from 'rxjs/operators';
-import {USER_ROLE} from "../../iam/enums/role";
+import { USER_ROLE } from '../../iam/enums/role';
 
 export interface MenuTag {
   color: string;
@@ -23,40 +23,40 @@ export interface MenuChildrenItem {
 }
 export const MENU_ITEMS: Menu[] = [
   {
-    "route": "peru/tour-packages",
-    "name": "Tour Experience",
-    "type": "sub",
-    "icon": "route",
-    "role": USER_ROLE.AGENCY,
-    "children": [
+    route: 'peru/tour-packages',
+    name: 'Tour Experience',
+    type: 'sub',
+    icon: 'route',
+    role: USER_ROLE.AGENCY,
+    children: [
       {
-        "route": "my-packages",
-        "name": "My Packages",
-        "role": USER_ROLE.AGENCY,
-        "type": "link",
+        route: 'my-packages',
+        name: 'My Packages',
+        role: USER_ROLE.AGENCY,
+        type: 'link',
       },
       {
-        "route": "add-tour-package",
-        "name": "Add Package",
-        "role": USER_ROLE.AGENCY,
-        "type": "link"
-      }
-    ]
+        route: 'add-tour-package',
+        name: 'Add Package',
+        role: USER_ROLE.AGENCY,
+        type: 'link',
+      },
+    ],
   },
   {
-    "route": "peru/transportation",
-    "name": "Transportation",
-    "type": "sub",
-    "icon": "directions_bus",
-    "role": USER_ROLE.AGENCY,
-    "children": [
+    route: 'peru/transportation',
+    name: 'Transportation',
+    type: 'sub',
+    icon: 'directions_bus',
+    role: USER_ROLE.AGENCY,
+    children: [
       {
-        "route": "my-vehicles",
-        "name": "My Vehicles",
-        "role": USER_ROLE.AGENCY,
-        "type": "link",
+        route: 'my-vehicles',
+        name: 'My Vehicles',
+        role: USER_ROLE.AGENCY,
+        type: 'link',
       },
-    ]
+    ],
   },
   // {
   //   "route": "peru/my-subscription",
@@ -66,11 +66,11 @@ export const MENU_ITEMS: Menu[] = [
   //   "role": USER_ROLE.AGENCY
   // },
   {
-    "route": "peru/",
-    "name": "Search Packages",
-    "type": "link",
-    "icon": "search",
-    "role": USER_ROLE.TOURIST
+    route: 'peru/',
+    name: 'Search Packages',
+    type: 'link',
+    icon: 'search',
+    role: USER_ROLE.TOURIST,
   },
   // {
   //   "route": "peru/my-bookings",
@@ -86,7 +86,6 @@ export const MENU_ITEMS: Menu[] = [
   //   "icon": "rate_review",
   //   "role": USER_ROLE.TOURIST
   // }
-
 ];
 
 export interface Menu {
@@ -132,7 +131,7 @@ export class MenuService {
 
   buildRoute(routeArr: string[]): string {
     let route = '';
-    routeArr.forEach(item => {
+    routeArr.forEach((item) => {
       if (item && item.trim()) {
         route += '/' + item.replace(/^\/+|\/+$/g, '');
       }
@@ -159,29 +158,36 @@ export class MenuService {
     return JSON.stringify(obj0) === JSON.stringify(obj1);
   }
 
-  private isRouteEqual(routeArr: Array<string>, realRouteArr: Array<string>): boolean {
+  private isRouteEqual(
+    routeArr: Array<string>,
+    realRouteArr: Array<string>,
+  ): boolean {
     realRouteArr = this.deepClone(realRouteArr);
-    realRouteArr = realRouteArr.filter(r => r !== '');
+    realRouteArr = realRouteArr.filter((r) => r !== '');
     return this.isJsonObjEqual(routeArr, realRouteArr);
   }
 
   getLevel(routeArr: string[]): string[] {
     let tmpArr: any[] = [];
-    this.menu$.value.forEach(item => {
+    this.menu$.value.forEach((item) => {
       // Breadth-first traverse
       let unhandledLayer = [{ item, parentNamePathList: [], realRouteArr: [] }];
       while (unhandledLayer.length > 0) {
         let nextUnhandledLayer: any[] = [];
         for (const ele of unhandledLayer) {
           const eachItem = ele.item;
-          const currentNamePathList = this.deepClone(ele.parentNamePathList).concat(eachItem.name);
-          const currentRealRouteArr = this.deepClone(ele.realRouteArr).concat(eachItem.route);
+          const currentNamePathList = this.deepClone(
+            ele.parentNamePathList,
+          ).concat(eachItem.name);
+          const currentRealRouteArr = this.deepClone(ele.realRouteArr).concat(
+            eachItem.route,
+          );
           if (this.isRouteEqual(routeArr, currentRealRouteArr)) {
             tmpArr = currentNamePathList;
             break;
           }
           if (!this.isLeafItem(eachItem)) {
-            const wrappedChildren = eachItem.children?.map(child => ({
+            const wrappedChildren = eachItem.children?.map((child) => ({
               item: child,
               parentNamePathList: currentNamePathList,
               realRouteArr: currentRealRouteArr,
@@ -196,7 +202,7 @@ export class MenuService {
   }
 
   addNamespace(menu: Menu[] | MenuChildrenItem[], namespace: string) {
-    menu.forEach(menuItem => {
+    menu.forEach((menuItem) => {
       menuItem.name = `${namespace}.${menuItem.name}`;
       if (menuItem.children && menuItem.children.length > 0) {
         this.addNamespace(menuItem.children, menuItem.name);

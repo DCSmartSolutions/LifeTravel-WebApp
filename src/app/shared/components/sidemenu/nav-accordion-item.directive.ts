@@ -1,4 +1,11 @@
-import { Directive, HostBinding, Inject, Input, OnInit, OnDestroy } from '@angular/core';
+import {
+  Directive,
+  HostBinding,
+  Inject,
+  Input,
+  OnInit,
+  OnDestroy,
+} from '@angular/core';
 import { NavAccordionDirective } from './nav-accordion.directive';
 
 @Directive({

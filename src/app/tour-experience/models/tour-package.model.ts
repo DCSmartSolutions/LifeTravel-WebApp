@@ -1,6 +1,6 @@
-import {Activity} from "./activity.model";
-import {LocationName, Location} from "./map.model";
-import {Schedule} from "./time-picker.model";
+import { Activity } from './activity.model';
+import { LocationName, Location } from './map.model';
+import { Schedule } from './time-picker.model';
 
 export class TourPackage {
   id: number = 0;

@@ -6,7 +6,8 @@
     "start": "ng serve --ssl --ssl-key localhost-key.pem  --ssl-cert localhost.pem --open",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "lint": "ng lint"
   },
   "private": true,
   "dependencies": {
@@ -43,12 +44,21 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^16.2.3",
+    "@angular-eslint/builder": "16.3.1",
+    "@angular-eslint/eslint-plugin": "16.3.1",
+    "@angular-eslint/eslint-plugin-template": "16.3.1",
+    "@angular-eslint/schematics": "16.3.1",
+    "@angular-eslint/template-parser": "16.3.1",
     "@angular/cli": "~16.2.3",
     "@angular/compiler-cli": "^16.2.0",
     "@types/jasmine": "~4.3.0",
-    "@types/mapbox__mapbox-gl-geocoder": "^4.7.6",
     "@types/mapbox-gl": "^2.7.17",
+    "@types/mapbox__mapbox-gl-geocoder": "^4.7.6",
+    "@typescript-eslint/eslint-plugin": "5.62.0",
+    "@typescript-eslint/parser": "5.62.0",
     "css-loader": "^6.8.1",
+    "eslint": "^8.51.0",
+    "eslint-config-prettier": "^9.1.0",
     "jasmine-core": "~4.6.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
@@ -56,6 +66,8 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "node-sass": "^9.0.0",
+    "pretier": "^0.0.1",
+    "prettier": "^3.2.5",
     "sass-loader": "^13.3.2",
     "style-loader": "^3.3.3",
     "typescript": "~5.1.3"

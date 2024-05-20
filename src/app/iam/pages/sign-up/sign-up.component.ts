@@ -1,74 +1,101 @@
-import {Component, OnInit} from '@angular/core';
-import {FormGroup, UntypedFormBuilder, Validators} from "@angular/forms";
-import {FirebaseAuthCustomService} from "../../services/firebase-auth.service";
-import {Router} from "@angular/router";
-import {UserService} from "../../services/user.service";
-import {CookieService} from "ngx-cookie-service";
-import {SpinnerComponent} from "../../../shared/components/spinner/spinner.component";
-import {MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {set} from "@angular/fire/database";
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
+import { FirebaseAuthCustomService } from '../../services/firebase-auth.service';
+import { Router } from '@angular/router';
+import { UserService } from '../../services/user.service';
+import { CookieService } from 'ngx-cookie-service';
+import { SpinnerComponent } from '../../../shared/components/spinner/spinner.component';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { set } from '@angular/fire/database';
 
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.scss']
+  styleUrls: ['./sign-up.component.scss'],
 })
 export class SignUpComponent implements OnInit {
   signUpForm: FormGroup = new FormGroup({});
   private dialog: MatDialogRef<SpinnerComponent> | undefined;
 
-  constructor(private fireAuthCustomService: FirebaseAuthCustomService,
-              private userService: UserService,
-              private formBuilder: UntypedFormBuilder,
-              private cookieService: CookieService,
-              private matDialog: MatDialog,
-              private router: Router) {
+  constructor(
+    private fireAuthCustomService: FirebaseAuthCustomService,
+    private userService: UserService,
+    private formBuilder: UntypedFormBuilder,
+    private cookieService: CookieService,
+    private matDialog: MatDialog,
+    private router: Router,
+  ) {
     this.signUpForm = this.formBuilder.group({
-      email: ['', {validators: [Validators.required, Validators.email], updateOn: 'change'}],
-      password: ['', {validators: [Validators.required, Validators.minLength(6)]}],
-      confirmPassword: ['', {validators: [Validators.required, Validators.minLength(6)]}],
-      role: ['Agency', {validators: [Validators.required]}],
+      email: [
+        '',
+        {
+          validators: [Validators.required, Validators.email],
+          updateOn: 'change',
+        },
+      ],
+      password: [
+        '',
+        { validators: [Validators.required, Validators.minLength(6)] },
+      ],
+      confirmPassword: [
+        '',
+        { validators: [Validators.required, Validators.minLength(6)] },
+      ],
+      role: ['Agency', { validators: [Validators.required] }],
     });
   }
 
   roles: any[] = [
-    {name: 'Agency', selected: true, icon: 'assets/images/authentication/travel-agency.png'},
-    {name: 'Tourist', selected: false, icon: 'assets/images/authentication/tour-guide.png'},
-  ]
+    {
+      name: 'Agency',
+      selected: true,
+      icon: 'assets/images/authentication/travel-agency.png',
+    },
+    {
+      name: 'Tourist',
+      selected: false,
+      icon: 'assets/images/authentication/tour-guide.png',
+    },
+  ];
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
   signUp() {
-
-    this.cookieService.delete('JSESSIONID')
-    this.cookieService.delete('JUID')
+    this.cookieService.delete('JSESSIONID');
+    this.cookieService.delete('JUID');
     this.showSpinnerDialog();
-    this.signUpForm.get('role')?.setValue(this.roles.find(role => role.selected)?.name);
+    this.signUpForm
+      .get('role')
+      ?.setValue(this.roles.find((role) => role.selected)?.name);
     const user = this.signUpForm.value;
 
-    this.fireAuthCustomService.register(this.signUpForm.value)
+    this.fireAuthCustomService
+      .register(this.signUpForm.value)
       .then(async (response: any) => {
         user.id = response.user.uid;
 
         await this.cookieService.set('JUID', response.user.uid, 1, '/');
-        await this.cookieService.set('JSESSIONID', response.user.accessToken, 1, '/');
+        await this.cookieService.set(
+          'JSESSIONID',
+          response.user.accessToken,
+          1,
+          '/',
+        );
 
         if (user.role === 'Agency') {
-          this.userService.registerAgency(user, response.user.accessToken).subscribe(
-            () => {
-              this.hideSpinnerDialog()
+          this.userService
+            .registerAgency(user, response.user.accessToken)
+            .subscribe(() => {
+              this.hideSpinnerDialog();
               this.router.navigate(['/authentication', 'login']);
-            },
-          )
+            });
         } else {
-          this.userService.registerTourist(user, response.user.accessToken6).subscribe(
-            () => {
-              this.hideSpinnerDialog()
+          this.userService
+            .registerTourist(user, response.user.accessToken6)
+            .subscribe(() => {
+              this.hideSpinnerDialog();
               this.router.navigate(['/authentication', 'login']);
-            }
-          )
+            });
         }
       })
       .catch((error: any) => {
@@ -82,7 +109,10 @@ export class SignUpComponent implements OnInit {
   }
 
   get doesPasswordsMatch() {
-    return this.signUpForm.get('password')?.value === this.signUpForm.get('confirmPassword')?.value;
+    return (
+      this.signUpForm.get('password')?.value ===
+      this.signUpForm.get('confirmPassword')?.value
+    );
   }
 
   get email() {
@@ -90,7 +120,10 @@ export class SignUpComponent implements OnInit {
   }
 
   get hasLessThanSixCharacters() {
-    return this.signUpForm.get('password')?.value.length < 6 && this.signUpForm.get('password')?.touched;
+    return (
+      this.signUpForm.get('password')?.value.length < 6 &&
+      this.signUpForm.get('password')?.touched
+    );
   }
 
   selectRole(role: any) {
@@ -106,7 +139,7 @@ export class SignUpComponent implements OnInit {
   showSpinnerDialog() {
     this.dialog = this.matDialog.open(SpinnerComponent, {
       panelClass: 'custom-dialog',
-      disableClose: true
+      disableClose: true,
     });
   }
 

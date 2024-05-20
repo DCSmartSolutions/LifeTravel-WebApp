@@ -9,7 +9,7 @@ export class Schedule {
   selected: boolean = false;
   hourRange: HourRange = new HourRange();
 }
-export class Time{
+export class Time {
   hour: string = '';
   minute: string = '';
   dayTime: string = '';

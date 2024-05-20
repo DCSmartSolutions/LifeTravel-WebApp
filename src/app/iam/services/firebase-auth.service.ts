@@ -1,24 +1,34 @@
 import { Injectable } from '@angular/core';
 import {
-  Auth, createUserWithEmailAndPassword,
-  signInWithEmailAndPassword, signOut,
-  signInWithPopup, GoogleAuthProvider, signInWithCustomToken
+  Auth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  signInWithPopup,
+  GoogleAuthProvider,
+  signInWithCustomToken,
 } from '@angular/fire/auth';
-import {CookieService} from "ngx-cookie-service";
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FirebaseAuthCustomService {
-
-  constructor(private auth: Auth, private cookieService: CookieService) { }
+  constructor(
+    private auth: Auth,
+    private cookieService: CookieService,
+  ) {}
 
   register({ email, password }: any) {
     return createUserWithEmailAndPassword(this.auth, email, password);
   }
 
   login(credentials: any) {
-    return signInWithEmailAndPassword(this.auth,credentials.email, credentials.password)
+    return signInWithEmailAndPassword(
+      this.auth,
+      credentials.email,
+      credentials.password,
+    );
   }
 
   loginWithGoogle() {
@@ -31,6 +41,9 @@ export class FirebaseAuthCustomService {
   }
 
   refreshToken() {
-    return signInWithCustomToken(this.auth, this.cookieService.get('JSESSIONID') || '');
+    return signInWithCustomToken(
+      this.auth,
+      this.cookieService.get('JSESSIONID') || '',
+    );
   }
 }

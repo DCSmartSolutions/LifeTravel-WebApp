@@ -1,5 +1,5 @@
 @mixin rtl {
-  @at-root [dir='rtl'] #{&} {
+  @at-root [dir="rtl"] #{&} {
     @content;
   }
 }

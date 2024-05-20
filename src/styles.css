@@ -1,7 +1,8 @@
 /*@import '~@angular/material/prebuilt-themes/indigo-pink.css';*/
 /*customize theming - primary colors*/
 
-html, body {
+html,
+body {
   height: 100%;
 }
 

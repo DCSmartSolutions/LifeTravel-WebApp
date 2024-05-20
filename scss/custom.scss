@@ -1,7 +1,6 @@
-@use '@angular/material' as mat;
+@use "@angular/material" as mat;
 
-
-$blue: #12263A;
+$blue: #12263a;
 @import "node_modules/bootstrap/scss/bootstrap";
 
 @include mat.core();
@@ -21,8 +20,8 @@ $my-blue-palette: (
     50: rgba(black, 0.87),
     100: rgba(black, 0.87),
     200: rgba(black, 0.87),
-    300: white
-  )
+    300: white,
+  ),
 );
 
 $my-red-palette: (
@@ -40,24 +39,25 @@ $my-red-palette: (
     50: rgba(black, 0.87),
     100: rgba(black, 0.87),
     200: rgba(black, 0.87),
-    300: white
-  )
+    300: white,
+  ),
 );
-
 
 $my-primary: mat.define-palette($my-blue-palette, 900, 500, 50);
 $my-accent: mat.define-palette(mat.$amber-palette, A200, A400);
 $my-warn: mat.define-palette($my-red-palette, 400, 500, 900);
 $my-secondary: mat.define-palette(mat.$grey-palette, 500, 300, 700);
 
-$my-theme: mat.define-light-theme((
-  color: (
-    primary: $my-primary,
-    accent: $my-accent,
-    warn: $my-warn,
-  ),
-  typography: mat.define-typography-config(),
-  density: 0,
-));
+$my-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $my-primary,
+      accent: $my-accent,
+      warn: $my-warn,
+    ),
+    typography: mat.define-typography-config(),
+    density: 0,
+  )
+);
 
 @include mat.all-component-themes($my-theme);

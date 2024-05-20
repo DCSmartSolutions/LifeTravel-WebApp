@@ -9,14 +9,15 @@
   height: 100%;
   align-items: flex-end;
 }
-.card-container{
-  background-color: #6689A1;
+.card-container {
+  background-color: #6689a1;
   border-radius: 15px;
 }
-.star-icon{
-  color: #FFD02A;
+.star-icon {
+  color: #ffd02a;
   margin-right: 6px;
 }
-:host ::ng-deep .mat-mdc-fab:not(.mdc-fab--extended), .mat-mdc-mini-fab:not(.mdc-fab--extended) {
+:host ::ng-deep .mat-mdc-fab:not(.mdc-fab--extended),
+.mat-mdc-mini-fab:not(.mdc-fab--extended) {
   border-radius: 10px;
 }

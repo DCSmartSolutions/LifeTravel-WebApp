@@ -1,6 +1,6 @@
-@use '../../../../styles/variables';
-@use '../../../../styles/transitions';
-@use '../../../../styles/badge';
+@use "../../../../styles/variables";
+@use "../../../../styles/transitions";
+@use "../../../../styles/badge";
 
 .sidemenu {
   width: variables.$sidenav-width - 1px; // subtract border width
@@ -30,7 +30,8 @@
     padding-top: 0;
     overflow: hidden;
     visibility: hidden;
-    transition: transitions.fast-out-slow(max-height), transitions.fast-out-slow(visibility);
+    transition: transitions.fast-out-slow(max-height),
+      transitions.fast-out-slow(visibility);
     transform: translateZ(0) !important;
   }
 
@@ -55,7 +56,7 @@
     font-size: 18px;
     line-height: 18px;
 
-    [dir='rtl'] & {
+    [dir="rtl"] & {
       margin-right: auto;
       margin-left: 16px;
     }
@@ -90,7 +91,7 @@
   &.level-1 > li > .menu-heading {
     padding-left: 50px;
 
-    [dir='rtl'] & {
+    [dir="rtl"] & {
       padding-right: 50px;
       padding-left: 16px;
     }
@@ -99,16 +100,16 @@
   &.level-2 > li > .menu-heading {
     padding-left: 64px;
 
-    [dir='rtl'] & {
+    [dir="rtl"] & {
       padding-right: 64px;
       padding-left: 16px;
     }
   }
 
-  &.level-2 [class^='level-'] > li > .menu-heading {
+  &.level-2 [class^="level-"] > li > .menu-heading {
     padding-left: 80px;
 
-    [dir='rtl'] & {
+    [dir="rtl"] & {
       padding-right: 80px;
       padding-left: 16px;
     }

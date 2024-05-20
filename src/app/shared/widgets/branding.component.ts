@@ -3,7 +3,11 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-branding',
   template: `
-      <img src="./assets/images/life-travel.png" class="brand-logo align-middle" alt="logo"/>
+    <img
+      src="./assets/images/life-travel.png"
+      class="brand-logo align-middle"
+      alt="logo"
+    />
   `,
   styles: [
     `

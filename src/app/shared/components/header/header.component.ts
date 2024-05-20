@@ -6,10 +6,8 @@ import {
   Output,
   ViewEncapsulation,
 } from '@angular/core';
-import {MatDialog} from "@angular/material/dialog";
-import {
-  PlaceSearchModalComponent
-} from "../../../tour-experience/components/place-search-modal/place-search-modal.component";
+import { MatDialog } from '@angular/material/dialog';
+import { PlaceSearchModalComponent } from '../../../tour-experience/components/place-search-modal/place-search-modal.component';
 
 @Component({
   selector: 'app-header',
@@ -26,23 +24,19 @@ export class HeaderComponent {
   @Output() toggleSidenavNotice = new EventEmitter<void>();
   showSearchInput: boolean = true;
 
-  constructor(public dialog: MatDialog) {
-
-  }
+  constructor(public dialog: MatDialog) {}
 
   showSearchDialog() {
     this.showSearchInput = false;
     const dialogRef = this.dialog.open(PlaceSearchModalComponent, {
-        width: '600px',
-        position: {
-          top: '60px'
-        },
-        panelClass: 'search-places-dialog',
-      }
-    );
+      width: '600px',
+      position: {
+        top: '60px',
+      },
+      panelClass: 'search-places-dialog',
+    });
     dialogRef.afterClosed().subscribe(() => {
-        this.showSearchInput = true;
-      }
-    );
+      this.showSearchInput = true;
+    });
   }
 }

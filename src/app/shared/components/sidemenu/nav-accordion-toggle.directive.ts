@@ -7,7 +7,9 @@ import { NavAccordionItemDirective } from './nav-accordion-item.directive';
 export class NavAccordionToggleDirective {
   protected navLink: NavAccordionItemDirective;
 
-  constructor(@Inject(NavAccordionItemDirective) navLink: NavAccordionItemDirective) {
+  constructor(
+    @Inject(NavAccordionItemDirective) navLink: NavAccordionItemDirective,
+  ) {
     this.navLink = navLink;
   }
 

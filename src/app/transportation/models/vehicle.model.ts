@@ -1,4 +1,4 @@
-import {VEHICLE_STATUS} from "../enums/vehicle-status.enum";
+import { VEHICLE_STATUS } from '../enums/vehicle-status.enum';
 
 export class Vehicle {
   id: number = 0;

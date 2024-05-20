@@ -11,10 +11,13 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The appli
 You can use JSON Server locally to simulate a backend server for your application. To do this, follow these steps:
 
 1. Install JSON Server globally if you haven't already:
+
 ```sh
 npm install -g json-server
 ```
+
 2. Start JSON Server with your local JSON data file and routes (adjust the paths as needed):
+
 ```sh
 json-server --watch server/db.json --routes server/routes.json
 ```
@@ -28,4 +31,3 @@ Alternatively, you can use a public JSON server like `typicode` for testing and 
 ```typescript
 private baseUrl = 'https://my-json-server.typicode.com/DominikMendoza/data/';
 ```
-

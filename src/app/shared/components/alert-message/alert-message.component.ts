@@ -1,5 +1,5 @@
-import {Component, Inject, Input} from '@angular/core';
-import {MAT_DIALOG_DATA} from "@angular/material/dialog";
+import { Component, Inject, Input } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 export class DialogData {
   title: string = '';
@@ -9,7 +9,7 @@ export class DialogData {
 @Component({
   selector: 'app-alert-message',
   templateUrl: './alert-message.component.html',
-  styleUrls: ['./alert-message.component.css']
+  styleUrls: ['./alert-message.component.css'],
 })
 export class AlertMessageComponent {
   title: string = '';

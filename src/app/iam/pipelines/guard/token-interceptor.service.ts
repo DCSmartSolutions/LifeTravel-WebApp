@@ -1,22 +1,30 @@
-import { Injectable } from "@angular/core";
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
-import { Observable, from, throwError } from "rxjs";
-import { catchError, switchMap } from "rxjs/operators";
-import { CookieService } from "ngx-cookie-service";
-import { FirebaseAuthCustomService } from "../../services/firebase-auth.service";
-import {Router} from "@angular/router";
+import { Injectable } from '@angular/core';
+import {
+  HttpEvent,
+  HttpHandler,
+  HttpInterceptor,
+  HttpRequest,
+} from '@angular/common/http';
+import { Observable, from, throwError } from 'rxjs';
+import { catchError, switchMap } from 'rxjs/operators';
+import { CookieService } from 'ngx-cookie-service';
+import { FirebaseAuthCustomService } from '../../services/firebase-auth.service';
+import { Router } from '@angular/router';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TokenInterceptorService implements HttpInterceptor {
   constructor(
     private cookieService: CookieService,
     private router: Router,
-    private fireAuthCustomService: FirebaseAuthCustomService
+    private fireAuthCustomService: FirebaseAuthCustomService,
   ) {}
 
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  intercept(
+    req: HttpRequest<any>,
+    next: HttpHandler,
+  ): Observable<HttpEvent<any>> {
     const token = this.cookieService.get('JSESSIONID');
     if (!token) {
       this.router.navigate(['/authentication']);
@@ -26,8 +34,8 @@ export class TokenInterceptorService implements HttpInterceptor {
         switchMap((response: any) => {
           const jwtToken = req.clone({
             setHeaders: {
-              Authorization: 'Bearer ' + response.user.accessToken
-            }
+              Authorization: 'Bearer ' + response.user.accessToken,
+            },
           });
 
           return next.handle(jwtToken);
@@ -36,13 +44,13 @@ export class TokenInterceptorService implements HttpInterceptor {
           this.cookieService.delete('JSESSIONID', '/');
           this.cookieService.delete('JUID', '/');
           return throwError(error);
-        })
+        }),
       );
     }
     let jwtToken = req.clone({
       setHeaders: {
-        Authorization: 'Bearer ' + token
-      }
+        Authorization: 'Bearer ' + token,
+      },
     });
 
     return next.handle(jwtToken);

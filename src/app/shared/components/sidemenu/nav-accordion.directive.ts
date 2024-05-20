@@ -2,7 +2,7 @@ import { Directive } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { NavAccordionItemDirective } from './nav-accordion-item.directive';
-import {MenuService} from "../../services/menu.service";
+import { MenuService } from '../../services/menu.service';
 
 @Directive({
   selector: '[navAccordion]',
@@ -10,9 +10,12 @@ import {MenuService} from "../../services/menu.service";
 export class NavAccordionDirective {
   protected navLinks: NavAccordionItemDirective[] = [];
 
-  constructor(private router: Router, private menu: MenuService) {
+  constructor(
+    private router: Router,
+    private menu: MenuService,
+  ) {
     this.router.events
-      .pipe(filter(event => event instanceof NavigationEnd))
+      .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe(() => this.checkOpenLinks());
 
     // Fix opening status for async menu data
@@ -33,7 +36,7 @@ export class NavAccordionDirective {
   }
 
   closeOtherLinks(openLink: NavAccordionItemDirective) {
-    this.navLinks.forEach(link => {
+    this.navLinks.forEach((link) => {
       if (link !== openLink) {
         link.expanded = false;
       }
@@ -41,7 +44,7 @@ export class NavAccordionDirective {
   }
 
   checkOpenLinks() {
-    this.navLinks.forEach(link => {
+    this.navLinks.forEach((link) => {
       if (link.route) {
         if (this.router.url.split('/').includes(link.route)) {
           link.expanded = true;

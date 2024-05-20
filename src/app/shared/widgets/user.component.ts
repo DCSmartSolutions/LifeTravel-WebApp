@@ -1,11 +1,11 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
-import {SettingsService} from "../services/settings.service";
-import {User} from "../interfaces/user";
-import {FirebaseAuthCustomService} from "../../iam/services/firebase-auth.service";
-import {MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {SpinnerComponent} from "../components/spinner/spinner.component";
-import {CookieService} from "ngx-cookie-service";
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { SettingsService } from '../services/settings.service';
+import { User } from '../interfaces/user';
+import { FirebaseAuthCustomService } from '../../iam/services/firebase-auth.service';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { SpinnerComponent } from '../components/spinner/spinner.component';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-user',
@@ -60,17 +60,14 @@ export class UserComponent implements OnInit {
     private matDialog: MatDialog,
     private cookieService: CookieService,
     private fireAuthCustomService: FirebaseAuthCustomService,
-  ) {
-  }
+  ) {}
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 
   showSpinnerDialog() {
     this.dialog = this.matDialog.open(SpinnerComponent, {
       panelClass: 'custom-dialog',
-      disableClose: true
+      disableClose: true,
     });
   }
 
@@ -80,14 +77,13 @@ export class UserComponent implements OnInit {
 
   logout() {
     this.showSpinnerDialog();
-    this.fireAuthCustomService.logout().then(r =>
+    this.fireAuthCustomService.logout().then((r) =>
       setTimeout(() => {
         this.router.navigate(['/authentication']);
         this.hideSpinnerDialog();
-      }, 3000)
+      }, 3000),
     );
   }
-
 
   restore() {
     this.settings.reset();

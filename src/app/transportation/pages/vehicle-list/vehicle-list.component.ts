@@ -1,34 +1,38 @@
-import {Component, OnInit} from '@angular/core';
-import {Vehicle} from "../../models/vehicle.model";
-import {TransportService} from "../../services/transport.service";
-import {VEHICLE_STATUS} from "../../enums/vehicle-status.enum";
-import {Router} from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { Vehicle } from '../../models/vehicle.model';
+import { TransportService } from '../../services/transport.service';
+import { VEHICLE_STATUS } from '../../enums/vehicle-status.enum';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-vehicle-list',
   templateUrl: './vehicle-list.component.html',
-  styleUrls: ['./vehicle-list.component.scss']
+  styleUrls: ['./vehicle-list.component.scss'],
 })
 export class VehicleListComponent implements OnInit {
   existingVehicles: Vehicle[] = [];
-  constructor(private transportService: TransportService,
-              private router: Router) {}
+  constructor(
+    private transportService: TransportService,
+    private router: Router,
+  ) {}
   addVehicle() {
     this.router.navigate(['peru/transportation/add-vehicle']);
   }
   ngOnInit() {
-    this.transportService.getAllTransportationsByAgencyId().subscribe((vehicles: Vehicle[]) => {
+    this.transportService
+      .getAllTransportationsByAgencyId()
+      .subscribe((vehicles: Vehicle[]) => {
         this.existingVehicles = vehicles;
-      }
-    );
+      });
   }
 
   getExistingVehiclesByStatus(status: VEHICLE_STATUS) {
     this.selectedStatus = status.replace('_', ' ');
-    this.transportService.getAllTransportationsByAgencyId(status).subscribe((vehicles: Vehicle[]) => {
+    this.transportService
+      .getAllTransportationsByAgencyId(status)
+      .subscribe((vehicles: Vehicle[]) => {
         this.existingVehicles = vehicles;
-      }
-    );
+      });
   }
 
   protected readonly VEHICLE_STATUS = VEHICLE_STATUS;

@@ -1,14 +1,14 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {User} from "../../../iam/models/user.model";
-import {HttpClient} from "@angular/common/http";
-import {UserService} from "../../../iam/services/user.service";
-import {Router} from "@angular/router";
-import {TourPackage} from "../../models/tour-package.model";
+import { Component, Input, OnInit } from '@angular/core';
+import { User } from '../../../iam/models/user.model';
+import { HttpClient } from '@angular/common/http';
+import { UserService } from '../../../iam/services/user.service';
+import { Router } from '@angular/router';
+import { TourPackage } from '../../models/tour-package.model';
 
 @Component({
   selector: 'app-package-card',
   templateUrl: './package-card.component.html',
-  styleUrls: ['./package-card.component.scss']
+  styleUrls: ['./package-card.component.scss'],
 })
 export class PackageCardComponent implements OnInit {
   // Input properties for receiving data from parent components
@@ -18,10 +18,11 @@ export class PackageCardComponent implements OnInit {
   agencyName: string = '';
 
   // Constructor to inject required services
-  constructor(private http: HttpClient,
-              private userService: UserService,
-              private router: Router) {
-  }
+  constructor(
+    private http: HttpClient,
+    private userService: UserService,
+    private router: Router,
+  ) {}
 
   // Lifecycle hook - ngOnInit is called after the component is initialized
   ngOnInit() {

@@ -1,16 +1,16 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
-import {FormGroup, UntypedFormBuilder, Validators} from "@angular/forms";
-import {FirebaseAuthCustomService} from "../../services/firebase-auth.service";
-import {Router} from "@angular/router";
-import {CookieService} from "ngx-cookie-service";
-import {MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {SpinnerComponent} from "../../../shared/components/spinner/spinner.component";
-import {Auth, getAuth} from "@angular/fire/auth";
+import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { FormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
+import { FirebaseAuthCustomService } from '../../services/firebase-auth.service';
+import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { SpinnerComponent } from '../../../shared/components/spinner/spinner.component';
+import { Auth, getAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup = new FormGroup({});
@@ -22,11 +22,17 @@ export class LoginComponent implements OnInit {
     private cookieService: CookieService,
     private router: Router,
     private matDialog: MatDialog,
-    private auth:Auth
+    private auth: Auth,
   ) {
     this.loginForm = this.formBuilder.group({
-      email: ['', {validators: [Validators.required, Validators.email], updateOn: 'change'}],
-      password: ['', {validators: [Validators.required]}]
+      email: [
+        '',
+        {
+          validators: [Validators.required, Validators.email],
+          updateOn: 'change',
+        },
+      ],
+      password: ['', { validators: [Validators.required] }],
     });
   }
   ngOnInit(): void {
@@ -36,29 +42,31 @@ export class LoginComponent implements OnInit {
   }
   onSubmit() {
     this.showSpinnerDialog();
-    this.clearCookies()
-    this.fireAuthCustomService.login(this.loginForm.value)
+    this.clearCookies();
+    this.fireAuthCustomService
+      .login(this.loginForm.value)
       .then((response: any) => {
-        this.cookieService.set('JUID', response.user.uid,1, '/');
+        this.cookieService.set('JUID', response.user.uid, 1, '/');
         this.cookieService.set('JSESSIONID', response.user.accessToken, 1, '/');
-        this.hideSpinnerDialog()
+        this.hideSpinnerDialog();
         this.router.navigate(['/peru']);
       })
       .catch((error: any) => {
         this.credentialsError = true;
-        this.hideSpinnerDialog()
+        this.hideSpinnerDialog();
       });
   }
   onClick() {
-    this.showSpinnerDialog()
-    this.clearCookies()
-    this.fireAuthCustomService.loginWithGoogle()
-      .then((response: { user: any; }) => {
-        this.cookieService.set('JUID', response.user.uid,1, '/');
+    this.showSpinnerDialog();
+    this.clearCookies();
+    this.fireAuthCustomService
+      .loginWithGoogle()
+      .then((response: { user: any }) => {
+        this.cookieService.set('JUID', response.user.uid, 1, '/');
         this.cookieService.set('JSESSIONID', response.user.accessToken, 1, '/');
-        this.hideSpinnerDialog()
+        this.hideSpinnerDialog();
         this.router.navigate(['/peru']);
-      })
+      });
   }
 
   goToRegister() {
@@ -80,7 +88,7 @@ export class LoginComponent implements OnInit {
   showSpinnerDialog() {
     this.dialog = this.matDialog.open(SpinnerComponent, {
       panelClass: 'custom-dialog',
-      disableClose: true
+      disableClose: true,
     });
   }
 

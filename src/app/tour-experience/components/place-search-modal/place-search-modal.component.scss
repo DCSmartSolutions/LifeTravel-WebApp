@@ -15,8 +15,10 @@
   left: 50%;
   transform: translate(-50%, -50%);
   opacity: 0;
-  transition: opacity 0.3s, transform 0.3s;
-  background-color: #6689A1;
+  transition:
+    opacity 0.3s,
+    transform 0.3s;
+  background-color: #6689a1;
   font-weight: bold;
   color: white;
   border-radius: 15px;
@@ -26,7 +28,10 @@
 
 .image-opacity {
   opacity: 0.4;
-  transition: opacity 0.3s, transform 0.3s, transform-origin center;
+  transition:
+    opacity 0.3s,
+    transform 0.3s,
+    transform-origin center;
 }
 
 .image-opacity:hover {
