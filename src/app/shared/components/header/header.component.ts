@@ -8,6 +8,8 @@ import {
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PlaceSearchModalComponent } from '../../../tour-experience/components/place-search-modal/place-search-modal.component';
+import { OpenAIService } from '../../services/openai.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -23,8 +25,14 @@ export class HeaderComponent {
   @Output() toggleSidenav = new EventEmitter<void>();
   @Output() toggleSidenavNotice = new EventEmitter<void>();
   showSearchInput: boolean = true;
+  searchText: string = '';
+  respuestaDelEndpoint: string = '';
 
-  constructor(public dialog: MatDialog) {}
+  constructor(
+    public dialog: MatDialog,
+    private openAIService: OpenAIService,
+    private router: Router,
+  ) {}
 
   showSearchDialog() {
     this.showSearchInput = false;
@@ -38,5 +46,17 @@ export class HeaderComponent {
     dialogRef.afterClosed().subscribe(() => {
       this.showSearchInput = true;
     });
+  }
+  submitSearchOpenAI() {
+    this.openAIService.getChatResponse(this.searchText).subscribe(
+      (data) => {
+        this.respuestaDelEndpoint = data;
+        const randomNumber = Math.floor(Math.random() * 3) + 1;
+        this.router.navigate([`peru/tour-packages/${randomNumber}`]);
+      },
+      (error) => {
+        console.error('Error al obtener respuesta del endpoint:', error);
+      },
+    );
   }
 }

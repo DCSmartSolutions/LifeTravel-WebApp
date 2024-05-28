@@ -27,6 +27,7 @@ import { UserService } from '../../../iam/services/user.service';
 import { Vehicle } from '../../../transportation/models/vehicle.model';
 import { AddVehicleModalComponent } from '../../../transportation/components/add-vehicle-modal/add-vehicle-modal.component';
 import { TransportService } from '../../../transportation/services/transport.service';
+import { OpenAIService } from '../../../shared/services/openai.service';
 
 @Component({
   selector: 'app-package-info',
@@ -64,6 +65,7 @@ export class PackageInfoComponent implements OnInit {
     private activityService: ActivityService,
     // private tourExperienceService: TourExperienceService,
     private bookingService: BookingService,
+    private openAIService: OpenAIService,
     private transportService: TransportService,
     private userService: UserService,
     private azureBlobStorageService: AzureBlobStorageService,
