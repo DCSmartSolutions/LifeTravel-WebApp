@@ -26,7 +26,8 @@
               "node_modules/font-awesome/css/font-awesome.min.css",
               "node_modules/@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css",
               "src/styles.css",
-              "scss/custom.scss"
+              "scss/custom.scss",
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": []
           },
