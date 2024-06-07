@@ -19,12 +19,16 @@ import { TourPackagesModule } from './tour-experience/tour-packages.module';
 import { IamModule } from './iam/iam.module';
 import { TokenInterceptorService } from './iam/pipelines/guard/token-interceptor.service';
 import { PinkToast } from './shared/widgets/customToast.component';
+import { ChartModule } from 'angular-highcharts';
+import { DashboardComponent } from './tour-experience/pages/dashboard/dashboard.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     PackageSearchComponent,
     HomeComponent,
     PinkToast,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,7 +48,9 @@ import { PinkToast } from './shared/widgets/customToast.component';
     MatGridListModule,
     TourPackagesModule,
     IamModule,
+    ChartModule,
   ],
+  exports: [DashboardComponent],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
