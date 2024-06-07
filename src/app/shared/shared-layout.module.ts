@@ -31,6 +31,7 @@ import { TimePickerComponent } from './components/time-picker/time-picker.compon
 import { MatSelectModule } from '@angular/material/select';
 import { AlertMessageComponent } from './components/alert-message/alert-message.component';
 import { ConfirmationMessageComponent } from './components/confirmation-message/confirmation-message.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,8 @@ import { ConfirmationMessageComponent } from './components/confirmation-message/
     MatDialogModule,
     MatProgressSpinnerModule,
     MatSelectModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
 })
 export class SharedLayoutModule {}

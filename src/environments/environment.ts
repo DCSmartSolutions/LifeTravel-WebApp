@@ -12,6 +12,6 @@ export const environment = {
     measurementId: 'G-9SDX88S17F',
   },
   production: false,
-  baseUrl: 'https://lifetravel-iot-api.azurewebsites.net/api/v1/',
-  // baseUrl: 'http://localhost:8080/api/v1/',
+  //baseUrl: 'https://lifetravel-iot-api.azurewebsites.net/api/v1/',
+  baseUrl: 'http://localhost:8080/api/v1/',
 };

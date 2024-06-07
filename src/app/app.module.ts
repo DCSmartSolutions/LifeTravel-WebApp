@@ -18,14 +18,22 @@ import { HomeComponent } from './public/pages/home/home.component';
 import { TourPackagesModule } from './tour-experience/tour-packages.module';
 import { IamModule } from './iam/iam.module';
 import { TokenInterceptorService } from './iam/pipelines/guard/token-interceptor.service';
+import { PinkToast } from './shared/widgets/customToast.component';
 @NgModule({
-  declarations: [AppComponent, PackageSearchComponent, HomeComponent],
+  declarations: [
+    AppComponent,
+    PackageSearchComponent,
+    HomeComponent,
+    PinkToast,
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
     NgxPermissionsModule.forRoot(),
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({
+      toastComponent: PinkToast,
+    }),
     AppRoutingModule,
     RouterOutlet,
     MatListModule,
