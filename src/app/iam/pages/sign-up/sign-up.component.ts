@@ -3,10 +3,12 @@ import { FormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { FirebaseAuthCustomService } from '../../services/firebase-auth.service';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
+import { AgencyService } from '../../services/agency.service';
 import { CookieService } from 'ngx-cookie-service';
 import { SpinnerComponent } from '../../../shared/components/spinner/spinner.component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { set } from '@angular/fire/database';
+import { Agency } from '../../models/agency.model';
 
 @Component({
   selector: 'app-sign-up',
@@ -20,6 +22,7 @@ export class SignUpComponent implements OnInit {
   constructor(
     private fireAuthCustomService: FirebaseAuthCustomService,
     private userService: UserService,
+    private agencyService: AgencyService,
     private formBuilder: UntypedFormBuilder,
     private cookieService: CookieService,
     private matDialog: MatDialog,
@@ -86,6 +89,17 @@ export class SignUpComponent implements OnInit {
           this.userService
             .registerAgency(user, response.user.accessToken)
             .subscribe(() => {
+              const agency = new Agency();
+              this.agencyService
+                .registerAgencyWithUserId(
+                  user.id,
+                  agency,
+                  response.user.accessToken,
+                )
+                .subscribe((agencyResponse) =>
+                  // !delete this console.log before merging with develop
+                  console.log(agencyResponse),
+                );
               this.hideSpinnerDialog();
               this.router.navigate(['/authentication', 'login']);
             });

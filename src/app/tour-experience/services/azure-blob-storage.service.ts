@@ -5,10 +5,10 @@ import { BlobServiceClient, ContainerClient } from '@azure/storage-blob';
   providedIn: 'root',
 })
 export class AzureBlobStorageService {
-  accountName: string = 'nstoragetest';
-  container: string = 'tour-packages-pictures';
+  accountName: string = 'nexusnovastorage';
+  container: string = 'tour-packages-images';
   sas =
-    'sp=racwdli&st=2023-10-24T00:12:03Z&se=2024-01-05T08:12:03Z&sv=2022-11-02&sr=c&sig=ihpBcbG09pC7gTDHSdvhmIJCxf7mqwFY7fZ9wTLg2S4%3D';
+    'sp=racwd&st=2024-06-07T17:09:20Z&se=2024-09-07T01:09:20Z&sv=2022-11-02&sr=c&sig=t1fpecltaEhWvihZxGbrIndMYd0BqHx9xpXbTNFc%2F5c%3D';
 
   constructor() {}
   //public an image and get the url
