@@ -52,10 +52,15 @@ export class HeaderComponent {
   }
   submitSearchOpenAI() {
     this.openAIService.getChatResponse(this.searchText).subscribe(
-      (data) => {
-        this.toastr.show(data, 'Ai Bot 🤖', { toastComponent: PinkToast });
-        const randomNumber = Math.floor(Math.random() * 3) + 1;
-        this.router.navigate([`peru/tour-packages/${randomNumber}`]);
+      (data: any) => {
+        console.log(data);
+        const responseData = JSON.parse(data);
+        const region = parseInt(responseData.region);
+
+        const message = responseData.message;
+        this.toastr.show(message, 'Ai Bot 🤖', { toastComponent: PinkToast });
+
+        this.router.navigate([`peru/tour-packages/${region}`]);
       },
       (error) => {
         console.error('Error al obtener respuesta del endpoint:', error);
