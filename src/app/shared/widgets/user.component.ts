@@ -70,11 +70,11 @@ export class UserComponent implements OnInit {
       disableClose: true,
     });
   }
-
+  //hide spinner
   hideSpinnerDialog() {
     this.dialog?.close();
   }
-
+  //cerrar sesión
   logout() {
     this.showSpinnerDialog();
     this.fireAuthCustomService.logout().then((r) =>
