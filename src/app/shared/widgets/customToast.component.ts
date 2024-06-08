@@ -148,7 +148,7 @@ export class PinkToast extends Toast {
         ? this.fullMessage.substring(0, 100) + '...'
         : this.fullMessage;
   }
-
+  //show more toast event
   showMore(event: Event) {
     event.stopPropagation();
     event.preventDefault();
