@@ -67,4 +67,9 @@ export class HeaderComponent {
       },
     );
   }
+
+  goToDashboard() {
+    this.router.navigate(['peru/dashboard']);
+  }
+
 }

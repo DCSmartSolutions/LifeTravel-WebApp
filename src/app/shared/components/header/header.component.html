@@ -4,6 +4,10 @@
     <button mat-icon-button *ngIf="showToggle" (click)="toggleSidenav.emit()">
       <mat-icon class="text-white">menu</mat-icon>
     </button>
+    <!-- Button to go the dasbhaords page-->
+    <button mat-icon-button *ngIf="showToggle" (click)="goToDashboard()">
+      <mat-icon class="text-white">home</mat-icon>
+    </button>
     <app-branding *ngIf="showBranding && !isAgency"></app-branding>
   </div>
 

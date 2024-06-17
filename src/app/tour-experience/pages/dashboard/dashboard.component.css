@@ -1,0 +1,10 @@
+.dashboard {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .chart-container {
+    flex: 1 1 50%;
+    padding: 20px;
+  }
+  
