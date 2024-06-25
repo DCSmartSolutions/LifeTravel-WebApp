@@ -72,4 +72,8 @@ export class HeaderComponent {
     this.router.navigate(['peru/reports']);
   }
 
+  goToHome() {
+    this.router.navigate(['peru']);
+  }
+
 }
