@@ -20,4 +20,8 @@ export class AgencyService {
       headers: { Authorization: `Bearer ${token}` },
     });
   }
+
+  getAgencyByUserId(userId: string) {
+    return this.http.get<Agency>(`${this.baseUrl}/profile/${userId}`);
+  }
 }

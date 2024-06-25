@@ -1,4 +1,5 @@
 export class Agency {
+  id: string = '';
   legalName: string = 'user';
   RUC: string = '99999999999';
   address: string = 'alameda san marcos, chorrillos';

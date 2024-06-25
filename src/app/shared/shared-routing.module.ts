@@ -3,6 +3,7 @@ import { Route, RouterModule } from '@angular/router';
 import { HomeComponent } from '../public/pages/home/home.component';
 import { AdminLayoutComponent } from './pages/layout/admin-layout.component';
 import { DashboardComponent } from '../tour-experience/pages/dashboard/dashboard.component';
+import { ReportsComponent } from '../reporting/pages/reports/reports.component';
 
 const childrenRoutes: Route[] = [
   {
@@ -29,9 +30,9 @@ const childrenRoutes: Route[] = [
       ),
   },
   {
-    path: 'dashboard',
-    component: DashboardComponent,
-  },
+    path: 'reports',
+    component: ReportsComponent,
+  }
 ];
 
 const routes: Route[] = [

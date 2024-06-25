@@ -78,6 +78,12 @@ export class TourPackageService {
       `${this._tourPackageService}/all-visible-packages-by-agency/${agencyId}`,
     );
   }
+
+  getAllVisiblePackagesByAgencyByAgencyId(agencyId: string): Observable<TourPackage[]> {
+    return this.http.get<TourPackage[]>(
+      `${this._tourPackageService}/all-visible-packages-by-agency/${agencyId}`,
+    );
+  }
   getRegionById(regionId: number): Observable<any> {
     return this.http.get<any>(`${this._regionService}/${regionId}`);
   }

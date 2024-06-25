@@ -1,0 +1,45 @@
+<h1 class="text-center">Reportes {{ agency.legalName }}</h1>
+<section class="container">
+  <hr>
+  <div class="container-item">
+    <div class="container-item">
+      <p><strong>Select a tour package:</strong></p>
+      <select class="dropdown" (change)="onDropdownChange($event)">
+        <option *ngFor="let tourPackage of tourPackages" [value]="tourPackage.id">{{ tourPackage.title }}</option>
+      </select>
+    </div>
+    <div *ngIf="reportsFromSelectedPackage.length > 0" class="container-item">
+      <h2>Reports of the tour package {{ selectedTourPackage.title }}</h2>
+      <div class="container-item">
+        <ul *ngFor="let report of reportsFromSelectedPackage">
+          <li [id]="report.reportId">
+            <p><strong>{{ formatDate(report.generatedDate, 'dd/MM/yyyy') }}: </strong>{{ report.aiRecommendation }}</p>
+          </li>
+        </ul>
+      </div>
+      <div class="container-item">
+        <!-- drowpdown including all the tourPackages titles -->
+        <div [chart]="averageRatingLineChart"></div>
+      </div>
+    </div>
+    <div *ngIf="reportsFromSelectedPackage.length === 0" class="container-item">
+      <p>No reports available for the selected tour package</p>
+      <p>Try generating a report</p>
+    </div>
+  </div>
+</section>
+<section class="container">
+  <div class="">
+    <div class="container-item">
+      <h2>Create a tour package report</h2>
+      <p>The report will be generated only for packages that contain reviews</p>
+      <div *ngFor="let tourPackage of tourPackages" class="checkbox-item">
+        <input type="checkbox" [id]="tourPackage.id" [value]="tourPackage.title" (change)="onCheckboxChange($event, tourPackage)">
+        <label [for]="tourPackage.id">{{ tourPackage.title }}</label>
+      </div>
+    </div>
+    <button class="btn btn-primary" (click)="generateReport()">Generate report</button>
+  </div>
+</section>
+<!-- <h2>Line Chart</h2> <div [chart]="lineChart"></div> -->
+<!-- <div [chart]="lineChart"></div> -->

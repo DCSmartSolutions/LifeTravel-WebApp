@@ -21,6 +21,7 @@ import { TokenInterceptorService } from './iam/pipelines/guard/token-interceptor
 import { PinkToast } from './shared/widgets/customToast.component';
 import { ChartModule } from 'angular-highcharts';
 import { DashboardComponent } from './tour-experience/pages/dashboard/dashboard.component';
+import { ReportsComponent } from './reporting/pages/reports/reports.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { DashboardComponent } from './tour-experience/pages/dashboard/dashboard.
     HomeComponent,
     PinkToast,
     DashboardComponent,
+    ReportsComponent,
   ],
   imports: [
     BrowserModule,
